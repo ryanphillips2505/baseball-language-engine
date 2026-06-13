@@ -18,6 +18,30 @@ _BASEBALL_ACTION_RE = re.compile(
     re.I,
 )
 
+# MLB highlight captions:
+# "Sonny Gray strikes out Brandon Nimmo"
+# "Jack Leiter strikes out Jarren Duran"
+_HIGHLIGHT_CAPTION_RE = re.compile(
+    r"^[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)+\s+strikes out\s+[A-Z]",
+    re.I,
+)
+
+# Standalone labels that appear above the real play description.
+_STANDALONE_LABELS = {
+    "single",
+    "double",
+    "triple",
+    "home run",
+    "walk",
+    "strikeout",
+    "flyout",
+    "groundout",
+    "lineout",
+    "pop out",
+    "hit by pitch",
+    "sac fly",
+}
+
 
 def clean_mlb_text(raw_text: str) -> list[str]:
     cleaned_blocks: list[str] = []
@@ -30,7 +54,18 @@ def clean_mlb_text(raw_text: str) -> list[str]:
 
         line = re.sub(r"\s+", " ", line)
 
-        if _BASEBALL_ACTION_RE.search(line):
-            cleaned_blocks.append(line)
+        # Must contain baseball action language
+        if not _BASEBALL_ACTION_RE.search(line):
+            continue
+
+        # Reject MLB video captions
+        if _HIGHLIGHT_CAPTION_RE.match(line):
+            continue
+
+        # Reject standalone event labels
+        if line.lower() in _STANDALONE_LABELS:
+            continue
+
+        cleaned_blocks.append(line)
 
     return cleaned_blocks
