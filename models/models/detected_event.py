@@ -9,3 +9,6 @@ from models.types import EventType
 class DetectedEvent:
     event_type: EventType
     is_primary: bool = False
+
+    def make_primary(self) -> None:
+        self.is_primary = True
