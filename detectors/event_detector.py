@@ -23,16 +23,16 @@ def detect_event_types(pa_block: str) -> list[EventType]:
     # HITS
     #
 
-    if " singles " in f" {text} ":
-        events.append(EventType.SINGLE)
+    if "singles" in text:
+    events.append(EventType.SINGLE)
 
-    if " doubles " in f" {text} ":
+    if "doubles" in text:
         events.append(EventType.DOUBLE)
-
-    if " triples " in f" {text} ":
+    
+    if "triples" in text:
         events.append(EventType.TRIPLE)
-
-    if " homers " in f" {text} ":
+    
+    if "homers" in text:
         events.append(EventType.HOME_RUN)
 
     #
