@@ -7,20 +7,32 @@ from models.detected_event import DetectedEvent
 def detected_events_to_baseball_event(
     detected_events: list[DetectedEvent],
 ) -> BaseballEvent | None:
-    primary_events = [event for event in detected_events if event.is_primary]
-
-    if not primary_events:
+    if not detected_events:
         return None
 
-    primary_event = primary_events[0]
+    primary_events = [event for event in detected_events if event.is_primary]
 
-    secondary_events = [
-        event.event_type
-        for event in detected_events
-        if not event.is_primary
-    ]
+    if primary_events:
+        primary_event = primary_events[0]
+
+        secondary_events = [
+            event.event_type
+            for event in detected_events
+            if not event.is_primary
+        ]
+
+        return BaseballEvent(
+            primary_event=primary_event.event_type,
+            secondary_events=secondary_events,
+        )
+
+    # Pure baserunning / non-batter event
+    primary_event = detected_events[0]
 
     return BaseballEvent(
         primary_event=primary_event.event_type,
-        secondary_events=secondary_events,
+        secondary_events=[
+            event.event_type
+            for event in detected_events[1:]
+        ],
     )
