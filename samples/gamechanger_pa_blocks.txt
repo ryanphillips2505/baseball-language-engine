@@ -11,3 +11,882 @@ Line Out
 Strike 1 swinging, Ball 1, Ball 2, Ball 3, In play.
 Cooper Cunningham lines out to shortstop Eddie Fish.
 === END ===
+
+=== PA ===
+Strikeout
+3 Outs
+Ball 1, Strike 1 swinging, Strike 2 looking, Ball 2, Strike 3 looking.
+Preston Klose strikes out looking, Caleb Adams pitching.
+=== END ===
+
+=== PA ===
+Strikeout
+2 Outs
+Ball 1, Strike 1 looking, Ball 2, Ball 3, Strike 2 looking, Strike 3 swinging.
+Gentry Hoke strikes out swinging, Caleb Adams pitching, Wyatt Jones remains at 2nd.
+=== END ===
+
+=== PA ===
+Error
+Strike 1 looking, In play.
+Wyatt Jones hits a fly ball and reaches on an error by right fielder Ryan Barfield, Wyatt Jones advances to 2nd on the same error.
+=== END ===
+
+=== PA ===
+Line Out
+1 Out
+Ball 1, Ball 2, In play.
+Drake Pace lines out to center fielder Preston Baublit.
+=== END ===
+
+=== PA ===
+Strikeout
+3 Outs
+Strike 1 looking, Strike 2 swinging, Ball 1, Ball 2, Strike 3 swinging.
+Ryan Barfield strikes out swinging, Clayton Strange pitching.
+=== END ===
+
+=== PA ===
+Pop Out
+2 Outs
+Strike 1 looking, Strike 2 looking, Ball 1, In play.
+Preston Baublit pops out to second baseman Drake Pace, Ashton Byrd remains at 1st.
+=== END ===
+
+=== PA ===
+Strikeout
+1 Out
+Brayden Trogdon in for pitcher Clayton Strange, Ball 1, Strike 1 swinging, Strike 2 swinging, Foul, Ball 2, Strike 3 swinging.
+Julio Alonso Gutierrez strikes out swinging, Clayton Strange pitching, Ashton Byrd remains at 1st.
+=== END ===
+
+=== PA ===
+Walk
+Ball 1, Ball 2, Strike 1 looking, Ball 3, Ball 4.
+Ashton Byrd walks, Brayden Trogdon pitching.
+=== END ===
+
+=== PA ===
+Home Run
+NRMN 1 - YKNM 3
+Strike 1 swinging, Strike 2 swinging, Ball 1, Ball 2, Foul, Foul, In play.
+Brody Hailey homers on a fly ball to left field.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Eddie Fish caught stealing home, Drake Pace steals 3rd, Strike 1 looking, Strike 2 swinging, Strike 3 looking.
+Wyatt Jones strikes out looking, Caleb Adams pitching.
+=== END ===
+
+=== PA ===
+Double
+Ball 1, In play.
+Drake Pace doubles on a line drive to right fielder Ryan Barfield, Caleb Schneider scores, Zayden Khalil scores, Eddie Fish advances to 3rd.
+=== END ===
+
+=== PA ===
+Walk
+Ball 1, Ball 2, Ball 3, Ball 4.
+Eddie Fish walks, Caleb Adams pitching, Wyatt Ruzicka scores, Caleb Schneider advances to 3rd, Zayden Khalil advances to 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Ball 1, Ball 2, Strike 1 looking, Ball 3, Ball 4.
+Zayden Khalil walks, Caleb Adams pitching, Wyatt Ruzicka advances to 3rd, Caleb Schneider advances to 2nd.
+=== END ===
+
+=== PA ===
+Infield Fly
+Foul, Foul, In play.
+Cade Geiger out on infield fly to shortstop Ethan Vinson, Wyatt Ruzicka remains at 2nd, Caleb Schneider remains at 1st.
+=== END ===
+
+=== PA ===
+Walk
+Courtesy runner Wyatt Ruzicka in for Owen Blair, Ball 1, Ball 2, Ball 3, Ball 4.
+Caleb Schneider walks, Caleb Adams pitching, Wyatt Ruzicka advances to 2nd.
+=== END ===
+
+=== PA ===
+Error
+Foul, Ball 1, Foul, Ball 2, Ball 3, In play.
+Owen Blair hits a ground ball and reaches on an error by second baseman Julio Alonso Gutierrez.
+=== END ===
+
+=== PA ===
+Double Play
+Pickoff attempt at 1st, Foul, Pickoff attempt at 1st, Foul, Ball 1, In play.
+Drake Pace lines into a double play to first baseman Brody Hailey, Zayden Khalil out advancing to 1st.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Foul, Pickoff attempt at 1st, Foul, Ball 2, Pickoff attempt at 1st, Strike 3 looking.
+Eddie Fish strikes out looking, Caleb Adams pitching, Zayden Khalil remains at 1st.
+=== END ===
+
+=== PA ===
+Error
+Foul, Ball 1, Ball 2, Strike 2 swinging, Ball 3, In play.
+Zayden Khalil hits a ground ball and reaches on an error by third baseman Thatcher Jack.
+=== END ===
+
+=== PA ===
+Fly Out
+Ball 1, Ball 2, Foul, Strike 2 swinging, Ball 3, In play.
+Brody Hailey flies out to center fielder Wyatt Jones.
+=== END ===
+
+=== PA ===
+Strikeout
+Foul, Ball 1, Strike 2 swinging, Strike 3 looking.
+Ryan Barfield strikes out looking, Brayden Trogdon pitching.
+=== END ===
+
+=== PA ===
+Strikeout
+Strike 1 looking, Strike 2 looking, Strike 3 swinging.
+Preston Baublit strikes out swinging, Brayden Trogdon pitching.
+=== END ===
+
+=== PA ===
+Fly Out
+Strike 1 looking, Ball 1, In play.
+Cade Geiger flies out to right fielder Noah Burns.
+=== END ===
+
+=== PA ===
+Double
+In play.
+Clayton Strange doubles on a line drive to left fielder Wyatt Dunahoo, Wyatt Jones scores, Drake Pace scores.
+=== END ===
+
+=== PA ===
+Walk
+Pickoff attempt at 1st, Strike 1 looking, Ball 1, Zayden Khalil scores on wild pitch, Drake Pace advances to 2nd on the same pitch, Ball 2, Drake Pace advances to 3rd on passed ball, Strike 2 swinging, Ball 3, Foul, Ball 4.
+Wyatt Jones walks, Cayden Vickers pitching, Drake Pace remains at 3rd.
+=== END ===
+
+=== PA ===
+Error
+Strike 1 looking, Strike 2 looking, In play.
+Drake Pace hits a ground ball and reaches on an error by first baseman Miguel Garcia, Caleb Schneider scores, Zayden Khalil advances to 3rd.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Caleb Schneider advances to 3rd on wild pitch, Zayden Khalil advances to 2nd on the same pitch, Strike 1 looking, Foul, Ball 2, Foul, Ball 3, Strike 3 looking.
+Eddie Fish strikes out looking, Cayden Vickers pitching, Caleb Schneider remains at 3rd, Zayden Khalil remains at 2nd.
+=== END ===
+
+=== PA ===
+Single
+Foul, Foul, Ball 1, In play.
+Zayden Khalil singles on a hard ground ball to left fielder Wyatt Dunahoo, Wyatt Ruzicka scores, Preston Klose scores, Caleb Schneider advances to 2nd.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Courtesy runner Wyatt Ruzicka in for Owen Blair, Strike 1 looking, Ball 1, Pickoff attempt at 2nd, Ball 2.
+Caleb Schneider is hit by pitch, Cayden Vickers pitching, Preston Klose advances to 3rd, Wyatt Ruzicka advances to 2nd.
+=== END ===
+
+=== PA ===
+Single
+In play.
+Owen Blair singles on a line drive to left fielder Wyatt Dunahoo, Cade Geiger scores, Clayton Strange scores, Preston Klose advances to 2nd.
+=== END ===
+
+=== PA ===
+Single
+Ball 1, Strike 1 looking, Ball 2, Foul, In play.
+Preston Klose singles on a ground ball to shortstop Kort Bain, Wyatt Jones scores, Clayton Strange advances to 3rd, Cade Geiger advances to 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Ball 1, Ball 2, Wyatt Jones advances to 3rd on wild pitch, Clayton Strange advances to 2nd on the same pitch, Ball 3, Strike 1 looking, Foul, Ball 4.
+Cade Geiger walks, Cayden Vickers pitching, Wyatt Jones remains at 3rd, Clayton Strange remains at 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Pickoff attempt at 1st, Pickoff attempt at 1st, Ball 1, Ball 2, Ball 3, Ball 4.
+Clayton Strange walks, Cayden Vickers pitching, Wyatt Jones advances to 2nd.
+=== END ===
+
+=== PA ===
+Single
+Strike 1 looking, Ball 1, Ball 2, Ball 3, In play.
+Wyatt Jones singles on a line drive to left fielder Wyatt Dunahoo.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Strike 1 swinging, Strike 2 looking, Ball 2, Strike 3 swinging.
+Drake Pace strikes out swinging, Cayden Vickers pitching.
+=== END ===
+
+=== PA ===
+Home Run
+Pickoff attempt at 1st, In play.
+Eddie Fish homers on a fly ball to left field, Zayden Khalil scores.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Strike 1 looking, Ball 1, Ball 2.
+Zayden Khalil is hit by pitch, Cayden Vickers pitching.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Strike 1 looking, Strike 2 swinging, Ball 2, Strike 3 swinging.
+Cayden Vickers strikes out swinging, Brayden Trogdon pitching.
+=== END ===
+
+=== PA ===
+Fly Out
+In play.
+Colten Anderson flies out to second baseman Drake Pace, Santana Gordon remains at 2nd.
+=== END ===
+
+=== PA ===
+Sacrifice Bunt
+Strike 1 looking, In play.
+Jayven Wesley sacrifices, pitcher Brayden Trogdon to first baseman Preston Klose, Jayven Wesley out advancing to 1st, Santana Gordon advances to 2nd.
+=== END ===
+
+=== PA ===
+Single
+In play.
+Santana Gordon singles on a ground ball to shortstop Eddie Fish.
+=== END ===
+
+=== PA ===
+Ground Out
+Strike 1 looking, Strike 2 swinging, Foul, In play.
+Malachi Large grounds out to catcher Owen Blair.
+=== END ===
+
+=== PA ===
+Strikeout
+Pickoff attempt at 1st, Pickoff attempt at 1st, Pickoff attempt at 1st, Foul, Ball 1, Ball 2, Pickoff attempt at 1st, Foul, Foul, Strike 3 swinging.
+Cayden Vickers strikes out swinging, Brayden Trogdon pitching, Colten Anderson remains at 1st.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Ball 1, Ball 2.
+Colten Anderson is hit by pitch, Brayden Trogdon pitching.
+=== END ===
+
+=== PA ===
+Line Out
+Strike 1 looking, Ball 1, Ball 2, In play.
+Jayven Wesley lines out to right fielder Preston Rea.
+=== END ===
+
+=== PA ===
+Ground Out
+Ball 1, Ball 2, In play.
+Grant Richards grounds out to third baseman Zayden Khalil.
+=== END ===
+
+=== PA ===
+Sacrifice Fly
+Preston Klose in for pitcher Jayden Henderson, Foul, In play.
+Hudson Hedrick out on sacrifice fly to left fielder Caleb Schneider, Colton Seaman held up at 1st, Walker Edwards scores, Mason Mayhew advances to 3rd.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Strike 1 looking, Ball 1.
+Colton Seaman is hit by pitch, Preston Klose pitching, Ryan Hubble scores, Walker Edwards advances to 3rd, Mason Mayhew advances to 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Strike 1 looking, Ball 1, Ball 2, Ball 3, Foul, Ball 4.
+Mason Mayhew walks, Preston Klose pitching, Kai Horne scores, Ryan Hubble advances to 3rd, Walker Edwards advances to 2nd.
+=== END ===
+
+=== PA ===
+Single
+In play.
+Walker Edwards singles on a hard ground ball to left fielder Caleb Schneider, Kai Horne advances to 3rd, Ryan Hubble advances to 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Strike 1 swinging, Ball 1, Strike 2 looking, Ball 2, Ball 3, Ball 4.
+Ryan Hubble walks, Preston Klose pitching, Kai Horne remains at 2nd.
+=== END ===
+
+=== PA ===
+Line Out
+Foul, Ball 1, Kai Horne steals 2nd, In play.
+Tristan Tomlin lines out to center fielder Wyatt Jones, Kai Horne remains at 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Ball 1, Ball 2, Ball 3, Ball 4.
+Kai Horne walks, Preston Klose pitching.
+=== END ===
+
+=== PA ===
+Pop Out
+Strike 1 looking, Ball 1, Ball 2, Strike 2 looking, In play.
+Brayden Trogdon pops out to third baseman Kai Horne.
+=== END ===
+
+=== PA ===
+Home Run
+Strike 1 looking, Pickoff attempt at 1st, In play.
+Wyatt Jones homers on a fly ball to left field, Cade Geiger scores.
+=== END ===
+
+=== PA ===
+Fielder's Choice
+In play.
+Cade Geiger grounds into fielder's choice to second baseman Mason Mayhew, Clayton Strange out advancing to 2nd.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Strike 1 looking, Ball 1, Strike 2 looking, Ball 2, Ball 3, Ball 4.
+Clayton Strange is hit by pitch, Aiden Heater pitching.
+=== END ===
+
+=== PA ===
+Line Out
+Ball 1, Ball 2, Ball 3, Strike 1 looking, Foul, In play.
+Drake Pace lines out to shortstop Mason Phillips.
+=== END ===
+
+=== PA ===
+Fielder's Choice
+Strike 1 looking, Foul, Ball 1, In play.
+Caleb Cargal grounds into fielder's choice to third baseman, Preston Klose out advancing to 3rd, Cayden Thomas advances to 2nd.
+=== END ===
+
+=== PA ===
+Ground Out
+Ball 1, Strike 1 looking, Strike 2 looking, Foul, Ball 2, Foul, In play.
+Zayden Khalil grounds out, second baseman Landon Chavez to first baseman Mark Seeley.
+=== END ===
+
+=== PA ===
+Error
+Courtesy runner Wyatt Ruzicka in for Cade Rush, Kody Lonsbury in for pitcher Kaison Lang, Ball 1, Ball 2, In play.
+Caleb Schneider hits a line drive and reaches on an error by center fielder Shane Fordenbacher, Caleb Schneider advances to 2nd on the same error, Wyatt Ruzicka scores.
+=== END ===
+
+=== PA ===
+Double
+Ball 1, Strike 1 looking, Ball 2, Foul, In play.
+Cade Rush doubles on a line drive to center fielder Shane Fordenbacher.
+=== END ===
+
+=== PA ===
+Sacrifice Fly
+Lineup changed: Pinch runner Eli Downing in for designated hitter Clayton Strange, In play.
+Preston Klose out on sacrifice fly to right fielder Frank Coats, Eli Downing scores.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Ball 2, Strike 1 looking, Foul, Strike 3 swinging.
+Cade Geiger strikes out swinging, Kody Lonsbury pitching, Clayton Strange remains at 3rd.
+=== END ===
+
+=== PA ===
+Triple
+Foul, In play.
+Clayton Strange triples on a line drive to right fielder Frank Coats, Wyatt Jones scores.
+=== END ===
+
+=== PA ===
+Walk
+Ball 1, Ball 2, Strike 1 swinging, Ball 3, Ball 4.
+Wyatt Jones walks, Kody Lonsbury pitching.
+=== END ===
+
+=== PA ===
+Strikeout
+Lineup changed: Dalten Gomez in for batter Easton Dutton, Strike 1 looking, Pickoff attempt at 1st, Ball 1, Strike 2 swinging, Strike 3 swinging.
+Dalten Gomez strikes out swinging, Owen Blair pitching.
+=== END ===
+
+=== PA ===
+Fielder's Choice
+Ball 1, In play.
+Landon Chavez grounds into fielder's choice, third baseman Zayden Khalil to second baseman Drake Pace to first baseman Preston Klose, Landin Shippers out advancing to 2nd.
+=== END ===
+
+=== PA ===
+Strikeout
+Strike 1 swinging, Strike 2 swinging, Ball 1, Strike 3 swinging.
+Frank Coats strikes out swinging, Owen Blair pitching, Landin Shippers remains at 1st.
+=== END ===
+
+=== PA ===
+Error
+Kaleb Rea in for pitcher Owen Blair, In play.
+Landin Shippers hits a ground ball and reaches on an error by second baseman Drake Pace.
+=== END ===
+
+=== PA ===
+FC Double Play
+In play.
+Brody Pierce grounds into a fielder's choice double play, shortstop Eddie Fish to second baseman Drake Pace to first baseman Preston Klose, Landin Shippers did not score, Frank Coats out advancing to 3rd, Landon Chavez out advancing to 2nd.
+=== END ===
+
+=== PA ===
+Double Play
+Foul, In play.
+Frank Coats lines into a double play to second baseman Drake Pace, Ethan Parrish out advancing to 2nd, Landin Shippers remains at 1st.
+=== END ===
+
+=== PA ===
+Walk
+Ball 1, Ball 2, Ball 3, Ball 4.
+Landin Shippers walks, Kaleb Rea pitching, Ethan Parrish advances to 2nd.
+=== END ===
+
+=== PA ===
+Pop Out
+Strike 1 looking, Ball 1, Ball 2, Ball 3, In play.
+Shane Fordenbacher pops out to second baseman Drake Pace, Ethan Parrish remains at 1st.
+=== END ===
+
+=== PA ===
+Single
+Strike 1 swinging, In play.
+Ethan Parrish singles on a line drive to left fielder Caleb Schneider.
+=== END ===
+
+=== PA ===
+FC Double Play
+Foul, Ball 1, Strike 2 looking, Ball 2, David Miller scores on wild pitch, Grady Glidden advances to 3rd on the same pitch, Maverick Gardner advances to 2nd on the same pitch, In play.
+Josiah Abshire flies into a fielder's choice double play, shortstop Eddie Fish to third baseman Zayden Khalil, Grady Glidden out advancing to home, Maverick Gardner out advancing to 3rd.
+=== END ===
+
+=== PA ===
+Runner Out
+Ball 1, Strike 1 swinging, Ball 2, Braylon Henry advances to 2nd on passed ball, Ball 3, Strike 2 looking, Braylon Henry caught stealing 3rd, catcher Cade Rush to third baseman Zayden Khalil.
+Half-inning ended by out on the base paths.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Strike 1 swinging, Foul, Ball 2, Strike 3 swinging.
+Bryson Harlow strikes out swinging, Cayden Thomas pitching, Braylon Henry remains at 1st.
+=== END ===
+
+=== PA ===
+Fly Out
+In play.
+Cole Gossett flies out to left fielder Caleb Schneider, Braylon Henry remains at 1st.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Ball 1, Ball 2.
+Braylon Henry is hit by pitch, Cayden Thomas pitching.
+=== END ===
+
+=== PA ===
+Home Run
+In play.
+Maverick Gardner homers on a fly ball to left field, David Miller scores.
+=== END ===
+
+=== PA ===
+Ground Out
+In play.
+Wyatt Ruzicka grounds out, third baseman Aaron De Loera Rodriguez to first baseman Angel Perez.
+=== END ===
+
+=== PA ===
+Error
+Courtesy runner Preston Rea in for Cade Rush, Ball 1, Foul, Ball 2, Foul, In play.
+Cayden Thomas hits a hard ground ball and reaches on an error by first baseman Angel Perez, Preston Rea advances to 3rd.
+=== END ===
+
+=== PA ===
+Sacrifice Fly
+Ball 1, Strike 1 looking, Foul, Ball 2, Foul, Ball 3, Kamden Hotz scores on wild pitch, Caleb Cargal advances to 3rd on the same pitch, Eli Downing advances to 2nd on the same pitch, In play.
+Daxton Pierson out on sacrifice fly to right fielder Angelo White, Caleb Cargal scores, Eli Downing advances to 3rd.
+=== END ===
+
+=== PA ===
+Error
+Strike 1 looking, In play.
+Eli Downing hits a ground ball and reaches on an error by third baseman Aaron De Loera Rodriguez, Nathan Clark scores, Kamden Hotz advances to 3rd, Caleb Cargal advances to 2nd.
+=== END ===
+
+=== PA ===
+Fielder's Choice
+(Play Edit) Drake Pace in for Nathan Clark, Strike 1 looking, Lineup changed: Pinch runner Nathan Clark in for third baseman Drake Pace, In play.
+Kamden Hotz grounds into fielder's choice to shortstop Riley Axtell, Wyatt Ruzicka scores, Nathan Clark advances to 2nd.
+=== END ===
+
+=== PA ===
+Fielder's Choice
+In play.
+Nathan Clark grounds into fielder's choice, second baseman Tylor Mason to shortstop Riley Axtell, Owen Blair out advancing to 2nd, Wyatt Ruzicka advances to 3rd.
+=== END ===
+
+=== PA ===
+Single
+Courtesy runner Preston Rea in for Cade Rush, Ball 1, Ball 2, Ball 3, Foul, Foul, Foul, Foul, In play.
+Cayden Thomas singles on a line drive to left fielder Malachi Ferguson, Daxton Pierson scores on error by left fielder Malachi Ferguson, Preston Rea scores on the same error, Cayden Thomas scores on the same error, Eli Downing scores.
+=== END ===
+
+=== PA ===
+Runner Out
+Strike 1 swinging, Ball 1, Ball 2, Strike 2 swinging, Ball 3, Aaron De Loera Rodriguez caught stealing 2nd, catcher Cade Rush to second baseman Kamden Hotz.
+Half-inning ended by out on the base paths.
+=== END ===
+
+=== PA ===
+Strikeout
+Ball 1, Strike 1 looking, Pickoff attempt at 1st, Ball 2, Strike 2 swinging, Pickoff attempt at 1st, Foul, Strike 3 swinging.
+Malachi Ferguson strikes out swinging, Gentry Hoke pitching, Aaron De Loera Rodriguez remains at 1st.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Ball 1, Strike 1 looking, Ball 2.
+Aaron De Loera Rodriguez is hit by pitch, Gentry Hoke pitching.
+=== END ===
+
+=== PA ===
+Pop Out
+In play.
+Riley Axtell pops out to shortstop Eddie Fish.
+=== END ===
+
+=== PA ===
+Triple
+Ball 1, Wyatt Jones steals 2nd, Ball 2, Ball 3, Strike 1 looking, In play.
+Preston Klose triples on a fly ball to center fielder Cadence Smith, Clayton Strange scores, Wyatt Jones scores.
+=== END ===
+
+=== PA ===
+Triple
+Ball 1, Ball 2, Strike 1 looking, In play.
+Aaron De Loera Rodriguez triples on a fly ball to right fielder Cade Geiger.
+=== END ===
+
+=== PA ===
+Dropped 3rd Strike
+Strike 1 looking, Strike 2 looking, Strike 3 swinging.
+Clayton Strange reaches on dropped 3rd strike (wild pitch).
+=== END ===
+
+=== PA ===
+Fly Out
+Strike 1 looking, Ball 1, Foul, In play.
+Eli Parkhurst flies out to center fielder Wyatt Jones.
+=== END ===
+
+=== PA ===
+Single
+Foul, Ball 1, Jax Gordon steals 3rd, Brady Morgeson steals 2nd, In play.
+Cam Brumbaugh singles on a line drive to left fielder Caleb Schneider, Brady Morgeson scores, Jax Gordon scores.
+=== END ===
+
+=== PA ===
+Error
+Foul, In play.
+Brady Morgeson hits a ground ball and reaches on an error by second baseman Kamden Hotz, Easton McDaniel scores, Jax Gordon advances to 2nd.
+=== END ===
+
+=== PA ===
+Fielder's Choice
+Strike 1 looking, Foul, In play.
+Jax Gordon grounds into fielder's choice, third baseman Zayden Khalil to second baseman Kamden Hotz, Zac Tucker out advancing to 2nd, Easton McDaniel advances to 3rd.
+=== END ===
+
+=== PA ===
+Sacrifice Fly
+Ball 1, Ball 2, Strike 1 looking, Strike 2 looking, Foul, In play.
+Alec Arredondo out on sacrifice fly to left fielder Caleb Schneider, Zac Tucker held up at 1st, Easton McDaniel held up at 2nd, Cole Britton scores.
+=== END ===
+
+=== PA ===
+Dropped 3rd Strike
+Easton McDaniel advances to 2nd, Strike 1 looking, Ball 1, Strike 2 swinging, Strike 3 swinging.
+Zac Tucker reaches on dropped 3rd strike (passed ball), Easton McDaniel held up at 2nd, Cole Britton held up at 3rd.
+=== END ===
+
+=== PA ===
+Single
+Foul, In play.
+Easton McDaniel singles on a bunt to catcher Owen Blair, Cole Britton advances to 3rd.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Ball 1.
+Cole Britton is hit by pitch, Brayden Trogdon pitching.
+=== END ===
+
+=== PA ===
+Dropped 3rd Strike
+Ball 1, Foul, Ball 2, Foul, Strike 3 swinging.
+Kike Anderson out at first on dropped 3rd strike.
+=== END ===
+
+=== PA ===
+Error
+Foul, Ball 1, In play.
+Eddie Fish hits a ground ball and reaches on an error by shortstop Jayden Mayfield, Wyatt Ruzicka scores, Caleb Schneider advances to 3rd, Cade Geiger advances to 2nd.
+=== END ===
+
+=== PA ===
+Double Play
+Ball 1, In play.
+Jayden Mayfield grounds into a double play, third baseman Zayden Khalil to second baseman Drake Pace to first baseman Preston Klose, Samuel McClure out advancing to 2nd.
+=== END ===
+
+=== PA ===
+Error
+Ball 1, Ball 2, Foul, Ball 3, In play.
+Cade Geiger hits a ground ball and reaches on an error by second baseman Daniel Diaz.
+=== END ===
+
+=== PA ===
+Double Play
+In play.
+David Miller bunts into a double play, pitcher Wyatt Jones to first baseman Preston Klose, Ethan Workman out advancing to 2nd.
+=== END ===
+
+=== PA ===
+Pop Out
+Ball 1, Pickoff attempt at 1st, Ball 2, Zayden Khalil steals 2nd, Strike 1 looking, Ball 3, In play.
+Caleb Schneider pops out to second baseman David Miller.
+=== END ===
+
+=== PA ===
+Fly Out
+Ball 1, Pickoff attempt at 1st, In play.
+Owen Blair flies out to right fielder Ethan Workman, Zayden Khalil remains at 1st.
+=== END ===
+
+=== PA ===
+Ground Out
+In play.
+Preston Klose bunts out to third baseman Cole Gossett, Zayden Khalil remains at 1st.
+=== END ===
+
+=== PA ===
+Single
+Strike 1 looking, Strike 2 swinging, Ball 1, In play.
+Zayden Khalil singles on a ground ball to second baseman David Miller.
+=== END ===
+
+=== PA ===
+Error
+Devon Butler in for pitcher Cayden Thomas, Ball 1, Strike 1 swinging, Strike 2 looking, Ball 2, In play.
+Jackson Sherrer hits a ground ball and reaches on an error by shortstop Eddie Fish.
+=== END ===
+
+=== PA ===
+Fielder's Choice
+Ball 1, Eddie Fish steals 3rd, In play.
+Wyatt Jones grounds into fielder's choice to third baseman Ty Lashbrook, Clayton Strange out advancing to 2nd, Eddie Fish scores.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Ball 1, Ball 2, Strike 1 swinging, Ball 3.
+Clayton Strange is hit by pitch, Ace Lewis pitching, Eddie Fish remains at 2nd.
+=== END ===
+
+=== PA ===
+Ground Out
+In play.
+Zayden Khalil bunts out to pitcher, Eddie Fish remains at 2nd.
+=== END ===
+
+=== PA ===
+Error
+Ace Lewis in for pitcher Gavin Bailey, Ball 1, Strike 1 looking, Strike 2 looking, In play.
+Eddie Fish hits a ground ball and reaches on an error by second baseman Kai Samonte, Eddie Fish advances to 2nd on error by second baseman Kai Samonte.
+=== END ===
+
+=== PA ===
+Sacrifice Bunt
+Courtesy runner Wyatt Ruzicka in for Owen Blair, Strike 1 looking, Ball 1, Strike 2 looking, In play.
+Caleb Schneider sacrifices to pitcher Ace Lewis, Caleb Schneider out advancing to 1st, Wyatt Ruzicka advances to 2nd.
+=== END ===
+
+=== PA ===
+Fly Out
+Lineup changed: Pinch runner Kamden Hotz in for first baseman Preston Klose, Strike 1 looking, Kamden Hotz picked off at 2nd, shortstop Dax Brooks, Strike 2 looking, Foul, In play.
+Caleb Schneider flies out in foul territory to right fielder Jackson Wheaton.
+=== END ===
+
+=== PA ===
+Ground Out
+Lineup changed: Pinch runner Eli Downing in for designated hitter Clayton Strange, Pickoff attempt at 1st, Strike 1 looking, Pickoff attempt at 1st, Pickoff attempt at 1st, Eli Downing steals 2nd, Ball 1, Foul, Ball 2, In play.
+Wyatt Jones grounds out to third baseman Aaron Muldowney.
+=== END ===
+
+=== PA ===
+Double Play
+Lineup changed: Trey Hurtt in for batter Lucas Hicks, In play.
+Trey Hurtt grounds into a double play, second baseman Drake Pace to shortstop Eddie Fish to first baseman Preston Klose, Justin Penland out advancing to 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Strike 1 swinging, Foul, Ball 1, Eli Downing steals 3rd, Eli Downing scores on error by catcher Maddux McMartin, Ball 2, Ball 3, Ball 4.
+Preston Klose walks, Brodie Inhofe pitching.
+=== END ===
+
+=== PA ===
+Error
+Drake Pace steals 2nd, Ball 1, Ball 2, In play.
+Clayton Strange hits a ground ball and reaches on an error by shortstop Bodee Cook, Drake Pace scores.
+=== END ===
+
+=== PA ===
+Pop Out
+In play.
+Cade Geiger pops out, center fielder Brody Vandeventer to left fielder Talen Stallings to center fielder Unknown Player, Wyatt Ruzicka remains at 2nd.
+=== END ===
+
+=== PA ===
+Error
+In play.
+Justin Penland bunts and reaches on an error by first baseman Preston Klose.
+=== END ===
+
+=== PA ===
+Single
+Strike 1 swinging, In play.
+Wyatt Jones singles on a bunt, third baseman Justin Penland to pitcher Brodie Inhofe to catcher Maddux McMartin, Drake Pace out advancing to home, Clayton Strange advances to 3rd, Wyatt Jones advances to 2nd on the throw, Eddie Fish scores.
+=== END ===
+
+=== PA ===
+Double
+In play.
+Talen Stallings doubles on a line drive to center fielder Wyatt Jones, Bryce Inhofe out advancing to home.
+=== END ===
+
+=== PA ===
+Strikeout
+Foul, Ball 1, Zayden Khalil scores on wild pitch, Strike 2 looking, Strike 3 swinging.
+Clayton Strange strikes out swinging, Brodie Inhofe pitching.
+=== END ===
+
+=== PA ===
+Single
+Foul, In play.
+Zayden Khalil singles on a bunt to third baseman Justin Penland, Zayden Khalil advances to 3rd on error by third baseman Justin Penland.
+=== END ===
+
+=== PA ===
+Sacrifice Bunt
+Foul, Ball 1, In play.
+Justin Penland sacrifices, pitcher Brayden Trogdon to first baseman Preston Klose, Justin Penland out advancing to 1st, Maddux McMartin advances to 3rd.
+=== END ===
+
+=== PA ===
+Strikeout
+Strike 1 looking, Maddux McMartin steals 2nd, Ball 1, Strike 2 swinging, Foul, Strike 3 swinging.
+Timmy Stoner strikes out swinging, Brayden Trogdon pitching, Maddux McMartin remains at 2nd.
+=== END ===
+
+=== PA ===
+Walk
+Strike 1 swinging, Foul, Ball 1, Eli Downing steals 3rd, Eli Downing scores on error by catcher Maddux McMartin, Ball 2, Ball 3, Ball 4.
+Preston Klose walks, Brodie Inhofe pitching.
+=== END ===
+
+=== PA ===
+Error
+Ball 1, Ball 2, In play.
+Caleb Schneider hits a ground ball and reaches on an error by first baseman Connor Douthitt, Caleb Schneider advances to 3rd on error by pitcher Brandon Chaney.
+=== END ===
+
+=== PA ===
+Single
+Owen Blair in for pitcher Jayden Henderson, In play.
+Asher Fowler singles on a bunt, pitcher Jayden Henderson to second baseman Drake Pace to shortstop Eddie Fish, Asher Fowler advances to 2nd on error.
+=== END ===
+
+=== PA ===
+Single
+Ball 1, Eddie Fish steals 2nd, In play.
+Drake Pace flies out to center fielder Asher Fowler.
+=== END ===
+
+=== PA ===
+Error
+Strike 1 looking, Ball 1, Strike 2 swinging, Ball 2, Wyatt Ruzicka scores on passed ball, Caleb Cargal advances to 3rd on the same pitch, Caleb Schneider advances to 2nd on the same pitch, Ball 3, In play.
+Cade Geiger hits a ground ball and reaches on an error by shortstop Burton Moore, Caleb Cargal scores, Caleb Schneider advances to 3rd.
+=== END ===
+
+=== PA ===
+Ground Out
+Ball 1, Ball 2, Pickoff attempt at 1st, Cade Geiger scores on error by catcher Jack Rhodes, Eddie Fish advances to 3rd on the same error, In play.
+Zayden Khalil grounds out to shortstop Burton Moore.
+=== END ===
+
+=== PA ===
+Walk
+2 Outs
+Roman Abbagnaro caught stealing 3rd, catcher Owen Blair to third baseman Zayden Khalil, Ball 1, Ball 2, Foul, Strike 2 looking, Foul, Ball 3, Pickoff attempt at 1st, Ball 4.
+Jack Rhodes walks, Brayden Trogdon pitching, Wright Martin advances to 2nd.
+=== END ===
+
+=== PA ===
+Single
+Owen Blair in for pitcher Jayden Henderson, In play.
+Asher Fowler singles on a bunt, pitcher Jayden Henderson to second baseman Drake Pace to shortstop Eddie Fish, Asher Fowler advances to 2nd on error.
+=== END ===
+
+=== PA ===
+Hit By Pitch
+Foul, Pickoff attempt at 1st, Ball 1, Pickoff attempt at 1st, Cade Geiger steals 2nd, Ball 2, Foul, Ball 3, Ball 4.
+Eddie Fish is hit by pitch, Eli Dickey pitching, Cade Geiger remains at 2nd.
+=== END ===
+
+=== PA ===
+Sacrifice Bunt
+Foul, Ball 1, Clayton Strange advances to 2nd on wild pitch, In play.
+Wyatt Jones sacrifices, third baseman Jack VanOrman to first baseman Wright Martin, Wyatt Jones out advancing to 1st, Clayton Strange advances to 3rd.
+=== END ===
+
+=== PA ===
+Double Play
+Pickoff attempt at 1st, Strike 1 looking, Pickoff attempt at 1st, In play.
+Wyatt Jones lines into a double play, third baseman Tripp Enright to first baseman Titus Hawk, Zayden Khalil out advancing to 1st.
+=== END ===
+
+=== PA ===
+Error
+In play.
+Zayden Khalil hits a line drive and reaches on an error.
+=== END ===
+
+=== PA ===
+Error
+In play.
+Brodee Clifton hits a fly ball and reaches on an error, Brodee Clifton advances to 2nd on the same error.
+=== END ===
+
+=== PA ===
+Walk
+1 Out
+Strike 1 looking, Ball 1, Ball 2, Pickoff attempt at 1st, Ball 3, Cade Geiger out at 1st, second baseman Landon Berglan to first baseman Titus Hawk, Foul, Ball 4.
+Eddie Fish walks, Broedy Taron pitching.
+=== END ===
