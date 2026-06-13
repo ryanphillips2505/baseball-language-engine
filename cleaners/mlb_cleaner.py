@@ -1,14 +1,36 @@
-from cleaners.mlb_cleaner import clean_mlb_text
+from __future__ import annotations
 
-raw_text = """
-PASTE A RAW MLB COPY/PASTE BLOCK HERE
-"""
+import re
 
-cleaned_blocks = clean_mlb_text(raw_text)
 
-print(f"Cleaned blocks: {len(cleaned_blocks)}")
+_BASEBALL_ACTION_RE = re.compile(
+    r"\b("
+    r"singles|doubles|triples|homers|"
+    r"walks|intentionally walks|"
+    r"strikes out|called out on strikes|"
+    r"hit by pitch|"
+    r"grounds out|grounds into|"
+    r"flies out|lines out|pops out|"
+    r"reaches on|"
+    r"out on a sacrifice fly|"
+    r"steals|caught stealing|picked off"
+    r")\b",
+    re.I,
+)
 
-for index, block in enumerate(cleaned_blocks, start=1):
-    print("=" * 70)
-    print(f"PA #{index}")
-    print(block)
+
+def clean_mlb_text(raw_text: str) -> list[str]:
+    cleaned_blocks: list[str] = []
+
+    for raw_line in raw_text.splitlines():
+        line = raw_line.strip()
+
+        if not line:
+            continue
+
+        line = re.sub(r"\s+", " ", line)
+
+        if _BASEBALL_ACTION_RE.search(line):
+            cleaned_blocks.append(line)
+
+    return cleaned_blocks
