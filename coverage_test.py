@@ -1,7 +1,7 @@
 from dataset.loader import load_pa_blocks
 from detectors.event_detector import detect_event_types
 
-blocks = load_pa_blocks("samples/gamechanger_pa_blocks.txt")
+blocks = load_pa_blocks("samples/mlb_pa_blocks.txt")
 
 detected_count = 0
 undetected_blocks = []
