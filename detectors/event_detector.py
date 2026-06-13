@@ -39,7 +39,10 @@ def detect_event_types(pa_block: str) -> list[EventType]:
     # OUTS
     #
 
-    if " grounds out " in f" {text} ":
+    if "grounds out" in text:
+        events.append(EventType.GROUND_OUT)
+
+    if "bunts out" in text:
         events.append(EventType.GROUND_OUT)
 
     if " flies out " in f" {text} ":
@@ -48,7 +51,7 @@ def detect_event_types(pa_block: str) -> list[EventType]:
     if " lines out " in f" {text} ":
         events.append(EventType.LINE_OUT)
 
-    if " pops out " in f" {text} ":
+    if "pops out" in text:
         events.append(EventType.POP_OUT)
 
     if " infield fly " in text:
@@ -80,7 +83,7 @@ def detect_event_types(pa_block: str) -> list[EventType]:
     if " hit by pitch" in text:
         events.append(EventType.HIT_BY_PITCH)
 
-    if " reaches on an error " in f" {text} ":
+    if "reaches on an error" in text:
         events.append(EventType.ERROR)
 
     #
