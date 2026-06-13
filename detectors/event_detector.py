@@ -73,6 +73,12 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
 
     if "out at first on dropped 3rd strike" in text:
         events.append(DetectedEvent(event_type=EventType.DROPPED_THIRD_STRIKE_OUT))
+    
+    if "strikes out on a foul tip" in text:
+        events.append(DetectedEvent(event_type=EventType.STRIKEOUT_SWINGING))
+
+    if "called out on strikes" in text:
+        events.append(DetectedEvent(event_type=EventType.STRIKEOUT_LOOKING))
 
     #
     # REACH EVENTS
