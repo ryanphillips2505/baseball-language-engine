@@ -57,17 +57,17 @@ def detect_event_types(pa_block: str) -> list[EventType]:
     #
     # STRIKEOUTS
     #
-
-    if " strikes out looking " in f" {text} ":
+    
+    if "strikes out looking" in text:
         events.append(EventType.STRIKEOUT_LOOKING)
-
-    if " strikes out swinging " in f" {text} ":
+    
+    if "strikes out swinging" in text:
         events.append(EventType.STRIKEOUT_SWINGING)
-
-    if " reaches on dropped 3rd strike " in f" {text} ":
+    
+    if "reaches on dropped 3rd strike" in text:
         events.append(EventType.DROPPED_THIRD_STRIKE_REACH)
-
-    if " out at first on dropped 3rd strike " in f" {text} ":
+    
+    if "out at first on dropped 3rd strike" in text:
         events.append(EventType.DROPPED_THIRD_STRIKE_OUT)
 
     #
