@@ -30,6 +30,9 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "doubles" in text:
         events.append(DetectedEvent(event_type=EventType.DOUBLE))
 
+    if "ground-rule double" in text:
+        events.append(DetectedEvent(event_type=EventType.DOUBLE))
+
     if "triples" in text:
         events.append(DetectedEvent(event_type=EventType.TRIPLE))
 
@@ -74,9 +77,11 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "out at first on dropped 3rd strike" in text:
         events.append(DetectedEvent(event_type=EventType.DROPPED_THIRD_STRIKE_OUT))
     
+    # Strikeout swinging variant
     if "strikes out on a foul tip" in text:
         events.append(DetectedEvent(event_type=EventType.STRIKEOUT_SWINGING))
 
+    # Strikeout looking variant
     if "called out on strikes" in text:
         events.append(DetectedEvent(event_type=EventType.STRIKEOUT_LOOKING))
 
@@ -93,6 +98,8 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "reaches on an error" in text:
         events.append(DetectedEvent(event_type=EventType.ERROR))
 
+    if "reaches on a fielding error" in text:
+        events.append(DetectedEvent(event_type=EventType.ERROR))
     #
     # SPECIAL EVENTS
     #
@@ -106,12 +113,14 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "fielder's choice double play" in text:
         events.append(DetectedEvent(event_type=EventType.FC_DOUBLE_PLAY))
 
+    elif "grounds into a force out" in text:
+        events.append(DetectedEvent(event_type=EventType.FIELDERS_CHOICE))
+
     elif "fielder's choice" in text:
         events.append(DetectedEvent(event_type=EventType.FIELDERS_CHOICE))
 
     elif "double play" in text:
         events.append(DetectedEvent(event_type=EventType.DOUBLE_PLAY))
-
     #
     # BASERUNNING EVENTS
     #
