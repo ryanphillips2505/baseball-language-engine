@@ -39,6 +39,18 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "homers" in text:
         events.append(DetectedEvent(event_type=EventType.HOME_RUN))
 
+    # iScore variants
+    if "for a single" in text:
+        events.append(DetectedEvent(event_type=EventType.SINGLE))
+
+    if "for a double" in text:
+        events.append(DetectedEvent(event_type=EventType.DOUBLE))
+
+    if "for a triple" in text:
+        events.append(DetectedEvent(event_type=EventType.TRIPLE))
+
+    if "homerun" in text:
+        events.append(DetectedEvent(event_type=EventType.HOME_RUN))
     #
     # OUTS
     #
@@ -47,6 +59,9 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
         events.append(DetectedEvent(event_type=EventType.GROUND_OUT))
 
     if "bunts out" in text:
+        events.append(DetectedEvent(event_type=EventType.GROUND_OUT))
+
+    if "bunts for an out" in text:
         events.append(DetectedEvent(event_type=EventType.GROUND_OUT))
 
     if " flies out " in f" {text} ":
@@ -60,6 +75,9 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
 
     if " infield fly " in text:
         events.append(DetectedEvent(event_type=EventType.INFIELD_FLY))
+    if "hits a line drive to the" in text and "for an out" in text:
+        events.append(DetectedEvent(event_type=EventType.LINE_OUT))
+
 
     #
     # STRIKEOUTS
@@ -85,6 +103,10 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "called out on strikes" in text:
         events.append(DetectedEvent(event_type=EventType.STRIKEOUT_LOOKING))
 
+    if "strikes out but the third strike is dropped" in text and "thrown out" in text:
+        events.append(
+            DetectedEvent(event_type=EventType.DROPPED_THIRD_STRIKE_OUT)
+        )
     #
     # REACH EVENTS
     #
@@ -100,6 +122,15 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
 
     if "reaches on a fielding error" in text:
         events.append(DetectedEvent(event_type=EventType.ERROR))
+    if " is walked" in text:
+        events.append(DetectedEvent(event_type=EventType.WALK))
+
+    if " is hit by the pitch" in text:
+        events.append(DetectedEvent(event_type=EventType.HIT_BY_PITCH))
+
+    if "reaches base due to an error" in text:
+        events.append(DetectedEvent(event_type=EventType.ERROR))
+    
     #
     # SPECIAL EVENTS
     #
@@ -121,6 +152,13 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
 
     elif "double play" in text:
         events.append(DetectedEvent(event_type=EventType.DOUBLE_PLAY))
+    if "bunts to reach first safely" in text:
+        events.append(DetectedEvent(event_type=EventType.SINGLE))
+
+    if "is forced out at second" in text:
+        events.append(DetectedEvent(event_type=EventType.FIELDERS_CHOICE))
+        
+        
     #
     # BASERUNNING EVENTS
     #
