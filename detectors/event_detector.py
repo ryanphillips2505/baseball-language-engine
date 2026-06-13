@@ -24,14 +24,14 @@ def detect_event_types(pa_block: str) -> list[EventType]:
     #
 
     if "singles" in text:
-    events.append(EventType.SINGLE)
+        events.append(EventType.SINGLE)
 
     if "doubles" in text:
         events.append(EventType.DOUBLE)
-    
+
     if "triples" in text:
         events.append(EventType.TRIPLE)
-    
+
     if "homers" in text:
         events.append(EventType.HOME_RUN)
 
@@ -57,16 +57,16 @@ def detect_event_types(pa_block: str) -> list[EventType]:
     #
     # STRIKEOUTS
     #
-    
+
     if "strikes out looking" in text:
         events.append(EventType.STRIKEOUT_LOOKING)
-    
+
     if "strikes out swinging" in text:
         events.append(EventType.STRIKEOUT_SWINGING)
-    
+
     if "reaches on dropped 3rd strike" in text:
         events.append(EventType.DROPPED_THIRD_STRIKE_REACH)
-    
+
     if "out at first on dropped 3rd strike" in text:
         events.append(EventType.DROPPED_THIRD_STRIKE_OUT)
 
@@ -82,5 +82,46 @@ def detect_event_types(pa_block: str) -> list[EventType]:
 
     if " reaches on an error " in f" {text} ":
         events.append(EventType.ERROR)
+
+    #
+    # SPECIAL EVENTS
+    #
+
+    if "sacrifice fly" in text:
+        events.append(EventType.SAC_FLY)
+
+    if "sacrifices" in text or "sacrifice bunt" in text:
+        events.append(EventType.SAC_BUNT)
+
+    if "fielder's choice double play" in text:
+        events.append(EventType.FC_DOUBLE_PLAY)
+
+    elif "fielder's choice" in text:
+        events.append(EventType.FIELDERS_CHOICE)
+
+    elif "double play" in text:
+        events.append(EventType.DOUBLE_PLAY)
+
+    #
+    # BASERUNNING EVENTS
+    #
+
+    if " steals " in f" {text} ":
+        events.append(EventType.STOLEN_BASE)
+
+    if " caught stealing " in f" {text} ":
+        events.append(EventType.CAUGHT_STEALING)
+
+    if " picked off " in f" {text} ":
+        events.append(EventType.PICKOFF)
+
+    if " out advancing to " in text:
+        events.append(EventType.RUNNER_OUT)
+
+    if " wild pitch" in text:
+        events.append(EventType.WILD_PITCH_ADVANCE)
+
+    if " passed ball" in text:
+        events.append(EventType.PASSED_BALL_ADVANCE)
 
     return events
