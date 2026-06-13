@@ -1,0 +1,249 @@
+from cleaners.iscore_cleaner import clean_iscore_text
+from detectors.event_detector import detect_event_types
+from translators.base_translator import detected_events_to_baseball_event
+
+raw_text = """
+6/13/26 Yukon High School at Yukon High School
+Visitor:	Yukon High School	 	Home:	Yukon High School
+Location:	
+Field Conditions:	
+Weather:	
+Notes:	
+
+http://iscoresports.com
+(1) #0 Ryan 1Vis: 0   Home: 0    Top 1stP:  
+Ball 1.	 	1 - 0
+Strike 1.	 	1 - 1
+Foul Ball.	 	1 - 2
+#0 Ryan 1 bunts for an out to the pitcher on the throw pitcher to first baseman .	 	 
+(2) #0 Ryan 2Vis: 0   Home: 0    Top 1stP:  
+#0 Ryan 2 hits a medium line drive for a triple.	 	 
+(3) #0 Ryan 3Vis: 1   Home: 0    Top 1stP:  
+#0 Ryan 3 hits a sacrifice fly to the right fielder . #0 Ryan 2 scores.	 	 
+(4) #0 Ryan 4Vis: 1   Home: 0    Top 1stP:  
+#0 Ryan 4 reaches base due to an error on the third baseman . #0 Ryan 4 advances to first.	 	 
+(5) #0 Ryan 5Vis: 1   Home: 0    Top 1stP:  
+#0 Ryan 5 hits a medium line drive for a single. #0 Ryan 4 advances to second.	 	 
+(6) #0 Ryan 6Vis: 1   Home: 0    Top 1stP:  
+#0 Ryan 6 is hit by the pitch, goes to first. #0 Ryan 4 advances to third. #0 Ryan 5 advances to second.	 	 
+(7) #0 Ryan 7Vis: 1   Home: 0    Top 1stP:  
+#0 Ryan 7 grounds out on the throw shortstop to catcher .	 	 
+(1) #0 Ryan 1Vis: 1   Home: 0    Bottom 1stP:  
+Foul Ball.	 	0 - 1
+Foul Ball.	 	0 - 2
+#0 Ryan 1 hits a sacrifice fly to the center fielder .	 	 
+(2) #0 Ryan 2Vis: 1   Home: 0    Bottom 1stP:  
+#0 Ryan 2 reaches base due to a wild pitch third strike by the pitcher .	 	 
+(3) #0 Ryan 3Vis: 1   Home: 2    Bottom 1stP:  
+#0 Ryan 3 hits a hard fly ball for a Homerun!. #0 Ryan 2 scores.	 	 
+(4) #0 Ryan 4Vis: 1   Home: 2    Bottom 1stP:  
+Ball 1.	 	1 - 0
+Ball 2.	 	2 - 0
+Strike 1.	 	2 - 1
+Ball 3.	 	3 - 1
+Ball 4. #0 Ryan 4 is walked.	 	 
+(5) #0 Ryan 5Vis: 1   Home: 2    Bottom 1stP:  
+Foul Ball.	 	0 - 1
+Foul Ball.	 	0 - 2
+Foul Ball.	 	0 - 2
+#0 Ryan 5 grounds out on the throw second baseman to first baseman . #0 Ryan 4 advances to second.	 	 
+(6) #0 Ryan 6Vis: 1   Home: 2    Bottom 1stP:  
+#0 Ryan 4 steals third.	 	 
+#0 Ryan 4 scores on a wild pitch.	 	 
+#0 Ryan 6 hits a medium line drive for a single.	 	 
+(7) #0 Ryan 7Vis: 1   Home: 3    Bottom 1stP:  
+#0 Ryan 6 advances to second on a passed ball.	 	 
+#0 Ryan 6 steals third.	 	 
+#0 Ryan 7 is intentionally walked.	 	 
+(8) #0 Ryan 8Vis: 1   Home: 3    Bottom 1stP:  
+#0 Ryan 8 is intentionally walked. #0 Ryan 7 advances to second.	 	 
+(9) #0 Ryan 9Vis: 1   Home: 3    Bottom 1stP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Foul Ball.	 	0 - 2
+Foul Ball.	 	0 - 2
+#0 Ryan 9 is hit by the ball and called out.	 	 
+(8) #0 Ryan 8Vis: 1   Home: 3    Top 2ndP:  
+#0 Ryan 8 is hit by the pitch, goes to first.	 	 
+(9) #0 Ryan 9Vis: 1   Home: 3    Top 2ndP:  
+#0 Ryan 9 grounds out on the throw third baseman to second baseman to first baseman . #0 Ryan 8 is forced out at second.	 	 
+(1) #0 Ryan 1Vis: 1   Home: 3    Top 2ndP:  
+#0 Ryan 1 flies out to the catcher	 	 
+#0 Ryan 1 bunts to reach first safely.	 	 
+(2) #0 Ryan 2Vis: 1   Home: 3    Bottom 2ndP:  
+#0 Ryan 1 advances to second on a passed ball.	 	 
+Pickoff attempt pitcher to shortstop	 	 
+Pickoff attempt catcher to shortstop	 	 
+#0 Ryan 1 steals third.	 	 
+Courtesy runner #0 Ryan 13 comes in at third.	 	 
+#0 Ryan 13 is picked off at home.	 	 
+#0 Ryan 2 grounds out on the throw second baseman to first baseman .	 	 
+(3) #0 Ryan 3Vis: 1   Home: 3    Bottom 2ndP:  
+#0 Ryan 3 is out on an infield fly rule.	 	 
+(2) #0 Ryan 2Vis: 1   Home: 3    Top 3rdP:  
+#0 Ryan 2 is hit by the pitch, goes to first.	 	 
+(3) #0 Ryan 3Vis: 1   Home: 3    Top 3rdP:  
+Substitution.	 	 
+#0 Ryan 3 hits a hard fly ball for a Homerun!. #0 Ryan 12 scores.	 	 
+(4) #0 Ryan 4Vis: 3   Home: 3    Top 3rdP:  
+#0 Ryan 4 hits a medium line drive for a single.	 	 
+(5) #0 Ryan 5Vis: 3   Home: 3    Top 3rdP:  
+#0 Ryan 5 grounds out on the throw shortstop to first baseman . #0 Ryan 4 advances to second.	 	 
+(6) #0 Ryan 6Vis: 3   Home: 3    Top 3rdP:  
+Strike 1.	 	0 - 1
+Ball 1.	 	1 - 1
+Strike 2.	 	1 - 2
+#0 Ryan 6 strikes out swinging.	 	 
+(7) #0 Ryan 7Vis: 3   Home: 3    Top 3rdP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 7 strikes out swinging.	 	 
+(4) #0 Ryan 4Vis: 3   Home: 3    Bottom 3rdP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 4 strikes out swinging.	 	 
+(5) #0 Ryan 5Vis: 3   Home: 3    Bottom 3rdP:  
+Foul Ball.	 	0 - 1
+Foul Ball.	 	0 - 2
+#0 Ryan 5 hits a line drive to the second baseman for an out.	 	 
+(6) #0 Ryan 6Vis: 3   Home: 3    Bottom 3rdP:  
+#0 Ryan 6 grounds out . Unassisted out by first baseman .	 	 
+(8) #0 Ryan 8Vis: 3   Home: 3    Top 4thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 8 strikes out swinging.	 	 
+(9) #0 Ryan 9Vis: 3   Home: 3    Top 4thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 9 strikes out swinging.	 	 
+(1) #0 Ryan 1Vis: 3   Home: 3    Top 4thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 1 strikes out swinging.	 	 
+(7) #0 Ryan 7Vis: 3   Home: 3    Bottom 4thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 7 strikes out swinging.	 	 
+(8) #0 Ryan 8Vis: 3   Home: 3    Bottom 4thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 8 strikes out swinging.	 	 
+(9) #0 Ryan 9Vis: 3   Home: 3    Bottom 4thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 9 strikes out looking.	 	 
+(2) #0 Ryan 12Vis: 3   Home: 3    Top 5thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 12 strikes out looking.	 	 
+(3) #0 Ryan 3Vis: 3   Home: 3    Top 5thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 3 strikes out looking.	 	 
+(4) #0 Ryan 4Vis: 3   Home: 3    Top 5thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 4 strikes out looking.	 	 
+(1) #0 Ryan 1Vis: 3   Home: 3    Bottom 5thP:  
+Foul Ball.	 	0 - 1
+Foul Ball.	 	0 - 2
+Foul Ball.	 	0 - 2
+Foul Ball.	 	0 - 2
+Strike 3. #0 Ryan 1 strikes out looking.	 	 
+(2) #0 Ryan 2Vis: 3   Home: 3    Bottom 5thP:  
+Foul Ball.	 	0 - 1
+Strike 2.	 	0 - 2
+Foul Ball.	 	0 - 2
+Strike 3. #0 Ryan 2 strikes out swinging.	 	 
+(3) #0 Ryan 3Vis: 3   Home: 3    Bottom 5thP:  
+#0 Ryan 3 is out on an infield fly rule.	 	 
+(5) #0 Ryan 5Vis: 3   Home: 3    Top 6thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 5 strikes out swinging.	 	 
+(6) #0 Ryan 6Vis: 3   Home: 3    Top 6thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 6 strikes out swinging.	 	 
+(7) #0 Ryan 7Vis: 3   Home: 3    Top 6thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 7 strikes out looking.	 	 
+(4) #0 Ryan 4Vis: 3   Home: 3    Bottom 6thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 4 strikes out swinging.	 	 
+(5) #0 Ryan 5Vis: 3   Home: 3    Bottom 6thP:  
+Ball 1.	 	1 - 0
+Ball 2.	 	2 - 0
+Ball 3.	 	3 - 0
+Ball 4. #0 Ryan 5 is walked.	 	 
+(6) #0 Ryan 6Vis: 3   Home: 3    Bottom 6thP:  
+Ball 1.	 	1 - 0
+Ball 2.	 	2 - 0
+Ball 3.	 	3 - 0
+Ball 4. #0 Ryan 6 is walked. #0 Ryan 5 advances to second.	 	 
+(7) #0 Ryan 7Vis: 3   Home: 3    Bottom 6thP:  
+Ball 1.	 	1 - 0
+Ball 2.	 	2 - 0
+Ball 3.	 	3 - 0
+Ball 4. #0 Ryan 7 is walked. #0 Ryan 5 advances to third. #0 Ryan 6 advances to second.	 	 
+(8) #0 Ryan 8Vis: 3   Home: 3    Bottom 6thP:  
+Ball 1.	 	1 - 0
+Strike 1.	 	1 - 1
+Strike 2.	 	1 - 2
+Strike 3. #0 Ryan 8 strikes out swinging.	 	 
+(9) #0 Ryan 9Vis: 3   Home: 3    Bottom 6thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 9 strikes out swinging.	 	 
+(8) #0 Ryan 8Vis: 3   Home: 3    Top 7thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 8 strikes out swinging.	 	 
+(9) #0 Ryan 9Vis: 3   Home: 3    Top 7thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 9 strikes out looking.	 	 
+(1) #0 Ryan 1Vis: 4   Home: 3    Top 7thP:  
+#0 Ryan 1 hits a medium fly ball for a Homerun!.	 	 
+(2) #0 Ryan 12Vis: 4   Home: 3    Top 7thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 12 strikes out swinging.	 	 
+(1) #0 Ryan 1Vis: 4   Home: 3    Bottom 7thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 1 strikes out looking.	 	 
+(2) #0 Ryan 2Vis: 4   Home: 3    Bottom 7thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 2 strikes out swinging.	 	 
+(3) #0 Ryan 3Vis: 4   Home: 3    Bottom 7thP:  
+Strike 1.	 	0 - 1
+Strike 2.	 	0 - 2
+Strike 3. #0 Ryan 3 strikes out looking. Game Over.	 	 
+"""
+
+cleaned_lines = clean_iscore_text(raw_text)
+
+valid = 0
+invalid = []
+
+for index, line in enumerate(cleaned_lines, start=1):
+    detected = detect_event_types(line)
+    baseball_event = detected_events_to_baseball_event(detected)
+
+    if baseball_event:
+        valid += 1
+    else:
+        invalid.append((index, line))
+
+print(f"Cleaned lines: {len(cleaned_lines)}")
+print(f"Valid BaseballEvents: {valid}")
+print(f"Invalid cleaned lines: {len(invalid)}")
+
+for index, line in invalid:
+    print("=" * 70)
+    print(f"Line #{index}")
+    print(line)
