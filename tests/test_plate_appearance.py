@@ -21,8 +21,12 @@ def test_plate_appearance_model():
         batter_name="J. Walk",
         baseball_event=event,
         pitches=[pitch],
+        ball_type="FB",
+        location="CF",
     )
 
     assert pa.batter_name == "J. Walk"
     assert pa.baseball_event.primary_event == EventType.STRIKEOUT_LOOKING
     assert len(pa.pitches) == 1
+    assert pa.ball_type == "FB"
+    assert pa.location == "CF"
