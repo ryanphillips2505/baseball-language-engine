@@ -8,6 +8,12 @@ def classify_location(pa_block: str) -> str | None:
     # OUTFIELD
     #
 
+    if "left-center" in text or "left center" in text or " lcf" in text:
+        return "LF"
+
+    if "right-center" in text or "right center" in text or " rcf" in text:
+        return "RF"
+
     if "to left" in text:
         return "LF"
 

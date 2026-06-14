@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from classifiers.ball_type_classifier import classify_ball_type
 from classifiers.location_classifier import classify_location
 from detectors.event_detector import detect_event_types
 from extractors.player_extractor import extract_batter_name
@@ -18,9 +19,12 @@ def build_plate_appearance(pa_block: str) -> PlateAppearance:
 
     location = classify_location(pa_block)
 
+    ball_type = classify_ball_type(pa_block)
+
     return PlateAppearance(
         batter_name=batter_name,
         baseball_event=baseball_event,
         pitches=[],
+        ball_type=ball_type,
         location=location,
     )
