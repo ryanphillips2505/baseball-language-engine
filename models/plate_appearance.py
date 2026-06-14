@@ -13,3 +13,7 @@ class PlateAppearance:
     baseball_event: BaseballEvent | None
 
     pitches: list[PitchEvent] = field(default_factory=list)
+
+    ball_type: str | None = None
+
+    location: str | None = None
