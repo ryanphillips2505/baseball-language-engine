@@ -5,6 +5,7 @@ from detectors.event_detector import detect_event_types
 from extractors.player_extractor import extract_batter_name
 from models.plate_appearance import PlateAppearance
 from translators.base_translator import detected_events_to_baseball_event
+from classifiers.ball_type_classifier import classify_ball_type
 
 
 def build_plate_appearance(pa_block: str) -> PlateAppearance:
