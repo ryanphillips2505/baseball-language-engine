@@ -1,18 +1,18 @@
-from models.pitch_event import PitchEvent
+from __future__ import annotations
+
+from dataclasses import dataclass
 
 
-def test_pitch_event_model():
-    pitch = PitchEvent(
-        pitch_number=1,
-        count_before="0-0",
-        result="Strike Looking",
-        swing=False,
-        ball_in_play=False,
-    )
+@dataclass
+class PitchEvent:
+    pitch_number: int
 
-    assert pitch.pitch_number == 1
-    assert pitch.count_before == "0-0"
-    assert pitch.result == "Strike Looking"
-    assert pitch.swing is False
-    assert pitch.ball_in_play is False
-    assert pitch.terminal_pitch is False
+    count_before: str | None
+
+    result: str
+
+    swing: bool | None
+
+    ball_in_play: bool = False
+
+    terminal_pitch: bool = False
