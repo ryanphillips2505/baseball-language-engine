@@ -226,3 +226,20 @@ Future Swing Decision outputs must match the existing Opponent IQ Swing Decision
 Rule:
 
 Baseball Language Engine Swing Decision totals are not correct unless they match Opponent IQ Swing Decision exports.
+
+## Opponent IQ Pattern Engine Is Source of Truth
+
+The existing Opponent IQ event detector and parser_regex logic remain the source of truth for:
+
+- BIP detection
+- GB / FB / BUNT classification
+- Spray location
+- XBH type
+- XBH location
+- SB / CS
+- Bunt vs sac bunt
+- Special events
+
+The Baseball Language Engine should not independently redefine these rules.
+
+Instead, it should adapt or wrap the existing Opponent IQ pattern engine so future BaseballEvents produce stats that match current Opponent IQ exports.
