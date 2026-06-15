@@ -34,3 +34,10 @@ def test_classify_catcher_location():
         )
         == "C"
     )
+    
+def test_classify_catcher_foul_out_location():
+    assert classify_location("fouls out to catcher") == "C"
+
+
+def test_classify_catcher_caught_by_location():
+    assert classify_location("pop up caught by catcher") == "C"
