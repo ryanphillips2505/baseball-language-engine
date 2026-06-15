@@ -7,3 +7,4 @@ from dataclasses import dataclass
 class RunnerEvent:
     event_type: str
     base: str
+    runner_name: str | None = None
