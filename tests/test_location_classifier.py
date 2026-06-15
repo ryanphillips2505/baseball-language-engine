@@ -25,3 +25,18 @@ def test_gap_locations_collapse_to_opponent_iq_buckets():
 
 def test_unknown_location():
     assert classify_location("walked.") is None
+
+def test_classify_catcher_location():
+    assert (
+        classify_location(
+            "pops up to catcher"
+        )
+        == "C"
+    )
+
+def test_classify_catcher_foul_out_location():
+    assert classify_location("fouls out to catcher") == "C"
+
+
+def test_classify_catcher_caught_by_location():
+    assert classify_location("pop up caught by catcher") == "C"

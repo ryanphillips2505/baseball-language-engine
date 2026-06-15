@@ -38,6 +38,18 @@ def classify_location(pa_block: str) -> str | None:
 
     if "to first" in text:
         return "1B"
+    
+    if "to catcher" in text:
+        return "C"
+
+    if "caught by catcher" in text:
+        return "C"
+
+    if "pops up to catcher" in text:
+        return "C"
+
+    if "fouls out to catcher" in text:
+        return "C"
 
     if "to pitcher" in text:
         return "P"
