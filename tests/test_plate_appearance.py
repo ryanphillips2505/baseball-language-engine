@@ -30,3 +30,4 @@ def test_plate_appearance_model():
     assert len(pa.pitches) == 1
     assert pa.ball_type == "FB"
     assert pa.location == "CF"
+
