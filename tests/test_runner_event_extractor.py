@@ -67,3 +67,18 @@ def test_no_runner_event():
     )
 
     assert events == []
+
+def test_extract_multiple_runner_events():
+    events = extract_runner_events(
+        "John Smith steals second base. Mike Brown steals third base."
+    )
+
+    assert len(events) == 2
+
+    assert events[0].event_type == "SB"
+    assert events[0].base == "2B"
+    assert events[0].runner_name == "John Smith"
+
+    assert events[1].event_type == "SB"
+    assert events[1].base == "3B"
+    assert events[1].runner_name == "Mike Brown"
