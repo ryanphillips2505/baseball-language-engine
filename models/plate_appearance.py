@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 
 from models.baseball_event import BaseballEvent
 from models.pitch_event import PitchEvent
+from models.runner_event import RunnerEvent
 
 
 @dataclass
@@ -13,6 +14,8 @@ class PlateAppearance:
     baseball_event: BaseballEvent | None
 
     pitches: list[PitchEvent] = field(default_factory=list)
+
+    runner_events: list[RunnerEvent] = field(default_factory=list)
 
     ball_type: str | None = None
 
