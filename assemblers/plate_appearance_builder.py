@@ -5,6 +5,7 @@ from classifiers.bip_classifier import is_ball_in_play
 from classifiers.location_classifier import classify_location
 from detectors.event_detector import detect_event_types
 from extractors.player_extractor import extract_batter_name
+from extractors.runner_event_extractor import extract_runner_events
 from models.plate_appearance import PlateAppearance
 from translators.base_translator import detected_events_to_baseball_event
 
@@ -24,10 +25,13 @@ def build_plate_appearance(pa_block: str) -> PlateAppearance:
 
     is_bip = is_ball_in_play(baseball_event)
 
+    runner_events = extract_runner_events(pa_block)
+
     return PlateAppearance(
         batter_name=batter_name,
         baseball_event=baseball_event,
         pitches=[],
+        runner_events=runner_events,
         ball_type=ball_type,
         location=location,
         is_bip=is_bip,
