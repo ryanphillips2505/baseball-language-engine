@@ -11,3 +11,4 @@ def test_build_plate_appearance_from_college_single():
     assert pa.baseball_event.primary_event == EventType.SINGLE
     assert pa.location == "CF"
     assert pa.pitches == []
+    assert pa.is_bip is True

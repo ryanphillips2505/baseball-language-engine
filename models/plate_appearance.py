@@ -17,3 +17,5 @@ class PlateAppearance:
     ball_type: str | None = None
 
     location: str | None = None
+
+    is_bip: bool = False
