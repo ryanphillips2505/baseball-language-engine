@@ -3,6 +3,7 @@ from models.baseball_event import BaseballEvent
 from models.game import Game
 from models.plate_appearance import PlateAppearance
 from models.types import EventType
+from models.runner_event import RunnerEvent
 
 
 def test_aggregate_game_stats_tracks_gp():
@@ -182,3 +183,46 @@ def test_aggregate_game_stats_tracks_xbh_from_home_run():
     stats = aggregate_game_stats(game)
 
     assert stats["John Smith"]["XBH"] == 1
+
+def test_aggregate_game_stats_tracks_stolen_base():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name=None,
+                baseball_event=None,
+                runner_events=[
+                    RunnerEvent(
+                        event_type="SB",
+                        base="2B",
+                        runner_name="John Smith",
+                    )
+                ],
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["SB"] == 1
+
+
+def test_aggregate_game_stats_tracks_caught_stealing():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name=None,
+                baseball_event=None,
+                runner_events=[
+                    RunnerEvent(
+                        event_type="CS",
+                        base="2B",
+                        runner_name="John Smith",
+                    )
+                ],
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["CS"] == 1

@@ -27,6 +27,8 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
             "3B": 0,
             "HR": 0,
             "XBH": 0,
+            "SB": 0,
+            "CS": 0,
         }
 
     for pa in game.plate_appearances:
@@ -66,5 +68,31 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
             EventType.HOME_RUN,
         }:
             stats[player]["XBH"] += 1
+
+    for runner_event in pa.runner_events:
+        if not runner_event.runner_name:
+            continue
+
+        player = runner_event.runner_name
+
+        if player not in stats:
+            stats[player] = {
+                "GP": 1,
+                "K": 0,
+                "BB": 0,
+                "HBP": 0,
+                "2B": 0,
+                "3B": 0,
+                "HR": 0,
+                "XBH": 0,
+                "SB": 0,
+                "CS": 0,
+            }
+
+        if runner_event.event_type == "SB":
+            stats[player]["SB"] += 1
+
+        elif runner_event.event_type == "CS":
+            stats[player]["CS"] += 1
 
     return stats
