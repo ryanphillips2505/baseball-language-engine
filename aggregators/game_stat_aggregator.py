@@ -4,7 +4,7 @@ from models.game import Game
 from models.types import EventType
 
 
-LOCATION_KEYS = [
+RAW_LOCATION_KEYS = [
     "LF",
     "CF",
     "RF",
@@ -16,6 +16,20 @@ LOCATION_KEYS = [
     "C",
 ]
 
+LOCATION_KEY_MAP = {
+    "LF": "LOC_LF",
+    "CF": "LOC_CF",
+    "RF": "LOC_RF",
+    "3B": "LOC_3B",
+    "SS": "LOC_SS",
+    "2B": "LOC_2B",
+    "1B": "LOC_1B",
+    "P": "LOC_P",
+    "C": "LOC_C",
+}
+
+LOCATION_KEYS = list(LOCATION_KEY_MAP.values())
+
 BALLTYPE_KEYS = [
     "GB",
     "FB",
@@ -23,9 +37,9 @@ BALLTYPE_KEYS = [
 ]
 
 COMBO_KEYS = [
-    f"{ball_type}-{location}"
+    f"{ball_type}-{location_key}"
     for ball_type in BALLTYPE_KEYS
-    for location in LOCATION_KEYS
+    for location_key in LOCATION_KEYS
 ]
 
 
@@ -44,8 +58,8 @@ def _empty_player_stats() -> dict[str, int]:
         "BIP": 0,
     }
 
-    for location in LOCATION_KEYS:
-        stats[location] = 0
+    for location_key in LOCATION_KEYS:
+        stats[location_key] = 0
 
     for ball_type in BALLTYPE_KEYS:
         stats[ball_type] = 0
@@ -56,9 +70,28 @@ def _empty_player_stats() -> dict[str, int]:
     return stats
 
 
+def _location_stat_key(raw_location: str | None) -> str | None:
+    if raw_location is None:
+        return None
+
+    return LOCATION_KEY_MAP.get(raw_location)
+
+
 def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
     """
     Convert a Game object into player stat totals.
+
+    Important:
+    Hit result keys use traditional baseball names:
+    - 2B = double
+    - 3B = triple
+
+    Field location keys are stored internally with LOC_ prefixes:
+    - LOC_2B = ball hit to second-base area
+    - LOC_3B = ball hit to third-base area
+
+    This prevents collisions while still allowing the report layer to display
+    Opponent IQ-style labels later.
     """
 
     stats: dict[str, dict[str, int]] = {}
@@ -73,17 +106,19 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
             if player not in stats:
                 stats[player] = _empty_player_stats()
 
+            location_key = _location_stat_key(pa.location)
+
             if pa.is_bip:
                 stats[player]["BIP"] += 1
 
-            if pa.location in LOCATION_KEYS:
-                stats[player][pa.location] += 1
+            if location_key:
+                stats[player][location_key] += 1
 
             if pa.ball_type in BALLTYPE_KEYS:
                 stats[player][pa.ball_type] += 1
 
-            if pa.ball_type in BALLTYPE_KEYS and pa.location in LOCATION_KEYS:
-                combo_key = f"{pa.ball_type}-{pa.location}"
+            if pa.ball_type in BALLTYPE_KEYS and location_key:
+                combo_key = f"{pa.ball_type}-{location_key}"
                 stats[player][combo_key] += 1
 
             if pa.baseball_event:

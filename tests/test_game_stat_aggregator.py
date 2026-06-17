@@ -307,7 +307,7 @@ def test_aggregate_game_stats_tracks_location():
 
     stats = aggregate_game_stats(game)
 
-    assert stats["John Smith"]["RF"] == 1
+    assert stats["John Smith"]["LOC_RF"] == 1
 
 
 def test_aggregate_game_stats_tracks_gb_location_combo():
@@ -326,8 +326,8 @@ def test_aggregate_game_stats_tracks_gb_location_combo():
     stats = aggregate_game_stats(game)
 
     assert stats["John Smith"]["GB"] == 1
-    assert stats["John Smith"]["SS"] == 1
-    assert stats["John Smith"]["GB-SS"] == 1
+    assert stats["John Smith"]["LOC_SS"] == 1
+    assert stats["John Smith"]["GB-LOC_SS"] == 1
 
 
 def test_aggregate_game_stats_tracks_fb_location_combo():
@@ -346,8 +346,8 @@ def test_aggregate_game_stats_tracks_fb_location_combo():
     stats = aggregate_game_stats(game)
 
     assert stats["John Smith"]["FB"] == 1
-    assert stats["John Smith"]["CF"] == 1
-    assert stats["John Smith"]["FB-CF"] == 1
+    assert stats["John Smith"]["LOC_CF"] == 1
+    assert stats["John Smith"]["FB-LOC_CF"] == 1
 
 
 def test_aggregate_game_stats_tracks_bunt_location_combo():
@@ -366,5 +366,5 @@ def test_aggregate_game_stats_tracks_bunt_location_combo():
     stats = aggregate_game_stats(game)
 
     assert stats["John Smith"]["BUNT"] == 1
-    assert stats["John Smith"]["3B"] == 1
-    assert stats["John Smith"]["BUNT-3B"] == 1
+    assert stats["John Smith"]["LOC_3B"] == 1
+    assert stats["John Smith"]["BUNT-LOC_3B"] == 1

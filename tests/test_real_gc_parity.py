@@ -38,8 +38,8 @@ def test_real_gc_parity_sample():
     assert stats["Preston Klose"]["GP"] == 1
     assert stats["Preston Klose"]["BIP"] == 1
     assert stats["Preston Klose"]["GB"] == 1
-    assert stats["Preston Klose"]["SS"] == 1
-    assert stats["Preston Klose"]["GB-SS"] == 1
+    assert stats["Preston Klose"]["LOC_SS"] == 1
+    assert stats["Preston Klose"]["GB-LOC_SS"] == 1
 
 def test_real_gc_third_inning_parity():
     game = Game(
