@@ -8,12 +8,25 @@ def extract_batter_name(pa_block: str) -> str | None:
         return None
 
     action_words = [
+        " hits a hard ground ball",
+        " hits a hard fly ball",
+        " hits a hard line drive",
+        " hits a hard pop fly",
+        " hits a ground ball",
+        " hits a fly ball",
+        " hits a line drive",
+        " hits a pop fly",
+        " hits a popup",
+        " hits a bunt",
+        " bunts and",
+        " out on infield fly",
+        " is hit by pitch",
+        " hit by pitch",
         " singled",
         " doubled",
         " tripled",
         " homered",
         " walked",
-        " hit by pitch",
         " struck out",
         " grounded",
         " flied",
@@ -33,15 +46,7 @@ def extract_batter_name(pa_block: str) -> str | None:
         " flies",
         " lines",
         " pops",
-        " hits a ground ball",
-        " hits a fly ball",
-        " hits a line drive",
-        " hits a pop fly",
-        " hits a popup",
-        " hits a bunt",
-        " out on infield fly",
         " reaches",
-       
     ]
 
     lowered = text.lower()
