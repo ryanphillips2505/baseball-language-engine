@@ -528,6 +528,9 @@ def clean_gamechanger_text(raw_text: str) -> list[str]:
                 "hit by pitch",
                 "fielder's choice",
                 "reaches on",
+                "steals",
+                "stole",
+                "caught stealing",
             )
         ):
             continue

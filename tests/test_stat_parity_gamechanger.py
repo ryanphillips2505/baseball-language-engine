@@ -20,7 +20,7 @@ def test_yukon_norman_known_player_stat_parity():
 
     stats = aggregate_game_stats(game)
 
-    assert len(cleaned_blocks) == 147
+    assert len(cleaned_blocks) == 163
 
     assert stats["Drake Pace"]["2B"] == 1
     assert stats["Drake Pace"]["XBH"] == 1

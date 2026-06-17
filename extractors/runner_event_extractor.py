@@ -9,27 +9,43 @@ def _extract_runner_name(pa_block: str) -> str | None:
     """
     Extract runner name from common stolen-base phrases.
 
-    Examples:
+    Supports:
+
     John Smith steals second base.
     J. Walk stole third.
     M. Jones caught stealing second.
+
+    And embedded GameChanger pitch sequences:
+
+    Strike 1 swinging, Z Khalil steals 2nd, Foul.
+    Ball 1, Preston Klose caught stealing 2nd, shortstop Ethan Vinson.
     """
 
     patterns = [
-        r"^(.*?)\s+steals\s+(second|2nd|2b)",
-        r"^(.*?)\s+stole\s+(second|2nd|2b)",
-        r"^(.*?)\s+steals\s+(third|3rd|3b)",
-        r"^(.*?)\s+stole\s+(third|3rd|3b)",
-        r"^(.*?)\s+caught stealing\s+(second|2nd|2b)",
-        r"^(.*?)\s+caught stealing\s+(third|3rd|3b)",
+        r"([^,]+?)\s+steals\s+(second|2nd|2b)",
+        r"([^,]+?)\s+stole\s+(second|2nd|2b)",
+        r"([^,]+?)\s+steals\s+(third|3rd|3b)",
+        r"([^,]+?)\s+stole\s+(third|3rd|3b)",
+        r"([^,]+?)\s+caught stealing\s+(second|2nd|2b)",
+        r"([^,]+?)\s+caught stealing\s+(third|3rd|3b)",
     ]
 
-    text = pa_block.strip()
-
     for pattern in patterns:
-        match = re.search(pattern, text, re.IGNORECASE)
+        match = re.search(pattern, pa_block, re.IGNORECASE)
+
         if match:
-            return match.group(1).strip()
+            name = match.group(1).strip()
+
+            #
+            # Embedded GC pitch sequences:
+            #
+            # Strike 1 swinging, Z Khalil steals 2nd, Foul
+            # Ball 1, Preston Klose caught stealing 2nd, ...
+            #
+            if "," in name:
+                name = name.split(",")[-1].strip()
+
+            return name
 
     return None
 

@@ -19,5 +19,5 @@ def test_gamechanger_dataset_regression():
         assert baseball_event is not None
         valid_events.append(baseball_event)
 
-    assert len(cleaned_blocks) == 147
-    assert len(valid_events) == 147
+    assert len(cleaned_blocks) == 163
+    assert len(valid_events) == 163

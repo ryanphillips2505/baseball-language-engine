@@ -20,6 +20,6 @@ def test_full_game_parity():
 
     stats = aggregate_game_stats(game)
 
-    assert len(cleaned_blocks) == 147
-    assert len(game.plate_appearances) == 147
+    assert len(cleaned_blocks) == 163
+    assert len(game.plate_appearances) == 163
     assert len(stats) > 0
