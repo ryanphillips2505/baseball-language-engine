@@ -5,6 +5,9 @@ import re
 from models.runner_event import RunnerEvent
 
 
+_RUNNER_NAME_RE = r"[A-Z][A-Za-z'.-]*(?:\s+[A-Z][A-Za-z'.-]*)*"
+
+
 def _extract_runner_name(pa_block: str) -> str | None:
     """
     Extract runner name from common stolen-base phrases.
@@ -22,30 +25,19 @@ def _extract_runner_name(pa_block: str) -> str | None:
     """
 
     patterns = [
-        r"([^,]+?)\s+steals\s+(second|2nd|2b)",
-        r"([^,]+?)\s+stole\s+(second|2nd|2b)",
-        r"([^,]+?)\s+steals\s+(third|3rd|3b)",
-        r"([^,]+?)\s+stole\s+(third|3rd|3b)",
-        r"([^,]+?)\s+caught stealing\s+(second|2nd|2b)",
-        r"([^,]+?)\s+caught stealing\s+(third|3rd|3b)",
+        rf"({_RUNNER_NAME_RE})\s+steals\s+(second|2nd|2b)",
+        rf"({_RUNNER_NAME_RE})\s+stole\s+(second|2nd|2b)",
+        rf"({_RUNNER_NAME_RE})\s+steals\s+(third|3rd|3b)",
+        rf"({_RUNNER_NAME_RE})\s+stole\s+(third|3rd|3b)",
+        rf"({_RUNNER_NAME_RE})\s+caught stealing\s+(second|2nd|2b)",
+        rf"({_RUNNER_NAME_RE})\s+caught stealing\s+(third|3rd|3b)",
     ]
 
     for pattern in patterns:
         match = re.search(pattern, pa_block, re.IGNORECASE)
 
         if match:
-            name = match.group(1).strip()
-
-            #
-            # Embedded GC pitch sequences:
-            #
-            # Strike 1 swinging, Z Khalil steals 2nd, Foul
-            # Ball 1, Preston Klose caught stealing 2nd, ...
-            #
-            if "," in name:
-                name = name.split(",")[-1].strip()
-
-            return name
+            return match.group(1).strip()
 
     return None
 
