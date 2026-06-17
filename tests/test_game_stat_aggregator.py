@@ -292,3 +292,79 @@ def test_aggregate_game_stats_tracks_bunt():
     stats = aggregate_game_stats(game)
 
     assert stats["John Smith"]["BUNT"] == 1
+
+def test_aggregate_game_stats_tracks_location():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+                location="RF",
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["RF"] == 1
+
+
+def test_aggregate_game_stats_tracks_gb_location_combo():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+                ball_type="GB",
+                location="SS",
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["GB"] == 1
+    assert stats["John Smith"]["SS"] == 1
+    assert stats["John Smith"]["GB-SS"] == 1
+
+
+def test_aggregate_game_stats_tracks_fb_location_combo():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+                ball_type="FB",
+                location="CF",
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["FB"] == 1
+    assert stats["John Smith"]["CF"] == 1
+    assert stats["John Smith"]["FB-CF"] == 1
+
+
+def test_aggregate_game_stats_tracks_bunt_location_combo():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+                ball_type="BUNT",
+                location="3B",
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["BUNT"] == 1
+    assert stats["John Smith"]["3B"] == 1
+    assert stats["John Smith"]["BUNT-3B"] == 1

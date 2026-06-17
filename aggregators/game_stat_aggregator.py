@@ -4,8 +4,33 @@ from models.game import Game
 from models.types import EventType
 
 
+LOCATION_KEYS = [
+    "LF",
+    "CF",
+    "RF",
+    "3B",
+    "SS",
+    "2B",
+    "1B",
+    "P",
+    "C",
+]
+
+BALLTYPE_KEYS = [
+    "GB",
+    "FB",
+    "BUNT",
+]
+
+COMBO_KEYS = [
+    f"{ball_type}-{location}"
+    for ball_type in BALLTYPE_KEYS
+    for location in LOCATION_KEYS
+]
+
+
 def _empty_player_stats() -> dict[str, int]:
-    return {
+    stats = {
         "GP": 1,
         "K": 0,
         "BB": 0,
@@ -17,10 +42,18 @@ def _empty_player_stats() -> dict[str, int]:
         "SB": 0,
         "CS": 0,
         "BIP": 0,
-        "GB": 0,
-        "FB": 0,
-        "BUNT": 0,
     }
+
+    for location in LOCATION_KEYS:
+        stats[location] = 0
+
+    for ball_type in BALLTYPE_KEYS:
+        stats[ball_type] = 0
+
+    for combo_key in COMBO_KEYS:
+        stats[combo_key] = 0
+
+    return stats
 
 
 def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
@@ -43,14 +76,15 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
             if pa.is_bip:
                 stats[player]["BIP"] += 1
 
-            if pa.ball_type == "GB":
-                stats[player]["GB"] += 1
+            if pa.location in LOCATION_KEYS:
+                stats[player][pa.location] += 1
 
-            elif pa.ball_type == "FB":
-                stats[player]["FB"] += 1
+            if pa.ball_type in BALLTYPE_KEYS:
+                stats[player][pa.ball_type] += 1
 
-            elif pa.ball_type == "BUNT":
-                stats[player]["BUNT"] += 1
+            if pa.ball_type in BALLTYPE_KEYS and pa.location in LOCATION_KEYS:
+                combo_key = f"{pa.ball_type}-{pa.location}"
+                stats[player][combo_key] += 1
 
             if pa.baseball_event:
                 event = pa.baseball_event.primary_event
