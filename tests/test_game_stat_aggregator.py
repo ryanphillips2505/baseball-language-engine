@@ -226,3 +226,69 @@ def test_aggregate_game_stats_tracks_caught_stealing():
     stats = aggregate_game_stats(game)
 
     assert stats["John Smith"]["CS"] == 1
+
+def test_aggregate_game_stats_tracks_bip():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["BIP"] == 1
+
+
+def test_aggregate_game_stats_tracks_ground_ball():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+                ball_type="GB",
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["GB"] == 1
+
+
+def test_aggregate_game_stats_tracks_fly_ball():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+                ball_type="FB",
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["FB"] == 1
+
+
+def test_aggregate_game_stats_tracks_bunt():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=None,
+                is_bip=True,
+                ball_type="BUNT",
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["BUNT"] == 1
