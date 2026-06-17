@@ -33,7 +33,15 @@ def extract_batter_name(pa_block: str) -> str | None:
         " flies",
         " lines",
         " pops",
+        " hits a ground ball",
+        " hits a fly ball",
+        " hits a line drive",
+        " hits a pop fly",
+        " hits a popup",
+        " hits a bunt",
+        " out on infield fly",
         " reaches",
+       
     ]
 
     lowered = text.lower()
