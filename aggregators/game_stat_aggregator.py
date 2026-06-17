@@ -1,0 +1,70 @@
+from __future__ import annotations
+
+from models.game import Game
+from models.types import EventType
+
+
+def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
+    """
+    Convert a Game object into player stat totals.
+
+    Phase 9A:
+    GP
+    K
+    BB
+    HBP
+    """
+
+    stats: dict[str, dict[str, int]] = {}
+
+    for player in game.players_in_game():
+        stats[player] = {
+            "GP": 1,
+            "K": 0,
+            "BB": 0,
+            "HBP": 0,
+            "2B": 0,
+            "3B": 0,
+            "HR": 0,
+            "XBH": 0,
+        }
+
+    for pa in game.plate_appearances:
+        if not pa.batter_name:
+            continue
+
+        if not pa.baseball_event:
+            continue
+
+        player = pa.batter_name
+        event = pa.baseball_event.primary_event
+
+        if event in {
+            EventType.STRIKEOUT_LOOKING,
+            EventType.STRIKEOUT_SWINGING,
+        }:
+            stats[player]["K"] += 1
+
+        elif event == EventType.WALK:
+            stats[player]["BB"] += 1
+
+        elif event == EventType.HIT_BY_PITCH:
+            stats[player]["HBP"] += 1
+        
+        elif event == EventType.DOUBLE:
+            stats[player]["2B"] += 1
+
+        elif event == EventType.TRIPLE:
+            stats[player]["3B"] += 1
+
+        elif event == EventType.HOME_RUN:
+            stats[player]["HR"] += 1
+        
+        if event in {
+            EventType.DOUBLE,
+            EventType.TRIPLE,
+            EventType.HOME_RUN,
+        }:
+            stats[player]["XBH"] += 1
+
+    return stats

@@ -1,0 +1,184 @@
+from aggregators.game_stat_aggregator import aggregate_game_stats
+from models.baseball_event import BaseballEvent
+from models.game import Game
+from models.plate_appearance import PlateAppearance
+from models.types import EventType
+
+
+def test_aggregate_game_stats_tracks_gp():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.SINGLE,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["GP"] == 1
+
+
+def test_aggregate_game_stats_tracks_strikeout():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.STRIKEOUT_SWINGING,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["K"] == 1
+
+
+def test_aggregate_game_stats_tracks_walk():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.WALK,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["BB"] == 1
+
+
+def test_aggregate_game_stats_tracks_hbp():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.HIT_BY_PITCH,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["HBP"] == 1
+
+
+def test_aggregate_game_stats_tracks_double():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.DOUBLE,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["2B"] == 1
+
+
+def test_aggregate_game_stats_tracks_triple():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.TRIPLE,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["3B"] == 1
+
+
+def test_aggregate_game_stats_tracks_home_run():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.HOME_RUN,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["HR"] == 1
+
+def test_aggregate_game_stats_tracks_xbh_from_double():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.DOUBLE,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["XBH"] == 1
+
+
+def test_aggregate_game_stats_tracks_xbh_from_triple():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.TRIPLE,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["XBH"] == 1
+
+
+def test_aggregate_game_stats_tracks_xbh_from_home_run():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.HOME_RUN,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["XBH"] == 1
