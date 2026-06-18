@@ -1,10 +1,51 @@
 from __future__ import annotations
 
+import re
+
+
+_PITCH_TOKEN_RE = re.compile(
+    r"\b("
+    r"Ball\s*\d+|"
+    r"Strike\s*\d+\s*(?:looking|swinging)?|"
+    r"Foul|"
+    r"In play"
+    r")\b",
+    re.I,
+)
+
+_RUNNER_ONLY_ACTION_RE = re.compile(
+    r"\b("
+    r"steals|stole|caught stealing"
+    r")\b",
+    re.I,
+)
+
+
+def _looks_like_pitch_sequence_runner_line(text: str) -> bool:
+    """
+    GameChanger sometimes emits runner events inside pitch-sequence text.
+
+    Examples:
+    Strike 1 swinging, Zayden Khalil steals 2nd, Foul, Ball 1.
+    Ball 1, Eddie Fish caught stealing home, catcher Cooper Cunningham.
+
+    These lines can contain real runner events, but they should not create
+    a batter name.
+    """
+
+    return bool(
+        _PITCH_TOKEN_RE.search(text)
+        and _RUNNER_ONLY_ACTION_RE.search(text)
+    )
+
 
 def extract_batter_name(pa_block: str) -> str | None:
     text = pa_block.strip()
 
     if not text:
+        return None
+
+    if _looks_like_pitch_sequence_runner_line(text):
         return None
 
     action_words = [
@@ -27,6 +68,7 @@ def extract_batter_name(pa_block: str) -> str | None:
         " tripled",
         " homered",
         " walked",
+        " intentionally walks",
         " struck out",
         " grounded",
         " flied",
