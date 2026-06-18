@@ -10,6 +10,10 @@ HITTING_KEYS = [
     "3B",
     "HR",
     "XBH",
+    "XBH_LF",
+    "XBH_CF",
+    "XBH_RF",
+    "XBH_UNKNOWN",
     "SB",
     "CS",
     "BIP",
@@ -64,8 +68,8 @@ def build_season_summary_rows(
         gb = int(row.get("GB", 0))
         fb = int(row.get("FB", 0))
 
-        row["GB%"] = round((gb / bip) * 100, 1) if bip else 0.0
-        row["FB%"] = round((fb / bip) * 100, 1) if bip else 0.0
+        row["GB%"] = (gb / bip) if bip else 0.0
+        row["FB%"] = (fb / bip) if bip else 0.0
 
         rows.append(row)
 

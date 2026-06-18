@@ -34,6 +34,14 @@ BALLTYPE_KEYS = [
     "GB",
     "FB",
     "BUNT",
+    
+]
+
+XBH_LOCATION_KEYS = [
+    "XBH_LF",
+    "XBH_CF",
+    "XBH_RF",
+    "XBH_UNKNOWN",
 ]
 
 COMBO_KEYS = [
@@ -66,6 +74,9 @@ def _empty_player_stats() -> dict[str, int]:
 
     for combo_key in COMBO_KEYS:
         stats[combo_key] = 0
+    
+    for xbh_location_key in XBH_LOCATION_KEYS:
+        stats[xbh_location_key] = 0
 
     return stats
 
@@ -151,6 +162,11 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
                     EventType.HOME_RUN,
                 }:
                     stats[player]["XBH"] += 1
+
+                    if pa.location in {"LF", "CF", "RF"}:
+                        stats[player][f"XBH_{pa.location}"] += 1
+                    else:
+                        stats[player]["XBH_UNKNOWN"] += 1
 
         for runner_event in pa.runner_events:
             if not runner_event.runner_name:

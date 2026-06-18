@@ -29,5 +29,5 @@ def test_build_season_summary_rows():
     assert row["GB"] == 2
     assert row["FB"] == 1
     assert row["BIP"] == 3
-    assert row["GB%"] == 66.7
-    assert row["FB%"] == 33.3
+    assert row["GB%"] == 2 / 3
+    assert row["FB%"] == 1 / 3

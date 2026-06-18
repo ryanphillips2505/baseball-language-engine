@@ -13,7 +13,8 @@ from cleaners.iscore_cleaner import clean_iscore_text
 from cleaners.mlb_cleaner import clean_mlb_text
 from models.game import Game
 from translators.season_summary_translator import build_season_summary_rows
-
+from translators.season_summary_dataframe_builder import build_season_summary_dataframe
+from translators.spray_zone_translator import build_spray_zone_rows
 
 Cleaner = Callable[[str], list[str]]
 
@@ -160,6 +161,15 @@ def run_demo(source: str, file_path: str) -> None:
     season_summary_rows = build_season_summary_rows(
         opponent_iq_stats
     )
+
+    season_summary_df = build_season_summary_dataframe(
+        season_summary_rows
+    )
+
+    spray_zone_rows = build_spray_zone_rows(
+        season_summary_rows
+    )
+
     print()
     print("=" * 72)
     print("OPPONENT IQ ADAPTER OUTPUT DEMO")
@@ -169,6 +179,16 @@ def run_demo(source: str, file_path: str) -> None:
     print(f"Cleaned plays: {len(cleaned_blocks)}")
     print(f"Players found: {len(opponent_iq_stats)}")
     print(f"Season summary rows: {len(season_summary_rows)}")
+    print(f"Spray zone rows: {len(spray_zone_rows)}")
+
+    print()
+    print("FIRST DATAFRAME ROW")
+    print(season_summary_df.iloc[0].to_dict())
+    print()
+    print("FIRST SPRAY ZONE ROW")
+    print(spray_zone_rows[0])
+    print()
+
     print("=" * 72)
     print()
 
