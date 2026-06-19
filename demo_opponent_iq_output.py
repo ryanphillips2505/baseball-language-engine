@@ -12,8 +12,17 @@ from cleaners.gamechanger_cleaner import clean_gamechanger_text
 from cleaners.iscore_cleaner import clean_iscore_text
 from cleaners.mlb_cleaner import clean_mlb_text
 from models.game import Game
-from translators.season_summary_translator import build_season_summary_rows
-from translators.season_summary_dataframe_builder import build_season_summary_dataframe
+
+from translators.damage_dataframe_builder import build_damage_dataframe
+from translators.season_summary_dataframe_builder import (
+    build_season_summary_dataframe,
+)
+from translators.season_summary_translator import (
+    build_season_summary_rows,
+)
+from translators.spray_zone_dataframe_builder import (
+    build_spray_zone_dataframe,
+)
 from translators.spray_zone_translator import build_spray_zone_rows
 
 Cleaner = Callable[[str], list[str]]
@@ -166,8 +175,16 @@ def run_demo(source: str, file_path: str) -> None:
         season_summary_rows
     )
 
+    damage_df = build_damage_dataframe(
+        season_summary_rows
+    )
+
     spray_zone_rows = build_spray_zone_rows(
         season_summary_rows
+    )
+    
+    spray_zone_df = build_spray_zone_dataframe(
+        spray_zone_rows
     )
 
     print()
@@ -179,15 +196,21 @@ def run_demo(source: str, file_path: str) -> None:
     print(f"Cleaned plays: {len(cleaned_blocks)}")
     print(f"Players found: {len(opponent_iq_stats)}")
     print(f"Season summary rows: {len(season_summary_rows)}")
+    print(f"Damage rows: {len(damage_df)}")
     print(f"Spray zone rows: {len(spray_zone_rows)}")
+    print(f"Spray zone dataframe rows: {len(spray_zone_df)}")
 
     print()
     print("FIRST DATAFRAME ROW")
     print(season_summary_df.iloc[0].to_dict())
     print()
+    print("FIRST DAMAGE ROW")
+    print(damage_df.iloc[0].to_dict())
     print("FIRST SPRAY ZONE ROW")
     print(spray_zone_rows[0])
     print()
+    print("FIRST SPRAY ZONE DATAFRAME ROW")
+    print(spray_zone_df.iloc[0].to_dict())
 
     print("=" * 72)
     print()
