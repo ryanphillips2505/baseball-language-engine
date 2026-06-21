@@ -7,12 +7,13 @@ _BASEBALL_ACTION_RE = re.compile(
     r"\b("
     r"singles|doubles|triples|homers|"
     r"walks|intentionally walks|"
-    r"strikes out|called out on strikes|"
+    r"strikes out|called out on strikes|strikes out on a foul tip|"
     r"hit by pitch|"
     r"grounds out|grounds into|"
     r"flies out|lines out|pops out|"
     r"reaches on|"
     r"out on a sacrifice fly|"
+    r"wild pitch by pitcher|throwing error by|"
     r"steals|caught stealing|picked off"
     r")\b",
     re.I,
@@ -22,7 +23,8 @@ _BASEBALL_ACTION_RE = re.compile(
 # "Sonny Gray strikes out Brandon Nimmo"
 # "Jack Leiter strikes out Jarren Duran"
 _HIGHLIGHT_CAPTION_RE = re.compile(
-    r"^[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)+\s+strikes out\s+[A-Z]",
+    r"^[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)+\s+strikes out\s+"
+    r"[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)*$",
     re.I,
 )
 

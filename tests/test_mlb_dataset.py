@@ -19,5 +19,5 @@ def test_mlb_dataset_regression():
         assert baseball_event is not None
         valid_events.append(baseball_event)
 
-    assert len(cleaned_blocks) == 74
-    assert len(valid_events) == 74
+    assert len(cleaned_blocks) == 79
+    assert len(valid_events) == 79
