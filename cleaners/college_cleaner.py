@@ -7,6 +7,8 @@ _COLLEGE_ACTION_RE = re.compile(
     r"\b("
     r"singled|doubled|tripled|homered|"
     r"walked|hit by pitch|"
+    r"hit sacrifice fly|hit sacrifice bunt|"
+    r"wild pitch|passed ball|"
     r"struck out|"
     r"grounded out|grounded into|"
     r"flied out|popped out|fouled out|lined out|"
