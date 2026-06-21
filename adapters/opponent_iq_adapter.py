@@ -43,7 +43,7 @@ HITTING_KEYS = [
 
 def adapt_player_stats_to_opponent_iq(
     player_stats: dict[str, int],
-) -> dict[str, dict[str, int]]:
+) -> dict[str, int]:
     """
     Convert Baseball Language Engine internal player stats into
     an Opponent IQ-compatible output shape.
@@ -86,12 +86,13 @@ def adapt_player_stats_to_opponent_iq(
 
 def adapt_game_stats_to_opponent_iq(
     game_stats: dict[str, dict[str, int]],
-) -> dict[str, dict[str, dict[str, int]]]:
+) -> dict[str, dict[str, int]]:
     """
     Convert all player stats into Opponent IQ-compatible output shape.
     """
 
     return {
-        player: adapt_player_stats_to_opponent_iq(player_stats)
-        for player, player_stats in game_stats.items()
+        **hitting,
+        **locations,
+        **combos,
     }
