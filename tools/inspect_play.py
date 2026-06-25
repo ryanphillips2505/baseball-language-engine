@@ -1,5 +1,7 @@
 import sys
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -42,24 +44,45 @@ STAT_DISPLAY_ORDER = [
 ]
 
 
+@dataclass
+class PlayInspection:
+    raw_play: str
+    lines: list[str]
+    result_line: str
+    plate_appearance: Any
+    pitch_tokens: list[Any]
+    pitch_decisions: list[Any]
+    stat_changes: dict[str, int]
+
+
 def _section(title: str) -> None:
     print(f"\n{title}")
     print("-" * 40)
 
 
-def _print_stat_changes(pa) -> None:
+def _clean_lines(raw_play: str) -> list[str]:
+    return [
+        line.strip()
+        for line in raw_play.splitlines()
+        if line.strip()
+    ]
+
+
+def _get_result_line(raw_play: str, lines: list[str]) -> str:
+    return lines[-1] if lines else raw_play.strip()
+
+
+def _build_stat_changes(pa: Any) -> dict[str, int]:
     game = Game(plate_appearances=[pa])
     stats = aggregate_game_stats(game)
 
     player = pa.batter_name
 
     if not player or player not in stats:
-        print("No batter stat changes found.")
-        return
+        return {}
 
     player_stats = stats[player]
-
-    found = False
+    changes: dict[str, int] = {}
 
     for key in STAT_DISPLAY_ORDER:
         value = int(player_stats.get(key, 0) or 0)
@@ -68,32 +91,47 @@ def _print_stat_changes(pa) -> None:
             continue
 
         if value:
-            print(f"{key} +{value}")
-            found = True
+            changes[key] = value
 
-    if not found:
-        print("No tracked Opponent IQ stat changes.")
+    return changes
 
 
-def inspect_play(raw_play: str) -> None:
-    _section("RAW")
-    print(raw_play)
-
-    lines = [
-        line.strip()
-        for line in raw_play.splitlines()
-        if line.strip()
-    ]
-
-    result_line = lines[-1] if lines else raw_play
+def build_play_inspection(raw_play: str) -> PlayInspection:
+    lines = _clean_lines(raw_play)
+    result_line = _get_result_line(raw_play, lines)
 
     pa = build_plate_appearance(result_line)
 
     pitch_tokens = extract_pitch_tokens(lines)
     pitch_decisions = build_pitch_decisions(pitch_tokens)
+    stat_changes = _build_stat_changes(pa)
+
+    return PlayInspection(
+        raw_play=raw_play,
+        lines=lines,
+        result_line=result_line,
+        plate_appearance=pa,
+        pitch_tokens=pitch_tokens,
+        pitch_decisions=pitch_decisions,
+        stat_changes=stat_changes,
+    )
+
+
+def print_play_inspection(inspection: PlayInspection) -> None:
+    pa = inspection.plate_appearance
+
+    _section("RAW")
+    print(inspection.raw_play)
+
+    _section("CLEANED LINES")
+    if inspection.lines:
+        for line in inspection.lines:
+            print(line)
+    else:
+        print("No cleaned lines found.")
 
     _section("RESULT LINE")
-    print(result_line)
+    print(inspection.result_line)
 
     _section("BATTER")
     print(pa.batter_name)
@@ -108,20 +146,38 @@ def inspect_play(raw_play: str) -> None:
     print(pa.location)
 
     _section("RUNNER EVENTS")
-    print(pa.runner_events)
+    if pa.runner_events:
+        for runner_event in pa.runner_events:
+            print(runner_event)
+    else:
+        print("No runner events found.")
 
     _section("PITCH TOKENS")
-    print(pitch_tokens)
+    if inspection.pitch_tokens:
+        for token in inspection.pitch_tokens:
+            print(token)
+    else:
+        print("No pitch tokens found.")
 
     _section("PITCH DECISIONS")
-    if pitch_decisions:
-        for decision in pitch_decisions:
+    if inspection.pitch_decisions:
+        for decision in inspection.pitch_decisions:
             print(decision)
     else:
         print("No pitch decisions found.")
 
     _section("OPPONENT IQ STAT CHANGES")
-    _print_stat_changes(pa)
+    if inspection.stat_changes:
+        for key in STAT_DISPLAY_ORDER:
+            if key in inspection.stat_changes:
+                print(f"{key} +{inspection.stat_changes[key]}")
+    else:
+        print("No tracked Opponent IQ stat changes.")
+
+
+def inspect_play(raw_play: str) -> None:
+    inspection = build_play_inspection(raw_play)
+    print_play_inspection(inspection)
 
 
 if __name__ == "__main__":
