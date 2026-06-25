@@ -55,9 +55,22 @@ class PlayInspection:
     stat_changes: dict[str, int]
 
 
+@dataclass
+class GameInspection:
+    raw_plays: list[str]
+    play_inspections: list[PlayInspection]
+    game: Game
+    game_stats: dict[str, dict[str, Any]]
+
+
 def _section(title: str) -> None:
     print(f"\n{title}")
     print("-" * 40)
+
+
+def _subsection(title: str) -> None:
+    print(f"\n{title}")
+    print("=" * 40)
 
 
 def _clean_lines(raw_play: str) -> list[str]:
@@ -114,6 +127,29 @@ def build_play_inspection(raw_play: str) -> PlayInspection:
         pitch_tokens=pitch_tokens,
         pitch_decisions=pitch_decisions,
         stat_changes=stat_changes,
+    )
+
+
+def build_game_inspection(raw_plays: list[str]) -> GameInspection:
+    play_inspections = [
+        build_play_inspection(raw_play)
+        for raw_play in raw_plays
+    ]
+
+    game = Game(
+        plate_appearances=[
+            inspection.plate_appearance
+            for inspection in play_inspections
+        ]
+    )
+
+    game_stats = aggregate_game_stats(game)
+
+    return GameInspection(
+        raw_plays=raw_plays,
+        play_inspections=play_inspections,
+        game=game,
+        game_stats=game_stats,
     )
 
 
@@ -175,13 +211,60 @@ def print_play_inspection(inspection: PlayInspection) -> None:
         print("No tracked Opponent IQ stat changes.")
 
 
+def print_game_stat_summary(game_stats: dict[str, dict[str, Any]]) -> None:
+    _section("COMBINED GAME STATS")
+
+    if not game_stats:
+        print("No game stats found.")
+        return
+
+    for player in sorted(game_stats):
+        player_stats = game_stats[player]
+        shown_stats = []
+
+        for key in STAT_DISPLAY_ORDER:
+            value = int(player_stats.get(key, 0) or 0)
+
+            if value:
+                shown_stats.append(f"{key}={value}")
+
+        if shown_stats:
+            print(f"{player}: " + ", ".join(shown_stats))
+        else:
+            print(f"{player}: No tracked stats")
+
+
+def print_game_inspection(inspection: GameInspection) -> None:
+    _subsection("GAME WORKBENCH")
+
+    print(f"Total raw plays: {len(inspection.raw_plays)}")
+    print(f"Total plate appearances: {len(inspection.game.plate_appearances)}")
+
+    for index, play_inspection in enumerate(inspection.play_inspections, start=1):
+        _subsection(f"PLAY {index}")
+        print_play_inspection(play_inspection)
+
+    print_game_stat_summary(inspection.game_stats)
+
+
 def inspect_play(raw_play: str) -> None:
     inspection = build_play_inspection(raw_play)
     print_play_inspection(inspection)
 
 
+def inspect_game(raw_plays: list[str]) -> None:
+    inspection = build_game_inspection(raw_plays)
+    print_game_inspection(inspection)
+
+
 if __name__ == "__main__":
-    inspect_play(
-        "Ball 1, Strike 1 looking, Foul, In play.\n"
-        "Wade Webb doubles on a fly ball to center field."
+    inspect_game(
+        [
+            "Ball 1, Strike 1 looking, Foul, In play.\n"
+            "Wade Webb doubles on a fly ball to center field.",
+            "Strike 1 swinging, Strike 2 looking, Strike 3 swinging.\n"
+            "John Smith strikes out swinging.",
+            "Ball 1, Ball 2, Ball 3, Ball 4.\n"
+            "Trey Jones walks.",
+        ]
     )
