@@ -1,4 +1,5 @@
 from aggregators.game_stat_aggregator import aggregate_game_stats
+from cleaners.gamechanger_cleaner import clean_gamechanger_text
 from assemblers.plate_appearance_builder import build_plate_appearance
 from models.game import Game
 

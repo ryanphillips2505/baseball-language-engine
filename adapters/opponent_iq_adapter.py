@@ -5,9 +5,7 @@ LOCATION_OUTPUT_MAP = {
     "LOC_LF": "LF",
     "LOC_CF": "CF",
     "LOC_RF": "RF",
-    "LOC_3B": "3B",
     "LOC_SS": "SS",
-    "LOC_2B": "2B",
     "LOC_1B": "1B",
     "LOC_P": "P",
     "LOC_C": "C",
@@ -24,6 +22,7 @@ HITTING_KEYS = [
     "K",
     "BB",
     "HBP",
+    "1B",
     "2B",
     "3B",
     "HR",
@@ -46,17 +45,10 @@ def adapt_player_stats_to_opponent_iq(
 ) -> dict[str, int]:
     """
     Convert Baseball Language Engine internal player stats into
-    an Opponent IQ-compatible output shape.
-
-    Important:
-    The internal engine keeps location keys safe:
-
-    LOC_2B = hit location to second-base area
-    2B = double
-
-    This adapter maps locations back to Opponent IQ display labels
-    without overwriting hitting stats.
+    one flat Opponent IQ-compatible player stat dict.
     """
+
+    player_stats = player_stats or {}
 
     hitting = {}
 
@@ -78,9 +70,9 @@ def adapt_player_stats_to_opponent_iq(
             combos[output_combo_key] = player_stats.get(internal_combo_key, 0)
 
     return {
-        "hitting": hitting,
-        "locations": locations,
-        "combos": combos,
+        **hitting,
+        **locations,
+        **combos,
     }
 
 
@@ -88,11 +80,10 @@ def adapt_game_stats_to_opponent_iq(
     game_stats: dict[str, dict[str, int]],
 ) -> dict[str, dict[str, int]]:
     """
-    Convert all player stats into Opponent IQ-compatible output shape.
+    Convert all player stats into Opponent IQ-compatible flat output shape.
     """
 
     return {
-        **hitting,
-        **locations,
-        **combos,
+        player: adapt_player_stats_to_opponent_iq(player_stats)
+        for player, player_stats in (game_stats or {}).items()
     }

@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from assemblers.pitch_decision_builder import build_pitch_decisions
 from classifiers.ball_type_classifier import classify_ball_type
 from classifiers.bip_classifier import is_ball_in_play
 from classifiers.location_classifier import classify_location
 from detectors.event_detector import detect_event_types
+from extractors.pitch_token_extractor import extract_pitch_tokens
 from extractors.player_extractor import extract_batter_name
 from extractors.runner_event_extractor import extract_runner_events
 from models.plate_appearance import PlateAppearance
@@ -27,10 +29,16 @@ def build_plate_appearance(pa_block: str) -> PlateAppearance:
 
     runner_events = extract_runner_events(pa_block)
 
+    pitch_tokens = extract_pitch_tokens(
+        str(pa_block or "").splitlines()
+    )
+
+    pitches = build_pitch_decisions(pitch_tokens)
+
     return PlateAppearance(
         batter_name=batter_name,
         baseball_event=baseball_event,
-        pitches=[],
+        pitches=pitches,
         runner_events=runner_events,
         ball_type=ball_type,
         location=location,
