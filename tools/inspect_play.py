@@ -1,5 +1,4 @@
 import sys
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -7,10 +6,20 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from aggregators.game_stat_aggregator import aggregate_game_stats
+from aggregators.swing_decision_aggregator import aggregate_swing_decisions
 from assemblers.pitch_decision_builder import build_pitch_decisions
 from assemblers.plate_appearance_builder import build_plate_appearance
 from extractors.pitch_token_extractor import extract_pitch_tokens
 from models.game import Game
+from translators.damage_dataframe_builder import build_damage_dataframe
+from translators.player_card_translator import build_player_cards
+from translators.season_summary_translator import build_season_summary_rows
+from translators.spray_zone_translator import build_spray_zone_rows
+from translators.swing_decision_translator import build_swing_decision_rows
+from tools.inspection.constants import STAT_DISPLAY_ORDER
+from tools.inspection.models import GameInspection, PlayInspection, ReportInspection
+from tools.inspection.printers import section as _section
+from tools.inspection.printers import subsection as _subsection
 
 
 STAT_DISPLAY_ORDER = [
@@ -42,35 +51,6 @@ STAT_DISPLAY_ORDER = [
     "XBH_RF",
     "XBH_UNKNOWN",
 ]
-
-
-@dataclass
-class PlayInspection:
-    raw_play: str
-    lines: list[str]
-    result_line: str
-    plate_appearance: Any
-    pitch_tokens: list[Any]
-    pitch_decisions: list[Any]
-    stat_changes: dict[str, int]
-
-
-@dataclass
-class GameInspection:
-    raw_plays: list[str]
-    play_inspections: list[PlayInspection]
-    game: Game
-    game_stats: dict[str, dict[str, Any]]
-
-
-def _section(title: str) -> None:
-    print(f"\n{title}")
-    print("-" * 40)
-
-
-def _subsection(title: str) -> None:
-    print(f"\n{title}")
-    print("=" * 40)
 
 
 def _clean_lines(raw_play: str) -> list[str]:
@@ -109,6 +89,40 @@ def _build_stat_changes(pa: Any) -> dict[str, int]:
     return changes
 
 
+def _build_opponent_iq_stats(
+    game_stats: dict[str, dict[str, Any]],
+) -> dict[str, dict[str, dict[str, int]]]:
+    opponent_iq_stats: dict[str, dict[str, dict[str, int]]] = {}
+
+    for player, stats in game_stats.items():
+        hitting: dict[str, int] = {}
+        locations: dict[str, int] = {}
+        combos: dict[str, int] = {}
+
+        for key, value in stats.items():
+            safe_value = int(value or 0)
+
+            if key.startswith("LOC_"):
+                location_key = key.replace("LOC_", "")
+                locations[location_key] = safe_value
+
+            elif key.startswith(("GB-LOC_", "FB-LOC_", "BUNT-LOC_")):
+                combo_key = (
+                    key.replace("-LOC_", "-", 1)
+                )
+                combos[combo_key] = safe_value
+            else:
+                hitting[key] = safe_value
+
+        opponent_iq_stats[player] = {
+            "hitting": hitting,
+            "locations": locations,
+            "combos": combos,
+        }
+
+    return opponent_iq_stats
+
+
 def build_play_inspection(raw_play: str) -> PlayInspection:
     lines = _clean_lines(raw_play)
     result_line = _get_result_line(raw_play, lines)
@@ -117,6 +131,9 @@ def build_play_inspection(raw_play: str) -> PlayInspection:
 
     pitch_tokens = extract_pitch_tokens(lines)
     pitch_decisions = build_pitch_decisions(pitch_tokens)
+
+    pa.pitches = pitch_decisions
+
     stat_changes = _build_stat_changes(pa)
 
     return PlayInspection(
@@ -127,6 +144,27 @@ def build_play_inspection(raw_play: str) -> PlayInspection:
         pitch_tokens=pitch_tokens,
         pitch_decisions=pitch_decisions,
         stat_changes=stat_changes,
+    )
+
+
+def build_report_inspection(
+    game_stats: dict[str, dict[str, Any]],
+    swing_stats: dict[str, dict[str, dict[str, int]]],
+) -> ReportInspection:
+    opponent_iq_stats = _build_opponent_iq_stats(game_stats)
+
+    season_summary_rows = build_season_summary_rows(opponent_iq_stats)
+    spray_zone_rows = build_spray_zone_rows(season_summary_rows)
+    damage_df = build_damage_dataframe(season_summary_rows)
+    swing_decision_rows = build_swing_decision_rows(swing_stats)
+    player_cards = build_player_cards(game_stats, swing_stats)
+
+    return ReportInspection(
+        season_summary_rows=season_summary_rows,
+        spray_zone_rows=spray_zone_rows,
+        damage_rows=damage_df.to_dict("records"),
+        swing_decision_rows=swing_decision_rows,
+        player_cards=player_cards,
     )
 
 
@@ -144,13 +182,31 @@ def build_game_inspection(raw_plays: list[str]) -> GameInspection:
     )
 
     game_stats = aggregate_game_stats(game)
+    swing_stats = aggregate_swing_decisions(game)
+    reports = build_report_inspection(game_stats, swing_stats)
 
     return GameInspection(
         raw_plays=raw_plays,
         play_inspections=play_inspections,
         game=game,
         game_stats=game_stats,
+        swing_stats=swing_stats,
+        reports=reports,
     )
+
+
+def _print_rows(rows: list[dict[str, Any]], limit: int | None = None) -> None:
+    if not rows:
+        print("No rows found.")
+        return
+
+    visible_rows = rows[:limit] if limit else rows
+
+    for row in visible_rows:
+        print(row)
+
+    if limit and len(rows) > limit:
+        print(f"... {len(rows) - limit} more rows")
 
 
 def print_play_inspection(inspection: PlayInspection) -> None:
@@ -220,6 +276,7 @@ def print_game_stat_summary(game_stats: dict[str, dict[str, Any]]) -> None:
 
     for player in sorted(game_stats):
         player_stats = game_stats[player]
+        print(player_stats)
         shown_stats = []
 
         for key in STAT_DISPLAY_ORDER:
@@ -234,6 +291,55 @@ def print_game_stat_summary(game_stats: dict[str, dict[str, Any]]) -> None:
             print(f"{player}: No tracked stats")
 
 
+def print_swing_stat_summary(
+    swing_stats: dict[str, dict[str, dict[str, int]]],
+) -> None:
+    _section("COMBINED SWING DECISION STATS")
+
+    if not swing_stats:
+        print("No swing decision stats found.")
+        return
+
+    for player in sorted(swing_stats):
+        print(f"{player}:")
+        player_counts = swing_stats[player]
+
+        for count, bucket in player_counts.items():
+            pa = int(bucket.get("PA", 0) or 0)
+
+            if not pa:
+                continue
+
+            print(
+                f"  {count}: "
+                f"PA={bucket.get('PA', 0)}, "
+                f"BIP={bucket.get('BIP', 0)}, "
+                f"SWING_MISS={bucket.get('SWING_MISS', 0)}, "
+                f"FOUL={bucket.get('FOUL', 0)}, "
+                f"CALLED_STRIKE={bucket.get('CALLED_STRIKE', 0)}, "
+                f"BALL={bucket.get('BALL', 0)}"
+            )
+
+
+def print_report_inspection(reports: ReportInspection) -> None:
+    _subsection("REPORT WORKBENCH")
+
+    _section("SEASON SUMMARY ROWS")
+    _print_rows(reports.season_summary_rows)
+
+    _section("SPRAY ZONE ROWS")
+    _print_rows(reports.spray_zone_rows)
+
+    _section("DAMAGE ROWS")
+    _print_rows(reports.damage_rows)
+
+    _section("SWING DECISION ROWS")
+    _print_rows(reports.swing_decision_rows, limit=20)
+
+    _section("PLAYER CARDS")
+    _print_rows(reports.player_cards)
+
+
 def print_game_inspection(inspection: GameInspection) -> None:
     _subsection("GAME WORKBENCH")
 
@@ -245,6 +351,8 @@ def print_game_inspection(inspection: GameInspection) -> None:
         print_play_inspection(play_inspection)
 
     print_game_stat_summary(inspection.game_stats)
+    print_swing_stat_summary(inspection.swing_stats)
+    print_report_inspection(inspection.reports)
 
 
 def inspect_play(raw_play: str) -> None:
