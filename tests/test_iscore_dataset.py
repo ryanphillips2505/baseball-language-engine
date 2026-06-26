@@ -6,7 +6,7 @@ from translators.base_translator import detected_events_to_baseball_event
 
 
 def test_iscore_dataset_regression():
-    raw_text = Path("samples/iscore_raw_game_01.txt").read_text()
+    raw_text = Path("samples/iscore/raw/iscore_raw_game_01.txt").read_text()
 
     cleaned_blocks = clean_iscore_text(raw_text)
 

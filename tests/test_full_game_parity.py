@@ -7,7 +7,7 @@ from models.game import Game
 
 
 def test_full_game_parity():
-    raw_text = Path("samples/gamechanger_pa_blocks.txt").read_text()
+    raw_text = Path("samples/gamechanger/raw/gamechanger_pa_blocks.txt").read_text()
 
     cleaned_blocks = clean_gamechanger_text(raw_text)
 

@@ -6,7 +6,7 @@ from translators.base_translator import detected_events_to_baseball_event
 
 
 def test_college_dataset_regression():
-    raw_text = Path("samples/college_raw_game_01.txt").read_text()
+    raw_text = Path("samples/college/raw/college_raw_game_01.txt").read_text()
 
     cleaned_blocks = clean_college_text(raw_text)
 

@@ -2,7 +2,7 @@ from dataset.loader import load_pa_blocks
 from detectors.event_detector import detect_event_types
 from translators.base_translator import detected_events_to_baseball_event
 
-blocks = load_pa_blocks("samples/mlb_pa_blocks.txt")
+blocks = load_pa_blocks("samples/mlb/raw/mlb_pa_blocks.txt")
 
 for index, block in enumerate(blocks, start=1):
     detected = detect_event_types(block)

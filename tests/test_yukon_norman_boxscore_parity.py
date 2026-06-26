@@ -7,7 +7,7 @@ from models.game import Game
 
 
 def test_yukon_norman_boxscore_parity():
-    raw_text = Path("samples/yukon_norman_2026_03_02_raw.txt").read_text()
+    raw_text = Path("samples/gamechanger/raw/yukon_norman_2026_03_02_raw.txt").read_text()
 
     cleaned_blocks = clean_gamechanger_text(raw_text)
     

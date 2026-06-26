@@ -6,7 +6,7 @@ from translators.base_translator import detected_events_to_baseball_event
 
 
 def test_gamechanger_dataset_regression():
-    raw_text = Path("samples/gamechanger_pa_blocks.txt").read_text()
+    raw_text = Path("samples/gamechanger/raw/gamechanger_pa_blocks.txt").read_text()
 
     cleaned_blocks = clean_gamechanger_text(raw_text)
 

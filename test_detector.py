@@ -1,7 +1,7 @@
 from dataset.loader import load_pa_blocks
 from detectors.event_detector import detect_event_types
 
-blocks = load_pa_blocks("samples/gamechanger_pa_blocks.txt")
+blocks = load_pa_blocks("samples/gamechanger/raw/gamechanger_pa_blocks.txt")
 
 for index, block in enumerate(blocks[:30], start=1):
     print("=" * 70)
