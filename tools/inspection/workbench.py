@@ -2,6 +2,7 @@ from .game_inspector import build_game_inspection
 from .models import GameInspection, PlayInspection
 from .play_inspector import build_play_inspection
 from .printers import print_game_inspection, print_play_inspection
+from .game_loader import load_game_file
 
 
 class Workbench:
@@ -16,3 +17,7 @@ class Workbench:
 
     def print_game(self, inspection: GameInspection) -> None:
         print_game_inspection(inspection)
+
+    def inspect_game_file(self, path: str):
+        raw_plays = load_game_file(path)
+        return self.inspect_game(raw_plays)
