@@ -1,10 +1,7 @@
-from aggregators.game_stat_aggregator import aggregate_game_stats
-from aggregators.swing_decision_aggregator import aggregate_swing_decisions
-from models.game import Game
-
 from .game_inspector import build_game_inspection
 from .models import GameInspection, PlayInspection
 from .play_inspector import build_play_inspection
+from .printers import print_game_inspection, print_play_inspection
 
 
 class Workbench:
@@ -13,3 +10,9 @@ class Workbench:
 
     def inspect_game(self, raw_plays: list[str]) -> GameInspection:
         return build_game_inspection(raw_plays)
+
+    def print_play(self, inspection: PlayInspection) -> None:
+        print_play_inspection(inspection)
+
+    def print_game(self, inspection: GameInspection) -> None:
+        print_game_inspection(inspection)
