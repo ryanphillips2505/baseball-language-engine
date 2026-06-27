@@ -1,19 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Callable
-
 from cleaners.college_cleaner import clean_college_text
 from cleaners.gamechanger_cleaner import clean_gamechanger_text
 from cleaners.iscore_cleaner import clean_iscore_text
 from cleaners.mlb_cleaner import clean_mlb_text
+from cleaners.types import CleanedPlateAppearanceBlocks, Cleaner
 from detectors.source_detector import SourceType, detect_source
 
 
 class UnsupportedSourceError(ValueError):
     pass
-
-
-Cleaner = Callable[[str], list[str]]
 
 
 CLEANERS: dict[SourceType, Cleaner] = {
@@ -24,7 +20,7 @@ CLEANERS: dict[SourceType, Cleaner] = {
 }
 
 
-def clean_by_source(raw_text: str) -> list[str]:
+def clean_by_source(raw_text: str) -> CleanedPlateAppearanceBlocks:
     source = detect_source(raw_text)
 
     cleaner = CLEANERS.get(source)
