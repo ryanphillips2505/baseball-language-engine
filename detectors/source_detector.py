@@ -1,5 +1,5 @@
-import re
 from enum import Enum
+from typing import Callable
 
 
 class SourceType(str, Enum):
@@ -10,45 +10,40 @@ class SourceType(str, Enum):
     UNKNOWN = "unknown"
 
 
+SourceDetector = Callable[[str], SourceType | None]
+
+
+def _get_detectors() -> list[SourceDetector]:
+    from detectors.providers.college_detector import detect_college
+    from detectors.providers.gamechanger_detector import detect_gamechanger
+    from detectors.providers.iscore_detector import detect_iscore
+    from detectors.providers.mlb_detector import detect_mlb
+
+    return [
+        detect_iscore,
+        detect_college,
+        detect_gamechanger,
+        detect_mlb,
+    ]
+
+
 def detect_source(raw_text: str) -> SourceType:
     if not raw_text:
         return SourceType.UNKNOWN
 
     text = raw_text.lower()
 
-    if "iscoresports.com" in text or re.search(r"\(\d+\)\s+#\d+", text):
-        return SourceType.ISCORE
+    for detector in _get_detectors():
+        source = detector(text)
 
-    if (
-        "ncaa baseball" in text
-        or "gamecast" in text
-        or "box score" in text
-        or "college world series" in text
-        or "espn" in text
-    ):
-        return SourceType.COLLEGE
-
-    if "=== pa ===" in text:
-        if (
-            "strike 1" in text
-            or "strike 2" in text
-            or "strike 3" in text
-            or "ball 1" in text
-            or "ball 2" in text
-            or "ball 3" in text
-            or "ball 4" in text
-            or "in play" in text
-        ):
-            return SourceType.GAMECHANGER
-
-        return SourceType.MLB
-
-    if (
-        "all plays" in text
-        or "scoring plays" in text
-        or "top 1st" in text
-        or "bottom 1st" in text
-    ):
-        return SourceType.GAMECHANGER
+        if source is not None:
+            return source
 
     return SourceType.UNKNOWN
+
+
+__all__ = [
+    "SourceType",
+    "SourceDetector",
+    "detect_source",
+]
