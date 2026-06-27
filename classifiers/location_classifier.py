@@ -4,10 +4,7 @@ from __future__ import annotations
 def classify_location(pa_block: str) -> str | None:
     text = pa_block.lower()
 
-    #
-    # OUTFIELD
-    #
-
+    # Outfield direction
     if "left-center" in text or "left center" in text or " lcf" in text:
         return "LF"
 
@@ -23,10 +20,27 @@ def classify_location(pa_block: str) -> str | None:
     if "to right" in text:
         return "RF"
 
-    #
-    # INFIELD
-    #
+    # GameChanger infield fielder phrases.
+    # Check these before "to first" so throws to first do not become location 1B.
+    if "third baseman" in text:
+        return "3B"
 
+    if "shortstop" in text:
+        return "SS"
+
+    if "second baseman" in text:
+        return "2B"
+
+    if "first baseman" in text:
+        return "1B"
+
+    if "pitcher" in text:
+        return "P"
+
+    if "catcher" in text:
+        return "C"
+
+    # Generic fallback
     if "to third" in text:
         return "3B"
 
@@ -38,17 +52,8 @@ def classify_location(pa_block: str) -> str | None:
 
     if "to first" in text:
         return "1B"
-    
+
     if "to catcher" in text:
-        return "C"
-
-    if "caught by catcher" in text:
-        return "C"
-
-    if "pops up to catcher" in text:
-        return "C"
-
-    if "fouls out to catcher" in text:
         return "C"
 
     if "to pitcher" in text:
