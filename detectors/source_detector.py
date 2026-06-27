@@ -21,8 +21,8 @@ def _get_detectors() -> list[SourceDetector]:
 
     return [
         detect_iscore,
-        detect_college,
         detect_gamechanger,
+        detect_college,
         detect_mlb,
     ]
 
