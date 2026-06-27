@@ -1,12 +1,14 @@
-from pathlib import Path
-
 from cleaners.college_cleaner import clean_college_text
+from dataset.sample_paths import sample_path
 from detectors.event_detector import detect_event_types
 from translators.base_translator import detected_events_to_baseball_event
 
 
 def test_college_dataset_regression():
-    raw_text = Path("samples/college/raw/college_raw_game_01.txt").read_text()
+    raw_text = sample_path(
+        "college",
+        "college_raw_game_01.txt",
+    ).read_text()
 
     cleaned_blocks = clean_college_text(raw_text)
 

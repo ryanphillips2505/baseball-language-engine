@@ -1,12 +1,14 @@
-from pathlib import Path
-
 from cleaners.mlb_cleaner import clean_mlb_text
+from dataset.sample_paths import sample_path
 from detectors.event_detector import detect_event_types
 from translators.base_translator import detected_events_to_baseball_event
 
 
 def test_mlb_dataset_regression():
-    raw_text = Path("samples/mlb/raw/mlb_pa_blocks.txt").read_text()
+    raw_text = sample_path(
+        "mlb",
+        "mlb_pa_blocks.txt",
+    ).read_text()
 
     cleaned_blocks = clean_mlb_text(raw_text)
 

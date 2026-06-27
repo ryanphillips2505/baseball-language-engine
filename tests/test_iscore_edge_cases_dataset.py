@@ -1,10 +1,10 @@
-from pathlib import Path
-
 from cleaners.iscore_cleaner import clean_iscore_text
+from dataset.sample_paths import sample_path
 
 
-SAMPLE_PATH = Path(
-    "samples/iscore/iscore_edge_cases_2026_yukon.txt"
+SAMPLE_PATH = sample_path(
+    "iscore",
+    "iscore_edge_cases_2026_yukon.txt",
 )
 
 

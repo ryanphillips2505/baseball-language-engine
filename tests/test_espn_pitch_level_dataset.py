@@ -1,10 +1,10 @@
-from pathlib import Path
-
 from cleaners.college_cleaner import clean_college_text
+from dataset.sample_paths import sample_path
 
 
-SAMPLE_PATH = Path(
-    "samples/college/espn_college_world_series_2026_unc_wvu.txt"
+SAMPLE_PATH = sample_path(
+    "college",
+    "espn_college_world_series_2026_unc_wvu.txt",
 )
 
 

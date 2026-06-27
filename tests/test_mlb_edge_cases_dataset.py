@@ -1,10 +1,10 @@
-from pathlib import Path
-
 from cleaners.mlb_cleaner import clean_mlb_text
+from dataset.sample_paths import sample_path
 
 
-SAMPLE_PATH = Path(
-    "samples/mlb/mlb_redsox_mariners_2026_06_20.txt"
+SAMPLE_PATH = sample_path(
+    "mlb",
+    "mlb_redsox_mariners_2026_06_20.txt",
 )
 
 

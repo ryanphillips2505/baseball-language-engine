@@ -1,16 +1,18 @@
-from pathlib import Path
-
 from aggregators.game_stat_aggregator import aggregate_game_stats
 from assemblers.plate_appearance_builder import build_plate_appearance
 from cleaners.gamechanger_cleaner import clean_gamechanger_text
+from dataset.sample_paths import sample_path
 from models.game import Game
 
 
 def test_yukon_norman_boxscore_parity():
-    raw_text = Path("samples/gamechanger/raw/yukon_norman_2026_03_02_raw.txt").read_text()
+    raw_text = sample_path(
+        "gamechanger",
+        "yukon_norman_2026_03_02_raw.txt",
+    ).read_text()
 
     cleaned_blocks = clean_gamechanger_text(raw_text)
-    
+
     assert len(cleaned_blocks) == 50
 
     game = Game(
