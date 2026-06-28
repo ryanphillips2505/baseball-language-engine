@@ -90,6 +90,7 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
 
     if " infield fly " in text:
         events.append(DetectedEvent(event_type=EventType.INFIELD_FLY))
+    
     if "hits a line drive to the" in text and "for an out" in text:
         events.append(DetectedEvent(event_type=EventType.LINE_OUT))
 
@@ -122,7 +123,7 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
         events.append(DetectedEvent(event_type=EventType.DROPPED_THIRD_STRIKE_REACH))
 
     if "out at first on dropped 3rd strike" in text:
-        events.append(DetectedEvent(event_type=EventType.DROPPED_THIRD_STRIKE_OUT))
+        events.append(DetectedEvent(event_type=EventType.STRIKEOUT_SWINGING))
     
     # Strikeout swinging variant
     if "strikes out on a foul tip" in text:

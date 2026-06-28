@@ -75,7 +75,22 @@ def process_game_text(
 
     for player_stats in game_players.values():
         for key, value in player_stats.items():
+            if key == "GP":
+                continue
+
             game_team[key] = game_team.get(key, 0) + int(value)
+
+    all_game_players = adapt_game_stats_to_opponent_iq(game_stats)
+
+    game_team["SB"] = sum(
+        int(player_stats.get("SB", 0))
+        for player_stats in all_game_players.values()
+    )
+
+    game_team["CS"] = sum(
+        int(player_stats.get("CS", 0))
+        for player_stats in all_game_players.values()
+    )
 
     return game_team, game_players
 

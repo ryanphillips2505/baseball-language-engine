@@ -4,59 +4,114 @@ from __future__ import annotations
 def classify_location(pa_block: str) -> str | None:
     text = pa_block.lower()
 
-    # Outfield direction
-    if "left-center" in text or "left center" in text or " lcf" in text:
-        return "LF"
+    candidates: list[tuple[int, str]] = []
 
-    if "right-center" in text or "right center" in text or " rcf" in text:
-        return "RF"
+    def add_candidate(phrases: list[str], location: str) -> None:
+        for phrase in phrases:
+            index = text.find(phrase)
+            if index != -1:
+                candidates.append((index, location))
 
-    if "to left" in text:
-        return "LF"
+    add_candidate(
+        [
+            "left-center",
+            "left center",
+            " lcf",
+            "to left fielder",
+            "to left field",
+            "to left",
+            "left fielder",
+        ],
+        "LF",
+    )
 
-    if "to center" in text:
-        return "CF"
+    add_candidate(
+        [
+            "right-center",
+            "right center",
+            " rcf",
+            "to right fielder",
+            "to right field",
+            "to right",
+            "right fielder",
+        ],
+        "RF",
+    )
 
-    if "to right" in text:
-        return "RF"
+    add_candidate(
+        [
+            "to center fielder",
+            "to center field",
+            "to center",
+            "center fielder",
+        ],
+        "CF",
+    )
 
-    # GameChanger infield fielder phrases.
-    # Check these before "to first" so throws to first do not become location 1B.
-    if "third baseman" in text:
-        return "3B"
+    add_candidate(
+        [
+            "third baseman",
+            "to third baseman",
+            "to third",
+        ],
+        "3B",
+    )
 
-    if "shortstop" in text:
-        return "SS"
+    add_candidate(
+        [
+            "shortstop",
+            "to shortstop",
+        ],
+        "SS",
+    )
 
-    if "second baseman" in text:
-        return "2B"
+    add_candidate(
+        [
+            "second baseman",
+            "to second baseman",
+            "to second",
+        ],
+        "2B",
+    )
 
-    if "first baseman" in text:
-        return "1B"
+    add_candidate(
+        [
+            "first baseman",
+            "to first baseman",
+            "to first",
+        ],
+        "1B",
+    )
 
-    if "pitcher" in text:
-        return "P"
+    # Do NOT use bare "pitcher".
+    # GC often writes:
+    # "grounds out, pitcher Name to second baseman..."
+    # Legacy does not classify that as P unless there is an explicit pitcher-fielding phrase.
+    add_candidate(
+        [
+            "to pitcher",
+            "to the pitcher",
+            "back to pitcher",
+            "back to the pitcher",
+            "back to the mound",
+            "pitcher fields",
+            "fielded by pitcher",
+            "fielded by the pitcher",
+            "pitcher to",
+        ],
+        "P",
+    )
 
-    if "catcher" in text:
-        return "C"
+    add_candidate(
+        [
+            "catcher",
+            "to catcher",
+        ],
+        "C",
+    )
 
-    # Generic fallback
-    if "to third" in text:
-        return "3B"
-
-    if "to shortstop" in text:
-        return "SS"
-
-    if "to second" in text:
-        return "2B"
-
-    if "to first" in text:
-        return "1B"
-
-    if "to catcher" in text:
-        return "C"
-
-    if "to pitcher" in text:
-        return "P"
+    if candidates:
+        _, location = min(candidates, key=lambda item: item[0])
+        return location
 
     return None

@@ -1,11 +1,23 @@
 from __future__ import annotations
 
 
-LOCATION_OUTPUT_MAP = {
+TOP_LEVEL_LOCATION_OUTPUT_MAP = {
     "LOC_LF": "LF",
     "LOC_CF": "CF",
     "LOC_RF": "RF",
     "LOC_SS": "SS",
+    "LOC_1B": "1B",
+    "LOC_P": "P",
+    "LOC_C": "C",
+}
+
+COMBO_LOCATION_OUTPUT_MAP = {
+    "LOC_LF": "LF",
+    "LOC_CF": "CF",
+    "LOC_RF": "RF",
+    "LOC_3B": "3B",
+    "LOC_SS": "SS",
+    "LOC_2B": "2B",
     "LOC_1B": "1B",
     "LOC_P": "P",
     "LOC_C": "C",
@@ -37,6 +49,8 @@ HITTING_KEYS = [
     "GB",
     "FB",
     "BUNT",
+    "RBI",
+    "R",
 ]
 
 
@@ -55,15 +69,21 @@ def adapt_player_stats_to_opponent_iq(
     for key in HITTING_KEYS:
         hitting[key] = player_stats.get(key, 0)
 
+    # Legacy Opponent IQ overloads these keys:
+    # 2B = doubles + balls hit to second base
+    # 3B = triples + balls hit to third base
+    hitting["2B"] = player_stats.get("2B", 0) + player_stats.get("LOC_2B", 0)
+    hitting["3B"] = player_stats.get("3B", 0) + player_stats.get("LOC_3B", 0)
+
     locations = {}
 
-    for internal_key, output_key in LOCATION_OUTPUT_MAP.items():
+    for internal_key, output_key in TOP_LEVEL_LOCATION_OUTPUT_MAP.items():
         locations[output_key] = player_stats.get(internal_key, 0)
 
     combos = {}
 
     for ball_type in BALLTYPE_KEYS:
-        for internal_location_key, output_location_key in LOCATION_OUTPUT_MAP.items():
+        for internal_location_key, output_location_key in COMBO_LOCATION_OUTPUT_MAP.items():
             internal_combo_key = f"{ball_type}-{internal_location_key}"
             output_combo_key = f"{ball_type}-{output_location_key}"
 

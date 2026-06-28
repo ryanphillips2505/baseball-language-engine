@@ -1,7 +1,7 @@
 from adapters.opponent_iq_adapter import adapt_player_stats_to_opponent_iq
 
 
-def test_opponent_iq_adapter_keeps_hits_and_locations_separate():
+def test_opponent_iq_adapter_matches_legacy_2b_3b_location_collision():
     player_stats = {
         "2B": 1,
         "3B": 1,
@@ -17,12 +17,13 @@ def test_opponent_iq_adapter_keeps_hits_and_locations_separate():
 
     adapted = adapt_player_stats_to_opponent_iq(player_stats)
 
-    assert adapted["2B"] == 1
-    assert adapted["3B"] == 1
+    assert adapted["2B"] == 4
+    assert adapted["3B"] == 3
+    assert adapted["HR"] == 0
     assert adapted["XBH"] == 2
 
-    assert "LOC_2B" not in adapted
-    assert "LOC_3B" not in adapted
-
     assert adapted["CF"] == 4
+
+    assert adapted["GB-2B"] == 1
+    assert adapted["FB-3B"] == 1
     assert adapted["FB-CF"] == 2

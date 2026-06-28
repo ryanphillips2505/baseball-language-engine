@@ -24,12 +24,21 @@ def classify_ball_type(pa_block: str) -> str | None:
     if "grounded out" in text:
         return "GB"
 
+    if "grounds into" in text:
+        return "GB"
+
     if "grounded into" in text:
         return "GB"
 
     #
     # FLY BALLS
     #
+
+    if "sacrifice fly" in text:
+        return "FB"
+
+    if "sac fly" in text:
+        return "FB"
 
     if "fly ball" in text:
         return "FB"
@@ -46,10 +55,19 @@ def classify_ball_type(pa_block: str) -> str | None:
     if "lines out" in text:
         return "FB"
 
+    if "lines into" in text:
+        return "FB"
+
     if "pops out" in text:
         return "FB"
 
     if "popped out" in text:
+        return "FB"
+
+    if "pop fly" in text:
+        return "FB"
+
+    if "infield fly" in text:
         return "FB"
 
     return None
