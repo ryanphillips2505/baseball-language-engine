@@ -138,6 +138,8 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
                 if event in {
                     EventType.STRIKEOUT_LOOKING,
                     EventType.STRIKEOUT_SWINGING,
+                    EventType.DROPPED_THIRD_STRIKE_REACH,
+                    EventType.DROPPED_THIRD_STRIKE_OUT,
                 }:
                     stats[player]["K"] += 1
 

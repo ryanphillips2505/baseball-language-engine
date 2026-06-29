@@ -10,9 +10,6 @@ def classify_ball_type(pa_block: str) -> str | None:
 
     if "bunt" in text:
         return "BUNT"
-        
-    if "bunt" in text:
-        return "BUNT"
 
     if "sacrifices" in text and "sacrifice fly" not in text:
         return "BUNT"
@@ -55,13 +52,25 @@ def classify_ball_type(pa_block: str) -> str | None:
     if "flied out" in text:
         return "FB"
 
+    if "flies into" in text:
+        return "FB"
+
+    if "flied into" in text:
+        return "FB"
+
     if "line drive" in text:
         return "FB"
 
     if "lines out" in text:
         return "FB"
 
+    if "lined out" in text:
+        return "FB"
+
     if "lines into" in text:
+        return "FB"
+
+    if "lined into" in text:
         return "FB"
 
     if "pops out" in text:
