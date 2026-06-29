@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "baseball-language-engine"
+version = "0.1.0"
+description = "Source-agnostic baseball language parser for Opponent IQ and other applications."
+requires-python = ">=3.12"
+
+[tool.setuptools]
+py-modules = [
+    "ble",
+    "ble_api",
+    "ble_reports",
+    "batch",
+    "ble_batch",
+]
+packages = [
+    "adapters",
+    "aggregators",
+    "assemblers",
+    "classifiers",
+    "cleaners",
+    "dataset",
+    "detectors",
+    "extractors",
+    "models",
+    "pipeline",
+    "tools",
+    "translators",
+    "validation",
+]
