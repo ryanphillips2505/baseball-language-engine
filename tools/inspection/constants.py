@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 STAT_DISPLAY_ORDER = [
     "GP",
     "K",
