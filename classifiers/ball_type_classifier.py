@@ -10,6 +10,12 @@ def classify_ball_type(pa_block: str) -> str | None:
 
     if "bunt" in text:
         return "BUNT"
+        
+    if "bunt" in text:
+        return "BUNT"
+
+    if "sacrifices" in text and "sacrifice fly" not in text:
+        return "BUNT"
 
     #
     # GROUND BALLS

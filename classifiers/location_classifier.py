@@ -97,6 +97,8 @@ def classify_location(pa_block: str) -> str | None:
             "pitcher fields",
             "fielded by pitcher",
             "fielded by the pitcher",
+            "by pitcher",
+            "by the pitcher",
             "pitcher to",
         ],
         "P",

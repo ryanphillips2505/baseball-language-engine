@@ -61,6 +61,7 @@ def extract_batter_name(pa_block: str) -> str | None:
         " hits a bunt",
         " bunts and",
         " out on sacrifice fly",
+        " sacrifices",
         " out on infield fly",
         " out at first on dropped 3rd strike",
         " out at first on dropped third strike",

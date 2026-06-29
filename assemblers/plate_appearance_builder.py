@@ -12,6 +12,12 @@ from models.plate_appearance import PlateAppearance
 from translators.base_translator import detected_events_to_baseball_event
 
 
+_GC_RESULT_HEADERS = {
+    "runner out",
+    "sacrifice bunt",
+}
+
+
 def _extract_action_text(pa_block: str) -> str:
     lines = [
         line.strip()
@@ -21,6 +27,11 @@ def _extract_action_text(pa_block: str) -> str:
 
     if not lines:
         return ""
+
+    first_line = lines[0].lower()
+
+    if first_line in _GC_RESULT_HEADERS and len(lines) > 1:
+        return " ".join(lines[1:])
 
     return lines[-1]
 
@@ -36,13 +47,16 @@ def build_plate_appearance(pa_block: str) -> PlateAppearance:
 
     batter_name = extract_batter_name(action_text)
 
-    location = classify_location(action_text)
+    runner_events = extract_runner_events(action_text)
 
     ball_type = classify_ball_type(action_text)
 
     is_bip = is_ball_in_play(baseball_event)
 
-    runner_events = extract_runner_events(action_text)
+    location = classify_location(action_text)
+
+    if runner_events and not is_bip:
+        location = None
 
     pitch_tokens = extract_pitch_tokens(
         str(pa_block or "").splitlines()
