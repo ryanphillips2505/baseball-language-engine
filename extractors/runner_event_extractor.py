@@ -17,11 +17,13 @@ def _iter_runner_events(
     events: list[RunnerEvent] = []
 
     for match in re.finditer(pattern, pa_block, re.IGNORECASE):
+        runner = match.groupdict().get("runner")
+
         events.append(
             RunnerEvent(
                 event_type=event_type,
                 base=base,
-                runner_name=match.group("runner").strip(),
+                runner_name=runner.strip() if runner else None,
             )
         )
 
@@ -31,6 +33,10 @@ def _iter_runner_events(
 def extract_runner_events(pa_block: str) -> list[RunnerEvent]:
     """
     Extract runner events from a plate appearance block.
+
+    If the source gives the runner name, preserve it.
+    If the source only says "stole third", record the event and base,
+    but leave runner_name empty.
     """
 
     events: list[RunnerEvent] = []
@@ -43,6 +49,16 @@ def extract_runner_events(pa_block: str) -> list[RunnerEvent]:
         ),
         (
             rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?:steals|stole|steal)\s+(?:third|3rd|3b)\b",
+            "SB",
+            "3B",
+        ),
+        (
+            rf"(?:^|[,.]\s*)(?:steals|stole|steal)\s+(?:second|2nd|2b)\b",
+            "SB",
+            "2B",
+        ),
+        (
+            rf"(?:^|[,.]\s*)(?:steals|stole|steal)\s+(?:third|3rd|3b)\b",
             "SB",
             "3B",
         ),
