@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from models.game import Game
 from models.types import EventType
@@ -34,7 +34,6 @@ BALLTYPE_KEYS = [
     "GB",
     "FB",
     "BUNT",
-    
 ]
 
 XBH_LOCATION_KEYS = [
@@ -74,7 +73,7 @@ def _empty_player_stats() -> dict[str, int]:
 
     for combo_key in COMBO_KEYS:
         stats[combo_key] = 0
-    
+
     for xbh_location_key in XBH_LOCATION_KEYS:
         stats[xbh_location_key] = 0
 
@@ -88,23 +87,24 @@ def _location_stat_key(raw_location: str | None) -> str | None:
     return LOCATION_KEY_MAP.get(raw_location)
 
 
+def _effective_ball_type(pa) -> str | None:
+    """
+    Legacy Opponent IQ treats ordinary GameChanger "bunts out" plays as
+    ground-ball BIP outs to the first fielder, not as BUNT totals.
+
+    Sacrifice bunts remain BUNT because their primary event is SAC_BUNT.
+    """
+    if (
+        pa.baseball_event
+        and pa.baseball_event.primary_event == EventType.GROUND_OUT
+        and pa.ball_type == "BUNT"
+    ):
+        return "GB"
+
+    return pa.ball_type
+
+
 def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
-    """
-    Convert a Game object into player stat totals.
-
-    Important:
-    Hit result keys use traditional baseball names:
-    - 2B = double
-    - 3B = triple
-
-    Field location keys are stored internally with LOC_ prefixes:
-    - LOC_2B = ball hit to second-base area
-    - LOC_3B = ball hit to third-base area
-
-    This prevents collisions while still allowing the report layer to display
-    Opponent IQ-style labels later.
-    """
-
     stats: dict[str, dict[str, int]] = {}
 
     for player in game.players_in_game():
@@ -118,6 +118,7 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
                 stats[player] = _empty_player_stats()
 
             location_key = _location_stat_key(pa.location)
+            ball_type = _effective_ball_type(pa)
 
             if pa.is_bip:
                 stats[player]["BIP"] += 1
@@ -125,11 +126,11 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
             if location_key:
                 stats[player][location_key] += 1
 
-            if pa.ball_type in BALLTYPE_KEYS:
-                stats[player][pa.ball_type] += 1
+            if ball_type in BALLTYPE_KEYS:
+                stats[player][ball_type] += 1
 
-            if pa.ball_type in BALLTYPE_KEYS and location_key:
-                combo_key = f"{pa.ball_type}-{location_key}"
+            if ball_type in BALLTYPE_KEYS and location_key:
+                combo_key = f"{ball_type}-{location_key}"
                 stats[player][combo_key] += 1
 
             if pa.baseball_event:
