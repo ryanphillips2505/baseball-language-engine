@@ -126,7 +126,7 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
         events.append(DetectedEvent(event_type=EventType.STRIKEOUT_SWINGING))
     
     # Strikeout swinging variant
-    if "strikes out on a foul tip" in text:
+    if "strikes out on a foul tip" in text or "is out on foul tip" in text:
         events.append(DetectedEvent(event_type=EventType.STRIKEOUT_SWINGING))
 
     # Strikeout looking variant
