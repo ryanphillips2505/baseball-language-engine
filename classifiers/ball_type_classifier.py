@@ -8,8 +8,14 @@ def classify_ball_type(pa_block: str) -> str | None:
     # BUNTS
     #
 
+    if "bunts and" in text and "error" in text:
+        return "GB"
+
     if "bunt" in text:
         return "BUNT"
+
+    if "sacrifices and reaches on an error" in text:
+        return None
 
     if "sacrifices" in text and "sacrifice fly" not in text:
         return "BUNT"
