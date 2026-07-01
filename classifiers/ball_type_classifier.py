@@ -73,7 +73,7 @@ def classify_ball_type(pa_block: str) -> str | None:
     if "lined into" in text:
         return "FB"
 
-    if "pops out" in text:
+    if "pops out" in text or "pops into" in text:
         return "FB"
 
     if "popped out" in text:

@@ -85,7 +85,7 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if " lines out " in f" {text} ":
         events.append(DetectedEvent(event_type=EventType.LINE_OUT))
 
-    if "pops out" in text:
+    if "pops out" in text or "pops into" in text:
         events.append(DetectedEvent(event_type=EventType.POP_OUT))
 
     if " infield fly " in text:

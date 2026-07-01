@@ -49,6 +49,7 @@ def extract_batter_name(pa_block: str) -> str | None:
         return None
 
     action_words = [
+        " pops into",
         " hits a hard ground ball",
         " hits a hard fly ball",
         " hits a hard line drive",
