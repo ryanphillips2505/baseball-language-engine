@@ -516,6 +516,7 @@ def clean_gamechanger_text(raw_text: str) -> list[str]:
             phrase in line.lower()
             for phrase in (
                 "strikes out",
+                "is out on foul tip",
                 "walks",
                 "singles",
                 "doubles",
