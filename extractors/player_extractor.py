@@ -57,6 +57,7 @@ def extract_batter_name(pa_block: str) -> str | None:
         " hits a ground ball",
         " hits a fly ball",
         " hits a line drive",
+        " lines into",
         " hits a pop fly",
         " hits a popup",
         " hits a bunt",

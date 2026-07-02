@@ -55,7 +55,7 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "singled" in text:
         events.append(DetectedEvent(event_type=EventType.SINGLE))
 
-    if "doubled" in text:
+    if "doubled" in text and "doubled off" not in text:
         events.append(DetectedEvent(event_type=EventType.DOUBLE))
 
     if "tripled" in text:
