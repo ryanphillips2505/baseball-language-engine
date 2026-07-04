@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import re
 
@@ -50,6 +50,7 @@ def extract_batter_name(pa_block: str) -> str | None:
 
     action_words = [
         " pops into",
+        " hits an inside the park home run",
         " hits a hard ground ball",
         " hits a hard fly ball",
         " hits a hard line drive",
@@ -108,3 +109,4 @@ def extract_batter_name(pa_block: str) -> str | None:
             return text[:index].strip()
 
     return None
+

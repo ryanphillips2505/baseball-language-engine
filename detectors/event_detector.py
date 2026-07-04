@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from models.detected_event import DetectedEvent
 from models.types import EventType
@@ -36,7 +36,7 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "triples" in text:
         events.append(DetectedEvent(event_type=EventType.TRIPLE))
 
-    if "homers" in text:
+    if "homers" in text or "inside the park home run" in text:
         events.append(DetectedEvent(event_type=EventType.HOME_RUN))
 
     # iScore variants
@@ -237,3 +237,4 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
             break
     
     return events
+

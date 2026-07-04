@@ -13,7 +13,7 @@ def classify_ball_type(pa_block: str) -> str | None:
         return "BUNT"
 
     if "sacrifices and reaches on an error" in text:
-        return None
+        return "BUNT"
 
     if "sacrifices" in text and "sacrifice fly" not in text:
         return "BUNT"
@@ -90,3 +90,4 @@ def classify_ball_type(pa_block: str) -> str | None:
         return "FB"
 
     return None
+
