@@ -4,6 +4,12 @@ from __future__ import annotations
 def classify_location(pa_block: str) -> str | None:
     text = pa_block.lower()
 
+    if "bunts and reaches on an error by pitcher" in text:
+        return "P"
+
+    if "bunts and reaches on an error by the pitcher" in text:
+        return "P"
+
     candidates: list[tuple[int, str]] = []
 
     def add_candidate(phrases: list[str], location: str) -> None:
