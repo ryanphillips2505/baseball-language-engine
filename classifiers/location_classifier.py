@@ -4,6 +4,9 @@ from __future__ import annotations
 def classify_location(pa_block: str) -> str | None:
     text = pa_block.lower()
 
+    if "ground ball" in text and "reaches on an error by pitcher" in text:
+        return "P"
+
     if "bunts and reaches on an error by pitcher" in text:
         return "P"
 

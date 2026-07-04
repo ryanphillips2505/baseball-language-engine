@@ -1,8 +1,10 @@
 ﻿from assemblers.plate_appearance_builder import build_plate_appearance
+from aggregators.game_stat_aggregator import aggregate_game_stats
+from models.game import Game
 from models.types import EventType
 
 
-def test_gamechanger_bunts_and_reaches_error_by_pitcher_counts_gb_p():
+def test_gamechanger_bunts_and_reaches_error_by_pitcher_understands_bunt_to_pitcher_error():
     text = (
         "Kate Seaton bunts and reaches on an error by pitcher Grace Tonga, "
         "Ryen Bullock scores."
@@ -12,6 +14,21 @@ def test_gamechanger_bunts_and_reaches_error_by_pitcher_counts_gb_p():
 
     assert pa.batter_name == "Kate Seaton"
     assert pa.is_bip is True
-    assert pa.ball_type == "GB"
+    assert pa.ball_type == "BUNT"
     assert pa.location == "P"
     assert pa.baseball_event.primary_event == EventType.ERROR
+
+
+def test_gamechanger_bunts_and_reaches_error_by_pitcher_counts_bunt_and_pitcher_location():
+    text = (
+        "Kate Seaton bunts and reaches on an error by pitcher Grace Tonga, "
+        "Ryen Bullock scores."
+    )
+
+    pa = build_plate_appearance(text)
+    stats = aggregate_game_stats(Game([pa]))
+
+    assert stats["Kate Seaton"]["BIP"] == 1
+    assert stats["Kate Seaton"]["BUNT"] == 1
+    assert stats["Kate Seaton"]["LOC_P"] == 1
+    assert stats["Kate Seaton"]["BUNT-LOC_P"] == 1

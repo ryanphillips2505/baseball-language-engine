@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from models.game import Game
 from models.types import EventType
@@ -190,3 +190,5 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
                 stats[player]["CS"] += 1
 
     return stats
+
+

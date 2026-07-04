@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 
 def classify_ball_type(pa_block: str) -> str | None:
@@ -8,8 +8,6 @@ def classify_ball_type(pa_block: str) -> str | None:
     # BUNTS
     #
 
-    if "bunts and" in text and "error" in text:
-        return "GB"
 
     if "bunt" in text:
         return "BUNT"
