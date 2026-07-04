@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from models.game import Game
 from models.types import EventType
@@ -99,6 +99,9 @@ def _effective_ball_type(pa) -> str | None:
         and pa.baseball_event.primary_event == EventType.GROUND_OUT
         and pa.ball_type == "BUNT"
     ):
+        if pa.location == "C":
+            return "FB"
+
         return "GB"
 
     return pa.ball_type
