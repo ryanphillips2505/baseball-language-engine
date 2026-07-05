@@ -15,3 +15,11 @@ def test_extract_mlb_batter_names():
 
 def test_extract_unknown_returns_none():
     assert extract_batter_name("") is None
+def test_extracts_batter_from_mlb_hits_a_sacrifice_bunt():
+    from extractors.player_extractor import extract_batter_name
+
+    batter = extract_batter_name(
+        "Jarren Duran hits a sacrifice bunt. Missed catch error by first baseman Nolan Schanuel, assist to pitcher Reid Detmers."
+    )
+
+    assert batter == "Jarren Duran"
