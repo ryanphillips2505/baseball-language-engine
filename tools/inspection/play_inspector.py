@@ -28,6 +28,12 @@ def build_stat_changes(pa: Any) -> dict[str, int]:
 
     player = pa.batter_name
 
+    if not player and pa.runner_events:
+        for runner_event in pa.runner_events:
+            if runner_event.runner_name in stats:
+                player = runner_event.runner_name
+                break
+
     if not player or player not in stats:
         return {}
 

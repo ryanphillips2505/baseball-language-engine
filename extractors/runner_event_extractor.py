@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import re
 
@@ -6,6 +6,7 @@ from models.runner_event import RunnerEvent
 
 
 _RUNNER_NAME_RE = r"[A-Z][A-Za-z'.-]*(?:\s+[A-Z][A-Za-z'.-]*)*"
+_STEAL_TOTAL_RE = r"(?:\(\d+\)\s+)?"
 
 
 def _iter_runner_events(
@@ -31,34 +32,26 @@ def _iter_runner_events(
 
 
 def extract_runner_events(pa_block: str) -> list[RunnerEvent]:
-    """
-    Extract runner events from a plate appearance block.
-
-    If the source gives the runner name, preserve it.
-    If the source only says "stole third", record the event and base,
-    but leave runner_name empty.
-    """
-
     events: list[RunnerEvent] = []
 
     patterns = [
         (
-            rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?:steals|stole|steal)\s+(?:second|2nd|2b)\b",
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?:steals|stole|steal)\s+{_STEAL_TOTAL_RE}(?:second|2nd|2b)\b",
             "SB",
             "2B",
         ),
         (
-            rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?:steals|stole|steal)\s+(?:third|3rd|3b)\b",
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?:steals|stole|steal)\s+{_STEAL_TOTAL_RE}(?:third|3rd|3b)\b",
             "SB",
             "3B",
         ),
         (
-            rf"(?:^|[,.]\s*)(?:steals|stole|steal)\s+(?:second|2nd|2b)\b",
+            rf"(?:^|[,.]\s*)(?:steals|stole|steal)\s+{_STEAL_TOTAL_RE}(?:second|2nd|2b)\b",
             "SB",
             "2B",
         ),
         (
-            rf"(?:^|[,.]\s*)(?:steals|stole|steal)\s+(?:third|3rd|3b)\b",
+            rf"(?:^|[,.]\s*)(?:steals|stole|steal)\s+{_STEAL_TOTAL_RE}(?:third|3rd|3b)\b",
             "SB",
             "3B",
         ),

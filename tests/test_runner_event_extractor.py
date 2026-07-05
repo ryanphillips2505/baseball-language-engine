@@ -99,3 +99,23 @@ def test_extract_runner_name_on_caught_stealing():
     assert events[0].event_type == "CS"
     assert events[0].base == "2B"
     assert events[0].runner_name == "M. Jones"
+def test_mlb_numbered_stolen_base_to_second():
+    from extractors.runner_event_extractor import extract_runner_events
+
+    events = extract_runner_events("Ceddanne Rafaela steals (11) 2nd base.")
+
+    assert len(events) == 1
+    assert events[0].event_type == "SB"
+    assert events[0].base == "2B"
+    assert events[0].runner_name == "Ceddanne Rafaela"
+
+
+def test_mlb_numbered_stolen_base_to_third():
+    from extractors.runner_event_extractor import extract_runner_events
+
+    events = extract_runner_events("Runner Name steals (5) 3rd base.")
+
+    assert len(events) == 1
+    assert events[0].event_type == "SB"
+    assert events[0].base == "3B"
+    assert events[0].runner_name == "Runner Name"

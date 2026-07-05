@@ -61,7 +61,11 @@ def _empty_player_stats() -> dict[str, int]:
         "HR": 0,
         "XBH": 0,
         "SB": 0,
+        "SB-2B": 0,
+        "SB-3B": 0,
         "CS": 0,
+        "CS-2B": 0,
+        "CS-3B": 0,
         "BIP": 0,
     }
 
@@ -185,9 +189,13 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
 
             if runner_event.event_type == "SB":
                 stats[player]["SB"] += 1
+                if runner_event.base in {"2B", "3B"}:
+                    stats[player][f"SB-{runner_event.base}"] += 1
 
             elif runner_event.event_type == "CS":
                 stats[player]["CS"] += 1
+                if runner_event.base in {"2B", "3B"}:
+                    stats[player][f"CS-{runner_event.base}"] += 1
 
     return stats
 
