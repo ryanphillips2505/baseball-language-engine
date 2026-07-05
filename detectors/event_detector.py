@@ -79,10 +79,10 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if "bunts for an out" in text:
         events.append(DetectedEvent(event_type=EventType.GROUND_OUT))
 
-    if " flies out " in f" {text} ":
+    if "flies out" in text:
         events.append(DetectedEvent(event_type=EventType.FLY_OUT))
 
-    if " lines out " in f" {text} ":
+    if "lines out" in text:
         events.append(DetectedEvent(event_type=EventType.LINE_OUT))
 
     if "pops out" in text or "pops into" in text:
