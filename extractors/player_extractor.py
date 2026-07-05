@@ -67,7 +67,9 @@ def extract_batter_name(pa_block: str) -> str | None:
         " bunts into",
         " bunts and",
         " is out on foul tip",
+        " out on a sacrifice fly",
         " out on sacrifice fly",
+        " called out on strikes",
         " sacrifices",
         " out on infield fly",
         " out at first on dropped 3rd strike",
@@ -94,6 +96,7 @@ def extract_batter_name(pa_block: str) -> str | None:
         " triples",
         " homers",
         " walks",
+        " called out on strikes",
         " strikes out",
         " grounds",
         " flies",
@@ -110,4 +113,5 @@ def extract_batter_name(pa_block: str) -> str | None:
             return text[:index].strip()
 
     return None
+
 
