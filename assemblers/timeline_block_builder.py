@@ -2,17 +2,23 @@ from __future__ import annotations
 
 from models.plate_appearance_block import PlateAppearanceBlock
 from models.timeline_block import (
+    GameEventBlock,
     PlateAppearanceBlock as TimelinePlateAppearanceBlock,
+    TimelineBlock,
 )
 
 
 def build_timeline_blocks(
-    pa_blocks: list[str] | list[PlateAppearanceBlock],
-) -> list[TimelinePlateAppearanceBlock]:
+    pa_blocks: list[str] | list[PlateAppearanceBlock] | list[TimelineBlock],
+) -> list[TimelineBlock]:
 
-    timeline = []
+    timeline: list[TimelineBlock] = []
 
     for block in pa_blocks:
+
+        if isinstance(block, TimelineBlock):
+            timeline.append(block)
+            continue
 
         if isinstance(block, PlateAppearanceBlock):
             text = "\n".join(
