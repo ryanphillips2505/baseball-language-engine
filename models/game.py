@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from models.timeline import Timeline
 
 from models.plate_appearance import PlateAppearance
 
@@ -8,6 +9,7 @@ from models.plate_appearance import PlateAppearance
 @dataclass
 class Game:
     plate_appearances: list[PlateAppearance] = field(default_factory=list)
+    timeline: Timeline = field(default_factory=Timeline)
 
     def players_in_game(self) -> set[str]:
         players: set[str] = set()
