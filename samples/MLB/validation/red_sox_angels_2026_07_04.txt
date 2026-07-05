@@ -1,0 +1,360 @@
+﻿
+Major League Baseball
+
+Score change:Angels 2 Red Sox 5
+Red Sox
+Red Sox
+38 - 48
+5th AL East
+5
+Game State Change: Final
+Final
+2
+Angels
+Angels
+36 - 53
+5th AL West
+0	1	3	0	1	0	0	0	0	
+0	0	0	0	0	0	0	2	0	
+5	11	0
+2	7	1
+W:
+Bennett
+3 - 3|3.10 ERA
+L:
+Detmers
+3 - 6|4.13 ERA
+S:
+Chapman
+17|2.10 ERA
+Wrap
+Summary
+Box
+Video
+Insights
+Key Moments
+Scoring
+All
+Video
+ABS
+Home Runs
+Strikeouts
+Hard Hit Balls
+Lead Changes
+Win Probability Swings
+Top 1st
+First Pitch
+6:38 PM PDT
+Angel Stadium
+Nate Eaton headshot
+Strikeout
+Nate Eaton strikes out swinging. 1 Out
+Reid Detmers strikes out Nate Eaton
+00:07
+Ceddanne Rafaela headshot
+Single
+Ceddanne Rafaela singles on a line drive to right fielder Jo Adell.
+Stolen Base 2B
+Ceddanne Rafaela steals (11) 2nd base.
+Wilyer Abreu headshot
+Flyout
+Wilyer Abreu flies out to center fielder Jose Siri. 2 Outs
+Willson Contreras headshot
+Walk
+Willson Contreras walks.
+Ball 2 confirmed after ABS challenge
+00:24
+Caleb Durbin headshot
+Flyout
+Caleb Durbin flies out to left fielder Josh Lowe. 3 Outs
+Bottom 1st
+Zach Neto headshot
+Groundout
+Zach Neto grounds out softly, pitcher Jake Bennett to first baseman Willson Contreras. 1 Out
+Nolan Schanuel headshot
+Groundout
+Nolan Schanuel grounds out, second baseman Romy Gonzalez to first baseman Willson Contreras. 2 Outs
+Denzer Guzman headshot
+Strikeout
+Denzer Guzman strikes out swinging. 3 Outs
+Jake Bennett strikes out Denzer Guzman
+00:06
+Top 2nd
+Romy Gonzalez headshot
+Triple
+Romy Gonzalez triples (1) on a line drive to right fielder Jo Adell.
+BOS 0,LAA 0
+Romy Gonzalez triples in the 2nd
+00:20
+Jarren Duran headshot
+Sac Fly
+Jarren Duran out on a sacrifice fly to left fielder Josh Lowe. Romy Gonzalez scores. 1 Out
+BOS 1,LAA 0
+Jarren Duran's sac fly
+00:20
+Andruw Monasterio headshot
+Groundout
+Andruw Monasterio grounds out, second baseman Vaughn Grissom to first baseman Nolan Schanuel. 2 Outs
+Carlos Narváez headshot
+Single
+Carlos Narváez singles on a ground ball to center fielder Jose Siri.
+Nate Eaton headshot
+Strikeout
+Nate Eaton strikes out swinging. 3 Outs
+Bottom 2nd
+Jorge Soler headshot
+Groundout
+Jorge Soler grounds out, shortstop Andruw Monasterio to first baseman Willson Contreras. 1 Out
+Vaughn Grissom headshot
+Strikeout
+Vaughn Grissom strikes out swinging. 2 Outs
+Ball 2 confirmed after ABS challenge
+00:25
+Jo Adell headshot
+Lineout
+Jo Adell lines out to first baseman Willson Contreras. 3 Outs
+Top 3rd
+Ceddanne Rafaela headshot
+Groundout
+Ceddanne Rafaela grounds out, shortstop Zach Neto to first baseman Nolan Schanuel. 1 Out
+Wilyer Abreu headshot
+Double
+Wilyer Abreu doubles (17) on a line drive to right fielder Jo Adell.
+Willson Contreras headshot
+Single
+Willson Contreras singles on a fly ball to right fielder Jo Adell. Wilyer Abreu to 3rd.
+Caleb Durbin headshot
+Walk
+Caleb Durbin walks. Willson Contreras to 2nd.
+Romy Gonzalez headshot
+Single
+Romy Gonzalez singles on a ground ball to right fielder Jo Adell. Wilyer Abreu scores. Willson Contreras scores. Caleb Durbin to 3rd.
+BOS 3,LAA 0
+Romy Gonzalez's two-run single
+00:20
+Jarren Duran headshot
+Sac Bunt
+Jarren Duran hits a sacrifice bunt. Missed catch error by first baseman Nolan Schanuel, assist to pitcher Reid Detmers. Caleb Durbin scores. Romy Gonzalez to 3rd. Jarren Duran to 2nd.
+BOS 4,LAA 0
+Jarren Duran's sac bunt scores Caleb Durbin
+00:20
+Game Advisory
+Injury Delay.
+Defensive Sub
+Defensive Substitution: Tyler Heineman replaces catcher Logan O'Hoppe, batting 9th, playing catcher.
+Andruw Monasterio headshot
+Pop Out
+Andruw Monasterio pops out to first baseman Nolan Schanuel in foul territory. 2 Outs
+Carlos Narváez headshot
+Flyout
+Carlos Narváez flies out to right fielder Jo Adell. 3 Outs
+Bottom 3rd
+Jose Siri headshot
+Groundout
+Jose Siri grounds out, third baseman Caleb Durbin to first baseman Willson Contreras. 1 Out
+Josh Lowe headshot
+Lineout
+Josh Lowe lines out to third baseman Caleb Durbin. 2 Outs
+Caleb Durbin's leaping catch in the 3rd
+00:27
+Tyler Heineman headshot
+Strikeout
+Tyler Heineman strikes out swinging. 3 Outs
+Top 4th
+Nate Eaton headshot
+Strikeout
+Nate Eaton called out on strikes. 1 Out
+Ceddanne Rafaela headshot
+Pop Out
+Ceddanne Rafaela pops out to first baseman Nolan Schanuel in foul territory. 2 Outs
+Wilyer Abreu headshot
+Walk
+Wilyer Abreu walks.
+Wild Pitch
+Wild pitch by pitcher Reid Detmers. Wilyer Abreu to 2nd.
+Willson Contreras headshot
+Flyout
+Willson Contreras flies out to left fielder Josh Lowe. 3 Outs
+Bottom 4th
+Zach Neto headshot
+Flyout
+Zach Neto flies out to right fielder Nate Eaton. 1 Out
+Nolan Schanuel headshot
+Groundout
+Nolan Schanuel grounds out to first baseman Willson Contreras. 2 Outs
+Denzer Guzman headshot
+Flyout
+Denzer Guzman flies out to left fielder Jarren Duran. 3 Outs
+Top 5th
+Caleb Durbin headshot
+Home Run
+Caleb Durbin homers (8) on a line drive to left field.
+BOS 5,LAA 0
+Caleb Durbin's solo home run (8)
+00:23
+Romy Gonzalez headshot
+Strikeout
+Romy Gonzalez strikes out swinging. 1 Out
+Jarren Duran headshot
+Strikeout
+Jarren Duran strikes out swinging. 2 Outs
+Andruw Monasterio headshot
+Flyout
+Andruw Monasterio flies out sharply to center fielder Jose Siri. 3 Outs
+Bottom 5th
+Jorge Soler headshot
+Flyout
+Jorge Soler flies out to left fielder Jarren Duran. 1 Out
+Vaughn Grissom headshot
+Single
+Vaughn Grissom singles on a line drive to right fielder Nate Eaton.
+Jo Adell headshot
+Flyout
+Jo Adell flies out sharply to center fielder Ceddanne Rafaela. 2 Outs
+Jose Siri headshot
+Forceout
+Jose Siri grounds into a force out, shortstop Andruw Monasterio to second baseman Romy Gonzalez. Vaughn Grissom out at 2nd. 3 Outs
+Top 6th
+Pitching Substitution
+Pitching Change: José Fermin replaces Reid Detmers.
+Carlos Narváez headshot
+Strikeout
+Carlos Narváez strikes out swinging. 1 Out
+Ball 1 overturned after ABS challenge
+00:25
+Nate Eaton headshot
+Pop Out
+Nate Eaton pops out to first baseman Nolan Schanuel. 2 Outs
+Ceddanne Rafaela headshot
+Single
+Ceddanne Rafaela singles on a line drive to right fielder Jo Adell.
+Wilyer Abreu headshot
+Strikeout
+Wilyer Abreu strikes out swinging. 3 Outs
+Bottom 6th
+Josh Lowe headshot
+Groundout
+Josh Lowe grounds out, second baseman Romy Gonzalez to first baseman Willson Contreras. 1 Out
+Tyler Heineman headshot
+Flyout
+Tyler Heineman flies out to center fielder Ceddanne Rafaela. 2 Outs
+Zach Neto headshot
+Single
+Zach Neto singles on a sharp line drive to left fielder Jarren Duran.
+Nolan Schanuel headshot
+Strikeout
+Nolan Schanuel called out on strikes. 3 Outs
+Top 7th
+Pitching Substitution
+Pitching Change: Mitch Farris replaces José Fermin.
+Willson Contreras headshot
+Groundout
+Willson Contreras grounds out, shortstop Zach Neto to first baseman Nolan Schanuel. 1 Out
+Caleb Durbin headshot
+Lineout
+Caleb Durbin lines out sharply to left fielder Josh Lowe. 2 Outs
+Romy Gonzalez headshot
+Single
+Romy Gonzalez singles on a sharp line drive to center fielder Jose Siri.
+Jarren Duran headshot
+Flyout
+Jarren Duran flies out sharply to left fielder Josh Lowe. 3 Outs
+Bottom 7th
+Denzer Guzman headshot
+Strikeout
+Denzer Guzman strikes out swinging. 1 Out
+Jorge Soler headshot
+Flyout
+Jorge Soler flies out to right fielder Nate Eaton. 2 Outs
+Vaughn Grissom headshot
+Strikeout
+Vaughn Grissom strikes out swinging. 3 Outs
+Top 8th
+Andruw Monasterio headshot
+Single
+Andruw Monasterio singles on a line drive to center fielder Jose Siri.
+Carlos Narváez headshot
+Strikeout
+Carlos Narváez strikes out swinging. 1 Out
+Nate Eaton headshot
+Double Play
+Nate Eaton lines into a double play, shortstop Zach Neto to first baseman Nolan Schanuel. Andruw Monasterio out at 1st. 3 Outs
+Zach Neto's diving double play to end the top of the 8th
+00:19
+Bottom 8th
+Jo Adell headshot
+Groundout
+Jo Adell grounds out, third baseman Caleb Durbin to first baseman Willson Contreras. 1 Out
+Jose Siri headshot
+Home Run
+Jose Siri homers (5) on a fly ball to right center field.
+BOS 5,LAA 1
+Jose Siri's solo home run (5)
+00:22
+Josh Lowe headshot
+Single
+Josh Lowe singles on a ground ball to first baseman Willson Contreras.
+Tyler Heineman headshot
+Pop Out
+Tyler Heineman pops out to first baseman Willson Contreras in foul territory. 2 Outs
+Wild Pitch
+Wild pitch by pitcher Jake Bennett. Josh Lowe to 2nd.
+Zach Neto headshot
+Single
+Zach Neto singles on a ground ball to right fielder Nate Eaton. Josh Lowe scores.
+BOS 5,LAA 2
+Zach Neto's RBI single
+00:20
+Pitching Substitution
+Pitching Change: Garrett Whitlock replaces Jake Bennett.
+Nolan Schanuel headshot
+Groundout
+Nolan Schanuel grounds out, second baseman Romy Gonzalez to first baseman Willson Contreras. 3 Outs
+Top 9th
+Pitching Substitution
+Pitching Change: Kirby Yates replaces Mitch Farris.
+Ceddanne Rafaela headshot
+Strikeout
+Ceddanne Rafaela strikes out swinging. 1 Out
+Wilyer Abreu headshot
+Strikeout
+Wilyer Abreu strikes out swinging. 2 Outs
+Willson Contreras headshot
+Double
+Willson Contreras doubles (15) on a sharp line drive to left fielder Josh Lowe. Willson Contreras out at 3rd on the throw, left fielder Josh Lowe to shortstop Zach Neto to third baseman Denzer Guzman. 3 Outs
+Bottom 9th
+Pitching Substitution
+Pitching Change: Aroldis Chapman replaces Garrett Whitlock.
+Denzer Guzman headshot
+Strikeout
+Denzer Guzman strikes out swinging. 1 Out
+Aroldis Chapman sets the all-time reliever K record
+00:32
+Jorge Soler headshot
+Single
+Jorge Soler singles on a ground ball to left fielder Jarren Duran.
+Vaughn Grissom headshot
+Single
+Vaughn Grissom singles on a line drive to center fielder Ceddanne Rafaela. Jorge Soler to 2nd.
+Strike 1 overturned after ABS challenge
+00:25
+Jo Adell headshot
+Grounded Into DP
+Jo Adell grounds into a double play, third baseman Caleb Durbin to second baseman Romy Gonzalez to first baseman Willson Contreras. Vaughn Grissom out at 2nd. Jo Adell out at 1st. 3 Outs
+BOS 5,LAA 2
+Aroldis Chapman induces a double play for the win
+00:21
+
+OFFICIAL INFORMATION
+HELP/CONTACT US
+MORE MLB SITES & AFFILIATES
+CAREERS
+MLB.com
+Boys and Girls Club of America
+Terms of Use
+Privacy Policy
+Legal Notices
+Contact Us
+Do not Sell or Share My Personal Data
+Cookie Settings
+© 2026 MLB Advanced Media, LP. All rights reserved.
