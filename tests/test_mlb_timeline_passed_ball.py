@@ -1,0 +1,19 @@
+from cleaners.mlb_timeline_cleaner import clean_mlb_timeline_text
+from models.timeline_block import TimelineBlockType
+
+
+def test_mlb_timeline_marks_passed_ball_as_game_event():
+
+    raw = """
+Major League Baseball
+
+Nolan Schanuel walks.
+Passed ball by catcher Carlos Narváez. Nolan Schanuel to 2nd.
+"""
+
+    blocks = clean_mlb_timeline_text(raw)
+
+    assert len(blocks) == 2
+    assert blocks[0].block_type == TimelineBlockType.PLATE_APPEARANCE
+    assert blocks[1].block_type == TimelineBlockType.GAME_EVENT
+    assert blocks[1].event_type == "passed_ball"

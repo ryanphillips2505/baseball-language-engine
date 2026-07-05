@@ -26,6 +26,11 @@ _PICKED_OFF_RE = re.compile(
     re.I,
 )
 
+_PASSED_BALL_RE = re.compile(
+    r"\bpassed ball\b",
+    re.I,
+)
+
 
 def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
 
@@ -70,6 +75,16 @@ def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
                 GameEventBlock(
                     raw_text=block,
                     event_type="pickoff",
+                    source="mlb",
+                )
+            )
+            continue
+
+        if _PASSED_BALL_RE.search(block):
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=block,
+                    event_type="passed_ball",
                     source="mlb",
                 )
             )
