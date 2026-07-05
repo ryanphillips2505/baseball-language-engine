@@ -16,6 +16,11 @@ _STOLEN_BASE_RE = re.compile(
     re.I,
 )
 
+_WILD_PITCH_RE = re.compile(
+    r"\bwild pitch\b",
+    re.I,
+)
+
 
 def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
 
@@ -40,6 +45,16 @@ def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
                 GameEventBlock(
                     raw_text=block,
                     event_type="stolen_base",
+                    source="mlb",
+                )
+            )
+            continue
+
+        if _WILD_PITCH_RE.search(block):
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=block,
+                    event_type="wild_pitch",
                     source="mlb",
                 )
             )
