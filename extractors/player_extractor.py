@@ -61,6 +61,8 @@ def extract_batter_name(pa_block: str) -> str | None:
         " lines into",
         " hits a pop fly",
         " hits a popup",
+        " hits a sacrifice fly and",
+        " hits a sacrifice fly",
         " hits a sacrifice bunt",
         " hits a bunt",
         " bunts out",
