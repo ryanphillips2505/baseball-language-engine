@@ -117,6 +117,37 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
     for player in game.players_in_game():
         stats[player] = _empty_player_stats()
 
+    for block in getattr(game.timeline, "blocks", []):
+        if getattr(block.block_type, "value", "") != "game_event":
+            continue
+
+        event = block.metadata.get("game_event")
+        if event is None:
+            continue
+
+        runner = event.runner_name
+        if not runner:
+            continue
+
+        if runner not in stats:
+            stats[runner] = _empty_player_stats()
+
+        if event.event_type == "stolen_base":
+            stats[runner]["SB"] += 1
+
+            if event.to_base == "2nd":
+                stats[runner]["SB-2B"] += 1
+            elif event.to_base == "3rd":
+                stats[runner]["SB-3B"] += 1
+
+        elif event.event_type == "caught_stealing":
+            stats[runner]["CS"] += 1
+
+            if event.to_base == "2nd":
+                stats[runner]["CS-2B"] += 1
+            elif event.to_base == "3rd":
+                stats[runner]["CS-3B"] += 1
+
     for pa in game.plate_appearances:
         if pa.batter_name:
             player = pa.batter_name
