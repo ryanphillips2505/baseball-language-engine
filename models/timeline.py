@@ -31,6 +31,9 @@ class Timeline:
             if block.block_type == TimelineBlockType.PLATE_APPEARANCE
         ]
 
+    def events(self):
+        return self.game_event_blocks()
+
     def game_event_blocks(self) -> list[TimelineBlock]:
         return [
             block for block in self.blocks
