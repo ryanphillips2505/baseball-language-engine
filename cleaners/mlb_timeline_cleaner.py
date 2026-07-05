@@ -36,6 +36,11 @@ _BALK_RE = re.compile(
     re.I,
 )
 
+_DEFENSIVE_INDIFFERENCE_RE = re.compile(
+    r"\bdefensive indifference\b",
+    re.I,
+)
+
 
 def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
 
@@ -100,6 +105,16 @@ def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
                 GameEventBlock(
                     raw_text=block,
                     event_type="balk",
+                    source="mlb",
+                )
+            )
+            continue
+
+        if _DEFENSIVE_INDIFFERENCE_RE.search(block):
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=block,
+                    event_type="defensive_indifference",
                     source="mlb",
                 )
             )
