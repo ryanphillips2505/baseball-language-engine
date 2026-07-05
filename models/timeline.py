@@ -19,6 +19,9 @@ class Timeline:
     def __iter__(self) -> Iterator[TimelineBlock]:
         return iter(self.blocks)
 
+    def all_blocks(self) -> list[TimelineBlock]:
+        return list(self.blocks)
+
     def __len__(self) -> int:
         return len(self.blocks)
 
