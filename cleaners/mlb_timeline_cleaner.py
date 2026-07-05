@@ -21,6 +21,11 @@ _WILD_PITCH_RE = re.compile(
     re.I,
 )
 
+_PICKED_OFF_RE = re.compile(
+    r"\bpicked off\b",
+    re.I,
+)
+
 
 def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
 
@@ -55,6 +60,16 @@ def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
                 GameEventBlock(
                     raw_text=block,
                     event_type="wild_pitch",
+                    source="mlb",
+                )
+            )
+            continue
+
+        if _PICKED_OFF_RE.search(block):
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=block,
+                    event_type="pickoff",
                     source="mlb",
                 )
             )
