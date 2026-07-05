@@ -31,6 +31,11 @@ _PASSED_BALL_RE = re.compile(
     re.I,
 )
 
+_BALK_RE = re.compile(
+    r"\bbalk\b",
+    re.I,
+)
+
 
 def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
 
@@ -85,6 +90,16 @@ def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
                 GameEventBlock(
                     raw_text=block,
                     event_type="passed_ball",
+                    source="mlb",
+                )
+            )
+            continue
+
+        if _BALK_RE.search(block):
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=block,
+                    event_type="balk",
                     source="mlb",
                 )
             )
