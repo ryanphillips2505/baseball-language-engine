@@ -23,11 +23,10 @@ COMBO_LOCATION_OUTPUT_MAP = {
     "LOC_C": "C",
 }
 
-# Opponent IQ currently displays GB/FB location combos only.
-# BLE still stores BUNT-LOC_* internally for future bunt-location reporting.
 BALLTYPE_KEYS = [
     "GB",
     "FB",
+    "BUNT",
 ]
 
 HITTING_KEYS = [

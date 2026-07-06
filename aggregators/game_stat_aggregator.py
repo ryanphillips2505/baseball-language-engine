@@ -164,12 +164,19 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
             if location_key:
                 stats[player][location_key] += 1
 
-            if ball_type in BALLTYPE_KEYS:
-                stats[player][ball_type] += 1
+            if ball_type == "BUNT":
+                stats[player]["BUNT"] += 1
 
-            if ball_type in BALLTYPE_KEYS and location_key:
-                combo_key = f"{ball_type}-{location_key}"
-                stats[player][combo_key] += 1
+                if location_key:
+                    stats[player][f"BUNT-{location_key}"] += 1
+
+            else:
+                if ball_type in BALLTYPE_KEYS:
+                    stats[player][ball_type] += 1
+
+                if ball_type in BALLTYPE_KEYS and location_key:
+                    combo_key = f"{ball_type}-{location_key}"
+                    stats[player][combo_key] += 1
 
             if pa.baseball_event:
                 event = pa.baseball_event.primary_event
