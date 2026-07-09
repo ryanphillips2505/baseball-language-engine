@@ -1,7 +1,7 @@
 from adapters.opponent_iq_engine_adapter import process_raw_text_to_opponent_iq_game
 
 
-def test_gc_bunts_out_count_as_bip_ground_ball_locations():
+def test_gc_bunts_out_count_as_legacy_bunt_locations():
     raw_text = """
     All Plays
 
@@ -21,11 +21,16 @@ def test_gc_bunts_out_count_as_bip_ground_ball_locations():
     team, players = process_raw_text_to_opponent_iq_game(raw_text)
 
     assert players["John Crosby"]["BIP"] == 1
-    assert players["John Crosby"]["GB"] == 1
-    assert players["John Crosby"]["P"] == 1
-    assert players["John Crosby"]["GB-P"] == 1
+    assert players["John Crosby"]["BUNT"] == 1
+    assert players["John Crosby"]["BUNT-P"] == 1
+    assert players["John Crosby"]["GB"] == 0
 
     assert players["Ben Rogalski"]["BIP"] == 1
-    assert players["Ben Rogalski"]["GB"] == 1
-    assert players["Ben Rogalski"]["3B"] == 1
-    assert players["Ben Rogalski"]["GB-3B"] == 1
+    assert players["Ben Rogalski"]["BUNT"] == 1
+    assert players["Ben Rogalski"]["BUNT-3B"] == 1
+    assert players["Ben Rogalski"]["GB"] == 0
+
+    assert team["BIP"] == 2
+    assert team["BUNT"] == 2
+    assert team["BUNT-P"] == 1
+    assert team["BUNT-3B"] == 1

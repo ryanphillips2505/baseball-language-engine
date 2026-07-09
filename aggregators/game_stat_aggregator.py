@@ -93,21 +93,10 @@ def _location_stat_key(raw_location: str | None) -> str | None:
 
 def _effective_ball_type(pa) -> str | None:
     """
-    Legacy Opponent IQ treats ordinary GameChanger "bunts out" plays as
-    ground-ball BIP outs to the first fielder, not as BUNT totals.
-
-    Sacrifice bunts remain BUNT because their primary event is SAC_BUNT.
+    Preserve legacy production GameChanger behavior:
+    bunt-contact plays remain BUNT totals, including ordinary
+    "bunts out", sacrifice bunt forms, and bunt hits.
     """
-    if (
-        pa.baseball_event
-        and pa.baseball_event.primary_event == EventType.GROUND_OUT
-        and pa.ball_type == "BUNT"
-    ):
-        if pa.location == "C":
-            return "FB"
-
-        return "GB"
-
     return pa.ball_type
 
 
