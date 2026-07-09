@@ -99,7 +99,9 @@ _BASEBALL_ACTION_RE = re.compile(
     r"singles|doubles|triples|homers|hits a home run|"
     r"grounds out|grounds into|flies out|flies into|"
     r"lines out|lines into|pops out|"
-    r"bunts out|bunts into|"
+    r"bunt single|singles on a bunt|on a bunt|"
+    r"bunts out|bunts into|bunts to|bunts toward|bunts down|"
+    r"squares to bunt|"
     r"reaches on error|reaches on an error|"
     r"reaches on a dropped 3rd strike|reaches on dropped 3rd strike|"
     r"out on sacrifice fly|out on sacrifice bunt|"
@@ -529,6 +531,11 @@ def clean_gamechanger_text(raw_text: str) -> list[str]:
                 "hit by pitch",
                 "fielder's choice",
                 "reaches on",
+                "bunt",
+                "bunts",
+                "sacrifice bunt",
+                "sacrifices",
+                "squares to bunt",
                 "steals",
                 "stole",
                 "caught stealing",
