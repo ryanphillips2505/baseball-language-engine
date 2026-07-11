@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import re
 
@@ -63,7 +63,9 @@ def extract_batter_name(pa_block: str) -> str | None:
         " hits a popup",
         " hits a sacrifice fly and",
         " hits a sacrifice fly",
+        " hit sacrifice fly",
         " hits a sacrifice bunt",
+        " hit sacrifice bunt",
         " hits a bunt",
         " bunts out",
         " bunts into",
@@ -115,5 +117,6 @@ def extract_batter_name(pa_block: str) -> str | None:
             return text[:index].strip()
 
     return None
+
 
 

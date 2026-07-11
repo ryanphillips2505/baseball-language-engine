@@ -9,12 +9,23 @@ from extractors.pitch_token_extractor import extract_pitch_tokens
 from extractors.player_extractor import extract_batter_name
 from extractors.runner_event_extractor import extract_runner_events
 from models.plate_appearance import PlateAppearance
+from models.types import EventType
 from translators.base_translator import detected_events_to_baseball_event
 
 
 _GC_RESULT_HEADERS = {
     "runner out",
     "sacrifice bunt",
+}
+
+
+_RUNNER_ONLY_PRIMARY_EVENTS = {
+    EventType.STOLEN_BASE,
+    EventType.CAUGHT_STEALING,
+    EventType.PICKOFF,
+    EventType.RUNNER_OUT,
+    EventType.WILD_PITCH_ADVANCE,
+    EventType.PASSED_BALL_ADVANCE,
 }
 
 
@@ -46,6 +57,12 @@ def build_plate_appearance(pa_block: str) -> PlateAppearance:
     )
 
     batter_name = extract_batter_name(action_text)
+
+    if (
+        baseball_event
+        and baseball_event.primary_event in _RUNNER_ONLY_PRIMARY_EVENTS
+    ):
+        batter_name = None
 
     runner_events = extract_runner_events(action_text)
 

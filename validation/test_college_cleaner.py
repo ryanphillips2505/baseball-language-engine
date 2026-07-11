@@ -6,7 +6,7 @@ from cleaners.college_cleaner import clean_college_text
 SAMPLE_PATHS = [
     Path("samples/college/raw/college_raw_game_01.txt"),
     Path("samples/college/raw/espn_college_world_series_2026_unc_wvu.txt"),
-    Path("samples/college/raw/espn_ou_vs_unc_2026_cws.txt"),
+    Path("samples/college/raw/espn_ou_vs_unc_2026_06_20_ou9_unc3_cws.txt"),
 ]
 
 

@@ -1,0 +1,21 @@
+{
+  "source": "ESPN",
+  "sport": "NCAA baseball",
+  "game_date": "2026-06-20",
+  "start_time_local": "2:00 PM",
+  "venue": "Charles Schwab Field",
+  "city": "Omaha",
+  "state": "Nebraska",
+  "away_team": "Oklahoma Sooners",
+  "away_abbreviation": "OU",
+  "away_score": 9,
+  "away_hits": 14,
+  "away_errors": 0,
+  "home_team": "North Carolina Tar Heels",
+  "home_abbreviation": "UNC",
+  "home_score": 3,
+  "home_hits": 7,
+  "home_errors": 1,
+  "fixture": "samples/college/raw/espn_ou_vs_unc_2026_06_20_ou9_unc3_cws.txt",
+  "validation_status": "verified against ESPN box score screenshot"
+}

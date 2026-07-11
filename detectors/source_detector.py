@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import re
 from enum import Enum
@@ -45,6 +45,35 @@ def _looks_like_mlb_cleaned_blocks(text: str) -> bool:
     )
 
 
+def _looks_like_espn_college_raw_text(text: str) -> bool:
+    college_markers = (
+        "men's college world series",
+        "college world series",
+        "ncaa baseball",
+        "college baseball",
+    )
+
+    espn_page_markers = (
+        "play-by-play" in text
+        and "all plays" in text
+        and (
+            "gamecast" in text
+            or "box score" in text
+            or any(marker in text for marker in college_markers)
+        )
+    )
+
+    explicit_espn = (
+        "espn" in text
+        and (
+            "play-by-play" in text
+            or any(marker in text for marker in college_markers)
+        )
+    )
+
+    return espn_page_markers or explicit_espn
+
+
 def _looks_like_gamechanger_minimal_raw_text(text: str) -> bool:
     return (
         "all plays" in text
@@ -61,27 +90,25 @@ def _looks_like_gamechanger_minimal_raw_text(text: str) -> bool:
 def detect_source(raw_text: str) -> SourceType:
     text = raw_text.lower()
 
-    # -------------------------
-    # CLEANED GAMECHANGER BLOCKS
-    # -------------------------
+    # Cleaned GameChanger blocks remain explicit and safe.
     if _looks_like_gamechanger_cleaned_blocks(text):
         return SourceType.GAMECHANGER
 
-    # -------------------------
-    # CLEANED MLB BLOCKS
-    # -------------------------
+    # Cleaned MLB blocks.
     if _looks_like_mlb_cleaned_blocks(text):
         return SourceType.MLB
 
-    # -------------------------
-    # MINIMAL GAMECHANGER RAW TEXT
-    # -------------------------
+    # ESPN full-page text must be detected before the broad
+    # minimal-GameChanger rule. ESPN pages may contain "All Plays"
+    # plus unrelated scoreboard text such as "Top 8th".
+    if _looks_like_espn_college_raw_text(text):
+        return SourceType.COLLEGE
+
+    # Minimal GameChanger raw text.
     if _looks_like_gamechanger_minimal_raw_text(text):
         return SourceType.GAMECHANGER
 
-    # -------------------------
-    # GAMECHANGER RAW TEXT
-    # -------------------------
+    # GameChanger raw text.
     if (
         "gamechanger" in text
         or "gc.com" in text
@@ -90,9 +117,7 @@ def detect_source(raw_text: str) -> SourceType:
     ):
         return SourceType.GAMECHANGER
 
-    # -------------------------
-    # ISCORE
-    # -------------------------
+    # iScore.
     if (
         "iscoresports.com" in text
         or re.search(r"\(\d+\)\s+#\d+", text)
@@ -100,9 +125,7 @@ def detect_source(raw_text: str) -> SourceType:
     ):
         return SourceType.ISCORE
 
-    # -------------------------
-    # ESPN / COLLEGE
-    # -------------------------
+    # Additional college markers.
     if (
         "espn" in text
         or "ncaa baseball" in text
@@ -112,9 +135,7 @@ def detect_source(raw_text: str) -> SourceType:
     ):
         return SourceType.COLLEGE
 
-    # -------------------------
-    # MLB RAW TEXT
-    # -------------------------
+    # MLB raw text.
     if (
         "mlb" in text
         or "baseball savant" in text

@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import re
 
@@ -56,17 +56,32 @@ def extract_runner_events(pa_block: str) -> list[RunnerEvent]:
             "3B",
         ),
         (
-            rf"(?P<runner>{_RUNNER_NAME_RE})\s+caught stealing\s+(?:second|2nd|2b)\b",
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+picked off and caught stealing\s+(?:second|2nd|2b)\b",
             "CS",
             "2B",
         ),
         (
-            rf"(?P<runner>{_RUNNER_NAME_RE})\s+caught stealing\s+(?:third|3rd|3b)\b",
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+picked off and caught stealing\s+(?:third|3rd|3b)\b",
             "CS",
             "3B",
         ),
         (
-            rf"(?P<runner>{_RUNNER_NAME_RE})\s+caught stealing\s+(?:home|home plate)\b",
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+picked off and caught stealing\s+(?:home|home plate)\b",
+            "CS",
+            "HOME",
+        ),
+        (
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?<!picked off and )caught stealing\s+(?:second|2nd|2b)\b",
+            "CS",
+            "2B",
+        ),
+        (
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?<!picked off and )caught stealing\s+(?:third|3rd|3b)\b",
+            "CS",
+            "3B",
+        ),
+        (
+            rf"(?P<runner>{_RUNNER_NAME_RE})\s+(?<!picked off and )caught stealing\s+(?:home|home plate)\b",
             "CS",
             "HOME",
         ),
@@ -83,3 +98,5 @@ def extract_runner_events(pa_block: str) -> list[RunnerEvent]:
         )
 
     return events
+
+

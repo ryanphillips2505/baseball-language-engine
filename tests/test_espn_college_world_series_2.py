@@ -4,7 +4,7 @@ from dataset.sample_paths import sample_path
 
 SAMPLE_PATH = sample_path(
     "college",
-    "espn_ou_vs_unc_2026_cws.txt",
+    "espn_ou_vs_unc_2026_06_20_ou9_unc3_cws.txt",
 )
 
 
