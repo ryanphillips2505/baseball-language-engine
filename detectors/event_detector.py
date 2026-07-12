@@ -138,6 +138,13 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
             DetectedEvent(event_type=EventType.DROPPED_THIRD_STRIKE_OUT)
         )
     
+    if "struck out bunting foul" in text:
+        events.append(
+            DetectedEvent(
+                event_type=EventType.STRIKEOUT_SWINGING
+            )
+        )
+
     if "struck out looking" in text:
         events.append(DetectedEvent(event_type=EventType.STRIKEOUT_LOOKING))
 

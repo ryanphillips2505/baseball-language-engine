@@ -9,6 +9,9 @@ def classify_ball_type(pa_block: str) -> str | None:
     #
 
 
+    if "struck out bunting foul" in text:
+        return None
+
     if "bunt" in text:
         return "BUNT"
 
