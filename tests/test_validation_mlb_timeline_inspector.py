@@ -8,11 +8,15 @@ def test_mlb_inspector_uses_timeline_events_without_counting_them_as_plate_appea
     )
 
     assert data["source"] == "mlb"
-    # Includes the Jarren Duran sacrifice-bunt ROE line preserved by the MLB cleaner.
-    assert data["timeline_count"] == 76
+    # Includes sac-bunt ROE plus quarantined admin/substitution timeline events.
+    assert data["timeline_count"] == 94
     assert data["plate_appearance_count"] == 73
 
-    events = data["timeline_game_events"]
+    events = [
+        event
+        for event in data["timeline_game_events"]
+        if not event.get("administrative")
+    ]
 
     assert [event["event_type"] for event in events] == [
         "stolen_base",

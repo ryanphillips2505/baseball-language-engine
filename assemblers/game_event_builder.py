@@ -33,6 +33,21 @@ def _previous_base(to_base: str | None) -> str | None:
 def build_game_event(block: GameEventBlock) -> GameEvent:
 
     event_type = block.event_type or "unknown"
+
+    # Administrative quarantines are not runner advancements.
+    if (block.metadata or {}).get("administrative"):
+        return GameEvent(
+            event_type=event_type,
+            raw_text=block.raw_text,
+            runner_name=None,
+            actor_name=None,
+            base=None,
+            from_base=None,
+            to_base=None,
+            outcome=None,
+            source=block.source or "",
+        )
+
     runner_match = _RUNNER_RE.search(block.raw_text)
     advance_match = _ADVANCE_RE.search(block.raw_text)
     base_match = _BASE_RE.search(block.raw_text)

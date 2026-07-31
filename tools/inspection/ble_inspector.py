@@ -68,6 +68,9 @@ def inspect_ble_file(path: str) -> dict:
                 "to_base": getattr(event, "to_base", None),
                 "outcome": getattr(event, "outcome", None),
                 "raw": block.raw_text,
+                "administrative": bool(
+                    (block.metadata or {}).get("administrative")
+                ),
             }
         )
 

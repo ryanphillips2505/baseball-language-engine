@@ -21,14 +21,19 @@ def test_real_mlb_game_timeline_separates_runner_only_events():
         if block.block_type == TimelineBlockType.GAME_EVENT
     ]
 
-    # Includes the Jarren Duran sacrifice-bunt ROE line preserved by the MLB cleaner.
-    assert len(game.timeline) == 76
+    # Includes sac-bunt ROE preservation plus quarantined admin/substitution lines.
+    assert len(game.timeline) == 94
     assert len(game.plate_appearances) == 73
 
-    assert [event.event_type for event in events] == [
+    runner_events = [
+        event
+        for event in events
+        if not (event.metadata or {}).get("administrative")
+    ]
+    assert [event.event_type for event in runner_events] == [
         "stolen_base",
         "wild_pitch",
         "wild_pitch",
     ]
 
-    assert events[0].metadata["game_event"].base == "2nd"
+    assert runner_events[0].metadata["game_event"].base == "2nd"

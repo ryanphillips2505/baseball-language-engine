@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 
+from cleaners.mlb_admin_classifier import classify_mlb_admin_line
 from cleaners.mlb_cleaner import clean_mlb_text
 from models.timeline_block import GameEventBlock, PlateAppearanceBlock, TimelineBlock
 
@@ -137,8 +138,39 @@ def timeline_blocks_from_mlb_play_lines(
 
 
 def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
-    cleaned = clean_mlb_text(raw_text)
-    return timeline_blocks_from_mlb_play_lines(cleaned)
+    """
+    Build an ordered MLB timeline from Gameday text.
+
+    Administrative / substitution lines are quarantined as GameEventBlocks with
+    metadata.administrative=True so they are not treated as plate appearances.
+    """
+
+    timeline_blocks: list[TimelineBlock] = []
+
+    for raw_line in str(raw_text or "").splitlines():
+        line = " ".join(raw_line.split()).strip()
+        if not line:
+            continue
+
+        admin_type = classify_mlb_admin_line(line)
+        if admin_type is not None:
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=line,
+                    event_type=admin_type,
+                    source="mlb",
+                    metadata={"administrative": True},
+                )
+            )
+            continue
+
+        cleaned = clean_mlb_text(line)
+        if not cleaned:
+            continue
+
+        timeline_blocks.extend(timeline_blocks_from_mlb_play_lines(cleaned))
+
+    return timeline_blocks
 
 
 __all__ = [
