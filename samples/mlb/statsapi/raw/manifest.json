@@ -1,0 +1,39 @@
+{
+  "source": "statsapi.mlb.com",
+  "retrieved_at_utc": "2026-07-31T04:08:49.721716+00:00",
+  "fixtures": [
+    {
+      "game_pk": 824988,
+      "stem": "mlb_angels_athletics_2026_06_20_gamepk824988",
+      "raw_path": "samples/mlb/statsapi/raw/mlb_angels_athletics_2026_06_20_gamepk824988.live.json",
+      "expected_path": "samples/mlb/statsapi/expected/mlb_angels_athletics_2026_06_20_gamepk824988.expected.json",
+      "official_date": "2026-06-20",
+      "away_team": "Los Angeles Angels",
+      "home_team": "Athletics",
+      "bytes": 833718,
+      "all_plays_count": 79
+    },
+    {
+      "game_pk": 823126,
+      "stem": "mlb_redsox_mariners_2026_06_20_gamepk823126",
+      "raw_path": "samples/mlb/statsapi/raw/mlb_redsox_mariners_2026_06_20_gamepk823126.live.json",
+      "expected_path": "samples/mlb/statsapi/expected/mlb_redsox_mariners_2026_06_20_gamepk823126.expected.json",
+      "official_date": "2026-06-20",
+      "away_team": "Boston Red Sox",
+      "home_team": "Seattle Mariners",
+      "bytes": 777625,
+      "all_plays_count": 71
+    },
+    {
+      "game_pk": 824012,
+      "stem": "mlb_redsox_angels_2026_07_04_gamepk824012",
+      "raw_path": "samples/mlb/statsapi/raw/mlb_redsox_angels_2026_07_04_gamepk824012.live.json",
+      "expected_path": "samples/mlb/statsapi/expected/mlb_redsox_angels_2026_07_04_gamepk824012.expected.json",
+      "official_date": "2026-07-04",
+      "away_team": "Boston Red Sox",
+      "home_team": "Los Angeles Angels",
+      "bytes": 777709,
+      "all_plays_count": 74
+    }
+  ]
+}

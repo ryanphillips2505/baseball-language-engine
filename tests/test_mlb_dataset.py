@@ -21,5 +21,7 @@ def test_mlb_dataset_regression():
         assert baseball_event is not None
         valid_events.append(baseball_event)
 
-    assert len(cleaned_blocks) == 79
-    assert len(valid_events) == 79
+    # Includes strikeout-swinging lines previously dropped by the highlight-caption
+    # false positive ("strikes out swinging." matched as a video caption).
+    assert len(cleaned_blocks) == 85
+    assert len(valid_events) == 85

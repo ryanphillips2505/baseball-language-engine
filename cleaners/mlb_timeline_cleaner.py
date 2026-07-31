@@ -42,13 +42,19 @@ _DEFENSIVE_INDIFFERENCE_RE = re.compile(
 )
 
 
-def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
+def timeline_blocks_from_mlb_play_lines(
+    play_lines: list[str],
+) -> list[TimelineBlock]:
+    """
+    Classify already-cleaned MLB play lines into timeline blocks.
 
-    cleaned = clean_mlb_text(raw_text)
+    Used by Gameday text cleaning and StatsAPI JSON extraction so runner-only
+    events stay separated from plate appearances.
+    """
 
     timeline_blocks: list[TimelineBlock] = []
 
-    for block in cleaned:
+    for block in play_lines:
 
         if _CAUGHT_STEALING_RE.search(block):
             timeline_blocks.append(
@@ -130,6 +136,12 @@ def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
     return timeline_blocks
 
 
+def clean_mlb_timeline_text(raw_text: str) -> list[TimelineBlock]:
+    cleaned = clean_mlb_text(raw_text)
+    return timeline_blocks_from_mlb_play_lines(cleaned)
+
+
 __all__ = [
     "clean_mlb_timeline_text",
+    "timeline_blocks_from_mlb_play_lines",
 ]
