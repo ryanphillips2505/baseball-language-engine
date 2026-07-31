@@ -51,6 +51,13 @@ _STANDALONE_LABELS = {
     "sac fly",
 }
 
+# Video/recap captions that repeat a result already captured on the play line.
+# Example: "Colby Thomas strikes out after ABS challenge"
+_ABS_RESULT_CAPTION_RE = re.compile(
+    r"^.+\bstrikes out after ABS\b",
+    re.I,
+)
+
 
 def clean_mlb_text(raw_text: str) -> list[str]:
     cleaned_blocks: list[str] = []
@@ -69,6 +76,9 @@ def clean_mlb_text(raw_text: str) -> list[str]:
 
         # Reject MLB video captions
         if _HIGHLIGHT_CAPTION_RE.match(line):
+            continue
+
+        if _ABS_RESULT_CAPTION_RE.match(line):
             continue
 
         # Reject standalone event labels

@@ -31,7 +31,7 @@ _ADMIN_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     ),
     (
         re.compile(
-            r"^(Ball|Strike)\s+\d+\s+(overturned|confirmed)\s+after ABS\b",
+            r"^(Ball|Strike)\s+\d+\s+(?:is\s+)?(overturned|confirmed)\s+after ABS\b",
             re.I,
         ),
         "abs_review",
