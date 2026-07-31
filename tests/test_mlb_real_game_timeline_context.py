@@ -19,6 +19,7 @@ def test_real_mlb_game_timeline_event_context():
         block.metadata["game_event"]
         for block in game.timeline.blocks
         if block.block_type == TimelineBlockType.GAME_EVENT
+        and not (block.metadata or {}).get("administrative")
     ]
 
     assert len(events) == 3
