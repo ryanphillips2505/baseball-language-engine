@@ -16,6 +16,13 @@ RECONCILED_FIXTURES = [
     "redsox_athletics_2026_07_30",
 ]
 
+HIT_EVENTS = {
+    EventType.SINGLE,
+    EventType.DOUBLE,
+    EventType.TRIPLE,
+    EventType.HOME_RUN,
+}
+
 
 def _counts(stem: str) -> dict[str, int]:
     raw = Path(f"samples/mlb/validation/{stem}.txt").read_text(encoding="utf-8")
@@ -25,6 +32,8 @@ def _counts(stem: str) -> dict[str, int]:
     counts = {
         "K": 0,
         "BB": 0,
+        "IBB": 0,
+        "H": 0,
         "HR": 0,
         "2B": 0,
         "3B": 0,
@@ -32,6 +41,7 @@ def _counts(stem: str) -> dict[str, int]:
         "SAC_BUNT": 0,
         "SAC_FLY": 0,
         "SB": 0,
+        "CS": 0,
     }
 
     for pa in game.plate_appearances:
@@ -44,14 +54,19 @@ def _counts(stem: str) -> dict[str, int]:
             EventType.DROPPED_THIRD_STRIKE_OUT,
         }:
             counts["K"] += 1
-        elif event in {EventType.WALK, EventType.INTENTIONAL_WALK}:
+        elif event == EventType.INTENTIONAL_WALK:
             counts["BB"] += 1
-        elif event == EventType.HOME_RUN:
-            counts["HR"] += 1
-        elif event == EventType.DOUBLE:
-            counts["2B"] += 1
-        elif event == EventType.TRIPLE:
-            counts["3B"] += 1
+            counts["IBB"] += 1
+        elif event == EventType.WALK:
+            counts["BB"] += 1
+        elif event in HIT_EVENTS:
+            counts["H"] += 1
+            if event == EventType.HOME_RUN:
+                counts["HR"] += 1
+            elif event == EventType.DOUBLE:
+                counts["2B"] += 1
+            elif event == EventType.TRIPLE:
+                counts["3B"] += 1
         elif event == EventType.HIT_BY_PITCH:
             counts["HBP"] += 1
         elif event == EventType.SAC_BUNT:
@@ -59,13 +74,17 @@ def _counts(stem: str) -> dict[str, int]:
         elif event == EventType.SAC_FLY:
             counts["SAC_FLY"] += 1
 
-    counts["SB"] = sum(
-        1
-        for block in blocks
-        if isinstance(block, GameEventBlock)
-        and block.event_type == "stolen_base"
-        and not (block.metadata or {}).get("administrative")
-    )
+    def _runner_count(event_type: str) -> int:
+        return sum(
+            1
+            for block in blocks
+            if isinstance(block, GameEventBlock)
+            and block.event_type == event_type
+            and not (block.metadata or {}).get("administrative")
+        )
+
+    counts["SB"] = _runner_count("stolen_base")
+    counts["CS"] = _runner_count("caught_stealing")
     return counts
 
 
@@ -83,6 +102,8 @@ def _box_totals(stem: str) -> dict[str, int]:
     return {
         "K": total("strikeOuts"),
         "BB": total("baseOnBalls"),
+        "IBB": total("intentionalWalks"),
+        "H": total("hits"),
         "HR": total("homeRuns"),
         "2B": total("doubles"),
         "3B": total("triples"),
@@ -90,6 +111,7 @@ def _box_totals(stem: str) -> dict[str, int]:
         "SAC_BUNT": total("sacBunts"),
         "SAC_FLY": total("sacFlies"),
         "SB": total("stolenBases"),
+        "CS": total("caughtStealing"),
     }
 
 
@@ -97,7 +119,7 @@ def test_gameday_validation_corpus_boxscore_reconciles():
     """
     Scoped claim: on the three fully pasted 2026-07-30 Gameday fixtures,
     BLE plate-appearance / runner totals match StatsAPI team batting box scores
-    for K, BB(+IBB), HR, 2B, 3B, HBP, sac bunts, sac flies, and SB.
+    for K, BB(+IBB), IBB, H, HR, 2B, 3B, HBP, sac bunts, sac flies, SB, and CS.
     """
 
     matched_keys = 0
@@ -113,6 +135,6 @@ def test_gameday_validation_corpus_boxscore_reconciles():
             )
             matched_keys += 1
 
-    # 3 games × 9 keys
-    assert matched_keys == 27
-    assert total_keys == 27
+    # 3 games × 12 keys
+    assert matched_keys == 36
+    assert total_keys == 36

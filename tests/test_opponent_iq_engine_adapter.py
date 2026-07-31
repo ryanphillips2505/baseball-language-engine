@@ -16,6 +16,7 @@ def test_process_raw_text_to_opponent_iq_stats():
     assert "John Smith" in stats
     assert stats["John Smith"]["BIP"] == 1
     assert stats["John Smith"]["CF"] == 1
+    assert stats["John Smith"]["1B"] == 1
 
 
 def test_process_raw_text_to_opponent_iq_game_returns_legacy_contract():
@@ -30,6 +31,8 @@ def test_process_raw_text_to_opponent_iq_game_returns_legacy_contract():
     assert "John Smith" in game_players
     assert game_players["John Smith"]["BIP"] == 1
     assert game_players["John Smith"]["CF"] == 1
+    assert game_players["John Smith"]["1B"] == 1
 
     assert game_team["BIP"] == 1
     assert game_team["CF"] == 1
+    assert game_team["1B"] == 1

@@ -6,7 +6,7 @@ TOP_LEVEL_LOCATION_OUTPUT_MAP = {
     "LOC_CF": "CF",
     "LOC_RF": "RF",
     "LOC_SS": "SS",
-    "LOC_1B": "1B",
+    # LOC_1B is folded into overloaded hitting["1B"] below (same pattern as 2B/3B).
     "LOC_P": "P",
     "LOC_C": "C",
 }
@@ -70,8 +70,10 @@ def adapt_player_stats_to_opponent_iq(
         hitting[key] = player_stats.get(key, 0)
 
     # Legacy Opponent IQ overloads these keys:
+    # 1B = singles + balls hit to first base
     # 2B = doubles + balls hit to second base
     # 3B = triples + balls hit to third base
+    hitting["1B"] = player_stats.get("1B", 0) + player_stats.get("LOC_1B", 0)
     hitting["2B"] = player_stats.get("2B", 0) + player_stats.get("LOC_2B", 0)
     hitting["3B"] = player_stats.get("3B", 0) + player_stats.get("LOC_3B", 0)
 
