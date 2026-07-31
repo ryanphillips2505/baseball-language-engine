@@ -85,7 +85,7 @@ def test_red_sox_angels_fixture_quarantines_admin_without_changing_pa_count():
     ]
 
     assert len(admin_blocks) == 18
-    assert len(pa_blocks) == 73
+    assert len(pa_blocks) == 74
     assert [block.event_type for block in runner_blocks] == [
         "stolen_base",
         "wild_pitch",
@@ -93,7 +93,7 @@ def test_red_sox_angels_fixture_quarantines_admin_without_changing_pa_count():
     ]
 
     game = process_game(raw)
-    assert len(game.plate_appearances) == 73
+    assert len(game.plate_appearances) == 74
     assert not any(
         pa.batter_name and "Pitching Change" in pa.batter_name
         for pa in game.plate_appearances

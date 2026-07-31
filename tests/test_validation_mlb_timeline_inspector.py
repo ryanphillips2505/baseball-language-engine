@@ -9,8 +9,8 @@ def test_mlb_inspector_uses_timeline_events_without_counting_them_as_plate_appea
 
     assert data["source"] == "mlb"
     # Includes sac-bunt ROE plus quarantined admin/substitution timeline events.
-    assert data["timeline_count"] == 94
-    assert data["plate_appearance_count"] == 73
+    assert data["timeline_count"] == 95
+    assert data["plate_appearance_count"] == 74
 
     events = [
         event

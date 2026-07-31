@@ -222,7 +222,7 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     if " caught stealing " in f" {text} ":
         events.append(DetectedEvent(event_type=EventType.CAUGHT_STEALING))
 
-    if " picked off " in f" {text} ":
+    if " picked off " in f" {text} " or " picks off " in f" {text} ":
         events.append(DetectedEvent(event_type=EventType.PICKOFF))
 
     if " out advancing to " in text:
