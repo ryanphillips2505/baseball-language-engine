@@ -8,8 +8,9 @@ def test_mlb_inspector_uses_timeline_events_without_counting_them_as_plate_appea
     )
 
     assert data["source"] == "mlb"
-    assert data["timeline_count"] == 75
-    assert data["plate_appearance_count"] == 72
+    # Includes the Jarren Duran sacrifice-bunt ROE line preserved by the MLB cleaner.
+    assert data["timeline_count"] == 76
+    assert data["plate_appearance_count"] == 73
 
     events = data["timeline_game_events"]
 
