@@ -1,0 +1,46 @@
+{
+  "gamePk": 824974,
+  "source": "statsapi.mlb.com live feed boxscore",
+  "teams": {
+    "away": "Boston Red Sox",
+    "home": "Athletics"
+  },
+  "runs": {
+    "away": 5,
+    "home": 4
+  },
+  "team_batting": {
+    "away": {
+      "strikeOuts": 9,
+      "baseOnBalls": 2,
+      "intentionalWalks": 0,
+      "hitByPitch": 1,
+      "homeRuns": 2,
+      "doubles": 1,
+      "triples": 0,
+      "hits": 8,
+      "atBats": 33,
+      "rbi": 5,
+      "stolenBases": 1,
+      "caughtStealing": 0,
+      "sacBunts": 1,
+      "sacFlies": 0
+    },
+    "home": {
+      "strikeOuts": 8,
+      "baseOnBalls": 2,
+      "intentionalWalks": 0,
+      "hitByPitch": 0,
+      "homeRuns": 0,
+      "doubles": 5,
+      "triples": 0,
+      "hits": 9,
+      "atBats": 34,
+      "rbi": 4,
+      "stolenBases": 0,
+      "caughtStealing": 0,
+      "sacBunts": 0,
+      "sacFlies": 1
+    }
+  }
+}

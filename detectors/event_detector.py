@@ -155,8 +155,18 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     # REACH EVENTS
     #
 
-    if " walks" in text:
-        events.append(DetectedEvent(event_type=EventType.WALK))
+    # Intentional walks must win over generic walk wording (" walked").
+    if "intentionally walk" in text:
+        events.append(DetectedEvent(event_type=EventType.INTENTIONAL_WALK))
+    else:
+        if " walks" in text:
+            events.append(DetectedEvent(event_type=EventType.WALK))
+
+        if " is walked" in text:
+            events.append(DetectedEvent(event_type=EventType.WALK))
+
+        if " walked" in text:
+            events.append(DetectedEvent(event_type=EventType.WALK))
 
     if " hit by pitch" in text:
         events.append(DetectedEvent(event_type=EventType.HIT_BY_PITCH))
@@ -172,17 +182,12 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
 
     if "reaches on a missed catch error" in text:
         events.append(DetectedEvent(event_type=EventType.ERROR))
-    if " is walked" in text:
-        events.append(DetectedEvent(event_type=EventType.WALK))
 
     if " is hit by the pitch" in text:
         events.append(DetectedEvent(event_type=EventType.HIT_BY_PITCH))
 
     if "reaches base due to an error" in text:
         events.append(DetectedEvent(event_type=EventType.ERROR))
-
-    if " walked" in text:
-        events.append(DetectedEvent(event_type=EventType.WALK))
     
     #
     # SPECIAL EVENTS
@@ -248,6 +253,20 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
         }:
             event.make_primary()
             break
-    
+
+    # Attach secondary error language after primary selection so hits / FC
+    # remain primary when a fielding/throwing error is also mentioned.
+    if (
+        "fielding error by" in text
+        or "throwing error by" in text
+        or "missed catch error by" in text
+        or " on a throwing error" in text
+        or " on a fielding error" in text
+    ):
+        if not any(event.event_type == EventType.ERROR for event in events):
+            events.append(
+                DetectedEvent(event_type=EventType.ERROR, is_primary=False)
+            )
+
     return events
 

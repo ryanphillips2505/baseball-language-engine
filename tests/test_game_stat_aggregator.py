@@ -78,6 +78,24 @@ def test_aggregate_game_stats_tracks_hbp():
     assert stats["John Smith"]["HBP"] == 1
 
 
+def test_aggregate_game_stats_tracks_single():
+    game = Game(
+        plate_appearances=[
+            PlateAppearance(
+                batter_name="John Smith",
+                baseball_event=BaseballEvent(
+                    primary_event=EventType.SINGLE,
+                    secondary_events=[],
+                ),
+            )
+        ]
+    )
+
+    stats = aggregate_game_stats(game)
+
+    assert stats["John Smith"]["1B"] == 1
+
+
 def test_aggregate_game_stats_tracks_double():
     game = Game(
         plate_appearances=[

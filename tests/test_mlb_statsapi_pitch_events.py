@@ -67,18 +67,46 @@ def test_extract_mlb_statsapi_pitches_preserves_type_velocity_and_result():
 
 
 def test_process_game_attaches_statsapi_pitches_to_plate_appearances():
+    from models.pitch_decision import PitchDecision, PitchOutcome
+
     game = process_game(ANGELS_ATHLETICS.read_text(encoding="utf-8"))
 
-    matching = [
+    # Raw PitchEvents stay on game.pitch_events with type/velocity.
+    schanuel_cutter = [
+        pitch
+        for pitch in game.pitch_events
+        if pitch.batter_name == "Nolan Schanuel"
+        and pitch.pitcher_name == "J.T. Ginn"
+        and pitch.pitch_type == "Cutter"
+        and pitch.velocity_mph == 89.5
+    ]
+    assert schanuel_cutter
+    assert schanuel_cutter[0].result == "Foul"
+
+    terminal_cs = [
+        pitch
+        for pitch in game.pitch_events
+        if pitch.batter_name == "Nolan Schanuel"
+        and pitch.pitcher_name == "J.T. Ginn"
+        and pitch.result == "Called Strike"
+        and pitch.terminal_pitch
+    ]
+    assert terminal_cs
+    assert terminal_cs[0].pitch_type == "Sinker"
+    assert terminal_cs[0].velocity_mph == 94.4
+
+    # Plate appearances expose PitchDecisions for swing reports.
+    matching_pas = [
         pa
         for pa in game.plate_appearances
         if pa.batter_name == "Nolan Schanuel"
         and pa.pitches
-        and pa.pitches[-1].result == "Called Strike"
+        and pa.pitches[-1] == PitchDecision("1-2", PitchOutcome.CALLED_STRIKE)
     ]
-    assert matching
-    assert matching[0].pitches[0].pitch_type == "Cutter"
-    assert matching[0].pitches[0].velocity_mph == 89.5
+    assert matching_pas
+    assert matching_pas[0].pitches[0] == PitchDecision(
+        "0-0", PitchOutcome.FOUL
+    )
 
 
 def test_statsapi_fixture_pitch_totals_match_is_pitch_events():
@@ -91,11 +119,13 @@ def test_statsapi_fixture_pitch_totals_match_is_pitch_events():
     )
 
     game = process_game(ANGELS_ATHLETICS.read_text(encoding="utf-8"))
-    pa_pitches = sum(len(pa.pitches) for pa in game.plate_appearances)
-
-    assert pa_pitches == expected_pitches
+    # Raw pitch events preserve every isPitch playEvent.
     assert len(game.pitch_events) == expected_pitches
     assert expected_pitches == 322
+
+    # Swing decisions skip HBP (1 in this fixture).
+    pa_decisions = sum(len(pa.pitches) for pa in game.plate_appearances)
+    assert pa_decisions == expected_pitches - 1
 
 
 def test_statsapi_preserves_pitches_on_runner_only_plays():
@@ -112,11 +142,11 @@ def test_statsapi_preserves_pitches_on_runner_only_plays():
     )
 
     game = process_game(raw)
-    pa_pitches = sum(len(pa.pitches) for pa in game.plate_appearances)
+    pa_decisions = sum(len(pa.pitches) for pa in game.plate_appearances)
 
     # Caught-stealing-home is a runner-only timeline event but still carries
-    # the in-progress batter's pitch sequence in StatsAPI.
-    assert pa_pitches < expected_pitches
+    # the in-progress batter's pitch sequence in StatsAPI game.pitch_events.
+    assert pa_decisions < expected_pitches
     assert len(game.pitch_events) == expected_pitches
     assert expected_pitches == 279
 

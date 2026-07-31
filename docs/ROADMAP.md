@@ -11,10 +11,10 @@ PHASE 4
 ✓ Report translators
 
 PHASE 5
-→ Language coverage expansion
+→ Language coverage expansion (MLB Gameday + StatsAPI corpus in progress; see docs/mlb_coverage_matrix.md)
 
 PHASE 6
 → Additional source integrations
 
 PHASE 7
-→ Direct Opponent IQ ingestion
+→ Direct Opponent IQ ingestion (pin BLE after report-translators-phase merge)
