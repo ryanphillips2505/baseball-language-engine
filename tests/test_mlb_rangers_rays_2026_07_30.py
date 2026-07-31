@@ -85,7 +85,7 @@ def test_rangers_rays_gameday_core_understanding():
         for pa in game.plate_appearances
         if pa.batter_name == "Junior Caminero"
         and pa.baseball_event
-        and pa.baseball_event.primary_event == EventType.WALK
+        and pa.baseball_event.primary_event == EventType.INTENTIONAL_WALK
     ]
     assert len(caminero_ibb) == 1
 

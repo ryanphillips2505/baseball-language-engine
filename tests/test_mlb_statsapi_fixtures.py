@@ -129,7 +129,7 @@ def test_mlb_statsapi_team_boxscore_strikeouts_and_walks_reconcile():
 
     Definitions used:
     - K = strikeout_looking + strikeout_swinging + dropped-third-strike outs
-    - BB = walk (includes intentional walk wording currently classified as walk)
+    - BB = walk + intentional_walk
     """
 
     for stem in FIXTURES:
@@ -153,7 +153,7 @@ def test_mlb_statsapi_team_boxscore_strikeouts_and_walks_reconcile():
                 EventType.DROPPED_THIRD_STRIKE_OUT,
             }:
                 k += 1
-            elif event == EventType.WALK:
+            elif event in {EventType.WALK, EventType.INTENTIONAL_WALK}:
                 bb += 1
             elif event == EventType.HOME_RUN:
                 hr += 1

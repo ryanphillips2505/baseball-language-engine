@@ -22,6 +22,7 @@ class EventType(str, Enum):
     DROPPED_THIRD_STRIKE_OUT = "dropped_third_strike_out"
 
     WALK = "walk"
+    INTENTIONAL_WALK = "intentional_walk"
     HIT_BY_PITCH = "hit_by_pitch"
     ERROR = "error"
 

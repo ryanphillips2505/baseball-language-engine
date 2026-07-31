@@ -1,0 +1,46 @@
+{
+  "gamePk": 822946,
+  "source": "statsapi.mlb.com live feed boxscore",
+  "teams": {
+    "away": "Texas Rangers",
+    "home": "Tampa Bay Rays"
+  },
+  "runs": {
+    "away": 2,
+    "home": 3
+  },
+  "team_batting": {
+    "away": {
+      "strikeOuts": 13,
+      "baseOnBalls": 7,
+      "intentionalWalks": 0,
+      "hitByPitch": 1,
+      "homeRuns": 0,
+      "doubles": 1,
+      "triples": 0,
+      "hits": 2,
+      "atBats": 30,
+      "rbi": 2,
+      "stolenBases": 2,
+      "caughtStealing": 0,
+      "sacBunts": 0,
+      "sacFlies": 0
+    },
+    "home": {
+      "strikeOuts": 5,
+      "baseOnBalls": 2,
+      "intentionalWalks": 1,
+      "hitByPitch": 0,
+      "homeRuns": 2,
+      "doubles": 1,
+      "triples": 0,
+      "hits": 9,
+      "atBats": 31,
+      "rbi": 3,
+      "stolenBases": 1,
+      "caughtStealing": 0,
+      "sacBunts": 0,
+      "sacFlies": 0
+    }
+  }
+}

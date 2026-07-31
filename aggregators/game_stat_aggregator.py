@@ -178,7 +178,7 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
                 }:
                     stats[player]["K"] += 1
 
-                elif event == EventType.WALK:
+                elif event in {EventType.WALK, EventType.INTENTIONAL_WALK}:
                     stats[player]["BB"] += 1
 
                 elif event == EventType.HIT_BY_PITCH:

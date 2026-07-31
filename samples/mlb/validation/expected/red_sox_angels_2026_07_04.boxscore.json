@@ -1,0 +1,46 @@
+{
+  "gamePk": 824012,
+  "source": "statsapi.mlb.com live feed boxscore",
+  "teams": {
+    "away": "Boston Red Sox",
+    "home": "Los Angeles Angels"
+  },
+  "runs": {
+    "away": 8,
+    "home": 1
+  },
+  "team_batting": {
+    "away": {
+      "strikeOuts": 6,
+      "baseOnBalls": 6,
+      "intentionalWalks": 0,
+      "hitByPitch": 2,
+      "homeRuns": 2,
+      "doubles": 3,
+      "triples": 0,
+      "hits": 7,
+      "atBats": 35,
+      "rbi": 7,
+      "stolenBases": 2,
+      "caughtStealing": 0,
+      "sacBunts": 0,
+      "sacFlies": 0
+    },
+    "home": {
+      "strikeOuts": 9,
+      "baseOnBalls": 3,
+      "intentionalWalks": 0,
+      "hitByPitch": 0,
+      "homeRuns": 1,
+      "doubles": 0,
+      "triples": 0,
+      "hits": 4,
+      "atBats": 28,
+      "rbi": 1,
+      "stolenBases": 0,
+      "caughtStealing": 0,
+      "sacBunts": 0,
+      "sacFlies": 0
+    }
+  }
+}
