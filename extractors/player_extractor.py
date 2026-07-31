@@ -20,6 +20,16 @@ _RUNNER_ONLY_ACTION_RE = re.compile(
     re.I,
 )
 
+# MLB challenge wrappers put the challenger before the final call.
+# Example:
+# Shea Langeliers challenged (pitch result), call on the field was
+# overturned: Nolan Schanuel called out on strikes.
+_CHALLENGE_FINAL_CALL_RE = re.compile(
+    r"challenged\s*\([^)]*\)\s*,\s*call on the field was "
+    r"(?:overturned|confirmed|upheld):\s*(.+)$",
+    re.I,
+)
+
 
 def _looks_like_pitch_sequence_runner_line(text: str) -> bool:
     """
@@ -48,9 +58,14 @@ def extract_batter_name(pa_block: str) -> str | None:
     if _looks_like_pitch_sequence_runner_line(text):
         return None
 
+    challenge_match = _CHALLENGE_FINAL_CALL_RE.search(text)
+    if challenge_match:
+        text = challenge_match.group(1).strip()
+
     action_words = [
         " pops into",
         " hits an inside the park home run",
+        " hits a ground-rule double",
         " hits a hard ground ball",
         " hits a hard fly ball",
         " hits a hard line drive",

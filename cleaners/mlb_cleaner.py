@@ -6,6 +6,7 @@ import re
 _BASEBALL_ACTION_RE = re.compile(
     r"\b("
     r"singles|doubles|triples|homers|"
+    r"hits a ground-rule double|ground-rule double|"
     r"walks|intentionally walks|"
     r"strikes out|called out on strikes|strikes out on a foul tip|"
     r"hit by pitch|"

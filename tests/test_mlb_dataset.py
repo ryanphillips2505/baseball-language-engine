@@ -22,6 +22,6 @@ def test_mlb_dataset_regression():
         valid_events.append(baseball_event)
 
     # Includes strikeout-swinging lines previously dropped by the highlight-caption
-    # false positive ("strikes out swinging." matched as a video caption).
-    assert len(cleaned_blocks) == 85
-    assert len(valid_events) == 85
+    # false positive, plus ground-rule double wording kept by the MLB cleaner.
+    assert len(cleaned_blocks) == 86
+    assert len(valid_events) == 86
