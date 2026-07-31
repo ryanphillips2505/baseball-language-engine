@@ -23,7 +23,12 @@ _WILD_PITCH_RE = re.compile(
 )
 
 _PICKED_OFF_RE = re.compile(
-    r"\bpicked off\b",
+    r"\b(?:picked off|picks off)\b",
+    re.I,
+)
+
+_PICKOFF_THROWING_ERROR_RE = re.compile(
+    r"\bthrowing error by\b.*\bpickoff attempt\b",
     re.I,
 )
 
@@ -82,6 +87,16 @@ def timeline_blocks_from_mlb_play_lines(
                 GameEventBlock(
                     raw_text=block,
                     event_type="wild_pitch",
+                    source="mlb",
+                )
+            )
+            continue
+
+        if _PICKOFF_THROWING_ERROR_RE.search(block):
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=block,
+                    event_type="pickoff_error",
                     source="mlb",
                 )
             )

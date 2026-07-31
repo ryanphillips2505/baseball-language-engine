@@ -21,9 +21,9 @@ def test_real_mlb_game_timeline_separates_runner_only_events():
         if block.block_type == TimelineBlockType.GAME_EVENT
     ]
 
-    # Includes sac-bunt ROE preservation plus quarantined admin/substitution lines.
-    assert len(game.timeline) == 94
-    assert len(game.plate_appearances) == 73
+    # Includes sac-bunt ROE, lines-into DP recovery, and quarantined admin lines.
+    assert len(game.timeline) == 95
+    assert len(game.plate_appearances) == 74
 
     runner_events = [
         event

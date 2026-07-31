@@ -11,13 +11,13 @@ _BASEBALL_ACTION_RE = re.compile(
     r"strikes out|called out on strikes|strikes out on a foul tip|"
     r"hit by pitch|"
     r"grounds out|grounds into|"
-    r"flies out|lines out|pops out|"
+    r"flies out|lines out|lines into|pops out|pops into|"
     r"reaches on|"
-    r"out on a sacrifice fly|"
+    r"out on a sacrifice fly|out on a sacrifice bunt|"
     r"hits a sacrifice bunt|sacrifice bunt|"
     r"wild pitch by pitcher|passed ball by catcher|balk by pitcher|defensive indifference|throwing error by|"
     r"starts inning at 2nd base|"
-    r"steals|caught stealing|picked off"
+    r"steals|caught stealing|picked off|picks off"
     r")\b",
     re.I,
 )
