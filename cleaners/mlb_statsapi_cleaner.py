@@ -4,7 +4,8 @@ import json
 from typing import Any
 
 from cleaners.mlb_timeline_cleaner import timeline_blocks_from_mlb_play_lines
-from models.timeline_block import TimelineBlock
+from extractors.mlb_statsapi_pitch_extractor import extract_mlb_statsapi_pitches
+from models.timeline_block import GameEventBlock, PlateAppearanceBlock, TimelineBlock
 
 
 def looks_like_mlb_statsapi_live_feed(raw_text: str) -> bool:
@@ -97,11 +98,68 @@ def clean_mlb_statsapi_timeline_text(raw_text: str) -> list[TimelineBlock]:
     Convert StatsAPI live feed JSON into MLB timeline blocks.
 
     StatsAPI descriptions are already official play language, so they are not
-    re-filtered through the Gameday page cleaner.
+    re-filtered through the Gameday page cleaner. Pitch-level playEvents are
+    attached on plate-appearance block metadata when present.
     """
 
-    play_lines = clean_mlb_statsapi_text(raw_text)
-    return timeline_blocks_from_mlb_play_lines(play_lines)
+    payload = _load_statsapi_live_feed(raw_text)
+    all_plays = payload["liveData"]["plays"]["allPlays"]
+
+    timeline_blocks: list[TimelineBlock] = []
+
+    for play in all_plays:
+        if not isinstance(play, dict):
+            continue
+
+        result = play.get("result") or {}
+        description = result.get("description")
+        if not isinstance(description, str) or not description.strip():
+            continue
+
+        description = description.strip()
+        classified = timeline_blocks_from_mlb_play_lines([description])
+        if not classified:
+            continue
+
+        block = classified[0]
+        matchup = play.get("matchup") or {}
+        batter = (matchup.get("batter") or {}).get("fullName")
+        pitcher = (matchup.get("pitcher") or {}).get("fullName")
+        about = play.get("about") or {}
+
+        pitches = extract_mlb_statsapi_pitches(play)
+        metadata = {
+            **(block.metadata or {}),
+            "statsapi_at_bat_index": about.get("atBatIndex"),
+            "statsapi_batter": batter if isinstance(batter, str) else None,
+            "statsapi_pitcher": pitcher if isinstance(pitcher, str) else None,
+            "statsapi_pitches": pitches,
+        }
+
+        if isinstance(block, PlateAppearanceBlock):
+            timeline_blocks.append(
+                PlateAppearanceBlock(
+                    raw_text=description,
+                    source="mlb",
+                    metadata=metadata,
+                )
+            )
+            continue
+
+        if isinstance(block, GameEventBlock):
+            timeline_blocks.append(
+                GameEventBlock(
+                    raw_text=description,
+                    event_type=block.event_type,
+                    source="mlb",
+                    metadata=metadata,
+                )
+            )
+            continue
+
+        timeline_blocks.append(block)
+
+    return timeline_blocks
 
 
 __all__ = [
