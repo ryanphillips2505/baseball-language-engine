@@ -166,6 +166,12 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
 
     if "reaches on a fielding error" in text:
         events.append(DetectedEvent(event_type=EventType.ERROR))
+
+    if "reaches on a throwing error" in text:
+        events.append(DetectedEvent(event_type=EventType.ERROR))
+
+    if "reaches on a missed catch error" in text:
+        events.append(DetectedEvent(event_type=EventType.ERROR))
     if " is walked" in text:
         events.append(DetectedEvent(event_type=EventType.WALK))
 

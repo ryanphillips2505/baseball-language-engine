@@ -23,9 +23,13 @@ _BASEBALL_ACTION_RE = re.compile(
 # MLB highlight captions:
 # "Sonny Gray strikes out Brandon Nimmo"
 # "Jack Leiter strikes out Jarren Duran"
+#
+# The batter token after "strikes out" must start with a real capital letter.
+# With a fully case-insensitive pattern, "strikes out swinging." was falsely
+# rejected as a caption because "swinging" matched the batter-name group.
 _HIGHLIGHT_CAPTION_RE = re.compile(
     r"^[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)+\s+strikes out\s+"
-    r"[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)*$",
+    r"(?-i:[A-Z])[A-Za-z'.-]+(?:\s+(?-i:[A-Z])[A-Za-z'.-]+)*\.?$",
     re.I,
 )
 
