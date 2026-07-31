@@ -21,8 +21,9 @@ def test_real_mlb_game_timeline_separates_runner_only_events():
         if block.block_type == TimelineBlockType.GAME_EVENT
     ]
 
-    assert len(game.timeline) == 75
-    assert len(game.plate_appearances) == 72
+    # Includes the Jarren Duran sacrifice-bunt ROE line preserved by the MLB cleaner.
+    assert len(game.timeline) == 76
+    assert len(game.plate_appearances) == 73
 
     assert [event.event_type for event in events] == [
         "stolen_base",
