@@ -3,9 +3,33 @@ from __future__ import annotations
 import json
 from typing import Any
 
+from cleaners.mlb_admin_classifier import classify_mlb_admin_line
 from cleaners.mlb_timeline_cleaner import timeline_blocks_from_mlb_play_lines
 from extractors.mlb_statsapi_pitch_extractor import extract_mlb_statsapi_pitches
 from models.timeline_block import GameEventBlock, PlateAppearanceBlock, TimelineBlock
+
+
+# StatsAPI action eventTypes that are administrative / non-play.
+_ADMIN_EVENT_TYPES = {
+    "pitching_substitution": "pitching_change",
+    "offensive_substitution": "offensive_substitution",
+    "defensive_substitution": "defensive_substitution",
+    "defensive_switch": "defensive_switch",
+    "game_advisory": "game_advisory",
+    "batter_timeout": "batter_timeout",
+    "mound_visit": "mound_visit",
+    "stepoff": "pitcher_step_off",
+}
+
+# Runner / non-PA baseball events nested inside an at-bat's playEvents.
+_RUNNER_EVENT_TYPE_PREFIXES = (
+    "stolen_base",
+    "caught_stealing",
+    "wild_pitch",
+    "passed_ball",
+    "balk",
+    "defensive_indifference",
+)
 
 
 def looks_like_mlb_statsapi_live_feed(raw_text: str) -> bool:
@@ -93,13 +117,119 @@ def clean_mlb_statsapi_text(raw_text: str) -> list[str]:
     return extract_mlb_statsapi_play_descriptions(raw_text)
 
 
+def _is_runner_event_type(event_type: str | None) -> bool:
+    if not event_type:
+        return False
+    return any(
+        event_type == prefix or event_type.startswith(f"{prefix}_")
+        for prefix in _RUNNER_EVENT_TYPE_PREFIXES
+    )
+
+
+def _admin_block_from_action(
+    description: str,
+    *,
+    event_type: str,
+    statsapi_event_type: str | None,
+) -> GameEventBlock:
+    return GameEventBlock(
+        raw_text=description,
+        event_type=event_type,
+        source="mlb",
+        metadata={
+            "administrative": True,
+            "statsapi_event_type": statsapi_event_type,
+        },
+    )
+
+
+def _blocks_from_statsapi_play_action(
+    event: dict[str, Any],
+) -> list[TimelineBlock]:
+    """
+    Convert one non-pitch StatsAPI playEvent into timeline blocks.
+
+    Substitutions and other admin actions are quarantined. Nested stolen bases,
+    wild pitches, and caught-stealings become runner GameEventBlocks. Pitch
+    events are ignored here (handled by the pitch extractor).
+    """
+
+    if event.get("isPitch"):
+        return []
+
+    details = event.get("details") or {}
+    if not isinstance(details, dict):
+        return []
+
+    description = details.get("description")
+    if not isinstance(description, str) or not description.strip():
+        return []
+
+    description = description.strip()
+    statsapi_event_type = details.get("eventType")
+    if not isinstance(statsapi_event_type, str):
+        statsapi_event_type = None
+
+    admin_type = classify_mlb_admin_line(description)
+    if admin_type is None and statsapi_event_type in _ADMIN_EVENT_TYPES:
+        admin_type = _ADMIN_EVENT_TYPES[statsapi_event_type]
+
+    if admin_type is not None:
+        return [
+            _admin_block_from_action(
+                description,
+                event_type=admin_type,
+                statsapi_event_type=statsapi_event_type,
+            )
+        ]
+
+    # Pickoff attempts are admin; successful pickoffs are runner game events.
+    if statsapi_event_type == "pickoff":
+        if "attempt" in description.lower():
+            return [
+                _admin_block_from_action(
+                    description,
+                    event_type="pickoff_attempt",
+                    statsapi_event_type=statsapi_event_type,
+                )
+            ]
+        statsapi_event_type_for_runner = "pickoff"
+    else:
+        statsapi_event_type_for_runner = statsapi_event_type
+
+    if (
+        _is_runner_event_type(statsapi_event_type_for_runner)
+        or statsapi_event_type_for_runner == "pickoff"
+    ):
+        classified = timeline_blocks_from_mlb_play_lines([description])
+        blocks: list[TimelineBlock] = []
+        for block in classified:
+            if isinstance(block, GameEventBlock):
+                blocks.append(
+                    GameEventBlock(
+                        raw_text=block.raw_text,
+                        event_type=block.event_type,
+                        source="mlb",
+                        metadata={
+                            **(block.metadata or {}),
+                            "statsapi_event_type": statsapi_event_type,
+                        },
+                    )
+                )
+        return blocks
+
+    return []
+
+
 def clean_mlb_statsapi_timeline_text(raw_text: str) -> list[TimelineBlock]:
     """
     Convert StatsAPI live feed JSON into MLB timeline blocks.
 
     StatsAPI descriptions are already official play language, so they are not
-    re-filtered through the Gameday page cleaner. Pitch-level playEvents are
-    attached on plate-appearance block metadata when present.
+    re-filtered through the Gameday page cleaner. Non-pitch playEvents nested
+    inside an at-bat (substitutions, stolen bases, wild pitches, etc.) are
+    emitted in chronological order before the result play. Pitch-level
+    playEvents are attached on the result block metadata when present.
     """
 
     payload = _load_statsapi_live_feed(raw_text)
@@ -117,6 +247,11 @@ def clean_mlb_statsapi_timeline_text(raw_text: str) -> list[TimelineBlock]:
             continue
 
         description = description.strip()
+
+        for event in play.get("playEvents") or []:
+            if isinstance(event, dict):
+                timeline_blocks.extend(_blocks_from_statsapi_play_action(event))
+
         classified = timeline_blocks_from_mlb_play_lines([description])
         if not classified:
             continue

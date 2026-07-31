@@ -40,6 +40,11 @@ _ADMIN_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"^Challenging Team$", re.I), "abs_challenge"),
     (re.compile(r"^Injury Delay\b", re.I), "injury_delay"),
     (re.compile(r"^Game Advisory$", re.I), "game_advisory"),
+    (re.compile(r"^Status Change\b", re.I), "game_advisory"),
+    (re.compile(r"^Batter Timeout\b", re.I), "batter_timeout"),
+    (re.compile(r"^Mound Visit\b", re.I), "mound_visit"),
+    (re.compile(r"^Pitcher Step Off\b", re.I), "pitcher_step_off"),
+    (re.compile(r"^Pickoff Attempt\b", re.I), "pickoff_attempt"),
     (re.compile(r"^Ejection$", re.I), "ejection"),
     (re.compile(r"\bejected by\b", re.I), "ejection"),
 ]
