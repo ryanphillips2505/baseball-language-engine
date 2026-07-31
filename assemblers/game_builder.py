@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 from assemblers.game_event_builder import build_game_event
+from assemblers.pitch_decision_builder import (
+    build_pitch_decisions_from_pitch_events,
+)
 from assemblers.plate_appearance_builder import build_plate_appearance
 from assemblers.timeline_builder import build_timeline
 from models.game import Game
@@ -54,10 +57,18 @@ def build_game(
         else:
             text = block
 
+        # StatsAPI supplies PitchEvents; swing aggregators need PitchDecisions.
+        # Keep raw PitchEvents on game.pitch_events (collected above).
+        pitch_decisions = None
+        if statsapi_pitches is not None:
+            pitch_decisions = build_pitch_decisions_from_pitch_events(
+                statsapi_pitches
+            )
+
         plate_appearances.append(
             build_plate_appearance(
                 text,
-                pitches=statsapi_pitches,
+                pitches=pitch_decisions,
             )
         )
 
