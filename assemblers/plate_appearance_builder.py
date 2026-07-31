@@ -8,6 +8,7 @@ from detectors.event_detector import detect_event_types
 from extractors.pitch_token_extractor import extract_pitch_tokens
 from extractors.player_extractor import extract_batter_name
 from extractors.runner_event_extractor import extract_runner_events
+from models.pitch_event import PitchEvent
 from models.plate_appearance import PlateAppearance
 from models.types import EventType
 from translators.base_translator import detected_events_to_baseball_event
@@ -47,7 +48,10 @@ def _extract_action_text(pa_block: str) -> str:
     return lines[-1]
 
 
-def build_plate_appearance(pa_block: str) -> PlateAppearance:
+def build_plate_appearance(
+    pa_block: str,
+    pitches: list[PitchEvent] | None = None,
+) -> PlateAppearance:
     action_text = _extract_action_text(pa_block)
 
     detected_events = detect_event_types(action_text)
@@ -75,11 +79,11 @@ def build_plate_appearance(pa_block: str) -> PlateAppearance:
     if runner_events and not is_bip:
         location = None
 
-    pitch_tokens = extract_pitch_tokens(
-        str(pa_block or "").splitlines()
-    )
-
-    pitches = build_pitch_decisions(pitch_tokens)
+    if pitches is None:
+        pitch_tokens = extract_pitch_tokens(
+            str(pa_block or "").splitlines()
+        )
+        pitches = build_pitch_decisions(pitch_tokens)
 
     return PlateAppearance(
         batter_name=batter_name,
