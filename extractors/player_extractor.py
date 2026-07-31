@@ -20,13 +20,27 @@ _RUNNER_ONLY_ACTION_RE = re.compile(
     re.I,
 )
 
-# MLB challenge wrappers put the challenger before the final call.
-# Example:
+# MLB challenge / umpire-review wrappers put review context before the final call.
+# Examples:
 # Shea Langeliers challenged (pitch result), call on the field was
 # overturned: Nolan Schanuel called out on strikes.
+# Umpire reviewed (home run), call on the field was upheld:
+# Junior Caminero flies out sharply to center fielder Cam Cauley.
 _CHALLENGE_FINAL_CALL_RE = re.compile(
-    r"challenged\s*\([^)]*\)\s*,\s*call on the field was "
+    r"(?:challenged|umpire reviewed)\s*\([^)]*\)\s*,\s*call on the field was "
     r"(?:overturned|confirmed|upheld):\s*(.+)$",
+    re.I,
+)
+
+# Pitcher-subject intentional walk: "Marco Gonzales intentionally walks Junior Caminero."
+_INTENTIONAL_WALK_BATTER_RE = re.compile(
+    r"\bintentionally walks\s+([^./]+?)(?:\.|$)",
+    re.I,
+)
+
+# Batter-subject intentional walk: "John Smith is intentionally walked."
+_IS_INTENTIONALLY_WALKED_RE = re.compile(
+    r"^(.+?)\s+is intentionally walked\b",
     re.I,
 )
 
@@ -61,6 +75,15 @@ def extract_batter_name(pa_block: str) -> str | None:
     challenge_match = _CHALLENGE_FINAL_CALL_RE.search(text)
     if challenge_match:
         text = challenge_match.group(1).strip()
+
+    # Intentional walks must not treat the pitcher as the batter.
+    intentional_batter = _INTENTIONAL_WALK_BATTER_RE.search(text)
+    if intentional_batter:
+        return intentional_batter.group(1).strip()
+
+    is_intentionally_walked = _IS_INTENTIONALLY_WALKED_RE.search(text)
+    if is_intentionally_walked:
+        return is_intentionally_walked.group(1).strip()
 
     action_words = [
         " pops into",
@@ -100,7 +123,6 @@ def extract_batter_name(pa_block: str) -> str | None:
         " tripled",
         " homered",
         " walked",
-        " intentionally walks",
         " struck out",
         " grounded",
         " flied",
