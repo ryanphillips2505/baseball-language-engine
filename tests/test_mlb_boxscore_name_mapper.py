@@ -21,6 +21,11 @@ def test_parse_box_tokens_common_shapes():
     assert sogard.initials is None
     assert sogard.position == "2B"
 
+    dual = parse_box_player_token("CortesDH-P")
+    assert dual is not None
+    assert dual.last_name == "Cortes"
+    assert dual.position == "DH-P"
+
     abreu = parse_box_player_token("Abreu, WRF")
     assert abreu is not None
     assert abreu.last_name == "Abreu"

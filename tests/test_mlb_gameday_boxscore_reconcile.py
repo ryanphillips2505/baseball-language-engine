@@ -15,6 +15,7 @@ RECONCILED_FIXTURES = [
     "marlins_mets_2026_07_30",
     "redsox_athletics_2026_07_30",
     "redsox_dodgers_2026_08_02",
+    "tigers_athletics_2026_08_02",
 ]
 
 HIT_EVENTS = {
@@ -136,6 +137,6 @@ def test_gameday_validation_corpus_boxscore_reconciles():
             )
             matched_keys += 1
 
-    # 4 games × 12 keys
-    assert matched_keys == 48
-    assert total_keys == 48
+    # 5 games × 12 keys
+    assert matched_keys == 60
+    assert total_keys == 60
