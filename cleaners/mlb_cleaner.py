@@ -61,15 +61,19 @@ _STANDALONE_LABELS = {
 }
 
 # Video/recap captions that repeat a result already captured on the play line.
-# Example: "Colby Thomas strikes out after ABS challenge"
+# Examples:
+# "Colby Thomas strikes out after ABS challenge"
+# "Ben Malgeri walks after ABS Challenge"
+# "Gage Jump K's Dillon Dingler after ABS"
 _ABS_RESULT_CAPTION_RE = re.compile(
-    r"^.+\bstrikes out after ABS\b",
+    r"^.+\b(?:strikes out|called out on strikes|walks|K['’]?s)\b.+\bafter ABS\b",
     re.I,
 )
 
 # IQ Capture / Gameday highlight blurbs that reuse action verbs but are not
 # official play descriptions.
 # Example: "Freddie Freeman singles to extend hitting streak"
+# Example: "Enmanuel De Jesus strikes out Henry Bolte to end game"
 _HIGHLIGHT_NARRATIVE_RE = re.compile(
     r"\b("
     r"extend(?:s|ed|ing)?\s+hitting\s+streak|"
@@ -78,7 +82,10 @@ _HIGHLIGHT_NARRATIVE_RE = re.compile(
     r"complete\s+sweep|"
     r"drives?\s+in\b|"
     r"makes\s+(?:a\s+)?(?:slick|diving)\b|"
-    r"with\s+.+\s+bat\b"
+    r"with\s+.+\s+bat\b|"
+    r"to end(?:s|ed|ing)?(?:\s+the)?\s+game|"
+    r"nifty play|"
+    r"smooth diving"
     r")\b",
     re.I,
 )

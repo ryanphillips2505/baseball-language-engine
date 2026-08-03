@@ -1,0 +1,536 @@
+Major League Baseball
+
+Score change:Athletics 0 Tigers 11
+Tigers
+Tigers
+54 - 58
+4th AL Central
+11
+Game State Change: Final
+Final
+0
+Athletics
+Athletics
+45 - 67
+4th AL West
+2	0	0	4	0	0	0	4	1	
+0	0	0	0	0	0	0	0	0	
+11	12	0
+0	7	0
+W:
+Montero, K
+8 - 6|3.17 ERA
+L:
+Jump
+4 - 7|4.59 ERA
+Wrap
+Box
+Video
+Torres2B
+2	3	1	2	4	0	.269	.787
+DinglerDH
+5	2	2	0	0	3	.270	.848
+McGonigleSS
+4	1	0	0	2	1	.287	.824
+ValenciaC
+5	1	2	4	0	2	.452	1.404
+Torkelson1B
+5	0	2	3	0	0	.220	.738
+Lee3B
+5	0	1	1	0	0	.267	.721
+ClarkCF
+3	1	1	0	2	1	.500	1.517
+MalgeriLF
+2	1	0	0	1	0	.268	.770
+a-KeithPH
+1	0	0	0	0	0	.266	.729
+OutmanLF
+1	1	1	1	0	0	.168	.544
+McKinstryRF
+5	1	2	0	0	0	.211	.604
+Totals
+38	11	12	11	9	7		
+a-Popped out for Malgeri in the 7th.;
+BATTING
+2BTorkelson (19, Jump); Valencia 2 (3, Alvarado, Bowden).
+HROutman (5, 9th inning off Cortes, 0 on, 0 out).
+TBClark; Dingler 2; Lee; McKinstry 2; Outman 4; Torkelson 3; Torres; Valencia 4.
+RBILee (27); Outman (17); Torkelson 3 (58); Torres 2 (27); Valencia 4 (11).
+2-out RBIValencia 2; Torkelson 2.
+Runners left in scoring position, 2 outDingler; Torkelson 2; Lee; Keith.
+GIDPMcGonigle.
+Team RISP6-for-16.
+Team LOB10.
+FIELDING
+DP(Lee-McGonigle-Torkelson).
+Montero, K(W, 8-6)
+6.0	2	0	0	2	2	0	3.17
+Holton
+0.2	2	0	0	0	0	0	3.06
+Anderson, D
+1.1	1	0	0	0	2	0	4.24
+De Jesus
+1.0	2	0	0	0	3	0	3.63
+Totals
+9.0	7	0	0	2	7	0	
+Walton2B
+4	0	0	0	0	1	.288	.822
+SoderstromLF
+4	0	1	0	0	1	.242	.795
+HeimC
+3	0	1	0	1	0	.232	.722
+White3B
+4	0	0	0	0	2	.283	.623
+Butler, LRF
+3	0	1	0	0	0	.211	.633
+a-OrnelasPH
+1	0	0	0	0	1	.200	.400
+CortesDH-P
+2	0	0	0	1	0	.262	.753
+b-ServenPH
+1	0	1	0	0	0	.250	.808
+WilliamsSS
+4	0	1	0	0	1	.265	.701
+McNeil1B
+4	0	2	0	0	0	.251	.641
+BolteCF
+3	0	0	0	0	1	.253	.685
+Totals
+33	0	7	0	2	7		
+a-Struck out for Butler, L in the 9th.;
+b-Singled for Cortes in the 9th.;
+BATTING
+2BSoderstrom (24, Montero, K).
+TBButler, L; Heim; McNeil 2; Serven; Soderstrom 2; Williams.
+Runners left in scoring position, 2 outHeim; Bolte 2.
+GIDPWalton.
+Team RISP0-for-3.
+Team LOB9.
+FIELDING
+PBHeim (3).
+DP(Walton-McNeil).
+Jump(L, 4-7)
+3.2	4	6	6	6	5	0	4.59
+Alvarado
+1.1	1	0	0	0	1	0	4.72
+Harris, H
+1.0	1	0	0	1	1	0	3.31
+Juenger
+1.0	2	0	0	0	0	0	3.72
+Bowden
+1.0	2	4	4	2	0	0	36.00
+Cortes
+1.0	2	1	1	0	0	1	10.29
+Totals
+9.0	12	11	11	9	7	1	
+WP:Jump; Harris, H; Bowden.
+HBP:Dingler (by Bowden); Bolte (by Montero, K).
+ABS Challenge:Clark (Strike-Overturned to Ball); Heim 3 (Ball-Overturned to Strike, Ball-Confirmed, Ball-Overturned to Strike); Torkelson (Strike-Confirmed); Torres (Strike-Confirmed).
+Pitches-strikes:Montero, K 86-53; Holton 9-6; Anderson, D 22-15; De Jesus 19-14; Jump 88-46; Alvarado 22-16; Harris, H 17-9; Juenger 19-12; Bowden 40-19; Cortes 18-12.
+Groundouts-flyouts:Montero, K 5-4; Holton 2-0; Anderson, D 1-1; De Jesus 0-0; Jump 4-2; Alvarado 0-3; Harris, H 1-0; Juenger 2-0; Bowden 1-1; Cortes 2-1.
+Batters faced:Montero, K 22; Holton 4; Anderson, D 5; De Jesus 5; Jump 21; Alvarado 5; Harris, H 4; Juenger 5; Bowden 8; Cortes 5.
+Inherited runners-scored:Anderson, D 2-0; Alvarado 3-2.
+Umpires:HP: Jeremie Rehak. 1B: Dan Iassogna. 2B: Adam Beck. 3B: Louie Krupa.
+Weather:95 degrees, Sunny.
+Wind:3 mph, L To R.
+First pitch:1:05 PM.
+T:3:13.
+Att:8,237.
+Venue:Sutter Health Park.
+August 2, 2026
+Summary
+Insights
+Key Moments
+Scoring
+All
+Video
+ABS
+Home Runs
+Strikeouts
+Hard Hit Balls
+Lead Changes
+Win Probability Swings
+Top 1st
+First Pitch
+1:05 PM PDT
+Sutter Health Park
+Gleyber Torres headshot
+Walk
+Gleyber Torres walks.
+Dillon Dingler headshot
+Single
+Dillon Dingler singles on a sharp line drive to left fielder Tyler Soderstrom. Gleyber Torres to 2nd.
+Kevin McGonigle headshot
+Strikeout
+Kevin McGonigle called out on strikes. 1 Out
+Gage Jump strikes out Kevin McGonigle
+00:08
+Eduardo Valencia headshot
+Strikeout
+Eduardo Valencia called out on strikes. 2 Outs
+Spencer Torkelson headshot
+Double
+Spencer Torkelson doubles (19) on a sharp line drive to center fielder Henry Bolte. Gleyber Torres scores. Dillon Dingler scores.
+DET 2,ATH 0
+Spencer Torkelson's two-run double
+00:20
+Wild Pitch
+Wild pitch by pitcher Gage Jump. Spencer Torkelson to 3rd.
+Hao-Yu Lee headshot
+Groundout
+Hao-Yu Lee grounds out, third baseman Tommy White to first baseman Jeff McNeil. 3 Outs
+Tommy White's smooth diving stop
+00:12
+Bottom 1st
+Donovan Walton headshot
+Flyout
+Donovan Walton flies out to left fielder Ben Malgeri. 1 Out
+Tyler Soderstrom headshot
+Lineout
+Tyler Soderstrom lines out, pitcher Keider Montero to first baseman Spencer Torkelson. 2 Outs
+Keider Montero's nifty play off a combacker
+00:29
+Game Advisory
+Injury Delay.
+Jonah Heim headshot
+Walk
+Jonah Heim walks.
+Tommy White headshot
+Lineout
+Tommy White lines out sharply to center fielder Max Clark. 3 Outs
+Top 2nd
+Max Clark headshot
+Walk
+Max Clark walks.
+Strike 2 overturned after ABS Challenge
+00:24
+Ben Malgeri headshot
+Forceout
+Tigers challenged (play at 1st), call on the field was overturned: Ben Malgeri grounds into a force out, shortstop Alika Williams to second baseman Donovan Walton. Max Clark out at 2nd. Ben Malgeri to 1st. 1 Out
+Tigers challenge play at first base
+00:49
+Zach McKinstry headshot
+Flyout
+Zach McKinstry flies out to left fielder Tyler Soderstrom in foul territory. 2 Outs
+Passed Ball
+Passed ball by catcher Jonah Heim. Ben Malgeri to 2nd.
+Gleyber Torres headshot
+Walk
+Gleyber Torres walks.
+Dillon Dingler headshot
+Strikeout
+Jonah Heim challenged (pitch result), call on the field was overturned: Dillon Dingler called out on strikes. 3 Outs
+Gage Jump K's Dillon Dingler after ABS
+00:22
+Bottom 2nd
+Lawrence Butler headshot
+Single
+Lawrence Butler singles on a ground ball to right fielder Zach McKinstry.
+Carlos Cortes headshot
+Flyout
+Carlos Cortes flies out to center fielder Max Clark. 1 Out
+Alika Williams headshot
+Forceout
+Alika Williams grounds into a force out, shortstop Kevin McGonigle to second baseman Gleyber Torres. Lawrence Butler out at 2nd. Alika Williams to 1st. 2 Outs
+Jeff McNeil headshot
+Lineout
+Jeff McNeil lines out to right fielder Zach McKinstry. 3 Outs
+Top 3rd
+Game Advisory
+Injury Delay.
+Kevin McGonigle headshot
+Flyout
+Kevin McGonigle flies out to left fielder Tyler Soderstrom. 1 Out
+Eduardo Valencia headshot
+Strikeout
+Eduardo Valencia strikes out swinging. 2 Outs
+Spencer Torkelson headshot
+Groundout
+Spencer Torkelson grounds out, third baseman Tommy White to first baseman Jeff McNeil. 3 Outs
+Bottom 3rd
+Henry Bolte headshot
+Groundout
+Henry Bolte grounds out, third baseman Hao-Yu Lee to first baseman Spencer Torkelson. 1 Out
+Donovan Walton headshot
+Lineout
+Donovan Walton lines out to right fielder Zach McKinstry. 2 Outs
+Tyler Soderstrom headshot
+Double
+Tyler Soderstrom hits a ground-rule double (24) on a line drive to right field.
+Jonah Heim headshot
+Groundout
+Jonah Heim grounds out softly, catcher Eduardo Valencia to first baseman Spencer Torkelson. 3 Outs
+Top 4th
+Hao-Yu Lee headshot
+Groundout
+Hao-Yu Lee grounds out, second baseman Donovan Walton to first baseman Jeff McNeil. 1 Out
+Max Clark headshot
+Walk
+Max Clark walks.
+Ben Malgeri headshot
+Walk
+Jonah Heim challenged (pitch result), call on the field was confirmed: Ben Malgeri walks. Max Clark to 2nd.
+Ben Malgeri walks after ABS Challenge
+00:22
+Zach McKinstry headshot
+Single
+Zach McKinstry singles on a line drive to right fielder Lawrence Butler. Max Clark to 3rd. Ben Malgeri to 2nd.
+Gleyber Torres headshot
+Single
+Gleyber Torres singles on a ground ball to center fielder Henry Bolte. Max Clark scores. Ben Malgeri scores. Zach McKinstry to 3rd.
+DET 4,ATH 0
+Gleyber Torres' two-run single
+00:30
+Dillon Dingler headshot
+Strikeout
+Dillon Dingler strikes out swinging. 2 Outs
+Kevin McGonigle headshot
+Walk
+Kevin McGonigle walks. Gleyber Torres to 2nd.
+Pitching Substitution
+Pitching Change: Elvis Alvarado replaces Gage Jump.
+Eduardo Valencia headshot
+Double
+Eduardo Valencia doubles (2) on a sharp line drive to left fielder Tyler Soderstrom. Zach McKinstry scores. Gleyber Torres scores. Kevin McGonigle to 3rd.
+DET 6,ATH 0
+Eduardo Valencia's two-run double
+00:20
+Spencer Torkelson headshot
+Flyout
+Spencer Torkelson flies out to left fielder Tyler Soderstrom. 3 Outs
+Strike 1 confirmed after ABS Challenge
+00:22
+Bottom 4th
+Tommy White headshot
+Groundout
+Tommy White grounds out, third baseman Hao-Yu Lee to first baseman Spencer Torkelson. 1 Out
+Lawrence Butler headshot
+Flyout
+Lawrence Butler flies out to left fielder Ben Malgeri. 2 Outs
+Carlos Cortes headshot
+Walk
+Carlos Cortes walks.
+Alika Williams headshot
+Pop Out
+Alika Williams pops out to second baseman Gleyber Torres. 3 Outs
+Top 5th
+Hao-Yu Lee headshot
+Flyout
+Hao-Yu Lee flies out to center fielder Henry Bolte. 1 Out
+Max Clark headshot
+Strikeout
+Max Clark strikes out swinging. 2 Outs
+Ben Malgeri headshot
+Flyout
+Ben Malgeri flies out to right fielder Lawrence Butler. 3 Outs
+Bottom 5th
+Jeff McNeil headshot
+Lineout
+Jeff McNeil lines out sharply to right fielder Zach McKinstry. 1 Out
+Game Advisory
+On-field Delay.
+Umpire Substitution
+Umpire Adam Beck moving to HP.
+Umpire Substitution
+Umpire change: NO UMPIRE replaces HP umpire Adam Beck.
+Henry Bolte headshot
+Hit By Pitch
+Henry Bolte hit by pitch.
+Donovan Walton headshot
+Grounded Into DP
+Donovan Walton grounds into a double play, third baseman Hao-Yu Lee to shortstop Kevin McGonigle to first baseman Spencer Torkelson. Henry Bolte out at 2nd. Donovan Walton out at 1st. 3 Outs
+Top 6th
+Pitching Substitution
+Pitching Change: Hogan Harris replaces Elvis Alvarado.
+Zach McKinstry headshot
+Single
+Zach McKinstry singles on a ground ball to center fielder Henry Bolte.
+Ball 3 is overturned after ABS Challenge
+00:23
+Wild Pitch
+Wild pitch by pitcher Hogan Harris. Zach McKinstry to 2nd.
+Gleyber Torres headshot
+Walk
+Gleyber Torres walks.
+Dillon Dingler headshot
+Strikeout
+Dillon Dingler strikes out swinging. 1 Out
+Kevin McGonigle headshot
+Grounded Into DP
+Kevin McGonigle grounds into a double play, second baseman Donovan Walton to first baseman Jeff McNeil. Gleyber Torres out at 2nd. Kevin McGonigle out at 1st. 3 Outs
+Bottom 6th
+Tyler Soderstrom headshot
+Strikeout
+Tyler Soderstrom strikes out swinging. 1 Out
+Keider Montero strikes out Tyler Soderstrom
+00:07
+Jonah Heim headshot
+Flyout
+Jonah Heim flies out to center fielder Max Clark. 2 Outs
+Tommy White headshot
+Strikeout
+Tommy White strikes out swinging. 3 Outs
+Top 7th
+Pitching Substitution
+Pitching Change: Hayden Juenger replaces Hogan Harris.
+Eduardo Valencia headshot
+Groundout
+Eduardo Valencia grounds out to first baseman Jeff McNeil. 1 Out
+Spencer Torkelson headshot
+Groundout
+Spencer Torkelson grounds out, shortstop Alika Williams to first baseman Jeff McNeil. 2 Outs
+Hao-Yu Lee headshot
+Single
+Hao-Yu Lee singles on a line drive to center fielder Henry Bolte.
+Max Clark headshot
+Single
+Max Clark singles on a line drive to left fielder Tyler Soderstrom. Hao-Yu Lee to 2nd.
+Offensive Substitution
+Offensive Substitution: Pinch-hitter Colt Keith replaces Ben Malgeri.
+Colt Keith headshot
+Pop Out
+Colt Keith pops out to first baseman Jeff McNeil. 3 Outs
+Bottom 7th
+Defensive Sub
+Defensive Substitution: James Outman replaces Colt Keith, batting 8th, playing left field.
+Pitching Substitution
+Pitching Change: Tyler Holton replaces Keider Montero.
+Lawrence Butler headshot
+Groundout
+Lawrence Butler grounds out, second baseman Gleyber Torres to first baseman Spencer Torkelson. 1 Out
+Carlos Cortes headshot
+Groundout
+Carlos Cortes grounds out, shortstop Kevin McGonigle to first baseman Spencer Torkelson. 2 Outs
+Alika Williams headshot
+Single
+Alika Williams singles on a ground ball to third baseman Hao-Yu Lee.
+Jeff McNeil headshot
+Single
+Jeff McNeil singles on a ground ball to center fielder Max Clark, deflected by shortstop Kevin McGonigle. Alika Williams to 2nd.
+Pitching Substitution
+Pitching Change: Drew Anderson replaces Tyler Holton.
+Henry Bolte headshot
+Groundout
+Henry Bolte grounds out, shortstop Kevin McGonigle to first baseman Spencer Torkelson. 3 Outs
+Top 8th
+Pitching Substitution
+Pitching Change: Ben Bowden replaces Hayden Juenger.
+Zach McKinstry headshot
+Flyout
+Zach McKinstry flies out to center fielder Henry Bolte. 1 Out
+Gleyber Torres headshot
+Walk
+Gleyber Torres walks.
+Strike 2 confirmed after ABS Challenge
+00:23
+Dillon Dingler headshot
+Hit By Pitch
+Dillon Dingler hit by pitch. Gleyber Torres to 2nd.
+Wild Pitch
+Wild pitch by pitcher Ben Bowden. Gleyber Torres to 3rd. Dillon Dingler to 2nd.
+Kevin McGonigle headshot
+Walk
+Kevin McGonigle walks.
+Eduardo Valencia headshot
+Double
+Eduardo Valencia doubles (3) on a sharp line drive to left fielder Tyler Soderstrom. Gleyber Torres scores. Dillon Dingler scores. Kevin McGonigle to 3rd.
+DET 8,ATH 0
+Eduardo Valencia's second two-run double
+00:20
+Spencer Torkelson headshot
+Single
+Spencer Torkelson singles on a fly ball to center fielder Henry Bolte. Kevin McGonigle scores. Eduardo Valencia to 3rd.
+DET 9,ATH 0
+Spencer Torkelson's RBI single
+00:20
+Hao-Yu Lee headshot
+Forceout
+Hao-Yu Lee grounds into a force out, third baseman Tommy White to second baseman Donovan Walton. Eduardo Valencia scores. Spencer Torkelson out at 2nd. Hao-Yu Lee to 1st. 2 Outs
+DET 10,ATH 0
+Hao-Yu Lee's RBI forceout
+00:22
+Max Clark headshot
+Pop Out
+Max Clark pops out to third baseman Tommy White in foul territory. 3 Outs
+Bottom 8th
+Donovan Walton headshot
+Strikeout
+Donovan Walton strikes out swinging. 1 Out
+Tyler Soderstrom headshot
+Flyout
+Tyler Soderstrom flies out to left fielder James Outman. 2 Outs
+Jonah Heim headshot
+Single
+Jonah Heim singles on a fly ball to right fielder Zach McKinstry.
+Tommy White headshot
+Strikeout
+Tommy White strikes out swinging. 3 Outs
+Top 9th
+Pitching Substitution
+Pitcher Carlos Cortes enters the batting order, batting 6th, pitcher Carlos Cortes leaves the game.
+Pitcher Switch
+Carlos Cortes is now pitching left-handed.
+James Outman headshot
+Home Run
+James Outman homers (5) on a fly ball to center field.
+DET 11,ATH 0
+James Outman's solo home run (5)
+00:30
+Pitcher Switch
+Carlos Cortes is now pitching left-handed.
+Zach McKinstry headshot
+Groundout
+Zach McKinstry grounds out, second baseman Donovan Walton to first baseman Jeff McNeil. 1 Out
+Pitcher Switch
+Carlos Cortes is now pitching left-handed.
+Gleyber Torres headshot
+Groundout
+Gleyber Torres grounds out, shortstop Alika Williams to first baseman Jeff McNeil. 2 Outs
+Pitcher Switch
+Carlos Cortes is now pitching left-handed.
+Dillon Dingler headshot
+Single
+Dillon Dingler singles on a ground ball to center fielder Henry Bolte.
+Pitcher Switch
+Carlos Cortes is now pitching left-handed.
+Kevin McGonigle headshot
+Flyout
+Kevin McGonigle flies out to left fielder Tyler Soderstrom. 3 Outs
+Bottom 9th
+Pitching Substitution
+Pitching Change: Enmanuel De Jesus replaces Drew Anderson.
+Offensive Substitution
+Offensive Substitution: Pinch-hitter Jonathan Ornelas replaces Lawrence Butler.
+Jonathan Ornelas headshot
+Strikeout
+Jonathan Ornelas strikes out swinging. 1 Out
+Offensive Substitution
+Offensive Substitution: Pinch-hitter Brian Serven replaces Carlos Cortes.
+Brian Serven headshot
+Single
+Brian Serven singles on a ground ball to left fielder James Outman, deflected by third baseman Hao-Yu Lee.
+Alika Williams headshot
+Strikeout
+Alika Williams strikes out swinging. 2 Outs
+Jeff McNeil headshot
+Single
+Jeff McNeil singles on a line drive to left fielder James Outman. Brian Serven to 2nd.
+Henry Bolte headshot
+Strikeout
+Henry Bolte strikes out swinging. 3 Outs
+Enmanuel De Jesus strikes out Henry Bolte to end game
+00:07
+
+OFFICIAL INFORMATION
+HELP/CONTACT US
+MORE MLB SITES & AFFILIATES
+CAREERS
+MLB.com
+Boys and Girls Club of America
+Terms of Use
+Privacy Policy
+Legal Notices
+Contact Us
+Do not Sell or Share My Personal Data
+Cookie Settings
+© 2026 MLB Advanced Media, LP. All rights reserved.

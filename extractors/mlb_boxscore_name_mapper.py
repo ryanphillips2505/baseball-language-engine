@@ -16,6 +16,8 @@ _POSITION_SUFFIXES = (
     "PH-C",
     "PH-DH",
     "PH-P",
+    "DH-P",
+    "P-DH",
     "PH",
     "1B",
     "2B",
