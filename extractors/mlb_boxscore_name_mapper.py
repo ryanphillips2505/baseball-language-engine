@@ -19,6 +19,7 @@ _POSITION_SUFFIXES = (
     "DH-P",
     "P-DH",
     "PH",
+    "PR",
     "1B",
     "2B",
     "3B",
@@ -32,9 +33,10 @@ _POSITION_SUFFIXES = (
     "P",
 )
 
-_PINCH_PREFIX_RE = re.compile(r"^[a-z]-")
+# a-/b- pinch-hit markers and 1-/2- pinch-run markers from MLB.com box scores.
+_PINCH_PREFIX_RE = re.compile(r"^(?:[a-z]|\d)-")
 _BOX_TOKEN_RE = re.compile(
-    r"^(?:[a-z]-)?"
+    r"^(?:(?:[a-z]|\d)-)?"
     r"[A-Za-zÀ-ÿ'’. -]+"
     r"(?:,\s*[A-Za-z]+)?"
     r"(?:"
@@ -76,9 +78,10 @@ def parse_box_player_token(token: str) -> BoxPlayerRef | None:
         return None
 
     pinch_marker = None
-    if _PINCH_PREFIX_RE.match(text):
-        pinch_marker = text[0]
-        text = text[2:]
+    prefix = _PINCH_PREFIX_RE.match(text)
+    if prefix:
+        pinch_marker = prefix.group(0)[0]
+        text = text[prefix.end() :]
 
     position = None
     for suffix in _POSITION_SUFFIXES:

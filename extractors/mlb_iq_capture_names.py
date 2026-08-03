@@ -11,7 +11,7 @@ from pipeline.process_game import process_game
 
 
 _SUB_NAME_RE = re.compile(
-    r"(?:Pinch-hitter|Defensive Substitution:|Pitching Change:)\s+"
+    r"(?:Pinch-hitter|Pinch-runner|Defensive Substitution:|Pitching Change:)\s+"
     r"([A-Z][A-Za-zÀ-ÿ'’. -]+?)(?:\s+replaces\b|\s+replaces,|\s*$)",
     re.I,
 )

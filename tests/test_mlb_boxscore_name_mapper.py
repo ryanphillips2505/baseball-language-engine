@@ -26,6 +26,12 @@ def test_parse_box_tokens_common_shapes():
     assert dual.last_name == "Cortes"
     assert dual.position == "DH-P"
 
+    bolte = parse_box_player_token("1-BoltePR")
+    assert bolte is not None
+    assert bolte.last_name == "Bolte"
+    assert bolte.position == "PR"
+    assert bolte.pinch_marker == "1"
+
     abreu = parse_box_player_token("Abreu, WRF")
     assert abreu is not None
     assert abreu.last_name == "Abreu"
