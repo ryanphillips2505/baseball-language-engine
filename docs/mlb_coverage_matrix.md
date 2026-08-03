@@ -8,7 +8,7 @@ Integration tip for Opponent IQ: pin BLE after merging the completion PR into `r
 
 | Corpus | Fixtures | Notes |
 |--------|----------|-------|
-| Gameday validation (reconciled) | `rangers_rays_2026_07_30`, `marlins_mets_2026_07_30`, `redsox_athletics_2026_07_30` | Full pastes; boxscore sidecars |
+| Gameday validation (reconciled) | `rangers_rays_2026_07_30`, `marlins_mets_2026_07_30`, `redsox_athletics_2026_07_30`, `redsox_dodgers_2026_08_02` | Full pastes / IQ Capture; boxscore sidecars |
 | Gameday validation (sidecar only) | `red_sox_angels_2026_07_04` | Does **not** claim boxscore parity vs `824012` |
 | StatsAPI live | gamePks `824988`, `823126`, `824012` | Nested actions + pitch events |
 
@@ -18,7 +18,7 @@ On the three reconciled 2026-07-30 Gameday fixtures:
 
 | Key | Claim |
 |-----|-------|
-| K, BB(+IBB), IBB, H, HR, 2B, 3B, HBP, sac bunt, sac fly, SB, CS | **36/36** keys match (`test_mlb_gameday_boxscore_reconcile.py`) |
+| K, BB(+IBB), IBB, H, HR, 2B, 3B, HBP, sac bunt, sac fly, SB, CS | **48/48** keys match (`test_mlb_gameday_boxscore_reconcile.py`) |
 
 ## StatsAPI pitch / swing layer
 
