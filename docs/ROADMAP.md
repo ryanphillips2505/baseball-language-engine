@@ -12,9 +12,10 @@ PHASE 4
 
 PHASE 5
 → Language coverage expansion (MLB Gameday + StatsAPI corpus in progress; see docs/mlb_coverage_matrix.md)
+→ College / Presto capture loop targeting ≥99% corpus eventization (docs/college_presto_capture.md)
 
 PHASE 6
-→ Additional source integrations
+→ Additional source integrations (Presto / StatView college athletics)
 
 PHASE 7
 → Direct Opponent IQ ingestion (pin BLE after report-translators-phase merge)

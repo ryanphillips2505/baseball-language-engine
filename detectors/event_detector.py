@@ -66,6 +66,9 @@ def detect_event_types(pa_block: str) -> list[DetectedEvent]:
     
     if "infield single" in text:
         events.append(DetectedEvent(event_type=EventType.SINGLE))
+
+    if "bunt single" in text or "reached on bunt single" in text:
+        events.append(DetectedEvent(event_type=EventType.SINGLE))
     #
     # OUTS
     #

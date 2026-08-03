@@ -12,4 +12,6 @@ DATASETS = {
     "mlb_statsapi": SAMPLES / "mlb" / "statsapi" / "raw",
     "mlb_statsapi_expected": SAMPLES / "mlb" / "statsapi" / "expected",
     "college": SAMPLES / "college" / "raw",
+    "college_presto": SAMPLES / "college" / "presto" / "raw",
+    "college_presto_expected": SAMPLES / "college" / "presto" / "expected",
 }
