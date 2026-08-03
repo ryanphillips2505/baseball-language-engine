@@ -1,0 +1,543 @@
+Major League Baseball
+
+Score change:Dodgers 4 Red Sox 8
+Red Sox
+Red Sox
+60 - 51
+3rd AL East
+8
+Game State Change: Final
+Final
+4
+Dodgers
+Dodgers
+69 - 43
+1st NL West
+2	0	3	0	0	1	0	2	0	
+0	3	0	0	0	0	1	0	0	
+8	9	0
+4	9	1
+W:
+Bennett
+7 - 4|2.90 ERA
+L:
+Sheehan
+4 - 8|5.29 ERA
+Wrap
+Box
+Video
+Sogard2B
+4	0	0	0	1	2	.240	.676
+RafaelaCF
+5	2	2	1	0	2	.289	.805
+Abreu, WRF
+4	2	2	1	1	0	.248	.758
+Contreras, Wn1B
+5	0	0	0	0	2	.284	.931
+YoshidaDH
+4	1	2	2	1	0	.264	.729
+Durbin3B
+3	1	1	1	1	0	.243	.707
+MonasterioSS
+4	1	1	0	0	2	.259	.771
+Duran, JaLF
+4	1	1	1	0	1	.200	.602
+NarváezC
+2	0	0	0	1	2	.187	.535
+a-SeiglerPH
+1	0	0	0	0	0	.237	.695
+WongC
+0	0	0	0	0	0	.255	.708
+Totals
+36	8	9	6	5	11		
+a-Flied out for Narváez in the 8th.;
+BATTING
+HRRafaela (15, 3rd inning off Sheehan, 0 on, 0 out); Abreu, W (17, 3rd inning off Sheehan, 0 on, 0 out); Yoshida (5, 3rd inning off Sheehan, 0 on, 1 out); Duran, Ja (14, 6th inning off Hurt, 0 on, 1 out).
+TBAbreu, W 5; Duran, Ja 4; Durbin; Monasterio; Rafaela 5; Yoshida 5.
+RBIAbreu, W (54); Duran, Ja (57); Durbin (45); Rafaela (57); Yoshida 2 (22).
+2-out RBIDurbin; Yoshida.
+Runners left in scoring position, 2 outAbreu, W 2; Duran, Ja; Monasterio.
+SACDuran, Ja.
+Team RISP2-for-9.
+Team LOB9.
+FIELDING
+DP(Durbin-Sogard-Contreras, Wn).
+Bennett(W, 7-4)
+5.2	6	3	3	2	4	0	2.90
+Slaten(H, 17)
+0.1	0	0	0	0	0	0	4.40
+Guerrero(H, 13)
+1.0	2	1	1	0	1	0	2.33
+Morán
+0.2	1	0	0	0	0	0	2.80
+Weissert
+0.1	0	0	0	0	0	0	3.92
+Whitlock
+1.0	0	0	0	1	1	0	1.98
+Totals
+9.0	9	4	4	3	6	0	
+OhtaniDH
+3	0	1	0	2	2	.292	.939
+Pages, ACF
+5	0	2	3	0	2	.270	.795
+Edman2B
+4	0	0	0	0	1	.302	.822
+Freeman, F1B
+3	0	1	0	0	0	.310	.874
+a-CallPH-RF
+1	0	1	0	0	0	.250	.682
+BettsSS
+4	0	0	0	0	0	.229	.685
+TuckerRF
+2	1	1	0	1	1	.237	.703
+b-Hernández, EPH-1B
+1	0	0	0	0	0	.385	1.154
+Hernández, TLF
+4	1	1	0	0	0	.255	.733
+Muncy3B
+4	2	2	0	0	0	.255	.842
+AlfonzoC
+4	0	0	1	0	0	.167	.417
+Totals
+35	4	9	4	3	6		
+a-Doubled for Freeman, F in the 8th.;
+b-Grounded out for Tucker in the 8th.;
+BATTING
+2BPages, A (23, Guerrero); Call (6, Morán).
+TBCall 2; Freeman, F; Hernández, T; Muncy 2; Ohtani; Pages, A 3; Tucker.
+RBIAlfonzo (4); Pages, A 3 (74).
+2-out RBIPages, A 3.
+Runners left in scoring position, 2 outEdman 2; Pages, A; Hernández, T.
+GIDPBetts.
+Team RISP3-for-11.
+Team LOB7.
+FIELDING
+EBetts (4, throw).
+PBAlfonzo (2).
+Sheehan(L, 4-8)
+2.2	6	5	5	1	4	3	5.29
+Dreyer
+1.1	0	0	0	1	2	0	2.98
+Phillips, E
+1.0	0	0	0	0	0	0	5.40
+Hurt
+2.0	1	1	1	1	4	1	4.58
+Mills, W
+2.0	2	2	1	2	1	0	5.68
+Totals
+9.0	9	8	7	5	11	4	
+WP:Guerrero; Dreyer; Mills, W.
+IBB:Ohtani (by Bennett).
+HBP:Monasterio (by Sheehan); Durbin (by Mills, W).
+Pitch timer violations:Bennett (pitcher).
+ABS Challenge:Tucker (Strike-Overturned to Ball); Narváez (Ball-Overturned to Strike); Rafaela (Strike-Confirmed); Alfonzo (Ball-Confirmed); Durbin (Strike-Overturned to Ball).
+Pitches-strikes:Bennett 88-52; Slaten 5-3; Guerrero 23-18; Morán 15-9; Weissert 5-3; Whitlock 12-8; Sheehan 58-36; Dreyer 27-16; Phillips, E 11-8; Hurt 37-25; Mills, W 53-32.
+Groundouts-flyouts:Bennett 7-3; Slaten 1-0; Guerrero 0-2; Morán 2-0; Weissert 1-0; Whitlock 1-0; Sheehan 2-1; Dreyer 1-1; Phillips, E 2-1; Hurt 0-2; Mills, W 2-2.
+Batters faced:Bennett 24; Slaten 1; Guerrero 5; Morán 3; Weissert 1; Whitlock 4; Sheehan 16; Dreyer 5; Phillips, E 3; Hurt 8; Mills, W 12.
+Inherited runners-scored:Slaten 1-0; Weissert 1-0; Dreyer 1-0.
+Umpires:HP: Mike Muchlinski. 1B: Emil Jimenez. 2B: Gabe Morales. 3B: Doug Eddings.
+Weather:87 degrees, Sunny.
+Wind:2 mph, Calm.
+First pitch:4:20 PM.
+T:3:09.
+Att:46,834.
+Venue:UNIQLO Field at Dodger Stadium.
+August 2, 2026
+Summary
+Insights
+Key Moments
+Scoring
+All
+Video
+ABS
+Home Runs
+Strikeouts
+Hard Hit Balls
+Lead Changes
+Win Probability Swings
+Top 1st
+First Pitch
+4:20 PM PDT
+UNIQLO Field at Dodger Stadium
+Nick Sogard headshot
+Walk
+Nick Sogard walks.
+Ceddanne Rafaela headshot
+Forceout
+Ceddanne Rafaela grounds into a force out, shortstop Mookie Betts to second baseman Tommy Edman. Nick Sogard out at 2nd. Ceddanne Rafaela to 1st. 1 Out
+Wilyer Abreu headshot
+Single
+Wilyer Abreu singles on a sharp ground ball to center fielder Andy Pages. Ceddanne Rafaela to 2nd.
+Willson Contreras headshot
+Lineout
+Willson Contreras lines out to left fielder Teoscar Hernández. 2 Outs
+Masataka Yoshida headshot
+Single
+Masataka Yoshida singles on a ground ball to left fielder Teoscar Hernández. Ceddanne Rafaela scores. Wilyer Abreu to 2nd.
+BOS 1,LAD 0
+Masataka Yoshida's RBI single
+00:27
+Caleb Durbin headshot
+Single
+Caleb Durbin singles on a line drive to center fielder Andy Pages. Wilyer Abreu scores. Masataka Yoshida to 3rd.
+BOS 2,LAD 0
+Caleb Durbin's RBI single
+00:30
+Andruw Monasterio headshot
+Strikeout
+Andruw Monasterio strikes out swinging. 3 Outs
+Emmett Sheehan strikes out Monasterio
+00:09
+Bottom 1st
+Shohei Ohtani headshot
+Single
+Shohei Ohtani singles on a sharp line drive to right fielder Wilyer Abreu.
+Andy Pages headshot
+Strikeout
+Andy Pages strikes out swinging. 1 Out
+Tommy Edman headshot
+Strikeout
+Tommy Edman strikes out swinging. 2 Outs
+Freddie Freeman headshot
+Groundout
+Freddie Freeman grounds out to first baseman Willson Contreras. 3 Outs
+Top 2nd
+Jarren Duran headshot
+Strikeout
+Jarren Duran strikes out swinging. 1 Out
+Carlos Narváez headshot
+Strikeout
+Carlos Narváez strikes out swinging. 2 Outs
+Nick Sogard headshot
+Strikeout
+Nick Sogard called out on strikes. 3 Outs
+Bottom 2nd
+Mookie Betts headshot
+Lineout
+Mookie Betts lines out to shortstop Andruw Monasterio. 1 Out
+Kyle Tucker headshot
+Single
+Kyle Tucker singles on a line drive to center fielder Ceddanne Rafaela.
+
+Challenging Team
+ABS Challenge
+Pitch 1: Overturned
+Teoscar Hernández headshot
+Single
+Teoscar Hernández singles on a ground ball to center fielder Ceddanne Rafaela. Kyle Tucker to 2nd.
+Max Muncy headshot
+Single
+Max Muncy singles on a fly ball to right fielder Wilyer Abreu. Kyle Tucker to 3rd. Teoscar Hernández to 2nd.
+BOS 2,LAD 0
+Eliezer Alfonzo headshot
+Groundout
+Eliezer Alfonzo grounds out, shortstop Andruw Monasterio to first baseman Willson Contreras. Kyle Tucker scores. Teoscar Hernández to 3rd. Max Muncy to 2nd. 2 Outs
+BOS 2,LAD 1
+Eliezer Alfonzo drives in Tucker on RBI groundout
+00:26
+Shohei Ohtani headshot
+Intent Walk
+Jake Bennett intentionally walks Shohei Ohtani.
+Andy Pages headshot
+Single
+Andy Pages singles on a ground ball to right fielder Wilyer Abreu. Teoscar Hernández scores. Max Muncy scores. Shohei Ohtani to 3rd.
+BOS 2,LAD 3
+Andy Pages' two-run single
+00:28
+Tommy Edman headshot
+Forceout
+Tommy Edman grounds into a force out, third baseman Caleb Durbin to second baseman Nick Sogard. Andy Pages out at 2nd. 3 Outs
+Top 3rd
+Ceddanne Rafaela headshot
+Home Run
+Ceddanne Rafaela homers (15) on a fly ball to left center field.
+BOS 3,LAD 3
+Ceddanne Rafaela's solo homer (15)
+00:23
+Wilyer Abreu headshot
+Home Run
+Wilyer Abreu homers (17) on a fly ball to right center field.
+BOS 4,LAD 3
+Wilyer Abreu's solo home run (17)
+00:24
+Willson Contreras headshot
+Flyout
+Willson Contreras flies out to center fielder Andy Pages. 1 Out
+Masataka Yoshida headshot
+Home Run
+Masataka Yoshida homers (5) on a fly ball to right field.
+BOS 5,LAD 3
+Masataka Yoshida's solo home run (5)
+00:28
+Caleb Durbin headshot
+Groundout
+Caleb Durbin grounds out, shortstop Mookie Betts to first baseman Freddie Freeman. 2 Outs
+Andruw Monasterio headshot
+Hit By Pitch
+Andruw Monasterio hit by pitch.
+Pitching Substitution
+Pitching Change: Jack Dreyer replaces Emmet Sheehan.
+Jarren Duran headshot
+Groundout
+Jarren Duran grounds out, shortstop Mookie Betts to first baseman Freddie Freeman. 3 Outs
+Bottom 3rd
+Freddie Freeman headshot
+Groundout
+Freddie Freeman grounds out, first baseman Willson Contreras to pitcher Jake Bennett. 1 Out
+Mookie Betts headshot
+Flyout
+Mookie Betts flies out to center fielder Ceddanne Rafaela. 2 Outs
+Kyle Tucker headshot
+Strikeout
+Carlos Narváez challenged (pitch result), call on the field was overturned: Kyle Tucker called out on strikes. 3 Outs
+
+Challenging Team
+ABS Challenge
+Pitch 8: Overturned
+Top 4th
+Carlos Narváez headshot
+Walk
+Carlos Narváez walks.
+Nick Sogard headshot
+Strikeout
+Nick Sogard strikes out swinging. 1 Out
+Wild Pitch
+Wild pitch by pitcher Jack Dreyer. Carlos Narváez to 2nd.
+Ceddanne Rafaela headshot
+Strikeout
+Ceddanne Rafaela strikes out on a foul tip. 2 Outs
+Wilyer Abreu headshot
+Flyout
+Wilyer Abreu flies out to center fielder Andy Pages. 3 Outs
+Bottom 4th
+Teoscar Hernández headshot
+Flyout
+Teoscar Hernández flies out to right fielder Wilyer Abreu. 1 Out
+Max Muncy headshot
+Flyout
+Max Muncy flies out to left fielder Jarren Duran. 2 Outs
+Eliezer Alfonzo headshot
+Lineout
+Eliezer Alfonzo lines out to right fielder Wilyer Abreu. 3 Outs
+Top 5th
+Pitching Substitution
+Pitching Change: Evan Phillips replaces Jack Dreyer.
+Willson Contreras headshot
+Flyout
+Willson Contreras flies out to right fielder Kyle Tucker. 1 Out
+Masataka Yoshida headshot
+Groundout
+Masataka Yoshida grounds out, pitcher Evan Phillips to first baseman Freddie Freeman. 2 Outs
+Caleb Durbin headshot
+Groundout
+Caleb Durbin grounds out, shortstop Mookie Betts to first baseman Freddie Freeman. 3 Outs
+Bottom 5th
+Shohei Ohtani headshot
+Strikeout
+Shohei Ohtani called out on strikes. 1 Out
+Andy Pages headshot
+Groundout
+Andy Pages grounds out, second baseman Nick Sogard to first baseman Willson Contreras. 2 Outs
+Nick Sogard makes slick sliding play
+00:28
+Tommy Edman headshot
+Groundout
+Tommy Edman grounds out sharply, shortstop Andruw Monasterio to first baseman Willson Contreras. 3 Outs
+Andruw Monasterio makes a slick play at shortstop
+00:12
+Top 6th
+Pitching Substitution
+Pitching Change: Kyle Hurt replaces Evan Phillips.
+Andruw Monasterio headshot
+Strikeout
+Andruw Monasterio strikes out swinging. 1 Out
+Jarren Duran headshot
+Home Run
+Jarren Duran homers (14) on a fly ball to center field.
+BOS 6,LAD 3
+Jarren Duran's solo home run (14) 
+00:29
+Carlos Narváez headshot
+Strikeout
+Carlos Narváez strikes out swinging. 2 Outs
+Nick Sogard headshot
+Flyout
+Nick Sogard flies out to center fielder Andy Pages. 3 Outs
+Bottom 6th
+Freddie Freeman headshot
+Single
+Freddie Freeman singles on a ground ball to second baseman Nick Sogard.
+Freddie Freeman singles to extend hitting streak
+00:16
+Mookie Betts headshot
+Grounded Into DP
+Mookie Betts grounds into a double play, third baseman Caleb Durbin to second baseman Nick Sogard to first baseman Willson Contreras. Freddie Freeman out at 2nd. Mookie Betts out at 1st. 2 Outs
+Kyle Tucker headshot
+Walk
+Kyle Tucker walks.
+Pitching Substitution
+Pitching Change: Justin Slaten replaces Jake Bennett.
+Teoscar Hernández headshot
+Groundout
+Teoscar Hernández grounds out, second baseman Nick Sogard to first baseman Willson Contreras. 3 Outs
+Nick Sogard makes diving play to end 6th
+00:16
+Top 7th
+Ceddanne Rafaela headshot
+Strikeout
+Ceddanne Rafaela challenged (pitch result), call on the field was confirmed: Ceddanne Rafaela called out on strikes. 1 Out
+
+Challenging Team
+ABS Challenge
+Pitch 5: Upheld
+Wilyer Abreu headshot
+Walk
+Wilyer Abreu walks.
+
+Challenging Team
+ABS Challenge
+Pitch 3: Upheld
+Willson Contreras headshot
+Strikeout
+Willson Contreras strikes out on a foul tip. 2 Outs
+Masataka Yoshida headshot
+Flyout
+Masataka Yoshida flies out to left fielder Teoscar Hernández. 3 Outs
+Bottom 7th
+Pitching Substitution
+Pitching Change: Tyron Guerrero replaces Justin Slaten.
+Max Muncy headshot
+Single
+Max Muncy singles on a sharp ground ball to right fielder Wilyer Abreu, deflected by second baseman Nick Sogard.
+Eliezer Alfonzo headshot
+Flyout
+Eliezer Alfonzo flies out to center fielder Ceddanne Rafaela. 1 Out
+Wild Pitch
+Wild pitch by pitcher Tyron Guerrero. Max Muncy to 2nd.
+Shohei Ohtani headshot
+Strikeout
+Shohei Ohtani strikes out swinging. 2 Outs
+Andy Pages headshot
+Double
+Andy Pages doubles (23) on a line drive to left fielder Jarren Duran. Max Muncy scores.
+BOS 6,LAD 4
+Andy Pages hits RBI double with Kiké's bat
+01:06
+Tommy Edman headshot
+Flyout
+Tommy Edman flies out to center fielder Ceddanne Rafaela. 3 Outs
+Top 8th
+Pitching Substitution
+Pitching Change: Wyatt Mills replaces Kyle Hurt.
+Caleb Durbin headshot
+Hit By Pitch
+Caleb Durbin hit by pitch.
+Andruw Monasterio headshot
+Single
+Andruw Monasterio singles on a ground ball to third baseman Max Muncy. Caleb Durbin to 2nd.
+Jarren Duran headshot
+Sac Bunt
+Jarren Duran out on a sacrifice bunt, pitcher Wyatt Mills to second baseman Tommy Edman. Caleb Durbin to 3rd. Andruw Monasterio to 2nd. 1 Out
+Offensive Substitution
+Offensive Substitution: Pinch-hitter Anthony Seigler replaces Carlos Narváez.
+Wild Pitch
+Wild pitch by pitcher Wyatt Mills. Caleb Durbin scores. Andruw Monasterio to 3rd.
+BOS 7,LAD 4
+Passed Ball
+Passed ball by catcher Eliezer Alfonzo. Andruw Monasterio scores.
+BOS 8,LAD 4
+Anthony Seigler headshot
+Flyout
+Anthony Seigler flies out to left fielder Teoscar Hernández. 2 Outs
+Nick Sogard headshot
+Field Error
+Nick Sogard reaches on a throwing error by shortstop Mookie Betts.
+Ceddanne Rafaela headshot
+Single
+Ceddanne Rafaela singles on a line drive to center fielder Andy Pages. Nick Sogard to 3rd.
+Wilyer Abreu headshot
+Flyout
+Wilyer Abreu flies out to center fielder Andy Pages. 3 Outs
+Bottom 8th
+Defensive Sub
+Defensive Substitution: Connor Wong replaces Anthony Seigler, batting 9th, playing catcher.
+Pitching Substitution
+Pitching Change: Jovani Morán replaces Tyron Guerrero.
+Offensive Substitution
+Offensive Substitution: Pinch-hitter Alex Call replaces Freddie Freeman.
+Alex Call headshot
+Double
+Alex Call doubles (6) on a sharp line drive to left fielder Jarren Duran.
+Mookie Betts headshot
+Groundout
+Mookie Betts grounds out, shortstop Andruw Monasterio to first baseman Willson Contreras. 1 Out
+Offensive Substitution
+Offensive Substitution: Pinch-hitter Enrique Hernández replaces Kyle Tucker.
+Enrique Hernández headshot
+Groundout
+Enrique Hernández grounds out, second baseman Nick Sogard to first baseman Willson Contreras. Alex Call to 3rd. 2 Outs
+Pitching Substitution
+Pitching Change: Greg Weissert replaces Jovani Morán.
+Teoscar Hernández headshot
+Groundout
+Teoscar Hernández grounds out, third baseman Caleb Durbin to first baseman Willson Contreras. 3 Outs
+Top 9th
+Defensive Switch
+Alex Call remains in the game as the right fielder.
+Defensive Switch
+Enrique Hernández remains in the game as the first baseman.
+Willson Contreras headshot
+Strikeout
+Willson Contreras strikes out on a foul tip. 1 Out
+Masataka Yoshida headshot
+Walk
+Masataka Yoshida walks.
+Caleb Durbin headshot
+Walk
+Caleb Durbin walks. Masataka Yoshida to 2nd.
+
+Challenging Team
+ABS Challenge
+Pitch 1: Overturned
+Andruw Monasterio headshot
+Lineout
+Andruw Monasterio lines out sharply to left fielder Teoscar Hernández. 2 Outs
+Jarren Duran headshot
+Pop Out
+Jarren Duran pops out to first baseman Enrique Hernández in foul territory. 3 Outs
+Bottom 9th
+Pitching Substitution
+Pitching Change: Garrett Whitlock replaces Greg Weissert.
+Max Muncy headshot
+Pop Out
+Max Muncy pops out to third baseman Caleb Durbin in foul territory. 1 Out
+Eliezer Alfonzo headshot
+Groundout
+Eliezer Alfonzo grounds out, first baseman Willson Contreras to pitcher Garrett Whitlock. 2 Outs
+Shohei Ohtani headshot
+Walk
+Shohei Ohtani walks.
+Defensive Indiff
+Shohei Ohtani advances to 2nd on defensive indifference.
+Andy Pages headshot
+Strikeout
+Andy Pages strikes out on a foul tip. 3 Outs
+Red Sox complete sweep of Dodgers
+00:26
+
+OFFICIAL INFORMATION
+HELP/CONTACT US
+MORE MLB SITES & AFFILIATES
+CAREERS
+MLB.com
+Boys and Girls Club of America
+Terms of Use
+Privacy Policy
+Legal Notices
+Contact Us
+Do not Sell or Share My Personal Data
+Cookie Settings
+© 2026 MLB Advanced Media, LP. All rights reserved.
+Recapture Plays
+Capture this page, then capture the other tab.
+New Capture

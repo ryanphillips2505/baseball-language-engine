@@ -36,25 +36,50 @@ _HIGHLIGHT_CAPTION_RE = re.compile(
 )
 
 # Standalone labels that appear above the real play description.
+# Includes IQ Capture / Gameday summary chip labels.
 _STANDALONE_LABELS = {
     "single",
     "double",
     "triple",
     "home run",
     "walk",
+    "intent walk",
     "strikeout",
     "flyout",
     "groundout",
     "lineout",
     "pop out",
+    "forceout",
     "hit by pitch",
     "sac fly",
+    "sac bunt",
+    "field error",
+    "grounded into dp",
+    "wild pitch",
+    "passed ball",
+    "defensive indiff",
 }
 
 # Video/recap captions that repeat a result already captured on the play line.
 # Example: "Colby Thomas strikes out after ABS challenge"
 _ABS_RESULT_CAPTION_RE = re.compile(
     r"^.+\bstrikes out after ABS\b",
+    re.I,
+)
+
+# IQ Capture / Gameday highlight blurbs that reuse action verbs but are not
+# official play descriptions.
+# Example: "Freddie Freeman singles to extend hitting streak"
+_HIGHLIGHT_NARRATIVE_RE = re.compile(
+    r"\b("
+    r"extend(?:s|ed|ing)?\s+hitting\s+streak|"
+    r"hitting\s+streak|"
+    r"solo\s+homer|"
+    r"complete\s+sweep|"
+    r"drives?\s+in\b|"
+    r"makes\s+(?:a\s+)?(?:slick|diving)\b|"
+    r"with\s+.+\s+bat\b"
+    r")\b",
     re.I,
 )
 
@@ -79,6 +104,9 @@ def clean_mlb_text(raw_text: str) -> list[str]:
             continue
 
         if _ABS_RESULT_CAPTION_RE.match(line):
+            continue
+
+        if _HIGHLIGHT_NARRATIVE_RE.search(line):
             continue
 
         # Reject standalone event labels

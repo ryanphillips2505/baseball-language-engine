@@ -14,6 +14,7 @@ RECONCILED_FIXTURES = [
     "rangers_rays_2026_07_30",
     "marlins_mets_2026_07_30",
     "redsox_athletics_2026_07_30",
+    "redsox_dodgers_2026_08_02",
 ]
 
 HIT_EVENTS = {
@@ -117,7 +118,7 @@ def _box_totals(stem: str) -> dict[str, int]:
 
 def test_gameday_validation_corpus_boxscore_reconciles():
     """
-    Scoped claim: on the three fully pasted 2026-07-30 Gameday fixtures,
+    Scoped claim: on the reconciled Gameday / IQ Capture fixtures listed above,
     BLE plate-appearance / runner totals match StatsAPI team batting box scores
     for K, BB(+IBB), IBB, H, HR, 2B, 3B, HBP, sac bunts, sac flies, SB, and CS.
     """
@@ -135,6 +136,6 @@ def test_gameday_validation_corpus_boxscore_reconciles():
             )
             matched_keys += 1
 
-    # 3 games × 12 keys
-    assert matched_keys == 36
-    assert total_keys == 36
+    # 4 games × 12 keys
+    assert matched_keys == 48
+    assert total_keys == 48
