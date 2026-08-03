@@ -1,0 +1,6 @@
+{
+  "description": "Presto / college athletics play-by-play capture corpus for BLE accuracy expansion.",
+  "accuracy_target": 0.99,
+  "metric": "eventized_play_lines / cleaned_play_lines",
+  "fixtures": []
+}
