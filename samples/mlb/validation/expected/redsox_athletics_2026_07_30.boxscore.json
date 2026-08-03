@@ -1,6 +1,7 @@
 {
   "gamePk": 824974,
   "source": "statsapi.mlb.com live feed boxscore",
+  "capture_format": "mlb.com page copy-paste (box + plays)",
   "teams": {
     "away": "Boston Red Sox",
     "home": "Athletics"

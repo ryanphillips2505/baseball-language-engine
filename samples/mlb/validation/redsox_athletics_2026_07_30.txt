@@ -1,3 +1,157 @@
+Major League Baseball
+
+Score change:Athletics 4 Red Sox 5
+Red Sox
+Red Sox
+57 - 51
+3rd AL East
+5
+Game State Change: Final
+Final
+4
+Athletics
+Athletics
+45 - 64
+4th AL West
+0	0	0	0	3	0	0	2	0	
+0	0	1	2	0	1	0	0	0	
+5	8	2
+4	9	1
+W:
+Gray, S
+13 - 2|2.93 ERA
+L:
+Medina
+2 - 3|3.99 ERA
+S:
+Chapman
+26|1.72 ERA
+Wrap
+Box
+Video
+Seigler2B
+5	1	1	0	0	0	.255	.743
+RafaelaCF
+4	0	2	2	0	1	.282	.768
+Abreu, WRF
+4	1	1	1	0	2	.248	.754
+Contreras, Wn1B
+3	1	2	1	1	0	.289	.945
+YoshidaDH
+4	0	1	0	0	1	.260	.716
+Durbin3B
+2	1	0	0	0	0	.243	.704
+Duran, JaLF
+4	0	0	0	0	1	.195	.589
+MonasterioSS
+4	1	1	1	0	2	.259	.774
+WongC
+3	0	0	0	1	2	.261	.722
+Totals
+33	5	8	5	2	9		
+BATTING
+2BRafaela (27, Barnett).
+HRAbreu, W (16, 8th inning off Medina, 0 on, 0 out); Contreras, Wn (23, 8th inning off Medina, 0 on, 0 out).
+TBAbreu, W 4; Contreras, Wn 5; Monasterio; Rafaela 3; Seigler; Yoshida.
+RBIAbreu, W (53); Contreras, Wn (67); Monasterio (21); Rafaela 2 (52).
+2-out RBIRafaela 2.
+Runners left in scoring position, 2 outAbreu, W; Yoshida; Monasterio 2.
+SACDurbin.
+GIDPSeigler.
+Team RISP2-for-6.
+Team LOB5.
+BASERUNNING
+SBRafaela (14, 2nd base off Barnett/Heim).
+FIELDING
+EMonasterio (5, fielding); Abreu, W (7, fielding).
+DP2 (2 Monasterio-Contreras, Wn).
+Gray, S(W, 13-2)
+7.0	7	4	4	2	5	0	2.93
+Weissert(H, 6)
+1.0	1	0	0	0	1	0	3.95
+Chapman(S, 26)
+1.0	1	0	0	0	2	0	1.72
+Totals
+9.0	9	4	4	2	8	0	
+Kurtz1B
+4	0	0	0	1	2	.257	.883
+Wilson, JDH
+4	0	2	1	0	1	.275	.706
+SoderstromLF
+4	0	0	0	0	1	.243	.801
+HeimC
+4	1	2	0	0	0	.234	.730
+1-BoltePR
+0	0	0	0	0	0	.245	.648
+ServenC
+0	0	0	0	0	0	.286	1.000
+White3B
+4	0	0	0	0	0	.292	.653
+Butler, LCF
+4	2	2	1	0	1	.209	.639
+McNeil2B
+4	0	1	0	0	0	.248	.640
+CortesRF
+1	1	0	1	1	1	.265	.760
+a-WilliamsPH
+1	0	1	0	0	0	.264	.703
+WaltonSS
+3	0	1	1	0	1	.295	.846
+b-Thomas, CPH
+1	0	0	0	0	1	.202	.568
+Totals
+34	4	9	4	2	8		
+a-Doubled for Cortes in the 9th.;
+b-Struck out for Walton in the 9th.;
+1-Ran for Heim in the 8th.;
+BATTING
+2BWilson, J (12, Gray, S); Heim (11, Gray, S); Butler, L 2 (13, Gray, S, Gray, S); Williams (10, Chapman).
+TBButler, L 4; Heim 3; McNeil; Walton; Williams 2; Wilson, J 3.
+RBIButler, L (28); Cortes (28); Walton (14); Wilson, J (33).
+2-out RBIWalton.
+Runners left in scoring position, 2 outKurtz; Heim; Wilson, J 2.
+SFCortes.
+GIDPSoderstrom; White.
+Team RISP4-for-14.
+Team LOB6.
+FIELDING
+EWalton (2, throw).
+DP(Alvarado-Walton-Kurtz).
+Barnett
+5.0	4	3	3	1	6	0	4.85
+Blewett
+2.0	2	0	0	0	1	0	0.00
+Medina(L, 2-3)(BS, 4)
+1.0	2	2	2	0	1	2	3.99
+Alvarado
+1.0	0	0	0	1	1	0	4.91
+Totals
+9.0	8	5	5	2	9	2	
+HBP:Durbin (by Barnett).
+ABS Challenge:Heim (Ball-Overturned to Strike); Wong (Ball-Confirmed); Thomas, C (Strike-Confirmed).
+Pitches-strikes:Gray, S 97-63; Weissert 10-6; Chapman 11-8; Barnett 73-45; Blewett 22-17; Medina 18-11; Alvarado 11-7.
+Groundouts-flyouts:Gray, S 8-4; Weissert 1-0; Chapman 1-0; Barnett 4-5; Blewett 3-1; Medina 2-0; Alvarado 1-0.
+Batters faced:Gray, S 30; Weissert 3; Chapman 4; Barnett 21; Blewett 8; Medina 5; Alvarado 3.
+Umpires:HP: Nate Tomlinson. 1B: Carlos Torres. 2B: Mark Wegner. 3B: Bruce Dreckman.
+Weather:90 degrees, Clear.
+Wind:10 mph, Out To LF.
+First pitch:6:42 PM.
+T:2:24.
+Att:10,246.
+Venue:Sutter Health Park.
+July 30, 2026
+Summary
+Insights
+Key Moments
+Scoring
+All
+Video
+ABS
+Home Runs
+Strikeouts
+Hard Hit Balls
+Lead Changes
+Win Probability Swings
 Top 1st
 First Pitch
 6:42 PM PDT
@@ -60,8 +214,10 @@ Andruw Monasterio flies out to right fielder Carlos Cortes. 2 Outs
 Connor Wong headshot
 Strikeout
 Connor Wong called out on strikes. 3 Outs
-Ball 1 is overturned after ABS challenge
-00:23
+
+Challenging Team
+ABS Challenge
+Pitch 1: Overturned
 Bottom 3rd
 Carlos Cortes headshot
 Walk
@@ -301,11 +457,27 @@ Colby Thomas headshot
 Strikeout
 Colby Thomas challenged (pitch result), call on the field was confirmed: Colby Thomas called out on strikes. 2 Outs
 BOS 5,ATH 4
-Colby Thomas strikes out after ABS challenge
-00:22
+
+Challenging Team
+ABS Challenge
+Pitch 3: Upheld
 Nick Kurtz headshot
 Strikeout
 Nick Kurtz strikes out swinging. 3 Outs
 BOS 5,ATH 4
 Aroldis Chapman shuts the door on A's
 00:08
+
+OFFICIAL INFORMATION
+HELP/CONTACT US
+MORE MLB SITES & AFFILIATES
+CAREERS
+MLB.com
+Boys and Girls Club of America
+Terms of Use
+Privacy Policy
+Legal Notices
+Contact Us
+Do not Sell or Share My Personal Data
+Cookie Settings
+© 2026 MLB Advanced Media, LP. All rights reserved.
