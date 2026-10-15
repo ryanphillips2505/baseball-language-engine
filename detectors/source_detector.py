@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import re
 from enum import Enum
@@ -145,8 +145,25 @@ def detect_source(raw_text: str) -> SourceType:
     ):
         return SourceType.MLB
 
-    # Fallbacks for text no rule above recognized. Everything already
-    # detected (GameChanger included) is decided before this point.
+    return SourceType.UNKNOWN
+
+
+def detect_source_with_language_fallbacks(raw_text: str) -> SourceType:
+    """
+    detect_source, plus language-based guesses for text it calls UNKNOWN.
+
+    detect_source itself is unchanged on purpose: applications (Opponent
+    IQ) route UNKNOWN text to their own legacy parser, so widening it
+    would change live routing. BLE's own process_game uses this version.
+    """
+
+    source = detect_source(raw_text)
+
+    if source != SourceType.UNKNOWN:
+        return source
+
+    text = raw_text.lower()
+
     if "major league baseball" in text or "minor league baseball" in text:
         return SourceType.MLB
 

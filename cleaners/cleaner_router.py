@@ -20,8 +20,12 @@ CLEANERS: dict[SourceType, Cleaner] = {
 }
 
 
-def clean_by_source(raw_text: str) -> CleanedPlateAppearanceBlocks:
-    source = detect_source(raw_text)
+def clean_by_source(
+    raw_text: str,
+    source: SourceType | None = None,
+) -> CleanedPlateAppearanceBlocks:
+    if source is None:
+        source = detect_source(raw_text)
 
     cleaner = CLEANERS.get(source)
 

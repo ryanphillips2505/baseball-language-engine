@@ -13,7 +13,7 @@ ball was hit), the fielder location, and runner events.
 import pytest
 
 from aggregators.game_stat_aggregator import aggregate_game_stats
-from detectors.source_detector import SourceType, detect_source
+from detectors.source_detector import SourceType, detect_source, detect_source_with_language_fallbacks
 from language.normalizer import normalize_play_text
 from language.reader import build_multi_platform_plate_appearance
 from pipeline.process_game import process_game
@@ -212,7 +212,13 @@ Wells flied out to cf (0-1 K).
 
 
 def test_unlabeled_statcrew_text_is_read_as_college():
-    assert detect_source(STATCREW_GAME) == SourceType.COLLEGE
+    assert detect_source_with_language_fallbacks(STATCREW_GAME) == SourceType.COLLEGE
+
+
+def test_detect_source_routing_is_unchanged_for_unlabeled_text():
+    # Opponent IQ routes UNKNOWN text to its own legacy parser; the
+    # language fallbacks must not change what detect_source returns.
+    assert detect_source(STATCREW_GAME) == SourceType.UNKNOWN
 
 
 def test_statcrew_game_end_to_end_stats():
@@ -232,7 +238,7 @@ def test_statcrew_game_end_to_end_stats():
 def test_major_league_baseball_header_is_detected_as_mlb():
     text = "Major League Baseball\nSam Ortiz walks.\nBo Hart strikes out swinging.\n"
 
-    assert detect_source(text) == SourceType.MLB
+    assert detect_source_with_language_fallbacks(text) == SourceType.MLB
 
 
 def test_gameday_strikeout_and_steal_keeps_both():

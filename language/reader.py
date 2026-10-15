@@ -26,11 +26,11 @@ from __future__ import annotations
 import re
 
 from assemblers.pitch_decision_builder import build_pitch_decisions
-from classifiers.ball_type_classifier import classify_ball_type
+from classifiers import ball_type_classifier
 from classifiers.bip_classifier import is_ball_in_play
-from detectors.event_detector import detect_event_types
+from detectors import event_detector
+from extractors import player_extractor
 from extractors.pitch_token_extractor import extract_pitch_tokens
-from extractors.player_extractor import extract_batter_name
 from language.normalizer import PITCH_SEQUENCE_RE, normalize_play_text
 from models.baseball_event import BaseballEvent
 from models.detected_event import DetectedEvent
@@ -132,7 +132,9 @@ _RUNNER_LEAD_RE = re.compile(
 
 
 def _detect_events(text: str) -> list[DetectedEvent]:
-    events = detect_event_types(text)
+    # Looked up on the module at call time so applications that patch
+    # BLE detectors at runtime (Opponent IQ's iScore support) still apply.
+    events = event_detector.detect_event_types(text)
 
     # "grounded into fielder's choice": the legacy detector marks the
     # groundout primary; the batter actually reached on the FC.
@@ -247,7 +249,7 @@ def _extract_batter(text: str, primary: EventType | None) -> str | None:
     if match:
         return _clean_name(text[: match.start()])
 
-    return _clean_name(extract_batter_name(text))
+    return _clean_name(player_extractor.extract_batter_name(text))
 
 
 # ---------------------------------------------------------------------
@@ -377,7 +379,7 @@ _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
 
 
 def _classify_ball_type(text: str) -> str | None:
-    ball_type = classify_ball_type(text)
+    ball_type = ball_type_classifier.classify_ball_type(text)
 
     if ball_type is not None:
         return ball_type
