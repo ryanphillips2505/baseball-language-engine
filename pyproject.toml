@@ -25,6 +25,7 @@ packages = [
     "dataset",
     "detectors",
     "extractors",
+    "language",
     "models",
     "pipeline",
     "tools",
