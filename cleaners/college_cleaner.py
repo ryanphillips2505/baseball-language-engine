@@ -10,6 +10,9 @@ _COLLEGE_ACTION_RE = re.compile(
     r"singled|doubled|tripled|homered|"
     r"walked|hit by pitch|"
     r"hit sacrifice fly|hit sacrifice bunt|"
+    # SIDEARM bare forms: "Castro sacrifice fly to rf", "Wallace sacrifice
+    # bunt to first base", "Castro flew into double play to rf".
+    r"sacrifice fly|sacrifice bunt|flew into|flew out|"
     r"wild pitch|passed ball|"
     r"struck out|strikes out|"
     r"grounded out|grounded into|"

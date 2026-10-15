@@ -114,6 +114,7 @@ _BATTER_OUTCOME_RULES: list[tuple[re.Pattern, EventType]] = [
     (re.compile(r"\b(?:struck|strikes) out\b", re.I), EventType.STRIKEOUT),
     (re.compile(r"\bfoul(?:s|ed)? out\b", re.I), EventType.POP_OUT),
     (re.compile(r"\bpop(?:s|ped)? up\b", re.I), EventType.POP_OUT),
+    (re.compile(r"\bflew out\b", re.I), EventType.FLY_OUT),
     # "Smith out at first 1b to p" — the batter retired on a batted ball
     # with no ball type stated.
     (re.compile(r"^[^;]*?\bout at first\b", re.I), EventType.FIELD_OUT),
@@ -210,6 +211,9 @@ _BATTER_VERBS = [
     "out on a sacrifice", "out on sacrifice", "out on infield fly",
     "out at first", "is out", "sacrifices", "sacrificed", "sacrified",
     "safe at second", "safe at third",
+    # SIDEARM bare forms: "Castro sacrifice fly to rf", "Castro flew into
+    # double play to rf".
+    "sacrifice fly", "sacrifice bunt", "flew into", "flew out",
 ]
 
 _BATTER_VERB_RE = re.compile(
@@ -376,6 +380,8 @@ _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bfoul(?:s|ed)? out\b|\bfoul (?:fly|pop)", re.I), "FB"),
     (re.compile(r"\bpop(?:s|ped)? (?:up|into)\b|\bpopup\b|\bpop-up\b", re.I), "FB"),
     (re.compile(r"\bliner\b", re.I), "FB"),
+    # SIDEARM: "Castro flew out to rf", "Castro flew into double play".
+    (re.compile(r"\bflew (?:out|into)\b", re.I), "FB"),
 ]
 
 
