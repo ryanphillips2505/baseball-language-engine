@@ -123,7 +123,10 @@ def test_statcrew_sac_without_the_word_bunt_is_a_bunt():
         ("Max Tremblay reached on an error by Jackson Riedling (E4) (0-1 S).", {"BIP": 1, "GB": 1, "LOC_2B": 1}),
         ("Mason Shimkus out on batter's interference.", {"BIP": 1, "K": 0}),
         ("Mason Shimkus reached on a fielder's choice hit through the left side of the infield (0-1 K).", {"BIP": 1, "GB": 1}),
-        ("Eric Bacon singled down the rf line; Jadyn McNealy advanced to third.", {"H": 1, "FB": 1, "LOC_RF": 1}),
+        ("Eric Bacon singled down the rf line; Jadyn McNealy advanced to third.", {"H": 1, "GB": 1, "LOC_RF": 1}),
+        ("Quinn Johnson singled down the lf line; Ben Green advanced to second.", {"H": 1, "GB": 1, "LOC_LF": 1}),
+        ("Isaac Hill flied out to cf, RBI SAC; Keenan Morris scored.", {"BIP": 1, "FB": 1, "BUNT": 0, "LOC_CF": 1}),
+        ("Easton Ford reached on a fielding error by rf, advanced to second, RBI SAC.", {"BIP": 1, "BUNT": 0, "LOC_RF": 1}),
         ("Logan Rose singled to deep center field (2-1 BKB).", {"H": 1, "FB": 1, "LOC_CF": 1}),
     ],
 )

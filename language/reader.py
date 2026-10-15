@@ -414,7 +414,8 @@ _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bbunt", re.I), "BUNT"),
     # A sacrifice that is not a sacrifice fly is a bunt.
     (re.compile(r"\bsacrifi(?:c)?ed\b|\bsac bunt\b", re.I), "BUNT"),
-    (re.compile(r"\bSAC\b"), "BUNT"),
+    # A bare "SAC" is handled after classification, where an outfield
+    # play ("flied out to cf, RBI SAC") keeps its fly ball.
     (re.compile(r"\bgrounder\b", re.I), "GB"),
     (re.compile(r"\bfoul(?:s|ed)? out\b|\bfoul (?:fly|pop)", re.I), "FB"),
     (re.compile(r"\bpop(?:s|ped)? (?:up|into)\b|\bpopup\b|\bpop-up\b", re.I), "FB"),
@@ -432,8 +433,7 @@ _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
 _STATCREW_SINGLE_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     (
         re.compile(
-            r"\bsingled\b[^;,]*?\b(?:(?:left|right)[\s-]center|shallow|deep|"
-            r"down the (?:lf|rf|left field|right field) line)\b",
+            r"\bsingled\b[^;,]*?\b(?:(?:left|right)[\s-]center|shallow|deep)\b",
             re.I,
         ),
         "FB",
@@ -687,8 +687,14 @@ def build_multi_platform_plate_appearance(
 
     ball_type = _classify_ball_type(batter_clause(text)) if is_bip else None
     # StatCrew "SAC" (uppercase) is a sacrifice hit, i.e. a bunt, even when
-    # the sentence says "grounded out to 3b, SAC"; sacrifice flies are "SF".
-    if is_bip and _STATCREW_SAC_RE.search(raw_action.split(";", 1)[0]):
+    # the sentence says "grounded out to 3b, SAC". "flied out to cf, RBI SAC"
+    # is a sacrifice fly: a stated fly / line / pop and outfield plays win.
+    if (
+        is_bip
+        and ball_type in (None, "GB")
+        and _STATCREW_SAC_RE.search(raw_action.split(";", 1)[0])
+        and not re.search(r"\b(?:lf|cf|rf|left field|center field|right field)\b", raw_action.split(";", 1)[0], re.I)
+    ):
         ball_type = "BUNT"
     if ball_type is None and is_bip and label is not None:
         ball_type = label[1]
