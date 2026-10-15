@@ -29,8 +29,13 @@ from dataclasses import dataclass
 _SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 
 
+# SIDEARM glues the suffix on: "GuerreroJr,Adrian" / "Adrian GuerreroJr".
+_GLUED_SUFFIX_RE = re.compile(r"(?<=[a-z])(Jr|Sr|III|II|IV)\b\.?")
+
+
 def _fold(text: str) -> str:
-    text = unicodedata.normalize("NFKD", str(text or ""))
+    text = _GLUED_SUFFIX_RE.sub(r" \1", str(text or ""))
+    text = unicodedata.normalize("NFKD", text)
     text = "".join(ch for ch in text if not unicodedata.combining(ch))
     text = text.replace("’", "'").lower()
     return text

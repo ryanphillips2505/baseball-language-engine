@@ -90,13 +90,17 @@ def _action_text(pa_block: str) -> str:
 # detector found no batter outcome.
 _BATTER_OUTCOME_RULES: list[tuple[re.Pattern, EventType]] = [
     (re.compile(r"\bcatcher'?s? interference\b", re.I), EventType.CATCHER_INTERFERENCE),
+    # "struck out, reached first on an error by c": a dropped third strike
+    # is still a strikeout (the box counts SO), not a reach on error.
+    (re.compile(r"\b(?:struck|strikes) out\b[^;]*\breach", re.I), EventType.STRIKEOUT),
     (re.compile(r"\bhits? a grand slam\b", re.I), EventType.HOME_RUN),
     (re.compile(r"\binside the park home run\b", re.I), EventType.HOME_RUN),
     (re.compile(r"\bground-rule double\b", re.I), EventType.DOUBLE),
     (re.compile(r"\bbunt single\b", re.I), EventType.SINGLE),
     (
         re.compile(
-            r"\b(?:reach(?:es|ed)|safe at (?:first|second|third|home)|safe) on (?:a |an )?"
+            # "reached first on a throwing error by ss" (SIDEARM) too.
+            r"\b(?:reach(?:es|ed)(?: first)?|safe at (?:first|second|third|home)|safe) on (?:a |an )?"
             r"(?:(?:fielding|throwing|missed catch|dropped fly|catching) )?(?:error|muffed throw|muff)\b",
             re.I,
         ),
@@ -613,8 +617,32 @@ def build_multi_platform_plate_appearance(
     )
 
 
+_INFIELD_LOCATIONS = {"SS", "3B", "2B", "1B", "P"}
+
+
+def infer_statcrew_ball_types(game) -> None:
+    """
+    StatCrew results often name only the fielder ("singled to left field",
+    "out at first 1b to p"). Fill the missing ball type the way Opponent IQ's
+    Presto lane always has, so college spray / GB-FB reports match:
+    infield -> GB; outfield or catcher -> FB, except a single (or an error
+    by the catcher) -> GB. College games only; stated ball types win.
+    """
+    for pa in game.plate_appearances:
+        if not pa.is_bip or pa.ball_type is not None or pa.location is None:
+            continue
+        primary = pa.baseball_event.primary_event if pa.baseball_event else None
+        if pa.location in _INFIELD_LOCATIONS:
+            pa.ball_type = "GB"
+        elif primary == EventType.SINGLE or (primary == EventType.ERROR and pa.location == "C"):
+            pa.ball_type = "GB"
+        else:
+            pa.ball_type = "FB"
+
+
 __all__ = [
     "batter_clause",
     "build_multi_platform_plate_appearance",
     "classify_fielder_location",
+    "infer_statcrew_ball_types",
 ]

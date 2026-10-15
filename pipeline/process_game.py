@@ -8,7 +8,7 @@ from cleaners.mlb_statsapi_cleaner import (
 )
 from cleaners.mlb_timeline_cleaner import clean_mlb_timeline_text
 from detectors.source_detector import SourceType, detect_source_with_language_fallbacks
-from language.reader import build_multi_platform_plate_appearance
+from language.reader import build_multi_platform_plate_appearance, infer_statcrew_ball_types
 from language.substitutions import extract_runner_entries
 from models.game import Game
 
@@ -36,6 +36,8 @@ def process_game(raw_text: str) -> Game:
         blocks,
         plate_appearance_builder=build_multi_platform_plate_appearance,
     )
+    if source == SourceType.COLLEGE:
+        infer_statcrew_ball_types(game)
     return _mark_multi_platform(game, source.value, raw_text)
 
 
