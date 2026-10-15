@@ -101,3 +101,11 @@ def test_batter_advance_is_not_a_fielder_location():
     player = _player("Tyler Akers doubled, advanced to third on the throw, RBI.", "Tyler Akers")
 
     assert player["LOC_3B"] == 0
+
+
+def test_statcrew_sac_without_the_word_bunt_is_a_bunt():
+    player = _player("Max Tremblay grounded out to 3b, SAC; Bill McCarter advanced to second.", "Max Tremblay")
+
+    assert player["BUNT"] == 1
+    assert player["GB"] == 0
+    assert player["LOC_3B"] == 1

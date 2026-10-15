@@ -407,6 +407,9 @@ _STATCREW_SINGLE_TYPE_RULES: list[tuple[re.Pattern, str]] = [
 ]
 
 
+_STATCREW_SAC_RE = re.compile(r"\bSAC\b")
+
+
 def _statcrew_single_type(raw_action: str) -> str | None:
     for pattern, value in _STATCREW_SINGLE_TYPE_RULES:
         if pattern.search(raw_action.split(";", 1)[0]):
@@ -623,6 +626,10 @@ def build_multi_platform_plate_appearance(
     runner_events = _extract_runner_events(text)
 
     ball_type = _classify_ball_type(batter_clause(text)) if is_bip else None
+    # StatCrew "SAC" (uppercase) is a sacrifice hit, i.e. a bunt, even when
+    # the sentence says "grounded out to 3b, SAC"; sacrifice flies are "SF".
+    if is_bip and _STATCREW_SAC_RE.search(raw_action.split(";", 1)[0]):
+        ball_type = "BUNT"
     if ball_type is None and is_bip and label is not None:
         ball_type = label[1]
 
