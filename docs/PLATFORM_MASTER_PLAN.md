@@ -79,7 +79,12 @@ Two rules hold for every platform:
 3. Per-team name resolution in parity (tell home from away by half
    inning) so two players named Smith on different teams never collide.
 
-### Phase E — Ship to the live app
+### Phase E — Ship to the live app (ON HOLD by owner decision, Oct 2026)
+
+Nothing changes in the live app or the Opponent IQ Legacy parser until
+the owner says so. Verified safe so far: the Opponent-IQ backend suite
+gives identical results with this BLE as with the live pin.
+
 1. Opponent-IQ backend pins BLE to one commit. Bump the pin only after
    the backend's own BLE tests pass against the new commit.
 2. Shadow first: run the new BLE beside the pinned one on real captures
