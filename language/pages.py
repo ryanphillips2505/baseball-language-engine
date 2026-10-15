@@ -52,6 +52,16 @@ _MIN_OUT_MARKERS = 3
 _GC_HALF_HEADER_RE = re.compile(r"(?im)^\s*(?:top|bottom)\s+\d+(?:st|nd|rd|th)\s+-\s+\S")
 _GC_PITCH_LINE_RE = re.compile(r"(?im)^\s*(?:ball|strike)\s+\d\b|\bin play\.")
 
+# Real iScore text: the site name, "(3) #12 Smith" batting-order lines,
+# or the "Vis: ... Home:" header (the Opponent IQ backend's list). The
+# batting-order marker must sit on one line, as it always does in iScore:
+# a Presto page can end one line with "(2)" (a fielding count) and start
+# the next with "#17 Indiana Southeast" (a ranking).
+_ISCORE_MARKERS_RE = re.compile(
+    r"iscoresports\.com|\(\d+\)[ \t]*#\d+|\bVis:\s*.*\bHome:",
+    re.IGNORECASE,
+)
+
 _MIN_HEADERS = 2
 _MIN_PLAYS = 5
 
@@ -67,6 +77,10 @@ def half_inning_headers(text: str) -> int:
 def has_gamechanger_structure(text: str) -> bool:
     text = str(text or "")
     return bool(_GC_HALF_HEADER_RE.search(text) or _GC_PITCH_LINE_RE.search(text))
+
+
+def has_iscore_markers(text: str) -> bool:
+    return bool(_ISCORE_MARKERS_RE.search(str(text or "")))
 
 
 def looks_like_statcrew_page(text: str) -> bool:
@@ -124,5 +138,6 @@ __all__ = [
     "extract_statcrew_plays",
     "has_gamechanger_structure",
     "half_inning_headers",
+    "has_iscore_markers",
     "looks_like_statcrew_page",
 ]

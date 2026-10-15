@@ -172,6 +172,15 @@ def detect_source_with_language_fallbacks(raw_text: str) -> SourceType:
         if looks_like_statcrew_page(raw_text):
             return SourceType.COLLEGE
 
+    # Ranked team names ("#24 British Columbia at #1 Tennessee Wesleyan")
+    # look like iScore jersey prefixes. A whole college page with no real
+    # iScore marker is a college page.
+    if source == SourceType.ISCORE:
+        from language.pages import has_iscore_markers, looks_like_statcrew_page
+
+        if not has_iscore_markers(raw_text) and looks_like_statcrew_page(raw_text):
+            return SourceType.COLLEGE
+
     if source != SourceType.UNKNOWN:
         return source
 
