@@ -402,7 +402,8 @@ def _classify_ball_type(text: str) -> str | None:
 _NAME_START = r"[A-Z\u00C0-\u00DE]"
 _NAME_TOKEN = rf"(?:{_NAME_START}[\w'.\-]*|de|del|la|las|los|da|das|do|dos|di|van|von|le)"
 # iScore runners carry a jersey prefix: "#12 John Smith steals second".
-_RUNNER_NAME = rf"(?:#\d+\s+)?{_NAME_START}[\w'.\-]*(?:,?\s+(?:{_NAME_TOKEN}|\d+\b))*"
+# SIDEARM sometimes drops the space after the comma: "Brock,Brendan stole second".
+_RUNNER_NAME = rf"(?:#\d+\s+)?{_NAME_START}[\w'.\-]*(?:(?:,?\s+|,(?={_NAME_START}))(?:{_NAME_TOKEN}|\d+\b))*"
 
 _BASE_WORDS = {
     "second": "2B", "2nd": "2B", "2b": "2B",

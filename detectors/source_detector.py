@@ -159,6 +159,19 @@ def detect_source_with_language_fallbacks(raw_text: str) -> SourceType:
 
     source = detect_source(raw_text)
 
+    # A whole SIDEARM / Presto box-score page: detect_source can call it
+    # UNKNOWN or, from page chrome, MLB. GameChanger structure vetoes this.
+    # Presto pages scored in GameChanger-style wording are also detected as
+    # GAMECHANGER; the page recognizer's GameChanger veto ("Top 1st - Team"
+    # headers, pitch lines) keeps real GameChanger text out. The Opponent
+    # IQ backend never calls this function, so its GameChanger route is
+    # unaffected.
+    if source in (SourceType.UNKNOWN, SourceType.MLB, SourceType.GAMECHANGER):
+        from language.pages import looks_like_statcrew_page
+
+        if looks_like_statcrew_page(raw_text):
+            return SourceType.COLLEGE
+
     if source != SourceType.UNKNOWN:
         return source
 

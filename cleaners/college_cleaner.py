@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import re
 
+from language.pages import extract_statcrew_plays
+
 
 _COLLEGE_ACTION_RE = re.compile(
     r"\b("
@@ -32,6 +34,10 @@ _COLLEGE_ACTION_RE = re.compile(
 
 def clean_college_text(raw_text: str) -> list[str]:
     cleaned_blocks: list[str] = []
+
+    # Whole SIDEARM / Presto pages repeat plays (scoring summary, per-inning
+    # tabs). Keep each half inning once; plain play-by-play is unchanged.
+    raw_text = extract_statcrew_plays(raw_text)
 
     for raw_line in raw_text.splitlines():
         line = raw_line.strip()

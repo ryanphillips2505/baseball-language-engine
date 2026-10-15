@@ -94,6 +94,7 @@ def _first_fits(given: str, roster_first: str) -> bool:
 # PrestoSports cuts play-by-play names to 12 characters
 # ("M. Villanuev" for Mattew Villanueva).
 _TRUNCATED_LENGTH = 12
+_MIN_CUT_SURNAME = 8
 
 
 def _last_fits(given: NameParts, roster: NameParts, truncated: bool = False) -> bool:
@@ -135,10 +136,42 @@ class RosterMatcher:
 
         if len(candidates) == 1:
             return candidates[0]
+        if candidates:
+            return None
 
-        # A one-token name ("Devault") may also be a first-name-only
-        # roster entry; try the token as a last name only when unique.
-        return None
+        # SIDEARM also cuts long surnames ("Moutzouridi" for Moutzouridis);
+        # a long prefix of exactly one roster surname is that player.
+        if len(given.last) >= _MIN_CUT_SURNAME:
+            candidates = [
+                roster_name
+                for roster_name, parts in self._parts
+                if parts.last != given.last
+                and parts.last.startswith(given.last)
+                and _first_fits(given.first, parts.first)
+            ]
+            if len(candidates) == 1:
+                return candidates[0]
+            if candidates:
+                return None
+
+        if "," in str(name):
+            return None
+
+        # Surname-only play wording ("De La Rosa strikes out", "Salazar
+        # Mata singles"): read every token as last name. A double surname
+        # also fits a roster entry carrying only the first ("Gabriel
+        # Salazar"). Still unique-only.
+        tokens = tuple(t for t in _tokens(name) if t not in _SUFFIXES)
+        if len(tokens) < 2:
+            return None
+        as_last = NameParts(first="", last="".join(tokens), last_tokens=tokens)
+        candidates = [
+            roster_name
+            for roster_name, parts in self._parts
+            if _last_fits(as_last, parts)
+            or (len(tokens) == 2 and parts.last_tokens == tokens[:1])
+        ]
+        return candidates[0] if len(candidates) == 1 else None
 
 
 def resolve_player_stats(
