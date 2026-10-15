@@ -133,6 +133,20 @@ _RUNNER_LEAD_RE = re.compile(
 def _detect_events(text: str) -> list[DetectedEvent]:
     events = detect_event_types(text)
 
+    # "grounded into fielder's choice": the legacy detector marks the
+    # groundout primary; the batter actually reached on the FC.
+    primary = next((event for event in events if event.is_primary), None)
+    fielders_choice = next(
+        (event for event in events if event.event_type == EventType.FIELDERS_CHOICE), None
+    )
+    if primary is not None and fielders_choice is not None and primary.event_type in {
+        EventType.GROUND_OUT, EventType.FLY_OUT, EventType.LINE_OUT, EventType.POP_OUT,
+    }:
+        primary.is_primary = False
+        fielders_choice.make_primary()
+        events.remove(fielders_choice)
+        events.insert(0, fielders_choice)
+
     has_batter_outcome = any(event.is_primary for event in events)
 
     if not has_batter_outcome and not _RUNNER_LEAD_RE.search(text):
@@ -261,7 +275,7 @@ _LOCATION_PATTERNS: list[tuple[str, str]] = [
 
 _LOCATION_RE = [(re.compile(rf"\b{pattern}", re.I), location) for pattern, location in _LOCATION_PATTERNS]
 
-_SENTENCE_SPLIT_RE = re.compile(r"(?<=[a-z0-9)]{2})\.\s+(?=[A-Z])|;\s*")
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[a-z0-9)]{2})\s?\.\s+(?=[A-Z#])|;\s*")
 
 # ", Jones advanced to second" / ", Jones to third" / ", Jones scored"
 # / ", Jones out at second" — runner clauses inside the batter sentence.
@@ -349,6 +363,9 @@ _PUTOUT_BY_RE = re.compile(
 
 _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bbunt", re.I), "BUNT"),
+    # A sacrifice that is not a sacrifice fly is a bunt.
+    (re.compile(r"\bsacrifi(?:c)?ed\b|\bsac bunt\b", re.I), "BUNT"),
+    (re.compile(r"\bSAC\b"), "BUNT"),
     (re.compile(r"\bgrounder\b", re.I), "GB"),
     (re.compile(r"\bfoul(?:s|ed)? out\b|\bfoul (?:fly|pop)", re.I), "FB"),
     (re.compile(r"\bpop(?:s|ped)? (?:up|into)\b|\bpopup\b|\bpop-up\b", re.I), "FB"),
