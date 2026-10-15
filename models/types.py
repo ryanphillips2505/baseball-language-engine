@@ -18,6 +18,14 @@ class EventType(str, Enum):
     STRIKEOUT_LOOKING = "strikeout_looking"
     STRIKEOUT_SWINGING = "strikeout_swinging"
 
+    # Multi-platform outcomes. Never produced by the GameChanger path.
+    # STRIKEOUT: source says "struck out" with no looking/swinging.
+    # FIELD_OUT: batter retired on a batted ball, ball type not stated.
+    # CATCHER_INTERFERENCE: batter awarded first; not a ball in play.
+    STRIKEOUT = "strikeout"
+    FIELD_OUT = "field_out"
+    CATCHER_INTERFERENCE = "catcher_interference"
+
     DROPPED_THIRD_STRIKE_REACH = "dropped_third_strike_reach"
     DROPPED_THIRD_STRIKE_OUT = "dropped_third_strike_out"
 

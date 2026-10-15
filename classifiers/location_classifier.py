@@ -107,6 +107,9 @@ def classify_location(pa_block: str) -> str | None:
             "fielded by pitcher",
             "fielded by the pitcher",
             "pitcher to",
+            # Fielder chain that starts with the pitcher, named or not:
+            # "grounds out, pitcher C Adams to first baseman ..."
+            ", pitcher ",
         ],
         "P",
     )

@@ -5,7 +5,10 @@ import re
 from models.runner_event import RunnerEvent
 
 
-_RUNNER_NAME_RE = r"[A-Z][A-Za-z'.-]*(?:\s+[A-Z][A-Za-z'.-]*)*"
+# Accented letters are part of names ("José Pérez steals 2nd" credits
+# "José Pérez", not "rez").
+_NAME_CHARS = r"A-Za-zÀ-ÖØ-öø-ſ'.-"
+_RUNNER_NAME_RE = rf"[A-ZÀ-Þ][{_NAME_CHARS}]*(?:\s+[A-ZÀ-Þ][{_NAME_CHARS}]*)*"
 _STEAL_TOTAL_RE = r"(?:\(\d+\)\s+)?"
 
 

@@ -5,7 +5,8 @@ import re
 
 _ISCORE_ACTION_RE = re.compile(
     r"#\d+\s+.+?\b("
-    r"hits|strikes out|is walked|is hit by the pitch|"
+    r"hits|strikes out|is walked|is intentionally walked|is hit by the pitch|"
+    r"is picked off|"
     r"reaches base|grounds out|flies out|"
     r"bunts|steals|is caught stealing|"
     r"is out on an infield fly rule"

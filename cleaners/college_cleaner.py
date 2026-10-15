@@ -9,12 +9,16 @@ _COLLEGE_ACTION_RE = re.compile(
     r"walked|hit by pitch|"
     r"hit sacrifice fly|hit sacrifice bunt|"
     r"wild pitch|passed ball|"
-    r"struck out|"
+    r"struck out|strikes out|"
     r"grounded out|grounded into|"
     r"flied out|popped out|fouled out|lined out|"
-    r"reached on|reached on infield single|reached on bunt single|"
-    r"bunt single|"
-    r"stole|caught stealing"
+    r"popped up|lined into|flied into|popped into|hit into|"
+    r"hit a ground[- ]rule double|ground[- ]rule|"
+    r"out at first|safe at first|safe at second|safe at third|sacrificed|sacrified|"
+    r"reached on|reached on infield single|reached on bunt single|bunt single|"
+    r"intentionally walked|picked off|infield fly|"
+    # ESPN sometimes glues the base on: "caught stealingsecond".
+    r"stole|caught stealing|caught stealing(?:second|third|home)"
     r")\b",
     re.I,
 )

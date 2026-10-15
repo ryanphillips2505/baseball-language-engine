@@ -20,6 +20,8 @@ BIP_EVENTS = {
     EventType.FC_DOUBLE_PLAY,
     EventType.SAC_BUNT,
     EventType.SAC_FLY,
+    # Multi-platform only (never produced for GameChanger).
+    EventType.FIELD_OUT,
 }
 
 

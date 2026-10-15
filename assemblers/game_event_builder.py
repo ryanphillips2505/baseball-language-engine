@@ -6,12 +6,16 @@ from models.game_event import GameEvent
 from models.timeline_block import GameEventBlock
 
 
+# Name tokens accept accented letters ("Jasson Domínguez", "José Ramírez").
+# Game events only come from the MLB timeline cleaner.
+_NAME_TOKEN = r"[A-ZÀ-Þ][\w'.\-]*"
+
 _RUNNER_RE = re.compile(
-    r"^([A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)+)",
+    rf"^({_NAME_TOKEN}(?:\s+{_NAME_TOKEN})+)",
 )
 
 _ADVANCE_RE = re.compile(
-    r"\.\s*([A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)+)\s+to\s+(1st|2nd|3rd|home)\b",
+    rf"\.\s*({_NAME_TOKEN}(?:\s+{_NAME_TOKEN})+)\s+to\s+(1st|2nd|3rd|home)\b",
 )
 
 _BASE_RE = re.compile(

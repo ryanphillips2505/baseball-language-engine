@@ -8,6 +8,7 @@ from cleaners.mlb_statsapi_cleaner import (
 )
 from cleaners.mlb_timeline_cleaner import clean_mlb_timeline_text
 from detectors.source_detector import SourceType, detect_source
+from language.reader import build_multi_platform_plate_appearance
 from models.game import Game
 
 
@@ -25,7 +26,15 @@ def process_game(raw_text: str) -> Game:
     else:
         blocks = clean_by_source(raw_text)
 
-    return build_game(blocks)
+    # GameChanger keeps the legacy reader: its output is frozen to the
+    # production Opponent IQ GameChanger reading.
+    if source == SourceType.GAMECHANGER:
+        return build_game(blocks)
+
+    return build_game(
+        blocks,
+        plate_appearance_builder=build_multi_platform_plate_appearance,
+    )
 
 
 __all__ = [
