@@ -140,3 +140,13 @@ def test_surname_fallbacks_are_unique_only():
     assert matcher.match("Johnson, C") is None
     assert matcher.match("Hernande") is None
     assert matcher.match("Moutz") is None
+
+
+def test_sidearm_out_caught_stealing_wording():
+    text = SIDEARM_PAGE.replace(
+        "Brock,Brendan stole second base. 0 0",
+        "Brock,Brendan out caught stealing at second base, c to ss. 0 0",
+    )
+    stats = aggregate_game_stats(process_game(text))
+    assert stats["Brock,Brendan"]["CS"] == 1
+    assert stats["Brock,Brendan"]["SB"] == 0

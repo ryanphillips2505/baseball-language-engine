@@ -418,10 +418,11 @@ _RUNNER_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(rf"(?P<runner>{_RUNNER_NAME})\s+(?:steals|stole|steal)\s+{_STEAL_TOTAL}{_BASE}"), "SB"),
     (
         re.compile(
-            rf"(?P<runner>{_RUNNER_NAME})\s+(?:is\s+)?(?:picked off and )?caught stealing\s+{_STEAL_TOTAL}{_BASE}"
+            rf"(?P<runner>{_RUNNER_NAME})\s+(?:is\s+)?(?:out\s+)?(?:picked off and )?caught stealing\s+(?:at\s+)?{_STEAL_TOTAL}{_BASE}"
         ),
         "CS",
     ),
+    # SIDEARM: "Brosius,Parker out caught stealing at second base, c to ss."
     # "Smith out at second c to ss, caught stealing."
     (
         re.compile(
