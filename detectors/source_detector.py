@@ -145,4 +145,31 @@ def detect_source(raw_text: str) -> SourceType:
     ):
         return SourceType.MLB
 
+    # Fallbacks for text no rule above recognized. Everything already
+    # detected (GameChanger included) is decided before this point.
+    if "major league baseball" in text or "minor league baseball" in text:
+        return SourceType.MLB
+
+    # Past-tense StatCrew-family language (NCAA stats, Sidearm,
+    # PrestoSports, StatBroadcast, ESPN, high-school StatCrew feeds).
+    if len(_PAST_TENSE_PLAY_RE.findall(text)) >= 3:
+        return SourceType.COLLEGE
+
+    # Present-tense Gameday-style language with fielders spelled out.
+    if len(_GAMEDAY_PLAY_RE.findall(text)) >= 3:
+        return SourceType.MLB
+
     return SourceType.UNKNOWN
+
+
+_PAST_TENSE_PLAY_RE = re.compile(
+    r"\b(?:struck out (?:swinging|looking)|grounded out to|flied out to|lined out to|"
+    r"popped (?:up|out) to|fouled out to|singled (?:to|through|up)|doubled (?:to|down)|"
+    r"walked\b|hit by pitch|reached on)"
+)
+
+_GAMEDAY_PLAY_RE = re.compile(
+    r"\b(?:strikes out swinging|called out on strikes|grounds out, \w+|"
+    r"flies out to \w+ fielder|lines out to|pops out to|singles on a|doubles \(\d+\) on a|"
+    r"walks\.)"
+)

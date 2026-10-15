@@ -31,7 +31,6 @@ from classifiers.bip_classifier import is_ball_in_play
 from detectors.event_detector import detect_event_types
 from extractors.pitch_token_extractor import extract_pitch_tokens
 from extractors.player_extractor import extract_batter_name
-from extractors.runner_event_extractor import extract_runner_events
 from language.normalizer import PITCH_SEQUENCE_RE, normalize_play_text
 from models.baseball_event import BaseballEvent
 from models.detected_event import DetectedEvent
@@ -170,8 +169,12 @@ def _detect_events(text: str) -> list[DetectedEvent]:
 # ---------------------------------------------------------------------
 
 _INTENTIONAL_WALK_RE = re.compile(
-    r"^(?P<pitcher>.+?)\s+intentionally walks\s+(?P<batter>.+?)(?:\.\s|,|;|$)",
+    r"^(?P<pitcher>.+?)\s+intentionally walks\s+(?P<batter>.+)$",
 )
+
+# End of the walked batter's name: a sentence period (after two
+# lowercase letters, so "J.P." and "Jr." survive), a comma or semicolon.
+_NAME_END_RE = re.compile(r"(?<=[a-zß-ÿ]{2})\.(?=\s|$)|[,;]")
 
 # Lowercase verbs, matched case-sensitively so names never collide.
 _BATTER_VERBS = [
@@ -209,9 +212,11 @@ def _extract_batter(text: str, primary: EventType | None) -> str | None:
     intentional = _INTENTIONAL_WALK_RE.search(text)
     if intentional:
         batter = intentional.group("batter")
-        # Keep the period of "Jr." / initials; drop a sentence period.
-        if batter.endswith(".") and not re.search(r"(?:[A-Z]|Jr|Sr)\.$", batter):
-            batter = batter[:-1]
+        end = _NAME_END_RE.search(batter)
+        if end:
+            batter = batter[: end.start()]
+        # "Michael Harris II." ends the sentence; "Luis Robert Jr." keeps it.
+        batter = re.sub(r"\b(II|III|IV)\.$", r"\1", batter.strip())
         return _clean_name(batter)
 
     match = _BATTER_VERB_RE.search(text)
@@ -347,50 +352,71 @@ def _classify_ball_type(text: str) -> str | None:
 # Runner events
 # ---------------------------------------------------------------------
 
-_RUNNER_NAME = r"[A-Z][A-Za-z'.\-]*(?:,?\s+[A-Z][A-Za-z'.\-]*)*"
+# Case-sensitive, accent-aware runner names: a run of capitalized
+# tokens (plus lowercase surname particles), so "strikes out swinging
+# and Trea Turner" yields "Trea Turner" and "Julio Rodríguez" stays whole.
+_NAME_START = r"[A-Z\u00C0-\u00DE]"
+_NAME_TOKEN = rf"(?:{_NAME_START}[\w'.\-]*|de|del|la|las|los|da|das|do|dos|di|van|von|le)"
+_RUNNER_NAME = rf"{_NAME_START}[\w'.\-]*(?:,?\s+{_NAME_TOKEN})*"
 
 _BASE_WORDS = {
-    "second": "2B", "2nd": "2B",
-    "third": "3B", "3rd": "3B",
+    "second": "2B", "2nd": "2B", "2b": "2B",
+    "third": "3B", "3rd": "3B", "3b": "3B",
     "home": "HOME",
 }
 
-_EXTRA_RUNNER_RULES: list[tuple[re.Pattern, str]] = [
-    # "Smith out at second c to ss, caught stealing."
+_BASE = r"(?P<base>second|2nd|2b|third|3rd|3b|home)\b"
+_STEAL_TOTAL = r"(?:\(\d+\)\s+)?"
+
+_RUNNER_RULES: list[tuple[re.Pattern, str]] = [
+    (re.compile(rf"(?P<runner>{_RUNNER_NAME})\s+(?:steals|stole|steal)\s+{_STEAL_TOTAL}{_BASE}"), "SB"),
     (
         re.compile(
-            rf"(?P<runner>{_RUNNER_NAME})\s+out at (?P<base>second|third|home)\b[^;.]*?caught stealing"
+            rf"(?P<runner>{_RUNNER_NAME})\s+(?:picked off and )?caught stealing\s+{_STEAL_TOTAL}{_BASE}"
         ),
         "CS",
     ),
-    # "Smith steals home" / "Smith stole home"
+    # "Smith out at second c to ss, caught stealing."
     (
-        re.compile(rf"(?P<runner>{_RUNNER_NAME})\s+(?:steals|stole)\s+(?:\(\d+\)\s+)?(?P<base>home)\b"),
-        "SB",
+        re.compile(
+            rf"(?P<runner>{_RUNNER_NAME})\s+out at {_BASE}[^;.]*?caught stealing"
+        ),
+        "CS",
     ),
 ]
 
+# A prior sentence glued to the name: "Joe Ryan. Sal Frelick" -> "Sal Frelick".
+# Initials ("J. Smith", "J.P. Crawford") are not sentence ends.
+_PRIOR_SENTENCE_RE = re.compile(r"^.*(?<=[a-z\u00DF-\u00FF]{2})[.!?]\s+")
+
+
+def _runner_name(raw: str) -> str | None:
+    name = _PRIOR_SENTENCE_RE.sub("", raw.strip())
+    return _clean_name(name)
+
 
 def _extract_runner_events(text: str) -> list[RunnerEvent]:
-    events = list(extract_runner_events(text))
-    seen = {(event.event_type, event.runner_name) for event in events}
+    found: list[tuple[int, RunnerEvent]] = []
+    seen: set[tuple[str, str | None, str]] = set()
 
-    for pattern, event_type in _EXTRA_RUNNER_RULES:
+    for pattern, event_type in _RUNNER_RULES:
         for match in pattern.finditer(text):
-            runner = _clean_name(match.group("runner"))
-            if (event_type, runner) in seen:
+            runner = _runner_name(match.group("runner"))
+            base = _BASE_WORDS[match.group("base").lower()]
+            key = (event_type, runner, base)
+
+            if key in seen:
                 continue
 
-            seen.add((event_type, runner))
-            events.append(
-                RunnerEvent(
-                    event_type=event_type,
-                    base=_BASE_WORDS[match.group("base").lower()],
-                    runner_name=runner,
+            seen.add(key)
+            found.append(
+                (
+                    match.start(),
+                    RunnerEvent(event_type=event_type, base=base, runner_name=runner),
                 )
             )
 
-    return events
+    return [event for _, event in sorted(found, key=lambda item: item[0])]
 
 
 # ---------------------------------------------------------------------

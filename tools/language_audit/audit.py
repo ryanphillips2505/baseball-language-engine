@@ -335,7 +335,7 @@ def _issues(play: Play, reading: dict) -> list[str]:
             r"\b(?:stole|caught stealing|singled|doubled|walked|hit a|homered)\b", play.text
         ):
             return issues
-        if _BATTED_RE.search(play.text) or re.search(r"(walk|struck|strikes|hit by|steal|stole)", play.text, re.I):
+        if _BATTED_RE.search(play.text) or re.search(r"\b(walk|struck|strikes|hit by|steal|stole)", play.text, re.I):
             issues.append("dropped by cleaner")
         return issues
 
