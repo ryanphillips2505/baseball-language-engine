@@ -8,8 +8,8 @@ def test_mlb_inspector_uses_timeline_events_without_counting_them_as_plate_appea
     )
 
     assert data["source"] == "mlb"
-    assert data["timeline_count"] == 75
-    assert data["plate_appearance_count"] == 72
+    assert data["timeline_count"] == 77
+    assert data["plate_appearance_count"] == 74
 
     events = data["timeline_game_events"]
 

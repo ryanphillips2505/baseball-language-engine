@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from typing import Callable
+
 from assemblers.game_event_builder import build_game_event
 from assemblers.plate_appearance_builder import build_plate_appearance
 from assemblers.timeline_builder import build_timeline
 from models.game import Game
+from models.plate_appearance import PlateAppearance
 from models.plate_appearance_block import PlateAppearanceBlock
 from models.timeline_block import (
     GameEventBlock,
@@ -23,7 +26,13 @@ def _text_from_legacy_pa_block(block: PlateAppearanceBlock) -> str:
 
 def build_game(
     pa_blocks: list[str] | list[PlateAppearanceBlock] | list[TimelineBlock],
+    plate_appearance_builder: Callable[[str], PlateAppearance] = build_plate_appearance,
 ) -> Game:
+    """
+    plate_appearance_builder defaults to the legacy reader, which is
+    the frozen GameChanger reading. process_game passes the
+    multi-platform reader for every other source.
+    """
 
     plate_appearances = []
 
@@ -42,7 +51,7 @@ def build_game(
             text = block
 
         plate_appearances.append(
-            build_plate_appearance(text)
+            plate_appearance_builder(text)
         )
 
     game = Game(

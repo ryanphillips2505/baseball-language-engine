@@ -6,13 +6,15 @@ import re
 _BASEBALL_ACTION_RE = re.compile(
     r"\b("
     r"singles|doubles|triples|homers|"
+    r"hits a|hits an|hit into|"
     r"walks|intentionally walks|"
     r"strikes out|called out on strikes|strikes out on a foul tip|"
     r"hit by pitch|"
     r"grounds out|grounds into|"
     r"flies out|lines out|pops out|"
+    r"flies into|lines into|pops into|bunt grounds|bunt pops|bunt lines|"
     r"reaches on|"
-    r"out on a sacrifice fly|"
+    r"out on a sacrifice fly|out on a sacrifice bunt|"
     r"wild pitch by pitcher|passed ball by catcher|balk by pitcher|defensive indifference|throwing error by|"
     r"starts inning at 2nd base|"
     r"steals|caught stealing|picked off"
@@ -23,10 +25,12 @@ _BASEBALL_ACTION_RE = re.compile(
 # MLB highlight captions:
 # "Sonny Gray strikes out Brandon Nimmo"
 # "Jack Leiter strikes out Jarren Duran"
+#
+# Case-sensitive: the struck-out batter's name is capitalized. A play
+# such as "Nick Maton strikes out swinging." is not a caption.
 _HIGHLIGHT_CAPTION_RE = re.compile(
     r"^[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)+\s+strikes out\s+"
     r"[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+)*$",
-    re.I,
 )
 
 # Standalone labels that appear above the real play description.

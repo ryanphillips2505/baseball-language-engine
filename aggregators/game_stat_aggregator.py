@@ -171,6 +171,7 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
                 event = pa.baseball_event.primary_event
 
                 if event in {
+                    EventType.STRIKEOUT,
                     EventType.STRIKEOUT_LOOKING,
                     EventType.STRIKEOUT_SWINGING,
                     EventType.DROPPED_THIRD_STRIKE_REACH,

@@ -21,5 +21,7 @@ def test_mlb_dataset_regression():
         assert baseball_event is not None
         valid_events.append(baseball_event)
 
-    assert len(cleaned_blocks) == 79
-    assert len(valid_events) == 79
+    # 86 since the cleaner stopped treating "X strikes out swinging."
+    # as a highlight caption (6 strikeouts) and kept a ground-rule double.
+    assert len(cleaned_blocks) == 86
+    assert len(valid_events) == 86

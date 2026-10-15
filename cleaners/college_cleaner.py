@@ -12,7 +12,11 @@ _COLLEGE_ACTION_RE = re.compile(
     r"struck out|"
     r"grounded out|grounded into|"
     r"flied out|popped out|fouled out|lined out|"
+    r"popped up|lined into|flied into|popped into|hit into|"
+    r"hit a ground[- ]rule double|ground[- ]rule|"
+    r"out at first|safe at first|safe at second|safe at third|sacrificed|sacrified|"
     r"reached on|reached on infield single|"
+    r"intentionally walked|picked off|"
     r"stole|caught stealing"
     r")\b",
     re.I,

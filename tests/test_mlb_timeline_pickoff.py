@@ -14,10 +14,12 @@ Denzer Guzman strikes out swinging.
 
     blocks = clean_mlb_timeline_text(raw)
 
-    assert len(blocks) == 2
+    # The trailing strikeout is a real plate appearance.
+    assert len(blocks) == 3
     assert blocks[0].block_type == TimelineBlockType.PLATE_APPEARANCE
     assert blocks[1].block_type == TimelineBlockType.GAME_EVENT
     assert blocks[1].event_type == "pickoff"
+    assert blocks[2].block_type == TimelineBlockType.PLATE_APPEARANCE
     
 
 
@@ -33,6 +35,7 @@ Denzer Guzman strikes out swinging.
 
     blocks = clean_mlb_timeline_text(raw)
 
-    assert len(blocks) == 2
+    assert len(blocks) == 3
     assert blocks[1].block_type == TimelineBlockType.GAME_EVENT
     assert blocks[1].event_type == "caught_stealing"
+    assert blocks[2].block_type == TimelineBlockType.PLATE_APPEARANCE
