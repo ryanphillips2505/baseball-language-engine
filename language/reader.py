@@ -187,6 +187,8 @@ _BATTER_VERBS = [
     "strikes out", "struck out", "called out on strikes",
     "walks", "walked", "intentionally walked", "is walked",
     "is hit by", "reaches", "reached", "safe at first",
+    "is intentionally walked", "is picked off", "is caught stealing",
+    "infield fly",
     "out on a sacrifice", "out on sacrifice", "out on infield fly",
     "out at first", "is out", "sacrifices", "sacrificed", "sacrified",
     "safe at second", "safe at third",
@@ -202,6 +204,11 @@ def _clean_name(name: str | None) -> str | None:
         return None
 
     cleaned = re.sub(r"\s+", " ", name).strip(" ,;:")
+
+    # iScore: "Ball 4. #12 John Smith" / "#12 John Smith" -> "John Smith".
+    if "#" in cleaned:
+        cleaned = re.sub(r"^#\d+\s*", "", cleaned[cleaned.rindex("#"):])
+
     return cleaned or None
 
 
@@ -319,7 +326,21 @@ def classify_fielder_location(text: str, primary: EventType | None = None) -> st
         if chain:
             location = _earliest_location(chain.group("chain"))
 
+    # iScore names the fielder in a second sentence:
+    # "grounds out . Unassisted out by first baseman ."
+    if location is None:
+        putout = _PUTOUT_BY_RE.search(text)
+        if putout:
+            location = _earliest_location(putout.group("fielder"))
+
     return location
+
+
+_PUTOUT_BY_RE = re.compile(
+    r"\b(?:unassisted )?out by (?:the )?(?P<fielder>pitcher|catcher|first baseman|second baseman|"
+    r"third baseman|shortstop|left fielder|center fielder|right fielder)\b",
+    re.I,
+)
 
 
 # ---------------------------------------------------------------------
@@ -357,7 +378,8 @@ def _classify_ball_type(text: str) -> str | None:
 # and Trea Turner" yields "Trea Turner" and "Julio Rodríguez" stays whole.
 _NAME_START = r"[A-Z\u00C0-\u00DE]"
 _NAME_TOKEN = rf"(?:{_NAME_START}[\w'.\-]*|de|del|la|las|los|da|das|do|dos|di|van|von|le)"
-_RUNNER_NAME = rf"{_NAME_START}[\w'.\-]*(?:,?\s+{_NAME_TOKEN})*"
+# iScore runners carry a jersey prefix: "#12 John Smith steals second".
+_RUNNER_NAME = rf"(?:#\d+\s+)?{_NAME_START}[\w'.\-]*(?:,?\s+(?:{_NAME_TOKEN}|\d+\b))*"
 
 _BASE_WORDS = {
     "second": "2B", "2nd": "2B", "2b": "2B",
@@ -372,7 +394,7 @@ _RUNNER_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(rf"(?P<runner>{_RUNNER_NAME})\s+(?:steals|stole|steal)\s+{_STEAL_TOTAL}{_BASE}"), "SB"),
     (
         re.compile(
-            rf"(?P<runner>{_RUNNER_NAME})\s+(?:picked off and )?caught stealing\s+{_STEAL_TOTAL}{_BASE}"
+            rf"(?P<runner>{_RUNNER_NAME})\s+(?:is\s+)?(?:picked off and )?caught stealing\s+{_STEAL_TOTAL}{_BASE}"
         ),
         "CS",
     ),

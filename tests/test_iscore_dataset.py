@@ -21,5 +21,7 @@ def test_iscore_dataset_regression():
         assert baseball_event is not None
         valid_events.append(baseball_event)
 
-    assert len(cleaned_blocks) == 59
-    assert len(valid_events) == 59
+    # 62 since the cleaner keeps "is intentionally walked" (2) and
+    # "is picked off" (1), which it used to drop.
+    assert len(cleaned_blocks) == 62
+    assert len(valid_events) == 62
