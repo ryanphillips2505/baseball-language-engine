@@ -13,7 +13,7 @@ def test_iscore_edge_cases_preserves_key_batter_events():
 
     cleaned = clean_iscore_text(raw_text)
 
-    assert any("ground rule double" in line.lower() for line in cleaned)
+    assert any("ground-rule double" in line.lower() for line in cleaned)
     assert any("sacrifice fly" in line.lower() for line in cleaned)
     assert any("line drive" in line.lower() for line in cleaned)
     assert any("bunts for an out" in line.lower() for line in cleaned)

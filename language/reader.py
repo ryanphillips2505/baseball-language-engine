@@ -95,6 +95,7 @@ _BATTER_OUTCOME_RULES: list[tuple[re.Pattern, EventType]] = [
     (re.compile(r"\b(?:struck|strikes) out\b[^;]*\breach", re.I), EventType.STRIKEOUT),
     (re.compile(r"\bhits? a grand slam\b", re.I), EventType.HOME_RUN),
     (re.compile(r"\binside the park home run\b", re.I), EventType.HOME_RUN),
+    (re.compile(r"\bfor a home ?run\b", re.I), EventType.HOME_RUN),
     (re.compile(r"\bground-rule double\b", re.I), EventType.DOUBLE),
     (re.compile(r"\bbunt single\b", re.I), EventType.SINGLE),
     (
@@ -110,6 +111,8 @@ _BATTER_OUTCOME_RULES: list[tuple[re.Pattern, EventType]] = [
     (re.compile(r"\breach(?:es|ed)(?: first)? on (?:a |an )?dropped (?:foul )?fly\b", re.I), EventType.ERROR),
     # The batter is out and charged an at-bat, like a field out.
     (re.compile(r"\bout on batter'?s interference\b", re.I), EventType.FIELD_OUT),
+    # iScore: the batter hit by his own batted ball is out.
+    (re.compile(r"\bis hit by the ball and called out\b", re.I), EventType.FIELD_OUT),
     (re.compile(r"\bsafe at first on (?:a )?fielder'?s choice\b", re.I), EventType.FIELDERS_CHOICE),
     (re.compile(r"\binto (?:a )?force out\b", re.I), EventType.FIELDERS_CHOICE),
     # "sacrified" is a real ESPN misspelling.
@@ -132,6 +135,8 @@ _DROPPED_THIRD_OUT_RE = re.compile(
     r"^[^;]*\b(?:struck|strikes) out\b[^;]*?,\s*(?:grounded out|thrown out|out at first)\b",
     re.I,
 )
+
+_BATTER_GROUNDS_OUT_RE = re.compile(r"^[^;.]*\bground(?:s|ed) out\b", re.I)
 
 _CAUGHT_STEALING_RE = re.compile(r"\bcaught stealing\b", re.I)
 _PICKED_OFF_RE = re.compile(r"\bpicked off\b", re.I)
@@ -174,6 +179,12 @@ def _detect_events(text: str) -> list[DetectedEvent]:
     fielders_choice = next(
         (event for event in events if event.event_type == EventType.FIELDERS_CHOICE), None
     )
+    # A batter who "grounds out" was retired himself: a forced runner on the
+    # same play makes it a double play, not a fielder's choice.
+    batter_retired = bool(_BATTER_GROUNDS_OUT_RE.search(text))
+    if primary is not None and fielders_choice is not None and batter_retired:
+        events.remove(fielders_choice)
+        fielders_choice = None
     if primary is not None and fielders_choice is not None and primary.event_type in {
         EventType.GROUND_OUT, EventType.FLY_OUT, EventType.LINE_OUT, EventType.POP_OUT,
     }:
@@ -245,6 +256,7 @@ _BATTER_VERBS = [
     # double play to rf".
     "sacrifice fly", "sacrifice bunt", "flew into", "flew out",
     "out on batter's interference", "out on batters interference",
+    "is hit by the ball",
 ]
 
 _BATTER_VERB_RE = re.compile(

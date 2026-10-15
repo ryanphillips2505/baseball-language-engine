@@ -136,3 +136,26 @@ def test_presto_lane_parity_wordings(line, expect):
 
     for key, value in expect.items():
         assert int(player.get(key) or 0) == value, (key, player.get(key))
+
+
+@pytest.mark.parametrize(
+    ("line", "event"),
+    [
+        ("#0 Ryan 2 reaches base due to a wild pitch third strike by the pitcher .", "strikeout"),
+        ("#0 Ryan 9 is hit by the ball and called out.", "field_out"),
+        (
+            "#0 Ryan 9 grounds out on the throw third baseman to second baseman to first baseman . "
+            "#0 Ryan 8 is forced out at second.",
+            "ground_out",
+        ),
+        ("#0 Ryan 1 hits a hard fly ball for a Homerun!.", "home_run"),
+    ],
+)
+def test_iscore_wordings_read_natively(line, event):
+    from cleaners.iscore_cleaner import clean_iscore_text
+    from language.reader import build_multi_platform_plate_appearance
+
+    cleaned = clean_iscore_text(line)
+    assert cleaned
+    pa = build_multi_platform_plate_appearance(cleaned[0])
+    assert pa.baseball_event.primary_event.value.startswith(event)
