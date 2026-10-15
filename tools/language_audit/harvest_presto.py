@@ -32,7 +32,7 @@ def _get(url: str) -> str:
     # Be polite: these are small school sites. Pause between requests
     # and back off when the host rate-limits (HTTP 429 / 459).
     for attempt in range(5):
-        time.sleep(1.5)
+        time.sleep(3)
         request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         try:
             with urllib.request.urlopen(request, timeout=60) as response:
@@ -103,7 +103,7 @@ def _box(page: str) -> list[dict]:
         headers = [_text(h) for h in re.findall(r'(?s)<th scope="col"[^>]*>(.*?)</th>', table)]
         players = {}
         for row in re.findall(r"(?s)<tr>(.*?)</tr>", table):
-            name = re.search(r'(?s)class="player-name[^"]*">(.*?)</a>', row)
+            name = re.search(r'(?s)class="player-name[^"]*">(.*?)</(?:a|span)>', row)
             if not name:
                 continue
             cells = [_text(c) for c in re.findall(r"(?s)<td>(.*?)</td>", row)]
@@ -113,7 +113,14 @@ def _box(page: str) -> list[dict]:
         # this batting table and the next one.
         segment_end = hitters[index + 1].start() if index + 1 < len(hitters) else len(page)
         segment = page[match.end():segment_end]
-        teams.append({"players": players, "summary": _summary_counts(segment)})
+        # Only batting and baserunning lists; pitching lists name pitchers
+        # ("HBP: Matthew Hart (2)" = batters he hit).
+        offense = "".join(
+            block
+            for block in segment.split('<div class="stats-summary">')
+            if re.search(r'<div class="caption">\s*(?:Batting|Baserunning)\s*</div>', block)
+        )
+        teams.append({"players": players, "summary": _summary_counts(offense)})
 
     return teams
 
@@ -130,7 +137,7 @@ def main(argv: list[str]) -> int:
     out = Path(argv[1])
     links = [link for schedule in argv[2:] for link in boxscore_links(schedule)]
 
-    with ThreadPoolExecutor(2) as pool:
+    with ThreadPoolExecutor(1) as pool:
         games = [game for game in pool.map(harvest_game, links) if game and game["plays"]]
 
     out.write_text("\n".join(json.dumps(game) for game in games), encoding="utf-8")
