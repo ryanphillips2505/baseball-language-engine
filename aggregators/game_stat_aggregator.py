@@ -229,6 +229,50 @@ def aggregate_game_stats(game: Game) -> dict[str, dict[str, int]]:
                 if runner_event.base in {"2B", "3B"}:
                     stats[player][f"CS-{runner_event.base}"] += 1
 
+    if game.source and game.source != "gamechanger":
+        _add_reach_and_runner_stats(game, stats)
+
     return stats
+
+
+# Opponent IQ Legacy definitions (backend stat_engine):
+#   H    batter singles (incl. bunt single) or doubles / triples / homers
+#   ROE  batter reaches on an error
+#   FC   batter reaches on a fielder's choice (not an FC double play)
+#   PR / CR  pinch / courtesy runner entering the game
+_HIT_EVENTS = {
+    EventType.SINGLE,
+    EventType.DOUBLE,
+    EventType.TRIPLE,
+    EventType.HOME_RUN,
+}
+
+
+def _add_reach_and_runner_stats(game: Game, stats: dict[str, dict[str, int]]) -> None:
+    """Non-GameChanger games only; GameChanger output keeps its keys."""
+    for player_stats in stats.values():
+        for key in ("H", "ROE", "FC", "PR", "CR"):
+            player_stats.setdefault(key, 0)
+
+    for pa in game.plate_appearances:
+        if not pa.batter_name or not pa.baseball_event:
+            continue
+
+        event = pa.baseball_event.primary_event
+        player_stats = stats[pa.batter_name]
+
+        if event in _HIT_EVENTS:
+            player_stats["H"] += 1
+        elif event == EventType.ERROR:
+            player_stats["ROE"] += 1
+        elif event == EventType.FIELDERS_CHOICE:
+            player_stats["FC"] += 1
+
+    for runner, key in game.runner_entries:
+        if runner not in stats:
+            stats[runner] = _empty_player_stats()
+            for empty_key in ("H", "ROE", "FC", "PR", "CR"):
+                stats[runner][empty_key] = 0
+        stats[runner][key] += 1
 
 

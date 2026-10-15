@@ -54,6 +54,15 @@ HITTING_KEYS = [
 ]
 
 
+REACH_KEYS = [
+    "H",
+    "ROE",
+    "FC",
+    "PR",
+    "CR",
+]
+
+
 def adapt_player_stats_to_opponent_iq(
     player_stats: dict[str, int],
 ) -> dict[str, int]:
@@ -76,6 +85,12 @@ def adapt_player_stats_to_opponent_iq(
     hitting["1B"] = player_stats.get("1B", 0) + player_stats.get("LOC_1B", 0)
     hitting["2B"] = player_stats.get("2B", 0) + player_stats.get("LOC_2B", 0)
     hitting["3B"] = player_stats.get("3B", 0) + player_stats.get("LOC_3B", 0)
+
+    # Legacy reach / runner stats. Present only for non-GameChanger games
+    # (see aggregate_game_stats), so GameChanger output is unchanged.
+    for key in REACH_KEYS:
+        if key in player_stats:
+            hitting[key] = player_stats[key]
 
     locations = {}
 

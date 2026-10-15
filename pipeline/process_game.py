@@ -9,6 +9,7 @@ from cleaners.mlb_statsapi_cleaner import (
 from cleaners.mlb_timeline_cleaner import clean_mlb_timeline_text
 from detectors.source_detector import SourceType, detect_source_with_language_fallbacks
 from language.reader import build_multi_platform_plate_appearance
+from language.substitutions import extract_runner_entries
 from models.game import Game
 
 
@@ -17,7 +18,7 @@ def process_game(raw_text: str) -> Game:
     # the Gameday text cleaner retains JSON chrome as false play lines.
     if looks_like_mlb_statsapi_live_feed(raw_text):
         blocks = clean_mlb_statsapi_timeline_text(raw_text)
-        return build_game(blocks)
+        return _mark_multi_platform(build_game(blocks), "mlb", raw_text)
 
     source = detect_source_with_language_fallbacks(raw_text)
 
@@ -31,10 +32,18 @@ def process_game(raw_text: str) -> Game:
     if source == SourceType.GAMECHANGER:
         return build_game(blocks)
 
-    return build_game(
+    game = build_game(
         blocks,
         plate_appearance_builder=build_multi_platform_plate_appearance,
     )
+    return _mark_multi_platform(game, source.value, raw_text)
+
+
+def _mark_multi_platform(game: Game, source: str, raw_text: str) -> Game:
+    """Tag a non-GameChanger game so the aggregator adds H/ROE/FC/PR/CR."""
+    game.source = source
+    game.runner_entries = extract_runner_entries(raw_text)
+    return game
 
 
 __all__ = [

@@ -14,6 +14,11 @@ class Game:
     # Source-supplied pitch events (e.g. MLB StatsAPI), including pitches that
     # occur on runner-only timeline plays and therefore are not PA-attached.
     pitch_events: list[PitchEvent] = field(default_factory=list)
+    # Set by process_game for non-GameChanger sources only. GameChanger
+    # games leave both empty so their reading is unchanged.
+    source: str | None = None
+    # (runner name, "PR" | "CR") from pinch/courtesy runner lines.
+    runner_entries: list[tuple[str, str]] = field(default_factory=list)
 
     def players_in_game(self) -> set[str]:
         players: set[str] = set()
