@@ -21,7 +21,7 @@ _COLLEGE_ACTION_RE = re.compile(
     r"hit a ground[- ]rule double|ground[- ]rule|"
     r"out at first|safe at first|safe at second|safe at third|sacrificed|sacrified|"
     r"reached on|reached first on|reached on infield single|reached on bunt single|bunt single|"
-    r"intentionally walked|picked off|infield fly|"
+    r"intentionally walked|picked off|infield fly|batter's interference|"
     # ESPN sometimes glues the base on: "caught stealingsecond".
     r"stole|caught stealing|caught stealing(?:second|third|home)|"
     # Present tense: college scorecards imported from GameChanger-style

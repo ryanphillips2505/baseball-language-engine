@@ -106,6 +106,10 @@ _BATTER_OUTCOME_RULES: list[tuple[re.Pattern, EventType]] = [
         ),
         EventType.ERROR,
     ),
+    # SIDEARM: "reached first on a dropped fly by cf" (no word "error").
+    (re.compile(r"\breach(?:es|ed)(?: first)? on (?:a |an )?dropped (?:foul )?fly\b", re.I), EventType.ERROR),
+    # The batter is out and charged an at-bat, like a field out.
+    (re.compile(r"\bout on batter'?s interference\b", re.I), EventType.FIELD_OUT),
     (re.compile(r"\bsafe at first on (?:a )?fielder'?s choice\b", re.I), EventType.FIELDERS_CHOICE),
     (re.compile(r"\binto (?:a )?force out\b", re.I), EventType.FIELDERS_CHOICE),
     # "sacrified" is a real ESPN misspelling.
@@ -124,6 +128,11 @@ _BATTER_OUTCOME_RULES: list[tuple[re.Pattern, EventType]] = [
     (re.compile(r"^[^;]*?\bout at first\b", re.I), EventType.FIELD_OUT),
 ]
 
+_DROPPED_THIRD_OUT_RE = re.compile(
+    r"^[^;]*\b(?:struck|strikes) out\b[^;]*?,\s*(?:grounded out|thrown out|out at first)\b",
+    re.I,
+)
+
 _CAUGHT_STEALING_RE = re.compile(r"\bcaught stealing\b", re.I)
 _PICKED_OFF_RE = re.compile(r"\bpicked off\b", re.I)
 
@@ -138,6 +147,23 @@ _RUNNER_LEAD_RE = re.compile(
 
 
 def _detect_events(text: str) -> list[DetectedEvent]:
+    # "struck out swinging, grounded out to c unassisted": a dropped third
+    # strike where the batter is then retired is a strikeout (box SO), not
+    # a ball in play.
+    if _DROPPED_THIRD_OUT_RE.search(text):
+        detected = event_detector.detect_event_types(text)
+        strikeout = next(
+            (
+                event
+                for event in detected
+                if event.event_type
+                in {EventType.STRIKEOUT, EventType.STRIKEOUT_SWINGING, EventType.STRIKEOUT_LOOKING}
+            ),
+            None,
+        ) or DetectedEvent(event_type=EventType.STRIKEOUT)
+        strikeout.make_primary()
+        return [strikeout]
+
     # Looked up on the module at call time so applications that patch
     # BLE detectors at runtime (Opponent IQ's iScore support) still apply.
     events = event_detector.detect_event_types(text)
@@ -218,6 +244,7 @@ _BATTER_VERBS = [
     # SIDEARM bare forms: "Castro sacrifice fly to rf", "Castro flew into
     # double play to rf".
     "sacrifice fly", "sacrifice bunt", "flew into", "flew out",
+    "out on batter's interference", "out on batters interference",
 ]
 
 _BATTER_VERB_RE = re.compile(
@@ -394,6 +421,7 @@ _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bliner\b", re.I), "FB"),
     # SIDEARM: "Castro flew out to rf", "Castro flew into double play".
     (re.compile(r"\bflew (?:out|into)\b", re.I), "FB"),
+    (re.compile(r"\bdropped (?:foul )?fly\b", re.I), "FB"),
 ]
 
 # StatCrew singles (past tense only, read on the original wording because
@@ -402,8 +430,18 @@ _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
 # Opponent IQ's Presto lane has read it; up the middle / through a side is
 # a ground ball.
 _STATCREW_SINGLE_TYPE_RULES: list[tuple[re.Pattern, str]] = [
-    (re.compile(r"\bsingled\b[^;,]*?\b(?:(?:left|right)[\s-]center|shallow)\b", re.I), "FB"),
-    (re.compile(r"\bsingled (?:up the middle|through the (?:left|right) side)\b", re.I), "GB"),
+    (
+        re.compile(
+            r"\bsingled\b[^;,]*?\b(?:(?:left|right)[\s-]center|shallow|deep|"
+            r"down the (?:lf|rf|left field|right field) line)\b",
+            re.I,
+        ),
+        "FB",
+    ),
+    (re.compile(r"\bup the middle\b|\bthrough the (?:left|right) side\b", re.I), "GB"),
+    # Home runs and ground-rule doubles are fly balls even with no
+    # direction given ("homered, 2 RBI").
+    (re.compile(r"\bhomered\b|\bground[- ]rule\b", re.I), "FB"),
 ]
 
 
@@ -414,6 +452,28 @@ def _statcrew_single_type(raw_action: str) -> str | None:
     for pattern, value in _STATCREW_SINGLE_TYPE_RULES:
         if pattern.search(raw_action.split(";", 1)[0]):
             return value
+    return None
+
+
+# Where the batted ball went when the sentence names only an error:
+# "singled, advanced to second on an error by cf" / "reached on an error
+# by Smith (E4)". Used only when no other location was read.
+_ERROR_FIELDER_RE = re.compile(r"\berror by (?P<pos>lf|cf|rf|ss|2b|3b|1b|p|c)\b", re.I)
+_ERROR_NUMBER_RE = re.compile(r"\(E(?P<num>[1-9])\)")
+_POSITION_BY_NUMBER = {
+    "1": "P", "2": "C", "3": "1B", "4": "2B", "5": "3B",
+    "6": "SS", "7": "LF", "8": "CF", "9": "RF",
+}
+
+
+def _error_fielder_location(raw_action: str) -> str | None:
+    clause = raw_action.split(";", 1)[0]
+    named = _ERROR_FIELDER_RE.search(clause)
+    if named:
+        return named.group("pos").upper()
+    numbered = _ERROR_NUMBER_RE.search(clause)
+    if numbered:
+        return _POSITION_BY_NUMBER[numbered.group("num")]
     return None
 
 
@@ -634,6 +694,8 @@ def build_multi_platform_plate_appearance(
         ball_type = label[1]
 
     location = classify_fielder_location(text, primary) if is_bip else None
+    if location is None and is_bip:
+        location = _error_fielder_location(raw_action)
 
     if pitches is None:
         pitches = _pitch_decisions(pa_block, raw_action, is_bip)
@@ -667,12 +729,14 @@ def infer_statcrew_ball_types(game) -> None:
     by the catcher) -> GB. College games only; stated ball types win.
     """
     for pa in game.plate_appearances:
-        if not pa.is_bip or pa.ball_type is not None or pa.location is None:
+        if not pa.is_bip or pa.ball_type is not None:
             continue
         primary = pa.baseball_event.primary_event if pa.baseball_event else None
         hint = getattr(pa, "statcrew_single_type", None)
         if hint is not None:
             pa.ball_type = hint
+        elif pa.location is None:
+            continue
         elif pa.location in _INFIELD_LOCATIONS:
             pa.ball_type = "GB"
         elif primary == EventType.SINGLE or (primary == EventType.ERROR and pa.location == "C"):

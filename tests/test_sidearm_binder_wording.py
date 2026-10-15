@@ -109,3 +109,27 @@ def test_statcrew_sac_without_the_word_bunt_is_a_bunt():
     assert player["BUNT"] == 1
     assert player["GB"] == 0
     assert player["LOC_3B"] == 1
+
+
+@pytest.mark.parametrize(
+    ("line", "expect"),
+    [
+        ("Isaac Webb homered, 3 RBI; Dagen Brewer scored.", {"BIP": 1, "HR": 1, "FB": 1}),
+        ("Dagen Brewer doubled, ground-rule (0-1 F); Eric Bacon advanced to third.", {"BIP": 1, "FB": 1}),
+        ("Seth Dandridge singled, advanced to second on an error by cf (1-2 KBF).", {"H": 1, "GB": 1, "LOC_CF": 1}),
+        ("Landon Bruce singled, bunt, advanced to second on a throwing error by c (0-0).", {"H": 1, "BUNT": 1, "LOC_C": 1}),
+        ("Ben Green reached first on a dropped fly by cf, advanced to second (2-2 KBBF).", {"BIP": 1, "H": 0, "FB": 1, "LOC_CF": 1}),
+        ("Smith struck out swinging, grounded out to c unassisted.", {"K": 1, "BIP": 0}),
+        ("Max Tremblay reached on an error by Jackson Riedling (E4) (0-1 S).", {"BIP": 1, "GB": 1, "LOC_2B": 1}),
+        ("Mason Shimkus out on batter's interference.", {"BIP": 1, "K": 0}),
+        ("Mason Shimkus reached on a fielder's choice hit through the left side of the infield (0-1 K).", {"BIP": 1, "GB": 1}),
+        ("Eric Bacon singled down the rf line; Jadyn McNealy advanced to third.", {"H": 1, "FB": 1, "LOC_RF": 1}),
+        ("Logan Rose singled to deep center field (2-1 BKB).", {"H": 1, "FB": 1, "LOC_CF": 1}),
+    ],
+)
+def test_presto_lane_parity_wordings(line, expect):
+    stats = aggregate_game_stats(process_game(f"Top of 1st\n{line}\n{FILLER}\n"))
+    player = next(v for name, v in stats.items() if not name.startswith(("A,", "C,", "E,", "G,", "I,")))
+
+    for key, value in expect.items():
+        assert int(player.get(key) or 0) == value, (key, player.get(key))
