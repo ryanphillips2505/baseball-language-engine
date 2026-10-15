@@ -77,3 +77,27 @@ def test_dropped_third_strike_reach_is_still_a_strikeout():
 
     assert player["K"] == 1
     assert player["BIP"] == 0
+
+
+@pytest.mark.parametrize(
+    ("line", "ball_type", "location"),
+    [
+        ("Logan Jeske singled to left center.", "FB", "LOC_LF"),
+        ("Mason Shimkus singled to shallow center field (0-0).", "FB", "LOC_CF"),
+        ("Logan Jeske singled up the middle.", "GB", "LOC_CF"),
+        ("Diego Sotelo grounded out, ss to 1b (1-0 B).", "GB", "LOC_SS"),
+        ("Blake Seefeldt grounded into double play ss to 2b to 1b; Ryan Strickland out on the play.", "GB", "LOC_SS"),
+    ],
+)
+def test_statcrew_spray_matches_the_fielder_who_played_the_ball(line, ball_type, location):
+    name = " ".join(line.split()[:2])
+    player = _player(line, name)
+
+    assert player[ball_type] == 1
+    assert player[location] == 1
+
+
+def test_batter_advance_is_not_a_fielder_location():
+    player = _player("Tyler Akers doubled, advanced to third on the throw, RBI.", "Tyler Akers")
+
+    assert player["LOC_3B"] == 0

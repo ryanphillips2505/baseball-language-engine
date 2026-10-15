@@ -298,6 +298,11 @@ _RUNNER_CLAUSE_RE = re.compile(
     r"(?:advanced to|advances to|to|scored|scores|out at|stole|steals|remains at)\b[^,;]*",
 )
 
+_BATTER_ADVANCE_RE = re.compile(
+    r",\s*(?:advanced|advances|went) to (?:first|second|third|home)\b[^,;]*",
+    re.I,
+)
+
 # "pitcher" on its own is a fielder; "pitching" and "pitches" are not.
 # A pitcher clause such as "Smith pitching" is removed before reading.
 _PITCHING_CLAUSE_RE = re.compile(r",\s*[^,;]*\bpitching\b[^,;]*", re.I)
@@ -316,6 +321,9 @@ def batter_clause(text: str) -> str:
     # own "Last, F." name is never mistaken for one.
     head, tail = first_sentence[:start], first_sentence[start:]
     tail = _RUNNER_CLAUSE_RE.sub("", tail)
+    # The batter's own advance ("doubled, advanced to third on the throw")
+    # names a base, not the fielder.
+    tail = _BATTER_ADVANCE_RE.sub("", tail)
     return head + _PITCHING_CLAUSE_RE.sub("", tail)
 
 
@@ -387,6 +395,23 @@ _EXTRA_BALL_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     # SIDEARM: "Castro flew out to rf", "Castro flew into double play".
     (re.compile(r"\bflew (?:out|into)\b", re.I), "FB"),
 ]
+
+# StatCrew singles (past tense only, read on the original wording because
+# the normalizer folds "shallow center field" / "up the middle" into
+# "center field"): into the gap or shallow outfield is a line drive, as
+# Opponent IQ's Presto lane has read it; up the middle / through a side is
+# a ground ball.
+_STATCREW_SINGLE_TYPE_RULES: list[tuple[re.Pattern, str]] = [
+    (re.compile(r"\bsingled\b[^;,]*?\b(?:(?:left|right)[\s-]center|shallow)\b", re.I), "FB"),
+    (re.compile(r"\bsingled (?:up the middle|through the (?:left|right) side)\b", re.I), "GB"),
+]
+
+
+def _statcrew_single_type(raw_action: str) -> str | None:
+    for pattern, value in _STATCREW_SINGLE_TYPE_RULES:
+        if pattern.search(raw_action.split(";", 1)[0]):
+            return value
+    return None
 
 
 def _classify_ball_type(text: str) -> str | None:
@@ -606,7 +631,7 @@ def build_multi_platform_plate_appearance(
     if pitches is None:
         pitches = _pitch_decisions(pa_block, raw_action, is_bip)
 
-    return PlateAppearance(
+    plate_appearance = PlateAppearance(
         batter_name=batter_name,
         baseball_event=baseball_event,
         pitches=pitches,
@@ -615,6 +640,12 @@ def build_multi_platform_plate_appearance(
         location=location,
         is_bip=is_bip,
     )
+    # Never a reading on its own: only infer_statcrew_ball_types (college
+    # games) uses this hint when the play states no ball type.
+    plate_appearance.statcrew_single_type = (
+        _statcrew_single_type(raw_action) if is_bip and ball_type is None else None
+    )
+    return plate_appearance
 
 
 _INFIELD_LOCATIONS = {"SS", "3B", "2B", "1B", "P"}
@@ -632,7 +663,10 @@ def infer_statcrew_ball_types(game) -> None:
         if not pa.is_bip or pa.ball_type is not None or pa.location is None:
             continue
         primary = pa.baseball_event.primary_event if pa.baseball_event else None
-        if pa.location in _INFIELD_LOCATIONS:
+        hint = getattr(pa, "statcrew_single_type", None)
+        if hint is not None:
+            pa.ball_type = hint
+        elif pa.location in _INFIELD_LOCATIONS:
             pa.ball_type = "GB"
         elif primary == EventType.SINGLE or (primary == EventType.ERROR and pa.location == "C"):
             pa.ball_type = "GB"
