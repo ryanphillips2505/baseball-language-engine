@@ -32,6 +32,7 @@ from detectors import event_detector
 from extractors import player_extractor
 from extractors.pitch_token_extractor import extract_pitch_tokens
 from language.normalizer import PITCH_SEQUENCE_RE, normalize_play_text
+from language.result_labels import result_label
 from models.baseball_event import BaseballEvent
 from models.detected_event import DetectedEvent
 from models.pitch_decision import PitchDecision
@@ -517,6 +518,42 @@ def _pitch_decisions(pa_block: str, action_text: str, is_bip: bool):
 # Plate appearance
 # ---------------------------------------------------------------------
 
+def _split_result_label(pa_block: str):
+    """
+    Pull an app result label line ("Ground Out", "Bunt Single") out of
+    the block, and drop PlayMaker's separate "Scored ..." line, so the
+    play sentence is what gets read.
+    """
+    label = None
+    kept = []
+
+    for line in str(pa_block or "").splitlines():
+        stripped = line.strip()
+        found = result_label(stripped) if stripped else None
+
+        if found is not None and label is None:
+            label = found
+            continue
+
+        if stripped.lower().startswith("scored") and kept:
+            continue
+
+        kept.append(line)
+
+    return label, "\n".join(kept) if kept else str(pa_block or "")
+
+
+# "John Smith #12 ..." / "John Smith ..." -> "John Smith"
+_LEADING_NAME_RE = re.compile(
+    r"^((?:[A-ZÀ-Þ][\w'.\-]*\s+){1,3}[A-ZÀ-Þ][\w'.\-]*)(?=\s+(?:#\d+|[a-z]))"
+)
+
+
+def _leading_name(sentence: str) -> str | None:
+    match = _LEADING_NAME_RE.match(str(sentence or "").strip())
+    return _clean_name(match.group(1)) if match else None
+
+
 def build_multi_platform_plate_appearance(
     pa_block: str,
     pitches: list[PitchDecision] | None = None,
@@ -525,20 +562,32 @@ def build_multi_platform_plate_appearance(
     pitches: decisions supplied by the source (MLB StatsAPI pitch data).
     When given they are used as-is instead of reading pitch text.
     """
+    label, pa_block = _split_result_label(pa_block)
+
     raw_action = _action_text(pa_block)
     text = normalize_play_text(raw_action)
 
     detected = _detect_events(text)
     baseball_event: BaseballEvent | None = detected_events_to_baseball_event(detected)
+
+    # The app's own result label decides only when the sentence itself
+    # gave no outcome.
+    if baseball_event is None and label is not None:
+        baseball_event = BaseballEvent(primary_event=label[0], secondary_events=[])
+
     primary = baseball_event.primary_event if baseball_event else None
 
     is_bip = is_ball_in_play(baseball_event)
 
     batter_name = _extract_batter(text, primary)
+    if batter_name is None and label is not None:
+        batter_name = _leading_name(raw_action)
 
     runner_events = _extract_runner_events(text)
 
     ball_type = _classify_ball_type(batter_clause(text)) if is_bip else None
+    if ball_type is None and is_bip and label is not None:
+        ball_type = label[1]
 
     location = classify_fielder_location(text, primary) if is_bip else None
 

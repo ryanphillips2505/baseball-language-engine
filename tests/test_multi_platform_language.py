@@ -255,3 +255,35 @@ def test_gameday_strikeout_and_steal_keeps_both():
     assert stats["Al Cole"]["SB"] == 1
     assert stats["Lindor Ruiz"]["SB-3B"] == 1
     assert stats["Sam Soto"]["SB-2B"] == 1
+
+
+# PlayMaker: result label line + server sentence. Labels come from
+# PlayMaker's own result-code table; the sentences below are stand-ins
+# because real PlayMaker wording has not been captured yet.
+@pytest.mark.parametrize(
+    "block, event, batter, ball_type",
+    [
+        ("Ground Out\nJohn Smith #12 hit to the shortstop", "ground_out", "John Smith", "GB"),
+        ("Bunt, Reached on Error\nJohn Smith #12\nScored Jake Lee", "error", "John Smith", "BUNT"),
+        ("Bunt Single\nJohn Smith #12", "single", "John Smith", "BUNT"),
+        ("Strike Out\nJake Lee #4", "strikeout", "Jake Lee", None),
+        ("Dropped 3rd Strike, Safe\nJake Lee #4", "dropped_third_strike_reach", "Jake Lee", None),
+        ("Intentional Walk\nJake Lee #4", "intentional_walk", "Jake Lee", None),
+    ],
+)
+def test_playmaker_result_label_fallback(block, event, batter, ball_type):
+    pa = build_multi_platform_plate_appearance(block)
+
+    assert pa.baseball_event.primary_event.value == event
+    assert pa.batter_name == batter
+    assert pa.ball_type == ball_type
+
+
+def test_readable_sentence_wins_over_label():
+    pa = build_multi_platform_plate_appearance(
+        "Single\nJohn Smith singles on a line drive to left fielder Al Cole."
+    )
+
+    assert pa.baseball_event.primary_event.value == "single"
+    assert pa.ball_type == "FB"
+    assert pa.location == "LF"
