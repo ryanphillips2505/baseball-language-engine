@@ -130,7 +130,12 @@ def test_surname_fallbacks_are_unique_only():
 
     assert matcher.match("Moutzouridi") == "Pj Moutzouridis"
     assert matcher.match("De La Rosa") == "Jacob De La Rosa"
-    assert matcher.match("Salazar Mata") == "Gabriel Salazar"
+    # Guesses stay unmatched: double surnames, word-boundary cuts, and
+    # trailing-token fits ("Hao-Yu Lee" is not "Yu Lee").
+    assert matcher.match("Salazar Mata") is None
+    assert RosterMatcher(["Al Martinez-Smith"]).match("Martinez") is None
+    assert RosterMatcher(["Yu Lee"]).match("Hao-Yu Lee") is None
+    assert RosterMatcher(["Caught Stealing"]).match("Pickoff Caught Stealing") is None
     # Ambiguous: flagged (unmatched), never guessed.
     assert matcher.match("Johnson, C") is None
     assert matcher.match("Hernande") is None

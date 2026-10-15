@@ -139,13 +139,15 @@ class RosterMatcher:
         if candidates:
             return None
 
-        # SIDEARM also cuts long surnames ("Moutzouridi" for Moutzouridis);
-        # a long prefix of exactly one roster surname is that player.
-        if len(given.last) >= _MIN_CUT_SURNAME:
+        # SIDEARM also cuts long surnames ("Moutzouridi" for Moutzouridis).
+        # The cut must fall inside one roster surname word, so "Martinez"
+        # never becomes "Martinez-Smith".
+        if len(given.last_tokens) == 1 and len(given.last) >= _MIN_CUT_SURNAME:
             candidates = [
                 roster_name
                 for roster_name, parts in self._parts
-                if parts.last != given.last
+                if len(parts.last_tokens) == 1
+                and len(parts.last) > len(given.last)
                 and parts.last.startswith(given.last)
                 and _first_fits(given.first, parts.first)
             ]
@@ -157,20 +159,13 @@ class RosterMatcher:
         if "," in str(name):
             return None
 
-        # Surname-only play wording ("De La Rosa strikes out", "Salazar
-        # Mata singles"): read every token as last name. A double surname
-        # also fits a roster entry carrying only the first ("Gabriel
-        # Salazar"). Still unique-only.
+        # Surname-only play wording ("De La Rosa strikes out"): every token
+        # is the last name, matched whole and unique-only.
         tokens = tuple(t for t in _tokens(name) if t not in _SUFFIXES)
         if len(tokens) < 2:
             return None
-        as_last = NameParts(first="", last="".join(tokens), last_tokens=tokens)
-        candidates = [
-            roster_name
-            for roster_name, parts in self._parts
-            if _last_fits(as_last, parts)
-            or (len(tokens) == 2 and parts.last_tokens == tokens[:1])
-        ]
+        whole = "".join(tokens)
+        candidates = [roster_name for roster_name, parts in self._parts if parts.last == whole]
         return candidates[0] if len(candidates) == 1 else None
 
 
