@@ -16,6 +16,7 @@ ROSTER = [
     "Cody Thomas",
     "Chris Thomas",
     "Anthony Lazits",
+    "Mattew Villanueva",
 ]
 
 
@@ -36,6 +37,8 @@ ROSTER = [
         ("Luis Robert", "Luis Robert Jr."),
         ("Ch. Thomas", "Chris Thomas"),
         ("Lazits,Anto", "Anthony Lazits"),
+        # PrestoSports cuts names at 12 characters.
+        ("M. Villanuev", "Mattew Villanueva"),
     ],
 )
 def test_play_by_play_names_resolve_to_roster(pbp_name, roster_name):
@@ -76,3 +79,9 @@ X. Visitor struck out swinging (0-2 KS).
     assert players["Lawson DeVault"]["SB"] == 1
     assert players["James Wilson"]["BIP"] == 1
     assert players["James Wilson"]["LF"] == 1
+
+
+def test_present_tense_college_scorecard_is_read():
+    from cleaners.college_cleaner import clean_college_text
+
+    assert clean_college_text("DeVault walks, Garza pitching") == ["DeVault walks, Garza pitching"]

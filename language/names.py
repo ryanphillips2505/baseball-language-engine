@@ -91,10 +91,17 @@ def _first_fits(given: str, roster_first: str) -> bool:
     return True
 
 
-def _last_fits(given: NameParts, roster: NameParts) -> bool:
+# PrestoSports cuts play-by-play names to 12 characters
+# ("M. Villanuev" for Mattew Villanueva).
+_TRUNCATED_LENGTH = 12
+
+
+def _last_fits(given: NameParts, roster: NameParts, truncated: bool = False) -> bool:
     if not given.last:
         return False
     if given.last == roster.last:
+        return True
+    if truncated and len(given.last) >= 4 and roster.last.startswith(given.last):
         return True
     # "Cruz" vs roster "De La Cruz"; "De La Cruz" vs roster "Cruz".
     return given.last_tokens[-1:] == roster.last_tokens[-1:] and (
@@ -119,10 +126,11 @@ class RosterMatcher:
             return exact[0]
 
         given = parse_name(name)
+        truncated = len(str(name).strip()) == _TRUNCATED_LENGTH
         candidates = [
             roster_name
             for roster_name, parts in self._parts
-            if _last_fits(given, parts) and _first_fits(given.first, parts.first)
+            if _last_fits(given, parts, truncated) and _first_fits(given.first, parts.first)
         ]
 
         if len(candidates) == 1:

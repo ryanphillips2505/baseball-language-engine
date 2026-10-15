@@ -18,7 +18,13 @@ _COLLEGE_ACTION_RE = re.compile(
     r"reached on|reached on infield single|reached on bunt single|bunt single|"
     r"intentionally walked|picked off|infield fly|"
     # ESPN sometimes glues the base on: "caught stealingsecond".
-    r"stole|caught stealing|caught stealing(?:second|third|home)"
+    r"stole|caught stealing|caught stealing(?:second|third|home)|"
+    # Present tense: college scorecards imported from GameChanger-style
+    # scoring ("DeVault walks, Garza pitching").
+    r"singles|doubles|triples|homers|walks|"
+    r"grounds out|grounds into|flies out|flies into|lines out|lines into|"
+    r"pops out|pops into|bunts|reaches|is hit by pitch|hits a|hits an|"
+    r"out on a sacrifice|sacrifices|steals|picks off"
     r")\b",
     re.I,
 )

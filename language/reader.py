@@ -219,6 +219,8 @@ def _clean_name(name: str | None) -> str | None:
         return None
 
     cleaned = re.sub(r"\s+", " ", name).strip(" ,;:")
+    # "M. Caputo was picked off" -> "M. Caputo"
+    cleaned = re.sub(r"\s+(?:was|is|has|had)$", "", cleaned)
 
     # iScore: "Ball 4. #12 John Smith" / "#12 John Smith" -> "John Smith".
     if "#" in cleaned:
