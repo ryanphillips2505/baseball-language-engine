@@ -1,4 +1,4 @@
-﻿from assemblers.plate_appearance_builder import build_plate_appearance
+from assemblers.plate_appearance_builder import build_plate_appearance
 from models.types import EventType
 
 
@@ -14,5 +14,6 @@ def test_gamechanger_bunts_into_fielders_choice_to_catcher():
     assert pa.batter_name == "Braxton Bacon"
     assert pa.is_bip is True
     assert pa.ball_type == "BUNT"
-    assert pa.location == "C"
+    # The pitcher fielded the bunt (throw went to the catcher).
+    assert pa.location == "P"
     assert pa.baseball_event.primary_event == EventType.FIELDERS_CHOICE
