@@ -256,6 +256,9 @@ _BATTER_VERBS = [
     # double play to rf".
     "sacrifice fly", "sacrifice bunt", "flew into", "flew out",
     "out on batter's interference", "out on batters interference",
+    # SIDEARM: "Chris Benavidez infield singled to third base".
+    "infield singled", "infield single",
+    "ground-rule doubled", "ground rule doubled",
     "is hit by the ball",
 ]
 

@@ -100,6 +100,9 @@ def _first_fits(given: str, roster_first: str) -> bool:
     # first name ("Brainer Bonaci"), as on PlayMaker box scores.
     if len(roster_first) <= 2 and given.startswith(roster_first):
         return True
+    # Box rosters cut long first names ("Jose Griswold" for Joseph).
+    if len(roster_first) >= 3 and given.startswith(roster_first):
+        return True
     if given[0] != roster_first[0]:
         return False
     # Abbreviation whose letters appear in order: "js" -> "josh".

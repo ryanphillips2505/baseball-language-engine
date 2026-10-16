@@ -159,3 +159,12 @@ def test_iscore_wordings_read_natively(line, event):
     assert cleaned
     pa = build_multi_platform_plate_appearance(cleaned[0])
     assert pa.baseball_event.primary_event.value.startswith(event)
+
+
+def test_more_statcrew_batter_verbs_and_short_first_names():
+    from language.reader import build_multi_platform_plate_appearance
+
+    assert build_multi_platform_plate_appearance("Chris Benavidez infield singled to third base (1-1 SB).").batter_name == "Chris Benavidez"
+    assert build_multi_platform_plate_appearance("Kole Kinnison ground-rule doubled to left center.").batter_name == "Kole Kinnison"
+    assert RosterMatcher(["Jose Griswold", "Caiden Hubbard"]).match("Joseph Griswold") == "Jose Griswold"
+    assert RosterMatcher(["Jo Smith", "Joseph Smith"]).match("Joseph Smith") == "Joseph Smith"
