@@ -49,8 +49,32 @@ def batting_boxes(text: str) -> list[dict[str, dict[str, int]]]:
             index += 7
             ab, r, h, rbi, bb, k, _lob = (int(n) for n in numbers)
             box[name] = {"AB": ab, "R": r, "H": h, "RBI": rbi, "BB": bb, "K": k}
-        boxes.append(box)
+        totals = lines[index + 1 : index + 8] if index < len(lines) and lines[index] == "Totals" else []
+        boxes.append({"rows": box, "totals": [int(n) for n in totals] if all(_INT_RE.match(n) for n in totals) else []})
     return boxes
+
+
+def usable_box(box: dict) -> dict[str, dict[str, int]]:
+    """
+    Rows that can judge BLE. PlayMaker sometimes prints rows with no real
+    name ("E.", ". Mikey Hannaberry") or leaves hitters out entirely; a box
+    whose rows do not add up to its Totals line is skipped.
+    """
+    rows = box["rows"]
+    totals = box["totals"]
+    if len(totals) < 6:
+        return {}
+    for position, key in ((0, "AB"), (2, "H"), (4, "BB"), (5, "K")):
+        if sum(row[key] for row in rows.values()) != totals[position]:
+            return {}
+    return {
+        name: stats
+        for name, stats in rows.items()
+        if _NAMED_ROW_RE.match(name)
+    }
+
+
+_NAMED_ROW_RE = re.compile(r"^[A-ZÀ-Þ][\w'\-]*\.?\s+[A-ZÀ-Þ][\w'\-]")
 
 
 def score_game(text: str) -> tuple[str, int, int, list[str]]:
@@ -58,8 +82,11 @@ def score_game(text: str) -> tuple[str, int, int, list[str]]:
     stats = aggregate_game_stats(process_game(text))
     checks = errors = 0
     misses: list[str] = []
-    for box in batting_boxes(text):
-        resolved, _unmatched = resolve_player_stats(stats, list(box))
+    for raw_box in batting_boxes(text):
+        box = usable_box(raw_box)
+        if not box:
+            continue
+        resolved, _unmatched = resolve_player_stats(stats, list(raw_box["rows"]))
         for name, expected in box.items():
             got = resolved.get(name, {})
             for key in ("H", "BB", "K"):

@@ -39,7 +39,8 @@ def test_box_parser_reads_rows_without_a_position():
     boxes = batting_boxes(_text())
 
     assert len(boxes) == 2
-    assert boxes[1]["Y. Bucce"] == {"AB": 5, "R": 1, "H": 1, "RBI": 0, "BB": 0, "K": 2}
+    assert boxes[1]["rows"]["Y. Bucce"] == {"AB": 5, "R": 1, "H": 1, "RBI": 0, "BB": 0, "K": 2}
+    assert boxes[1]["totals"][:6] == [29, 8, 6, 7, 10, 11]
 
 
 def test_initial_box_names_match_full_play_names():

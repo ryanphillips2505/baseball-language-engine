@@ -51,6 +51,17 @@ def looks_like_playmaker_text(raw_text: str) -> bool:
     )
 
 
+_SCOREBOARD_MARKERS = {"scoreboard", "live streaming", "batting", "scoring summary"}
+
+
+def _is_end_of_plays(lines: list[str], index: int) -> bool:
+    """The scoreboard: 'PFA' / '5' / 'Bottom 7th' (team, score), or its labels."""
+    line = lines[index]
+    if line.lower() in _SCOREBOARD_MARKERS or line.lower().startswith(("on deck:", "current batter:")):
+        return True
+    return index + 1 < len(lines) and lines[index + 1].isdigit() and not line.isdigit()
+
+
 def _sentence(line: str) -> str:
     line = _FIELDER_CREDITS_RE.sub("", line)
     return _JERSEY_SUFFIX_RE.sub("", line).strip()
@@ -85,7 +96,8 @@ def clean_playmaker_text(raw_text: str) -> list[str]:
                 continue
 
         # Past the play list (scoreboard, boxes, scoring summary): stop.
-        if current is not None and any(halves):
+        # Lineup notes inside it ("Evan Shin #1 was skipped") are skipped.
+        if current is not None and _is_end_of_plays(lines, index):
             break
 
         index += 1
