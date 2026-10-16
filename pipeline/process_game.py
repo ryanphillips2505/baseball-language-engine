@@ -13,14 +13,19 @@ from language.substitutions import extract_runner_entries
 from models.game import Game
 
 
-def process_game(raw_text: str) -> Game:
+def process_game(raw_text: str, source: SourceType | None = None) -> Game:
+    """
+    source: pass when the caller already knows the platform (e.g. a college
+    SCOUTBINDER export reading a Sidearm page); otherwise it is detected.
+    """
     # StatsAPI JSON must use the MLB StatsAPI cleaner. Passing raw JSON through
     # the Gameday text cleaner retains JSON chrome as false play lines.
-    if looks_like_mlb_statsapi_live_feed(raw_text):
+    if source is None and looks_like_mlb_statsapi_live_feed(raw_text):
         blocks = clean_mlb_statsapi_timeline_text(raw_text)
         return _mark_multi_platform(build_game(blocks), "mlb", raw_text)
 
-    source = detect_source_with_language_fallbacks(raw_text)
+    if source is None:
+        source = detect_source_with_language_fallbacks(raw_text)
 
     if source == SourceType.MLB:
         blocks = clean_mlb_timeline_text(raw_text)

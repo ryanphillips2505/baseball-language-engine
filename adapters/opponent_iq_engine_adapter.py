@@ -24,8 +24,9 @@ def _sum_team_totals(game_players: dict[str, dict[str, int]]) -> dict[str, int]:
 
 def process_raw_text_to_opponent_iq_stats(
     raw_text: str,
+    source=None,
 ) -> dict[str, dict[str, int]]:
-    game = process_game(raw_text)
+    game = process_game(raw_text, source=source)
     game_stats = aggregate_game_stats(game)
 
     return adapt_game_stats_to_opponent_iq(game_stats)
@@ -33,8 +34,10 @@ def process_raw_text_to_opponent_iq_stats(
 
 def process_raw_text_to_opponent_iq_game(
     raw_text: str,
+    source=None,
 ) -> tuple[dict[str, int], dict[str, dict[str, int]]]:
-    game_players = process_raw_text_to_opponent_iq_stats(raw_text)
+    """source: a SourceType when the caller already knows the platform."""
+    game_players = process_raw_text_to_opponent_iq_stats(raw_text, source=source)
     game_team = _sum_team_totals(game_players)
 
     return game_team, game_players
