@@ -36,6 +36,8 @@ _ADMIN_PATTERNS: list[tuple[re.Pattern[str], str]] = [
         ),
         "abs_review",
     ),
+    # Gameday's ABS panel: "ABS Challenge" then "Pitch 1: Overturned".
+    (re.compile(r"^Pitch\s+\d+:\s*(?:Overturned|Confirmed)\b", re.I), "abs_review"),
     (re.compile(r"^ABS Challenge$", re.I), "abs_challenge"),
     (re.compile(r"^Challenging Team$", re.I), "abs_challenge"),
     (re.compile(r"^Injury Delay\b", re.I), "injury_delay"),
