@@ -4,6 +4,7 @@ from cleaners.college_cleaner import clean_college_text
 from cleaners.gamechanger_cleaner import clean_gamechanger_text
 from cleaners.iscore_cleaner import clean_iscore_text
 from cleaners.mlb_cleaner import clean_mlb_text
+from cleaners.playmaker_cleaner import clean_playmaker_text
 from cleaners.types import CleanedPlateAppearanceBlocks, Cleaner
 from detectors.source_detector import SourceType, detect_source
 
@@ -17,6 +18,7 @@ CLEANERS: dict[SourceType, Cleaner] = {
     SourceType.ISCORE: clean_iscore_text,
     SourceType.MLB: clean_mlb_text,
     SourceType.COLLEGE: clean_college_text,
+    SourceType.PLAYMAKER: clean_playmaker_text,
 }
 
 

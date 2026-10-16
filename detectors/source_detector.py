@@ -9,6 +9,7 @@ class SourceType(str, Enum):
     ISCORE = "iscore"
     MLB = "mlb"
     COLLEGE = "college"
+    PLAYMAKER = "playmaker"
     UNKNOWN = "unknown"
 
 
@@ -93,6 +94,14 @@ def detect_source(raw_text: str) -> SourceType:
     # Cleaned GameChanger blocks remain explicit and safe.
     if _looks_like_gamechanger_cleaned_blocks(text):
         return SourceType.GAMECHANGER
+
+    # PlayMaker game pages: past-tense "Name #NN grounded out ..." sentences
+    # plus PlayMaker-only markers ("Moved on basepath:", "AS:", "PO:").
+    # GameChanger text has neither, so its detection is unchanged.
+    from cleaners.playmaker_cleaner import looks_like_playmaker_text
+
+    if looks_like_playmaker_text(raw_text):
+        return SourceType.PLAYMAKER
 
     # Cleaned MLB blocks.
     if _looks_like_mlb_cleaned_blocks(text):

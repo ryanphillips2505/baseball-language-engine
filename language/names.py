@@ -56,17 +56,25 @@ class NameParts:
     last_tokens: tuple[str, ...]
 
 
+def _drop_trailing_suffixes(tokens: list[str]) -> list[str]:
+    """'Smith Jr' -> 'Smith'; an initial 'V' ('V. Arias') is not a suffix."""
+    tokens = list(tokens)
+    while len(tokens) > 1 and tokens[-1] in _SUFFIXES:
+        tokens.pop()
+    return tokens
+
+
 def parse_name(name: str) -> NameParts:
     raw = _fold(name)
     raw = re.sub(r"^#\d+\s*", "", raw.strip())
 
     if "," in raw:
         last_part, _, first_part = raw.partition(",")
-        last_tokens = [t for t in _tokens(last_part) if t not in _SUFFIXES and t != ","]
-        first_tokens = [t for t in _tokens(first_part) if t not in _SUFFIXES and t != ","]
+        last_tokens = _drop_trailing_suffixes([t for t in _tokens(last_part) if t != ","])
+        first_tokens = _drop_trailing_suffixes([t for t in _tokens(first_part) if t != ","])
     else:
         tokens = [t.strip(",") for t in _tokens(raw)]
-        tokens = [t for t in tokens if t and t not in _SUFFIXES]
+        tokens = _drop_trailing_suffixes([t for t in tokens if t])
         if len(tokens) <= 1:
             first_tokens, last_tokens = [], tokens
         else:
@@ -83,6 +91,10 @@ def _first_fits(given: str, roster_first: str) -> bool:
     if not roster_first:
         return False
     if given == roster_first or roster_first.startswith(given):
+        return True
+    # Roster/box carries only an initial ("B. Bonaci") and the play the full
+    # first name ("Brainer Bonaci"), as on PlayMaker box scores.
+    if len(roster_first) <= 2 and given.startswith(roster_first):
         return True
     if given[0] != roster_first[0]:
         return False
