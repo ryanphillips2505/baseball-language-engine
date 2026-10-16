@@ -111,6 +111,8 @@ _BATTER_OUTCOME_RULES: list[tuple[re.Pattern, EventType]] = [
     (re.compile(r"\breach(?:es|ed)(?: first)? on (?:a |an )?dropped (?:foul )?fly\b", re.I), EventType.ERROR),
     # The batter is out and charged an at-bat, like a field out.
     (re.compile(r"\bout on batter'?s interference\b", re.I), EventType.FIELD_OUT),
+    # StatCrew: "Preston Smith called out to 1b, RBI" (batter retired).
+    (re.compile(r"\bcalled out to (?!strikes)\w", re.I), EventType.FIELD_OUT),
     # iScore: the batter hit by his own batted ball is out.
     (re.compile(r"\bis hit by the ball and called out\b", re.I), EventType.FIELD_OUT),
     (re.compile(r"\bsafe at first on (?:a )?fielder'?s choice\b", re.I), EventType.FIELDERS_CHOICE),
@@ -259,7 +261,7 @@ _BATTER_VERBS = [
     # SIDEARM: "Chris Benavidez infield singled to third base".
     "infield singled", "infield single",
     "ground-rule doubled", "ground rule doubled",
-    "is hit by the ball",
+    "is hit by the ball", "called out to",
 ]
 
 _BATTER_VERB_RE = re.compile(
@@ -543,6 +545,14 @@ _RUNNER_RULES: list[tuple[re.Pattern, str]] = [
         ),
         "CS",
     ),
+    # "Benavidez is out caught stealing, in a double play": no base named.
+    # Counts toward CS; the per-base split is left alone.
+    (
+        re.compile(
+            rf"(?P<runner>{_RUNNER_NAME})\s+(?:is\s+)?out\s+caught stealing(?=\s*(?:[,;.]|$))"
+        ),
+        "CS",
+    ),
 ]
 
 # A prior sentence glued to the name: "Joe Ryan. Sal Frelick" -> "Sal Frelick".
@@ -562,7 +572,8 @@ def _extract_runner_events(text: str) -> list[RunnerEvent]:
     for pattern, event_type in _RUNNER_RULES:
         for match in pattern.finditer(text):
             runner = _runner_name(match.group("runner"))
-            base = _BASE_WORDS[match.group("base").lower()]
+            named_base = match.groupdict().get("base")
+            base = _BASE_WORDS[named_base.lower()] if named_base else None
             key = (event_type, runner, base)
 
             if key in seen:

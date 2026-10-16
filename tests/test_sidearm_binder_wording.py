@@ -168,3 +168,16 @@ def test_more_statcrew_batter_verbs_and_short_first_names():
     assert build_multi_platform_plate_appearance("Kole Kinnison ground-rule doubled to left center.").batter_name == "Kole Kinnison"
     assert RosterMatcher(["Jose Griswold", "Caiden Hubbard"]).match("Joseph Griswold") == "Jose Griswold"
     assert RosterMatcher(["Jo Smith", "Joseph Smith"]).match("Joseph Smith") == "Joseph Smith"
+
+
+def test_caught_stealing_without_a_base_and_called_out():
+    from detectors.source_detector import SourceType
+
+    stats = aggregate_game_stats(process_game(
+        "Top of 1st\nTrent McCown struck out looking (3-2 BBKFBK); Chris Benavidez is out caught stealing, in a double play.\n"
+        "Preston Smith called out to 1b, RBI (0-0); Christian Gutierrez scored from second base.\n" + FILLER,
+        source=SourceType.COLLEGE,
+    ))
+    assert stats["Chris Benavidez"]["CS"] == 1
+    assert stats["Trent McCown"]["K"] == 1
+    assert stats["Preston Smith"]["BIP"] == 1
