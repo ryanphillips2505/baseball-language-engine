@@ -103,7 +103,8 @@ def main(argv: list[str]) -> int:
     total_checks = total_errors = 0
     worst = []
     for url, text in games.items():
-        if "BATTING" not in text:
+        if "BATTING" not in text or detect_source(text).value != "playmaker":
+            sources["no plays / not PlayMaker"] += 1
             continue
         source, checks, errors, misses = score_game(text)
         sources[source] += 1

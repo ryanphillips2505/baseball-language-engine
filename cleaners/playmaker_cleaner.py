@@ -42,9 +42,40 @@ def _is_label(line: str) -> bool:
     return result_label(line) is not None or " ".join(line.lower().split()) in _EXTRA_LABELS
 
 
+_PAST_TENSE_PLAY_RE = re.compile(
+    r"^[A-ZÀ-Þ][^\n]{0,60}?\s(?:grounded|flew|lined|popped|struck|walked|singled|"
+    r"doubled|tripled|homered|hit into|reached|was|sac|sacrificed|bunted|fouled|"
+    r"infield singled|ground-rule doubled|had catcher's)\b"
+)
+# GameChanger structure never appears on a PlayMaker page.
+_GC_STRUCTURE_RE = re.compile(
+    r"(?im)^\s*(?:top|bottom)\s+\d+(?:st|nd|rd|th)\s+-\s+\S|^\s*(?:ball|strike)\s+\d\b|\bin play\."
+)
+
+
+def _label_sentence_pairs(text: str) -> int:
+    """Result label lines directly followed by a past-tense play sentence."""
+    lines = [" ".join(line.split()) for line in text.splitlines()]
+    lines = [line for line in lines if line]
+    return sum(
+        1
+        for label, sentence in zip(lines, lines[1:])
+        if _is_label(label) and _PAST_TENSE_PLAY_RE.match(sentence)
+    )
+
+
 def looks_like_playmaker_text(raw_text: str) -> bool:
-    """PlayMaker page text: past-tense 'Name #NN' sentences plus its markers."""
+    """
+    PlayMaker page text: result labels each followed by a past-tense play
+    sentence ("Fly Out" / "Bowen Cottrill flew out to right field"), or
+    'Name #NN' sentences with PlayMaker's runner / fielder markers.
+    GameChanger structure vetoes it.
+    """
     text = str(raw_text or "")
+    if _GC_STRUCTURE_RE.search(text):
+        return False
+    if _label_sentence_pairs(text) >= 8:
+        return True
     return (
         len(_PLAYMAKER_SENTENCE_RE.findall(text)) >= 5
         and len(_PLAYMAKER_MARKER_RE.findall(text)) >= 3
@@ -62,9 +93,19 @@ def _is_end_of_plays(lines: list[str], index: int) -> bool:
     return index + 1 < len(lines) and lines[index + 1].isdigit() and not line.isdigit()
 
 
+# Positions coaches type into a player's name ("Carlos Cruz 1b walked").
+_NAME_POSITION_RE = re.compile(
+    r"^([A-ZÀ-Þ][^\n]{0,50}?)\s+(?:1b|2b|3b|ss|lf|cf|rf|dh|picher|pitcher|cacher|catcher)"
+    r"(?=\s+(?:grounded|flew|lined|popped|struck|walked|singled|doubled|tripled|homered|"
+    r"hit|reached|was|sac|sacrificed|bunted|fouled|infield|ground-rule|had)\b)",
+    re.I,
+)
+
+
 def _sentence(line: str) -> str:
     line = _FIELDER_CREDITS_RE.sub("", line)
-    return _JERSEY_SUFFIX_RE.sub("", line).strip()
+    line = _JERSEY_SUFFIX_RE.sub("", line).strip()
+    return _NAME_POSITION_RE.sub(r"\1", line)
 
 
 def clean_playmaker_text(raw_text: str) -> list[str]:

@@ -68,6 +68,47 @@ def _drop_trailing_suffixes(tokens: list[str]) -> list[str]:
     return tokens
 
 
+# Positions coaches type into names ("Carlos Cruz 1b", "E. Luevano Picher").
+_POSITION_WORDS = {
+    "1b", "2b", "3b", "ss", "lf", "cf", "rf", "dh", "ph", "pr",
+    "picher", "pitcher", "cacher", "catcher",
+}
+
+
+def _drop_trailing_positions(tokens: list[str]) -> list[str]:
+    tokens = list(tokens)
+    while len(tokens) > 2 and tokens[-1] in _POSITION_WORDS:
+        tokens.pop()
+    return tokens
+
+
+_NICKNAME_RE = re.compile(r"\(([^)]*)\)")
+_SUFFIX_TOKEN_RE = re.compile(r"\b(jr|sr|ii|iii|iv)\b\.?", re.I)
+
+
+def _identity_marks(name: str) -> tuple[str, str]:
+    """(suffix, nickname) a box uses to tell two same-name players apart."""
+    folded = _fold(name)
+    nickname = _NICKNAME_RE.search(folded)
+    outside = _NICKNAME_RE.sub(" ", folded)
+    suffix = _SUFFIX_TOKEN_RE.search(outside)
+    return (
+        suffix.group(1).lower() if suffix else "",
+        " ".join(nickname.group(1).split()) if nickname else "",
+    )
+
+
+def _tie_break(name: str, candidates: list[str]) -> str | None:
+    suffix, nickname = _identity_marks(name)
+    for wanted, index in ((nickname, 1), (suffix, 0)):
+        if not wanted and index == 1:
+            continue
+        narrowed = [c for c in candidates if _identity_marks(c)[index] == wanted]
+        if len(narrowed) == 1:
+            return narrowed[0]
+    return None
+
+
 def parse_name(name: str) -> NameParts:
     raw = _fold(name)
     raw = re.sub(r"^#\d+\s*", "", raw.strip())
@@ -78,7 +119,7 @@ def parse_name(name: str) -> NameParts:
         first_tokens = _drop_trailing_suffixes([t for t in _tokens(first_part) if t != ","])
     else:
         tokens = [t.strip(",") for t in _tokens(raw)]
-        tokens = _drop_trailing_suffixes([t for t in tokens if t])
+        tokens = _drop_trailing_suffixes(_drop_trailing_positions([t for t in tokens if t]))
         if len(tokens) <= 1:
             first_tokens, last_tokens = [], tokens
         else:
@@ -161,7 +202,9 @@ class RosterMatcher:
         if len(candidates) == 1:
             return candidates[0]
         if candidates:
-            return None
+            # Two "L. Ramirez" on one roster: a matching suffix ("jr") or
+            # nickname ("(Luis Jr)") settles it; otherwise stay unmatched.
+            return _tie_break(name, candidates)
 
         # SIDEARM also cuts long surnames ("Moutzouridi" for Moutzouridis).
         # The cut must fall inside one roster surname word, so "Martinez"

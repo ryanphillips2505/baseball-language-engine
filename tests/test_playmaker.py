@@ -57,3 +57,29 @@ def test_gamechanger_text_is_never_playmaker():
 def test_suffix_only_after_comma_is_not_a_first_name():
     assert parse_name("Stroemer, Jr").first == ""
     assert RosterMatcher(["Paul Stroemer Jr."]).match("Stroemer, Jr") == "Paul Stroemer Jr."
+
+
+def test_same_name_players_split_by_suffix_or_nickname():
+    m = RosterMatcher(["L. Ramírez jr (Luis Jr)", "L. Ramirez (Luis)"])
+
+    assert m.match("Luis angel Ramírez jr (Luis Jr)") == "L. Ramírez jr (Luis Jr)"
+    assert m.match("Luis Norberto Ramirez (Luis)") == "L. Ramirez (Luis)"
+
+
+def test_positions_typed_into_names_are_ignored():
+    m = RosterMatcher(["C. Cruz 1b", "E. Luevano Picher", "J. Luevano Cacher"])
+
+    assert m.match("Carlos Cruz 1b") == "C. Cruz 1b"
+    assert m.match("Eduardo Luevano Picher") == "E. Luevano Picher"
+    assert clean_playmaker_text(
+        "Top 1st\nWalk\nCarlos Cruz 1b walked\nWalk\nRaul Jaime SS walked\n" * 1
+    )[0].endswith("Carlos Cruz walked")
+
+
+def test_reached_on_error_label_overrules_a_stale_single_sentence():
+    from language.reader import build_multi_platform_plate_appearance
+
+    pa = build_multi_platform_plate_appearance(
+        "Reached on Error\nGavin Gonzalez singled to short center field"
+    )
+    assert pa.baseball_event.primary_event.value == "error"

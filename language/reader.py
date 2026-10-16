@@ -633,6 +633,10 @@ def _pitch_decisions(pa_block: str, action_text: str, is_bip: bool):
 # Plate appearance
 # ---------------------------------------------------------------------
 
+_HIT_EVENTS = {EventType.SINGLE, EventType.DOUBLE, EventType.TRIPLE, EventType.HOME_RUN}
+_NO_HIT_RULINGS = {EventType.ERROR, EventType.FIELDERS_CHOICE}
+
+
 def _split_result_label(pa_block: str):
     """
     Pull an app result label line ("Ground Out", "Bunt Single") out of
@@ -688,6 +692,15 @@ def build_multi_platform_plate_appearance(
     # The app's own result label decides only when the sentence itself
     # gave no outcome.
     if baseball_event is None and label is not None:
+        baseball_event = BaseballEvent(primary_event=label[0], secondary_events=[])
+    # The scorer's final ruling: a "Reached on Error" / "Fielder's Choice"
+    # label over a sentence that still says "singled" is not a hit.
+    elif (
+        label is not None
+        and label[0] in _NO_HIT_RULINGS
+        and baseball_event is not None
+        and baseball_event.primary_event in _HIT_EVENTS
+    ):
         baseball_event = BaseballEvent(primary_event=label[0], secondary_events=[])
 
     primary = baseball_event.primary_event if baseball_event else None
