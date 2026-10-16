@@ -71,9 +71,10 @@ def test_positions_typed_into_names_are_ignored():
 
     assert m.match("Carlos Cruz 1b") == "C. Cruz 1b"
     assert m.match("Eduardo Luevano Picher") == "E. Luevano Picher"
-    assert clean_playmaker_text(
-        "Top 1st\nWalk\nCarlos Cruz 1b walked\nWalk\nRaul Jaime SS walked\n" * 1
-    )[0].endswith("Carlos Cruz walked")
+    blocks = clean_playmaker_text("Top 1st\nWalk\nCarlos Cruz 1b walked\nWalk\nRaul Jaime SS walked\n")
+    # Newest first on the page, so Cruz (listed first) batted last.
+    assert blocks[-1].endswith("Carlos Cruz walked")
+    assert blocks[0].endswith("Raul Jaime walked")
 
 
 def test_reached_on_error_label_overrules_a_stale_single_sentence():
