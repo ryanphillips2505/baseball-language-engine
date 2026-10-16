@@ -51,3 +51,8 @@ def test_initial_box_names_match_full_play_names():
 def test_gamechanger_text_is_never_playmaker():
     gc = "Top 1st - Wildcats\nGround Out\nIn play.\nJ Smith grounds out to shortstop.\n" * 6
     assert not looks_like_playmaker_text(gc)
+
+
+def test_suffix_only_after_comma_is_not_a_first_name():
+    assert parse_name("Stroemer, Jr").first == ""
+    assert RosterMatcher(["Paul Stroemer Jr."]).match("Stroemer, Jr") == "Paul Stroemer Jr."

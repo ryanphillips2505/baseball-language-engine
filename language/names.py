@@ -56,9 +56,13 @@ class NameParts:
     last_tokens: tuple[str, ...]
 
 
+# Suffixes that are never a first initial; "V" can be ("V. Arias").
+_NEVER_INITIAL_SUFFIXES = _SUFFIXES - {"v"}
+
+
 def _drop_trailing_suffixes(tokens: list[str]) -> list[str]:
-    """'Smith Jr' -> 'Smith'; an initial 'V' ('V. Arias') is not a suffix."""
-    tokens = list(tokens)
+    """'Smith Jr' / 'Stroemer, Jr' drop the suffix; 'V. Arias' keeps its initial."""
+    tokens = [t for t in tokens if t not in _NEVER_INITIAL_SUFFIXES]
     while len(tokens) > 1 and tokens[-1] in _SUFFIXES:
         tokens.pop()
     return tokens
